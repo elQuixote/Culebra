@@ -29,3 +29,6 @@ E:\Documents\Visual Studio 2013\Projects\Culebra_GH\Culebra_GH\bin\IKVM.OpenJDK.
 E:\Documents\Visual Studio 2013\Projects\Culebra_GH\Culebra_GH\bin\CulebraData.pdb
 C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH.dll
 C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH.pdb
+E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\obj\Debug64\Culebra_GH.csprojResolveAssemblyReference.cache
+E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\obj\Debug64\Culebra_GH.dll
+E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\obj\Debug64\Culebra_GH.pdb

@@ -38,15 +38,15 @@ namespace CulebraData
                     creeperObject.getSpeed().y = creeperObject.getSpeed().y * -1;
                 }
             }
-            public void setMoveAtt(float maxSpeed, float maxForce, float velocityMult)
+            public void setMoveAttributes(float maxSpeed, float maxForce, float velocityMult)
             {
                 creeperObject.setMoveAttributes(maxSpeed, maxForce, velocityMult);
             }
-            public void applyBehavior(float sr, float cv, float sv, float av, float va, List<Creeper> cl, bool connect)
+            public void applyBehavior_Flock2D(float sr, float cv, float sv, float av, float va, List<Creeper> cl, bool connect)
             {
                 creeperObject.behavior.flock2D(sr, cv, sv, av, va, Utility.toJavaList(cl), Utility.toJavaBool(connect));
             }
-            public void applyWandBehavior()
+            public void applyBehavior_Wander2D()
             {
                 creeperObject.behavior.wander2D(new java.lang.Boolean(true), new java.lang.Boolean(false), 2.0f, 80.0f, 26.0f);
             }
@@ -54,12 +54,12 @@ namespace CulebraData
             {
                 creeperObject.move();
             }
-            public List<Point3d> getTrails()
+            public List<Point3d> getTrailPoints()
             {
                 List<Point3d> transfer = Utility.toPointList(creeperObject.getTrailPoints());
                 return transfer;
             }
-            public Point3d getObjectLocation()
+            public Point3d getLocation()
             {
                 Point3d loc = Utility.toPoint3d(creeperObject.getLocation());
                 return loc;

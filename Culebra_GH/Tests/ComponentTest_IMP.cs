@@ -136,16 +136,16 @@ namespace Culebra_GH
                 int counter = 0;
                 foreach (Creeper c in this.creepList)
                 {
-                    c.setMoveAtt(3.44f, 0.130f, 1.5f);
-                    c.applyWandBehavior();                
-                    c.applyBehavior(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                    c.setMoveAttributes(3.44f, 0.130f, 1.5f);
+                    c.applyBehavior_Wander2D();                
+                    c.applyBehavior_Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
                     
                     c.applyMove();
                     c.bounce(bb);
-                    currentPosList.Add(c.getObjectLocation());
+                    currentPosList.Add(c.getLocation());
 
                     GH_Path path = new GH_Path(counter);
-                    trailTree.AddRange(c.getTrails(),path);
+                    trailTree.AddRange(c.getTrailPoints(),path);
                     
                     counter++;
                 }
