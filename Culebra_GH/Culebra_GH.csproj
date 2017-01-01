@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Tests\ComponentTest.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
+    <Compile Include="Tests\Component_Test_Inheritance.cs" />
     <Compile Include="Tests\creepers.cs" />
     <Compile Include="Culebra_GHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

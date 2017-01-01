@@ -16,7 +16,7 @@ namespace CulebraData
     public class Creepers : culebra.objects.Creeper
     {
 
-        public Creepers(PVector pv1, PVector pv2, java.lang.Boolean b, java.lang.Boolean c, PApplet app) : base(pv1,pv2,b,c,app)
+        public Creepers(Vector3d pv1, Vector3d pv2, bool b, bool c) : base(Utility.toPVec(pv1),Utility.toPVec(pv2),Utility.toJavaBool(b),Utility.toJavaBool(c),Utility.toPApplet())
         {
         }
 
@@ -31,12 +31,12 @@ namespace CulebraData
                 this.getSpeed().y = this.getSpeed().y * -1;
             }
         }
-
         public List<Point3d> gh_getTrails()
         {
             List<Point3d> transfer = Utility.toPointList(this.getTrailPoints());
             return transfer;
         }
+        
         public Point3d gh_getObjectLocation()
         {
             Point3d loc = Utility.toPoint3d(this.getLocation());
