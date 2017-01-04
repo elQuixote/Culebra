@@ -139,7 +139,6 @@ namespace Culebra_GH
                     c.setMoveAttributes(3.44f, 0.130f, 1.5f);
                     c.applyBehavior_Wander2D();                
                     c.applyBehavior_Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
-                    
                     c.applyMove();
                     c.bounce(bb);
                     currentPosList.Add(c.getLocation());

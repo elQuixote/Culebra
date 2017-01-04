@@ -22,6 +22,16 @@ namespace CulebraData
             /// </summary>
             /// <param name="pvec"></param>
             /// <returns></returns>
+            public static Vector3d toVector3d(PVector pvec)
+            {
+                Vector3d vector = new Vector3d(pvec.x, pvec.y, pvec.z);
+                return vector;
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="pvec"></param>
+            /// <returns></returns>
             public static Point3d toPoint3d(PVector pvec)
             {
                 Point3d newPt = new Point3d(pvec.x, pvec.y, pvec.z);
@@ -55,6 +65,11 @@ namespace CulebraData
             public static java.lang.Boolean toJavaBool(bool value)
             {
                 java.lang.Boolean boolean = new java.lang.Boolean(value);
+                return boolean;
+            }
+            public static bool toBoolean(java.lang.Boolean value)
+            {
+                bool boolean = value.booleanValue();
                 return boolean;
             }
             /// <summary>

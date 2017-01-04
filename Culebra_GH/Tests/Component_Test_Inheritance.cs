@@ -10,6 +10,7 @@ using System.Reflection;
 using ikvm;
 using processing.core;
 using culebra.behaviors;
+using culebra.behaviors.types;
 using CulebraData;
 using CulebraData.Objects;
 
@@ -138,7 +139,7 @@ namespace Culebra_GH.Tests
                     c.setMoveAttributes(3.44f, 0.130f, 1.5f);
                     c.behavior.wander2D(new java.lang.Boolean(true), new java.lang.Boolean(false),2.0f, 80.0f, 26.0f);
                     c.behavior.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, CulebraData.Utilities.Utility.toJavaList(this.creepList), CulebraData.Utilities.Utility.toJavaBool(false));
-
+            
                     c.move(10,2000);
                     c.gh_Bounce(bb);
                     currentPosList.Add(CulebraData.Utilities.Utility.toPoint3d(c.getLocation()));
