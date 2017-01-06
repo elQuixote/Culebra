@@ -20,7 +20,7 @@ namespace CulebraData
         {
         }
 
-        public void gh_Bounce(BoundingBox bbox)
+        public void bounce(BoundingBox bbox)
         {            
             if (this.getLocation().x >= (int)bbox.Max[0] || this.getLocation().x <= (int)bbox.Min[0])
             {
@@ -33,6 +33,7 @@ namespace CulebraData
         }
         public List<Point3d> gh_getTrails()
         {
+
             List<Point3d> transfer = Utility.toPointList(this.getTrailPoints());
             return transfer;
         }

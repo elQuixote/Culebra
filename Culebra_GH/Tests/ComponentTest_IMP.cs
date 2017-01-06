@@ -22,6 +22,7 @@ namespace Culebra_GH
         private List<Vector3d> startList = new List<Vector3d>();
         private DataTree<Point3d> posTree;
 
+        private BabyCreeper babyCreep;
         private Creeper creep;
         private List<Creeper> creepList = new List<Creeper>();
         private List<Point3d> currentPosList = new List<Point3d>();
@@ -83,7 +84,6 @@ namespace Culebra_GH
             float cohVal = 0.24f;
 
             if(!DA.GetData(0, ref reset))return;
-            
 
             if (reset)
             { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
@@ -112,8 +112,17 @@ namespace Culebra_GH
                         this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
                         this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
 
-                        this.creep = new Creeper(this.startPos, this.moveVec, true, false);
-                        this.creepList.Add(this.creep);
+                        if (i <= ptCount / 2)
+                        {
+                            this.creep = new Creeper(this.startPos, this.moveVec, true, false);
+                            this.creepList.Add(this.creep);
+                        }
+                        else
+                        {
+                            this.babyCreep = new BabyCreeper(this.startPos, this.moveVec, true, "a", false);
+                            this.creepList.Add(this.babyCreep);
+                        }
+                        
                     }
                     else
                     { //IF WE WANT 3D
@@ -136,15 +145,30 @@ namespace Culebra_GH
                 int counter = 0;
                 foreach (Creeper c in this.creepList)
                 {
-                    c.setMoveAttributes(3.44f, 0.130f, 1.5f);
-                    c.applyBehavior_Wander2D();                
-                    c.applyBehavior_Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
-                    c.applyMove();
-                    c.bounce(bb);
-                    currentPosList.Add(c.getLocation());
+                    
+                    c.attributes.setMoveAttributes(3.44f, 0.130f, 1.5f);
+                    //c.behaviors.wander2D();
+                    if (c is BabyCreeper)
+                    {
+                        BabyCreeper bc = (BabyCreeper)c;
+                        //bc.behaviors.wander2D();
+                        bc.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        //Rhino.RhinoApp.WriteLine(bc.attributes.getSuperClass().ToString());
+                    }
+                    else
+                    {
+                        c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        //Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass().ToString());
+                    }
+                    //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                    c.actions.applyMove();
+                    c.actions.bounce(bb);
+                    currentPosList.Add(c.attributes.getLocation());
 
+                    
+                    
                     GH_Path path = new GH_Path(counter);
-                    trailTree.AddRange(c.getTrailPoints(),path);
+                    trailTree.AddRange(c.attributes.getTrailPoints(),path);
                     
                     counter++;
                 }

@@ -109,6 +109,7 @@ namespace CulebraData
                 }
                 return javalist;
             }
+
             /// <summary>
             /// 
             /// </summary>
@@ -122,6 +123,24 @@ namespace CulebraData
                     ptList.Add(toPoint3d(p));
                 }
                 return ptList;
+            }
+            public static List<Vector3d> toVec3DList(java.util.ArrayList arrayList)
+            {
+                List<Vector3d> vecList = new List<Vector3d>();
+                foreach (PVector p in arrayList)
+                {
+                    vecList.Add(toVector3d(p));
+                }
+                return vecList;
+            }
+            public static java.util.List toPVecList(List<Vector3d> vectorList)
+            {
+                java.util.List javalist = new java.util.ArrayList();
+                foreach (Vector3d v in vectorList)
+                {
+                    javalist.add(toPVec(v));
+                }
+                return javalist;
             }
         }
     }
