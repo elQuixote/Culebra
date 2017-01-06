@@ -60,8 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\Attributes.cs" />
+    <Compile Include="Behavior\Controller.cs" />
+    <Compile Include="Drawing\Vizualization.cs" />
+    <Compile Include="Objects\BabyCreeper.cs" />
     <Compile Include="Objects\Creeper.cs" />
     <Compile Include="Objects\Creepers.cs" />
+    <Compile Include="Operations\Actions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Utility.cs" />
   </ItemGroup>

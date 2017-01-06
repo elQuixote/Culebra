@@ -10,32 +10,36 @@ using System.Reflection;
 using ikvm;
 using processing.core;
 using culebra.behaviors;
-using culebra.behaviors.types;
 using CulebraData;
 using CulebraData.Objects;
 
+
 namespace Culebra_GH.Tests
 {
-    public class Component_Test_Inheritance : GH_Component
+    public class Component_Test_SelfTailChasers : GH_Component
     {
         //-----------------Global Variables---------------------------
         private List<Vector3d> moveList = new List<Vector3d>();
         private List<Vector3d> startList = new List<Vector3d>();
         private DataTree<Point3d> posTree;
 
-        private Creepers creep;
-        private List<Creepers> creepList = new List<Creepers>();
+        private BabyCreeper babyCreep;
+        private Creeper creep;
+        private List<Creeper> creepList = new List<Creeper>();
         private List<Point3d> currentPosList = new List<Point3d>();
+
+        private List<Vector3d> totTail = new List<Vector3d>();
 
         private Vector3d startPos = new Vector3d();
         private Vector3d moveVec;
         private BoundingBox bb;
         private int dimensions;
+        
         /// <summary>
-        /// Initializes a new instance of the Component_Test_Inheritance class.
+        /// Initializes a new instance of the ComponentTest class.
         /// </summary>
-        public Component_Test_Inheritance()
-            : base("Component_Test_Inheritance", "Nickname",
+        public Component_Test_SelfTailChasers()
+            : base("Component_Test_SelfTailChasers", "Nickname",
                 "Description",
                 "Culebra_GH", "Subcategory")
         {
@@ -82,8 +86,7 @@ namespace Culebra_GH.Tests
             float sepVal = 0.15f;
             float cohVal = 0.24f;
 
-            if (!DA.GetData(0, ref reset)) return;
-
+            if(!DA.GetData(0, ref reset))return;
 
             if (reset)
             { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
@@ -92,8 +95,10 @@ namespace Culebra_GH.Tests
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = dimension;
-                creepList = new List<Creepers>();
+                creepList = new List<Creeper>();
                 currentPosList = new List<Point3d>();
+
+                totTail = new List<Vector3d>();
 
                 if (this.dimensions == 0)
                 {
@@ -109,11 +114,22 @@ namespace Culebra_GH.Tests
 
                     if (this.dimensions == 0)
                     { //IF WE WANT 2D
-                        this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
-                        this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
+                        //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
+                        //this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
+                        this.moveVec = new Vector3d(rnd.Next(-1, 2) * 0.5, rnd.Next(-1, 2) * 0.5, 0); //move randomly in any direction 2d
+                        this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
 
-                        this.creep = new Creepers(this.startPos, this.moveVec, true, false);
-                        this.creepList.Add(this.creep);
+                        if (i <= ptCount / 2)
+                        {
+                            this.creep = new Creeper(this.startPos, this.moveVec, true, false);
+                            this.creepList.Add(this.creep);
+                        }
+                        else
+                        {
+                            this.babyCreep = new BabyCreeper(this.startPos, this.moveVec, true, "a", false);
+                            this.creepList.Add(this.babyCreep);
+                        }
+                        
                     }
                     else
                     { //IF WE WANT 3D
@@ -134,27 +150,32 @@ namespace Culebra_GH.Tests
                 DataTree<Point3d> trailTree = new DataTree<Point3d>();
 
                 int counter = 0;
-                foreach (Creepers c in this.creepList)
+                foreach (Creeper c in this.creepList)
                 {
-                    c.setMoveAttributes(3.44f, 0.130f, 1.5f);
-                    //c.behavior.wander2D(new java.lang.Boolean(true), new java.lang.Boolean(false),2.0f, 80.0f, 26.0f);
-                    c.behavior.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, CulebraData.Utilities.Utility.toJavaList(this.creepList), CulebraData.Utilities.Utility.toJavaBool(false));
                     
-                    c.move(1,2000);
-                    c.bounce(bb);
-                    currentPosList.Add(CulebraData.Utilities.Utility.toPoint3d(c.getLocation()));
-                    GH_Path path = new GH_Path(counter);
-                    //trailTree.AddRange(CulebraData.Utilities.Utility.toPointList(c.getTrailPoints()), path);
-                    trailTree.AddRange(c.gh_getTrails(), path);
-                    
+                    c.attributes.setMoveAttributes(3.44f, 0.130f, 1.5f);
+                    this.totTail.AddRange(c.attributes.getTrailVectors());
+                    c.behaviors.selfTailChase(60.0f, 1.5f, 80.0f, 0.00f, 5.00f, totTail);
+                    //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
+                    //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);                
+                    c.actions.applyMove(6,100);
+                    c.actions.bounce(bb);
+                    currentPosList.Add(c.attributes.getLocation());
 
+                    
+                    
+                    GH_Path path = new GH_Path(counter);
+                    trailTree.AddRange(c.attributes.getTrailPoints(),path);
+                    
                     counter++;
                 }
+                
                 DA.SetDataList(0, currentPosList);
                 if (trail)
                 {
                     DA.SetDataTree(1, trailTree);
                 }
+                this.totTail.Clear();
             }
         }
 
@@ -170,12 +191,14 @@ namespace Culebra_GH.Tests
                 return null;
             }
         }
+
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{51052114-b68d-4c3d-88dd-1aaf7ca71728}"); }
+            get { return new Guid("{b7bef7b8-4200-4545-853e-a6afe2bc58bb}"); }
         }
     }
 }
