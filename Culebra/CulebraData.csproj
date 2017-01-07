@@ -63,6 +63,7 @@
     <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="Behavior\Controller.cs" />
     <Compile Include="Drawing\Vizualization.cs" />
+    <Compile Include="Geometry\Path.cs" />
     <Compile Include="Objects\BabyCreeper.cs" />
     <Compile Include="Objects\Creeper.cs" />
     <Compile Include="Objects\Creepers.cs" />

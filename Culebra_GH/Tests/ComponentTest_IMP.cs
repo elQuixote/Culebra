@@ -164,9 +164,7 @@ namespace Culebra_GH
                     c.actions.applyMove();
                     c.actions.bounce(bb);
                     currentPosList.Add(c.attributes.getLocation());
-
-                    
-                    
+                                    
                     GH_Path path = new GH_Path(counter);
                     trailTree.AddRange(c.attributes.getTrailPoints(),path);
                     
@@ -179,7 +177,6 @@ namespace Culebra_GH
                 }
             }
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

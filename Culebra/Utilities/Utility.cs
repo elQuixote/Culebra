@@ -15,7 +15,7 @@ namespace CulebraData
 {
     namespace Utilities
     {
-        public static class Utility
+        public static class Convert
         {
             /// <summary>
             /// 
@@ -67,6 +67,11 @@ namespace CulebraData
                 java.lang.Boolean boolean = new java.lang.Boolean(value);
                 return boolean;
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
             public static bool toBoolean(java.lang.Boolean value)
             {
                 bool boolean = value.booleanValue();
@@ -109,7 +114,6 @@ namespace CulebraData
                 }
                 return javalist;
             }
-
             /// <summary>
             /// 
             /// </summary>
@@ -124,6 +128,11 @@ namespace CulebraData
                 }
                 return ptList;
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="arrayList"></param>
+            /// <returns></returns>
             public static List<Vector3d> toVec3DList(java.util.ArrayList arrayList)
             {
                 List<Vector3d> vecList = new List<Vector3d>();
@@ -133,16 +142,81 @@ namespace CulebraData
                 }
                 return vecList;
             }
-            public static java.util.List toPVecList(List<Vector3d> vectorList)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="vectorList"></param>
+            /// <returns></returns>
+            public static java.util.ArrayList toPVecList(List<Vector3d> vectorList)
             {
-                java.util.List javalist = new java.util.ArrayList();
+                java.util.ArrayList javalist = new java.util.ArrayList();
                 foreach (Vector3d v in vectorList)
                 {
                     javalist.add(toPVec(v));
                 }
                 return javalist;
             }
+
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="plineList"></param>
+            /// <returns></returns>
+            public static java.util.ArrayList polylinesToMultiShapes(List<Polyline> plineList)
+            {
+                java.util.ArrayList javalist = new java.util.ArrayList();           
+                foreach (Polyline p in plineList)
+                {
+                    java.util.ArrayList javalist2 = new java.util.ArrayList();
+                    for (int i = 0; i < p.SegmentCount + 1; i++)
+                    {
+                        javalist2.add(toPVec(p.PointAt(i)));
+                    }
+                    javalist.add(javalist2);
+                }
+                return javalist;
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="pline"></param>
+            /// <returns></returns>
+            public static java.util.ArrayList polylineToShape(Polyline pline)
+            {
+                java.util.ArrayList javalist = new java.util.ArrayList();
+                for (int i = 0; i < pline.SegmentCount + 1; i++)
+                {
+                    javalist.add(toPVec(pline.PointAt(i)));
+                }             
+                return javalist;
+            }
+            public static List<int> toIntList(java.util.ArrayList javaIntList)
+            {
+                List<int> intList = new List<int>();
+
+                for (int i = 0; i < javaIntList.size(); i++)
+                {
+                    int convertBabySequencer = 0;
+                    Int32.TryParse(javaIntList.get(i).ToString(), out convertBabySequencer);
+                    intList.Add(convertBabySequencer);
+                }
+                return intList;
+            }
+            public static java.util.ArrayList toJavaIntList(List<int> intList)
+            {
+                java.util.ArrayList javalist = new java.util.ArrayList();
+                foreach (int i in intList)
+                {
+                    javalist.Add(toJavaInt(i));
+                }
+                return javalist;
+            }
+            public static java.lang.Integer toJavaInt(int integer)
+            {
+                java.lang.Integer javaInt = new java.lang.Integer(integer);
+                return javaInt;
+            }
         }
     }
-
 }
