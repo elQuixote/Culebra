@@ -15,6 +15,7 @@ namespace CulebraData.Objects
 {
     public class BabyCreeper : Creeper
     {
+        private String babyType = null;
         private culebra.objects.BabyCreeper babycreeperObject;
 
         public BabyCreeper(Vector3d loc, Vector3d speed, bool instanceable, string babyType, bool In3D) : base(loc, speed, instanceable, In3D)
@@ -23,18 +24,11 @@ namespace CulebraData.Objects
             this.attributes = new CulebraData.Attributes.Attributes(this);
             this.actions = new CulebraData.Operations.Actions(this);
 
-            babycreeperObject = new culebra.objects.BabyCreeper(Utility.toPVec(loc), Utility.toPVec(speed), Utility.toJavaBool(instanceable), babyType, Utility.toJavaBool(In3D), Utility.toPApplet());
+            babycreeperObject = new culebra.objects.BabyCreeper(Utilities.Convert.toPVec(loc), Utilities.Convert.toPVec(speed), Utilities.Convert.toJavaBool(instanceable), babyType, Utilities.Convert.toJavaBool(In3D), Utilities.Convert.toPApplet());
         }
         protected internal culebra.objects.BabyCreeper getBabyCreeperObject()
         {
             return this.babycreeperObject;
         }
-        /*
-        new protected internal culebra.objects.BabyCreeper getCreeperObject()
-        {
-            return this.babycreeperObject;
-        }
-        */
-
     }
 }

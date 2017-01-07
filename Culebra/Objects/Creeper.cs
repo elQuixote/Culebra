@@ -11,6 +11,7 @@ using Rhino;
 using Rhino.Geometry;
 using CulebraData.Utilities;
 
+
 namespace CulebraData
 {
     namespace Objects
@@ -28,7 +29,7 @@ namespace CulebraData
                 this.attributes = new CulebraData.Attributes.Attributes(this);
                 this.actions = new CulebraData.Operations.Actions(this);
 
-                creeperObject = new culebra.objects.Creeper(Utility.toPVec(loc), Utility.toPVec(speed), Utility.toJavaBool(instanceable), Utility.toJavaBool(In3D), Utility.toPApplet());
+                creeperObject = new culebra.objects.Creeper(Utilities.Convert.toPVec(loc), Utilities.Convert.toPVec(speed), Utilities.Convert.toJavaBool(instanceable), Utilities.Convert.toJavaBool(In3D), Utilities.Convert.toPApplet());
             }
             protected internal culebra.objects.Creeper getCreeperObject()
             {
