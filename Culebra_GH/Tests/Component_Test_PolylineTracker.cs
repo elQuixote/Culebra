@@ -164,7 +164,7 @@ namespace Culebra_GH.Tests
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
                     c.behaviors.wander2D(true, false, 100.0f, 60.0f, 60.0f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);                
-                    c.actions.applyMove(0,1000);
+                    c.actions.move(0,1000);
                     c.actions.bounce(bb);
                     currentPosList.Add(c.attributes.getVecLocation());
                                    

@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\ComponentTest_IMP.cs" />
-    <Compile Include="Tests\Component_Test_Inheritance.cs" />
     <Compile Include="Tests\Component_Test_MultiPolylineTracker.cs" />
     <Compile Include="Tests\Component_Test_MultiPolylineTrackerBabies.cs" />
     <Compile Include="Tests\Component_Test_PolylineTracker.cs" />

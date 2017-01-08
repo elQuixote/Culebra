@@ -39,6 +39,14 @@
       <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\culebra_og.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="GH_IO">
+      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="IKVM.OpenJDK.Core">
       <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\IKVM.OpenJDK.Core.dll</HintPath>
       <Private>False</Private>
@@ -66,9 +74,9 @@
     <Compile Include="Geometry\Path.cs" />
     <Compile Include="Objects\BabyCreeper.cs" />
     <Compile Include="Objects\Creeper.cs" />
-    <Compile Include="Objects\Creepers.cs" />
     <Compile Include="Operations\Actions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\GHSupport.cs" />
     <Compile Include="Utilities\Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

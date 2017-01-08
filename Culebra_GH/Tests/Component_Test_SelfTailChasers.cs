@@ -155,7 +155,7 @@ namespace Culebra_GH.Tests
                     c.behaviors.selfTailChase(60.0f, 1.5f, 80.0f, 0.00f, 5.00f, totTail);
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);                
-                    c.actions.applyMove(6,100);
+                    c.actions.move(6,100);
                     c.actions.bounce(bb);
                     currentPosList.Add(c.attributes.getLocation());
                                    

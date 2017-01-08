@@ -27,6 +27,8 @@ namespace Culebra_GH
         private List<Creeper> creepList = new List<Creeper>();
         private List<Point3d> currentPosList = new List<Point3d>();
 
+        private List<Line> networkList = new List<Line>();
+
         private Vector3d startPos = new Vector3d();
         private Vector3d moveVec;
         private BoundingBox bb;
@@ -57,6 +59,7 @@ namespace Culebra_GH
         {
             pManager.AddPointParameter("Creeps", "C", "C", GH_ParamAccess.list);
             pManager.AddPointParameter("Trails", "T", "T", GH_ParamAccess.tree);
+            pManager.AddLineParameter("Network", "N", "N", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -71,6 +74,8 @@ namespace Culebra_GH
             Random rnd = new Random();
             List<Vector3d> vecs = new List<Vector3d>();
             List<Point3d> returnedvecs = new List<Point3d>();
+
+            
 
             bool reset = new bool();
             int ptCount = 95;
@@ -94,6 +99,8 @@ namespace Culebra_GH
                 this.dimensions = dimension;
                 creepList = new List<Creeper>();
                 currentPosList = new List<Point3d>();
+
+                networkList = new List<Line>();
 
                 if (this.dimensions == 0)
                 {
@@ -140,32 +147,55 @@ namespace Culebra_GH
             else
             {
                 currentPosList = new List<Point3d>();
+
                 DataTree<Point3d> trailTree = new DataTree<Point3d>();
+                DataTree<Line> networkTree = new DataTree<Line>();
+
 
                 int counter = 0;
                 foreach (Creeper c in this.creepList)
                 {
-                    
+                    networkList = new List<Line>();
+
                     c.attributes.setMoveAttributes(3.44f, 0.130f, 1.5f);
                     //c.behaviors.wander2D();
                     if (c is BabyCreeper)
                     {
                         BabyCreeper bc = (BabyCreeper)c;
                         //bc.behaviors.wander2D();
-                        bc.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        bc.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                         //Rhino.RhinoApp.WriteLine(bc.attributes.getSuperClass().ToString());
                     }
                     else
                     {
-                        c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                         //Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass().ToString());
                     }
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
-                    c.actions.applyMove();
+
+                    GH_Path path = new GH_Path(counter);
+
+                    List<Vector3d> testList = c.attributes.getNetwork();
+                    if (testList.Count > 0)
+                    {
+
+                        foreach (Vector3d v in testList)
+                        {
+                            Line l = new Line(c.attributes.getLocation(),(Point3d)v);
+                            networkList.Add(l);
+                            
+                        }
+                        networkTree.AddRange(networkList, path);
+                    }
+
+                    c.actions.move();
+
+
                     c.actions.bounce(bb);
+                    //c.actions.respawn(bb);
                     currentPosList.Add(c.attributes.getLocation());
                                     
-                    GH_Path path = new GH_Path(counter);
+                    
                     trailTree.AddRange(c.attributes.getTrailPoints(),path);
                     
                     counter++;
@@ -175,6 +205,7 @@ namespace Culebra_GH
                 {
                     DA.SetDataTree(1, trailTree);
                 }
+                DA.SetDataTree(2, networkTree);
             }
         }
         /// <summary>
