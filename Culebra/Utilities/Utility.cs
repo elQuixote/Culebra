@@ -127,9 +127,9 @@ namespace CulebraData.Utilities
             return vecList;
         }
         /// <summary>
-        /// Converts an arraylist of PVectors to a list of Vector3D
+        /// Converts a java.util.List of PVectors to a list of Vector3D
         /// </summary>
-        /// <param name="arrayList">the arraylist to convert</param>
+        /// <param name="arrayList">the java.util.List to convert</param>
         /// <returns>the list of Vectors</returns>
         public static List<Vector3d> toVec3DList(java.util.List arrayList)
         {

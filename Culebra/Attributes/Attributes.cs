@@ -133,6 +133,10 @@ namespace CulebraData.Attributes
             }
             return childType;
         }
+        /// <summary>
+        /// Gets the connectivity between each object and any objects within its search radius
+        /// </summary>
+        /// <returns></returns>
         public List<Vector3d> getNetwork()
         {
             List<Vector3d> networkList = new List<Vector3d>();
