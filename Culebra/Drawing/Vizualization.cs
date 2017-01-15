@@ -37,7 +37,7 @@ namespace CulebraData.Drawing
             ddl.SetPoints(particleList, Color.FromArgb(25, 255, 255, 255));
             args.Display.DrawSprites(dbm, ddl, 2.0f, new Vector3d(0, 0, 1), true);
         }
-        public void drawGradientTrails(IGH_PreviewArgs args, string file, List<Point3d> particleList, DataTree<Point3d> particleSet, Color randomColorAction, float minTrailThickness, float maxTrailThickness)
+        public void drawGradientTrails(IGH_PreviewArgs args, string file, List<Point3d> particleList, DataTree<Point3d> particleSet, int colorType, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
@@ -52,15 +52,22 @@ namespace CulebraData.Drawing
                         {
                             float stroke = CulebraData.Utilities.Convert.map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
                             float colorValue = CulebraData.Utilities.Convert.map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, 0f, 255.0f);
-                            args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValue, 0, 100), (int)stroke);
+                            if(colorType == 0)
+                            {
+                                args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValue, 0, 100), (int)stroke);
+                            }
+                            else if(colorType == 1)
+                            {
+                                args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, 0, 255, (int)colorValue), (int)stroke);
+                            }
+                            else
+                            {
+                                args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, 255, 255, (int)colorValue), (int)stroke);
+                            }
                         }
                     }
                 }
             }
-        }
-        public void drawPolylineGeometryTrails(List<Point3d> ptList)
-        {
-
         }
         public void drawPolylineTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, bool dottedPolyline, int thickness)
         {
@@ -78,14 +85,14 @@ namespace CulebraData.Drawing
                 }
             }
         }
-        public void drawDiscoTrails(IGH_PreviewArgs args, string file, List<Point3d> particleList, DataTree<Point3d> particleSet, Random randomGen, Color randomColorAction, float minTrailThickness, float maxTrailThickness)
+        public void drawDiscoTrails(IGH_PreviewArgs args, string file, List<Point3d> particleList, DataTree<Point3d> particleSet, Random randomGen, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
             {
                 List<Point3d> ptlist = particleSet.Branch(i);
                 //-------DRAW TRAILS AS SEGMENTS WITH CUSTOM STROKE WIDTH---------
-                randomColorAction = CulebraData.Utilities.Convert.GetRandomColor(randomGen);
+                Color randomColorAction = CulebraData.Utilities.Convert.GetRandomColor(randomGen);
                 if (ptlist.Count > 0)
                 {
                     for (int x = 0; x < ptlist.Count; x++)

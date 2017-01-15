@@ -82,6 +82,20 @@ namespace CulebraData.Behavior
             this.creeper.getCreeperObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.toJavaList(creeperList), Utilities.Convert.toJavaBool(drawSearchConnectivity));
         }
         /// <summary>
+        /// Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
+        /// </summary>
+        /// <param name="searchRadius">distance each culebra.objects.Object can see</param>
+        /// <param name="cohesionValue">cohesion value steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+        /// <param name="separateValue">separateValue separate value avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+        /// <param name="alignValue">align value steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+        /// <param name="viewAngle">allowable vision angle in degrees</param>
+        /// <param name="creeperList">list of other Creeper Objects</param>
+        /// <param name="drawSearchConnectivity">network visualizing search radius</param>
+        public void flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity)
+        {
+            this.creeper.getCreeperObject().behavior.flock(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.toJavaList(creeperList), drawSearchConnectivity);
+        }
+        /// <summary>
         /// 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
         /// </summary>
         /// <param name="randomize">if true then the change value will be randomly selected from -change value to change value each frame</param>
@@ -125,6 +139,30 @@ namespace CulebraData.Behavior
         public void superWander2D(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
         {
             this.creeper.getCreeperObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger, objType);
+        }
+        public void Wander3D(float change, float wanderR, float wanderD, float rotationTrigger)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
+        }
+        public void Wander3D_subA(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D_subA(change, wanderR, wanderD, rotationTrigger);
+        }
+        public void Wander3D_subB(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D_subB(change, wanderR, wanderD, rotationTrigger);
+        }
+        public void Wander3D_Mod(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D_Mod(change, wanderR, wanderD);
+        }
+        public void Wander3D_Mod2(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D_Mod2(change, wanderR, wanderD);
+        }
+        public void Wander3D_Mod3(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        {
+            this.creeper.getCreeperObject().behavior.wander3D_Mod3(change, wanderR, wanderD);
         }
         /// <summary>
         /// 2D/3D Trail Chasing Algorithm - Agents will chase all other agents trails. When using this algorithm in your main sketch use the overloaded move method, recommended values are move(6,100)
