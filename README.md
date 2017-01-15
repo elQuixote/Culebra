@@ -1,4 +1,4 @@
-![IMAGE](images/Culebra_2.0.jpg)
+![IMAGE](images/Culebra_2.0_B.jpg)
 
 #### CULEBRA LIBRARY ####
 Culebra is a live agent based C# library and plugin for Grasshopper. A collection of objects and behaviors for creating dynamic multi agent interactions.
