@@ -10,6 +10,8 @@ using culebra.behaviors;
 using Rhino;
 using Rhino.Geometry;
 using CulebraData.Objects;
+using System.Drawing;
+
 
 namespace CulebraData.Utilities
 {
@@ -228,6 +230,18 @@ namespace CulebraData.Utilities
         {
             java.lang.Integer javaInt = new java.lang.Integer(integer);
             return javaInt;
+        }
+        public static float map(float value, float istart, float istop, float ostart, float ostop) 
+        {
+		    return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+	    }
+        public static Color GetRandomColor(Random randomGen)
+        {
+            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            KnownColor randomColorName = names[randomGen.Next(names.Length)];
+            Color randomColor = Color.FromKnownColor(randomColorName);
+
+            return randomColor;
         }
     } 
 }
