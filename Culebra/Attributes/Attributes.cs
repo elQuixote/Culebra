@@ -72,6 +72,10 @@ namespace CulebraData.Attributes
             Vector3d loc = Utilities.Convert.toVector3d(this.creeper.getCreeperObject().getLocation());
             return loc;
         }
+        public void setLocation(Vector3d newLocation)
+        {
+            this.creeper.getCreeperObject().behavior.setLoc(Utilities.Convert.toPVec(newLocation));
+        }
         /// <summary>
         /// Getter for retrieving the object speed
         /// </summary>
@@ -80,6 +84,22 @@ namespace CulebraData.Attributes
         {
             Vector3d speed = Utilities.Convert.toVector3d(this.creeper.getCreeperObject().getSpeed());
             return speed;
+        }
+        /// <summary>
+        /// Setter for objects speed
+        /// </summary>
+        /// <param name="newSpeed">the desired new speed</param>
+        public void setSpeed(Vector3d newSpeed)
+        {
+            this.creeper.getCreeperObject().behavior.setSpeed(Utilities.Convert.toPVec(newSpeed));
+        }
+        /// <summary>
+        /// Getter for retrieving the objects behavior type
+        /// </summary>
+        /// <returns>the objects behavior type</returns>
+        public string getBehaviorType()
+        {
+            return this.creeper.getCreeperObject().behavior.getBehaviorType();
         }
         /// <summary>
         /// Gets the superclass of the object
