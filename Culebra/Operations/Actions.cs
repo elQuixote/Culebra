@@ -130,6 +130,13 @@ namespace CulebraData.Operations
             }
         }
         /// <summary>
+        /// Reverses the current objects speed
+        /// </summary>
+        public void reverseSpeed()
+        {
+            this.creeper.getCreeperObject().reverseSpeed();
+        }
+        /// <summary>
         /// Move method for moving the object.
         /// </summary>
         public void move()
