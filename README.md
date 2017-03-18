@@ -4,11 +4,11 @@
 Culebra is a live agent based C# library and plugin for Grasshopper. A collection of objects and behaviors for creating dynamic multi agent interactions.
 2D|3D Multi Object Behavior library focused on hybrid system interactions with custom Visualization, Data, and performance features.
 
-####Updates for Culebra 2.0####
+#### Updates for Culebra 2.0 ####
 * Complete Rewrite from Version 1
 * Using Culebra Java library
 
-#####Behavioral Updates#####
+##### Behavioral Updates #####
 * New Flocking Behavior - Flockers Behavior Type Class Implements Flock Behavior Interface
 * Wandering Behavior - Wanderer Behavior Type Class Implements Wander Behavior Interface, the base Wander behavior is from Craig Reynolds and Daniel Shiffman.
 * New Noise Behavior - Improved Perlin Noise Behavior Type Class Implements Noise Behavior Interface. 
@@ -17,16 +17,15 @@ Culebra is a live agent based C# library and plugin for Grasshopper. A collectio
 * Mesh Crawler - Mesh Crawler Behavior Class. 
 * Forces – Attract, Repel and other force methods inside the controller class.
 
-#####Performance Updates#####
+##### Performance Updates #####
 * Display Conduit – Simulations can run in 2 modes - Graphics or Geometry mode with massive performance gains in graphics mode
 * RTree Search Optimizations – Implementation of RTree for performance 
 * Zombie and Live mode for simulations
 
-#####Culebra Data DLL#####
-* Access to Culebra classes and methods through the dll
-* Expanded capabilities not available in the Culebra Grasshopper plugin
+##### Culebra API #####
+* Access to Culebra classes and methods through the Culebra Data DLL
 
-#####Culebra GHA#####
+##### Culebra GHA #####
 * Will expand on the components built in version 1
 
 #### RELEASES ####

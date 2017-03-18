@@ -33,7 +33,7 @@ namespace CulebraData.Drawing
         {
             Bitmap bm = new Bitmap(file);
             Rhino.Display.DisplayBitmap dbm = new Rhino.Display.DisplayBitmap(bm);
-            Rhino.Display.DisplayBitmapDrawList ddl = new Rhino.Display.DisplayBitmapDrawList();
+            Rhino.Display.DisplayBitmapDrawList ddl = new Rhino.Display.DisplayBitmapDrawList();         
             ddl.SetPoints(particleList, Color.FromArgb(25, 255, 255, 255));
             args.Display.DrawSprites(dbm, ddl, 2.0f, new Vector3d(0, 0, 1), true);
         }

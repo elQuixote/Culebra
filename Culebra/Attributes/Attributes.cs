@@ -156,7 +156,7 @@ namespace CulebraData.Attributes
         /// <summary>
         /// Gets the connectivity between each object and any objects within its search radius
         /// </summary>
-        /// <returns></returns>
+        /// <returns>network data which visualizes the search radius between agents</returns>
         public List<Vector3d> getNetwork()
         {
             List<Vector3d> networkList = new List<Vector3d>();

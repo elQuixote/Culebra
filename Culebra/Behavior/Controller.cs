@@ -140,27 +140,66 @@ namespace CulebraData.Behavior
         {
             this.creeper.getCreeperObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger, objType);
         }
+        /// <summary>
+        /// Expanded 3D Wandering Algorithm - Type "Primary" using triggers to create a "weaving" type movement. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
         public void Wander3D(float change, float wanderR, float wanderD, float rotationTrigger)
         {
             this.creeper.getCreeperObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
         }
-        public void Wander3D_subA(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        /// <summary>
+        /// Expanded 3D Wandering Algorithm - Type "B" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        public void Wander3D_subA(float change, float wanderR, float wanderD, float rotationTrigger)
         {
             this.creeper.getCreeperObject().behavior.wander3D_subA(change, wanderR, wanderD, rotationTrigger);
         }
-        public void Wander3D_subB(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        /// <summary>
+        /// Expanded 3D Wandering Algorithm - Type "C" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        public void Wander3D_subB(float change, float wanderR, float wanderD, float rotationTrigger)
         {
             this.creeper.getCreeperObject().behavior.wander3D_subB(change, wanderR, wanderD, rotationTrigger);
         }
-        public void Wander3D_Mod(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        /// <summary>
+        /// 3D Wandering Algorithm - Type "MOD" uses no Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        public void Wander3D_Mod(float change, float wanderR, float wanderD)
         {
             this.creeper.getCreeperObject().behavior.wander3D_Mod(change, wanderR, wanderD);
         }
-        public void Wander3D_Mod2(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        /// <summary>
+        /// 3D Wandering Algorithm - Type "MOD2" uses randomized sin and cos values with the wandertheta for the Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        public void Wander3D_Mod2(float change, float wanderR, float wanderD)
         {
             this.creeper.getCreeperObject().behavior.wander3D_Mod2(change, wanderR, wanderD);
         }
-        public void Wander3D_Mod3(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
+        /// <summary>
+        /// 3D Wandering Algorithm - Type "MOD3" uses randomized sin and cos values with the wandertheta for all PVector components These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+        /// </summary>
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        public void Wander3D_Mod3(float change, float wanderR, float wanderD)
         {
             this.creeper.getCreeperObject().behavior.wander3D_Mod3(change, wanderR, wanderD);
         }
@@ -232,6 +271,33 @@ namespace CulebraData.Behavior
         {
             this.creeper.attributes.getObjType();
             this.creeper.getCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.polylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.toPVecList(childList), Utilities.Convert.toJavaIntList(childTypeList));
+        }
+        /// <summary>
+        /// Other Object Trails Following Algorithm - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects - see example files
+        /// </summary>
+        /// <param name="trailsPts">list of all PVectors from all trails</param>
+        /// <param name="trailThreshold">distance threshold enabling agents to see shapes</param>
+        /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+        /// <param name="trailRadius">the radius of the shapes</param>
+        public void trailFollowers(List<Vector3d> trailsPts, float trailThreshold, float projectionDistance, float trailRadius)
+        {
+            this.creeper.getCreeperObject().behavior.trailFollower(Utilities.Convert.toPVecList(trailsPts), trailThreshold, projectionDistance, trailRadius);
+        }
+        /// <summary>
+        /// Other Object Trails Following Algorithm capable of spawning children - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects
+        /// </summary>
+        /// <param name="trailsPts">list of all PVectors from all trails</param>
+        /// <param name="trailThreshold">distance threshold enabling agents to see shapes</param>
+        /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+        /// <param name="trailRadius">the radius of the shapes</param>
+        /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+        /// <param name="maxChildren">the max number of children each agent can create</param>
+        /// <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+        /// <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+        /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        public void trailFollowersBabyMakers(List<Vector3d> trailsPts, float trailThreshold, float projectionDistance, float trailRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
+        {
+            this.creeper.getCreeperObject().behavior.trailFollowerBabyMaker(Utilities.Convert.toPVecList(trailsPts), trailThreshold, projectionDistance, trailRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.toPVecList(childList), Utilities.Convert.toJavaIntList(childTypeList));
         }
         /// <summary>
         /// Gets the child start positions if any

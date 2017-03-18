@@ -277,5 +277,92 @@ namespace CulebraData.Utilities
 
             return randomColor;
         }
-    } 
+    }
+    /// <summary>
+    /// Provides a set of color utilities for mesh editing
+    /// </summary>
+    public static class ColorUtility
+    {
+        /// <summary>
+        /// Gets the HLS of a mesh at a specified location
+        /// </summary>
+        /// <param name="sp">Sample Point</param> 
+        /// <param name="coloredMesh">colors mesh to sample</param> 
+        /// <returns>The Hue Saturation and Luminance at location</returns> 
+        public static Rhino.Display.ColorHSL getHueSatLum(Point3d sp, Mesh coloredMesh)
+        {
+            MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
+            if (mp != null)
+            {
+                MeshFace face = coloredMesh.Faces[mp.FaceIndex];
+                Color colorA = coloredMesh.VertexColors[face.A];
+                Color colorB = coloredMesh.VertexColors[face.B];
+                Color colorC = coloredMesh.VertexColors[face.C];
+
+                double colorSampleA = colorA.A * mp.T[0] + colorB.A * mp.T[1] + colorC.A * mp.T[2];
+                double colorSampleR = colorA.R * mp.T[0] + colorB.R * mp.T[1] + colorC.R * mp.T[2];
+                double colorSampleG = colorA.G * mp.T[0] + colorB.G * mp.T[1] + colorC.G * mp.T[2];
+                double colorSampleB = colorA.B * mp.T[0] + colorB.B * mp.T[1] + colorC.B * mp.T[2];
+
+                int Alpha = (int)colorSampleA;
+                int Red = (int)colorSampleR;
+                int Green = (int)colorSampleG;
+                int Blue = (int)colorSampleB;
+
+                Color colour = Color.FromArgb(Alpha, Red, Green, Blue);
+
+                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL(colour);
+                double H = HSL.H;
+                double lum = HSL.L;
+                double S = HSL.S;
+                return HSL;
+            }
+            else
+            {
+                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL();
+                return HSL;
+            }
+        }
+        /// <summary>
+        /// Gets the color of a mesh at a specified point
+        /// </summary>
+        /// <param name="sp">The sample point</param> 
+        /// <param name="coloredMesh">The colored mesh to sample</param> 
+        /// <returns>The color at that location</returns> 
+        public static Color getColor(Point3d sp, Mesh coloredMesh)
+        {
+            MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
+            if (mp != null)
+            {
+                MeshFace face = coloredMesh.Faces[mp.FaceIndex];
+                Color colorA = coloredMesh.VertexColors[face.A];
+                Color colorB = coloredMesh.VertexColors[face.B];
+                Color colorC = coloredMesh.VertexColors[face.C];
+
+                double colorSampleA = colorA.A * mp.T[0] + colorB.A * mp.T[1] + colorC.A * mp.T[2];
+                double colorSampleR = colorA.R * mp.T[0] + colorB.R * mp.T[1] + colorC.R * mp.T[2];
+                double colorSampleG = colorA.G * mp.T[0] + colorB.G * mp.T[1] + colorC.G * mp.T[2];
+                double colorSampleB = colorA.B * mp.T[0] + colorB.B * mp.T[1] + colorC.B * mp.T[2];
+
+                int Alpha = (int)colorSampleA;
+                int Red = (int)colorSampleR;
+                int Green = (int)colorSampleG;
+                int Blue = (int)colorSampleB;
+
+                Color colour = Color.FromArgb(Alpha, Red, Green, Blue);
+
+                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL(colour);
+                double H = HSL.H;
+                double lum = HSL.L;
+                double S = HSL.S;
+                return HSL;
+            }
+            else
+            {
+                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL();
+                return HSL;
+            }
+        }
+
+    }
 }
