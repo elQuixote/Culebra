@@ -157,46 +157,46 @@ namespace Culebra_GH
                 {
                     networkList = new List<Line>();
 
-                    c.attributes.setMoveAttributes(3.44f, 0.130f, 1.5f);
+                    c.attributes.SetMoveAttributes(3.44f, 0.130f, 1.5f);
                     //c.behaviors.wander2D();
                     if (c is BabyCreeper)
                     {
                         BabyCreeper bc = (BabyCreeper)c;
                         //bc.behaviors.wander2D();
-                        bc.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
+                        bc.behaviors.Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                         //Rhino.RhinoApp.WriteLine(bc.attributes.getSuperClass().ToString());
                     }
                     else
                     {
-                        c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
+                        c.behaviors.Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                         //Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass().ToString());
                     }
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
 
                     GH_Path path = new GH_Path(counter);
 
-                    List<Vector3d> testList = c.attributes.getNetwork();
+                    List<Vector3d> testList = c.attributes.GetNetwork();
                     if (testList.Count > 0)
                     {
 
                         foreach (Vector3d v in testList)
                         {
-                            Line l = new Line(c.attributes.getLocation(),(Point3d)v);
+                            Line l = new Line(c.attributes.GetLocation(),(Point3d)v);
                             networkList.Add(l);
                             
                         }
                         networkTree.AddRange(networkList, path);
                     }
 
-                    c.actions.move();
+                    c.actions.Move();
 
 
-                    c.actions.bounce(bb);
+                    c.actions.Bounce(bb);
                     //c.actions.respawn(bb);
-                    currentPosList.Add(c.attributes.getLocation());
+                    currentPosList.Add(c.attributes.GetLocation());
                                     
                     
-                    trailTree.AddRange(c.attributes.getTrailPoints(),path);
+                    trailTree.AddRange(c.attributes.GetTrailPoints(),path);
                     
                     counter++;
                 }

@@ -150,17 +150,17 @@ namespace Culebra_GH.Tests
                 foreach (Creeper c in this.creepList)
                 {
                     
-                    c.attributes.setMoveAttributes(3.44f, 0.130f, 1.5f);
-                    this.totTail.AddRange(c.attributes.getTrailVectors());
-                    c.behaviors.selfTailChase(60.0f, 1.5f, 80.0f, 0.00f, 5.00f, totTail);
+                    c.attributes.SetMoveAttributes(3.44f, 0.130f, 1.5f);
+                    this.totTail.AddRange(c.attributes.GetTrailVectors());
+                    c.behaviors.SelfTailChase(60.0f, 1.5f, 80.0f, 0.00f, 5.00f, totTail);
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);                
-                    c.actions.move(6,100);
-                    c.actions.bounce(bb);
-                    currentPosList.Add(c.attributes.getLocation());
+                    c.actions.Move(6,100);
+                    c.actions.Bounce(bb);
+                    currentPosList.Add(c.attributes.GetLocation());
                                    
                     GH_Path path = new GH_Path(counter);
-                    trailTree.AddRange(c.attributes.getTrailPoints(),path);
+                    trailTree.AddRange(c.attributes.GetTrailPoints(),path);
                     
                     counter++;
                 }

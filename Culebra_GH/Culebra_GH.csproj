@@ -86,6 +86,7 @@
     <Compile Include="Tests\Component_Test_Conduit.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
     <Compile Include="Tests\Component_Test_Behaviors.cs" />
+    <Compile Include="Tests\Component_Test_MapBehavior.cs" />
     <Compile Include="Tests\Component_Test_MultiPolylineTracker.cs" />
     <Compile Include="Tests\Component_Test_MultiPolylineTrackerBabies.cs" />
     <Compile Include="Tests\Component_Test_PolylineTracker.cs" />

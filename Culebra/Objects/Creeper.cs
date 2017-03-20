@@ -34,13 +34,13 @@ namespace CulebraData.Objects
             this.attributes = new CulebraData.Attributes.Attributes(this);
             this.actions = new CulebraData.Operations.Actions(this);
 
-            creeperObject = new culebra.objects.Creeper(Utilities.Convert.toPVec(location), Utilities.Convert.toPVec(speed), Utilities.Convert.toJavaBool(instanceable), Utilities.Convert.toJavaBool(In3D), Utilities.Convert.toPApplet());
+            creeperObject = new culebra.objects.Creeper(Utilities.Convert.ToPVec(location), Utilities.Convert.ToPVec(speed), Utilities.Convert.ToJavaBool(instanceable), Utilities.Convert.ToJavaBool(In3D), Utilities.Convert.ToPApplet());
         }
         /// <summary>
         /// Getter Method for retrieving the culebra java creeper object
         /// </summary>
         /// <returns>the culebra java creeper object</returns>
-        protected internal culebra.objects.Creeper getCreeperObject()
+        protected internal culebra.objects.Creeper GetCreeperObject()
         {
             return this.creeperObject;
         }

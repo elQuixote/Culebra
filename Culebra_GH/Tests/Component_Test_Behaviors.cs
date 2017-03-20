@@ -211,48 +211,48 @@ namespace Culebra_GH.Tests
                 {
                     networkList = new List<Line>();
 
-                    c.attributes.setMoveAttributes(2.5f, 0.0830f, 1.5f);
+                    c.attributes.SetMoveAttributes(2.5f, 0.0830f, 1.5f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                     //bool w, w2, sw, a, s, s2, c, s3, att, r, p, nma, nmb, nmc = new bool();
-                    if (w) c.behaviors.wander2D(true, false, 2.0f, 80.0f, 26.0f);
-                    if (w2) c.behaviors.wander2D(2.0f, 80.0f, 26.0f);
-                    if (sw) c.behaviors.superWander2D(100.0f, 60.0f, 60.0f, 6.0f);
-                    if (a) c.behaviors.align(30.0f, 0.045f, this.creepList);
-                    if (s) c.behaviors.separate(10.0f, this.creepList);
-                    if (s2) c.behaviors.separate(30.0f, 0.09f, this.creepList);
-                    if (c2) c.behaviors.cohesion(30.0f, 0.024f, this.creepList);
-                    if (s3) c.behaviors.seek(new Vector3d(0, 0, 0));
-                    if (att) c.behaviors.attract(new Vector3d(0, 0, 0), 30.0f, 1.2f, 5.0f);
-                    if (r) c.behaviors.repel(new Vector3d(0, 0, 0), 30.0f, 1.2f, 5.0f);
-                    if (p) c.behaviors.perlin(200.0f, 20.5f, 0.0f, 2.0f);
-                    if (nma) c.behaviors.noiseModified_A(500, 7.0f, 1.5f, 1.0f, 10.0f, 5.0f);
-                    if (nmb) c.behaviors.noiseModified_B(500.0f, 7.0f, 1.5f, 1.0f, 10.0f);
-                    if (nmc) c.behaviors.noiseModified_C(500, 7.0f, 1.5f, 1.0f, 10.0f);
+                    if (w) c.behaviors.Wander2D(true, false, 2.0f, 80.0f, 26.0f);
+                    if (w2) c.behaviors.Wander2D(2.0f, 80.0f, 26.0f);
+                    if (sw) c.behaviors.SuperWander2D(100.0f, 60.0f, 60.0f, 6.0f);
+                    if (a) c.behaviors.Align(30.0f, 0.045f, this.creepList);
+                    if (s) c.behaviors.Separate(10.0f, this.creepList);
+                    if (s2) c.behaviors.Separate(30.0f, 0.09f, this.creepList);
+                    if (c2) c.behaviors.Cohesion(30.0f, 0.024f, this.creepList);
+                    if (s3) c.behaviors.Seek(new Vector3d(0, 0, 0));
+                    if (att) c.behaviors.Attract(new Vector3d(0, 0, 0), 30.0f, 1.2f, 5.0f);
+                    if (r) c.behaviors.Repel(new Vector3d(0, 0, 0), 30.0f, 1.2f, 5.0f);
+                    if (p) c.behaviors.Perlin(200.0f, 20.5f, 0.0f, 2.0f);
+                    if (nma) c.behaviors.NoiseModified_A(500, 7.0f, 1.5f, 1.0f, 10.0f, 5.0f);
+                    if (nmb) c.behaviors.NoiseModified_B(500.0f, 7.0f, 1.5f, 1.0f, 10.0f);
+                    if (nmc) c.behaviors.NoiseModified_C(500, 7.0f, 1.5f, 1.0f, 10.0f);
     
                     GH_Path path = new GH_Path(counter);
 
-                    List<Vector3d> testList = c.attributes.getNetwork();
+                    List<Vector3d> testList = c.attributes.GetNetwork();
                     if (testList.Count > 0)
                     {
 
                         foreach (Vector3d v in testList)
                         {
-                            Line l = new Line(c.attributes.getLocation(),(Point3d)v);
+                            Line l = new Line(c.attributes.GetLocation(),(Point3d)v);
                             networkList.Add(l);
                             
                         }
                         networkTree.AddRange(networkList, path);
                     }
 
-                    c.actions.move(5,2000);
+                    c.actions.Move(5,2000);
 
 
                     //c.actions.bounce(bb);
-                    c.actions.respawn(bb);
-                    currentPosList.Add(c.attributes.getLocation());
+                    c.actions.Respawn(bb);
+                    currentPosList.Add(c.attributes.GetLocation());
                                     
                     
-                    trailTree.AddRange(c.attributes.getTrailPoints(),path);
+                    trailTree.AddRange(c.attributes.GetTrailPoints(),path);
                     
                     counter++;
                 }
