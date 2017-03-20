@@ -14,10 +14,9 @@ using CulebraData;
 using CulebraData.Objects;
 using CulebraData.Utilities;
 using CulebraData.Drawing;
-
 namespace Culebra_GH.Tests
 {
-    public class Component_Test_Conduit : GH_Component
+    public class Component_Test_MapBehavior : GH_Component
     {
         //-----------------Global Variables---------------------------
         private List<Vector3d> moveList = new List<Vector3d>();
@@ -42,8 +41,8 @@ namespace Culebra_GH.Tests
         /// <summary>
         /// Initializes a new instance of the ComponentTest class.
         /// </summary>
-        public Component_Test_Conduit()
-            : base("Compolnent_Test_Conduit", "Nickname",
+        public Component_Test_MapBehavior()
+            : base("Component_Test_MapBehavior", "Nickname",
                 "Description",
                 "Culebra_GH", "Subcategory")
         {
@@ -61,6 +60,7 @@ namespace Culebra_GH.Tests
             pManager.AddCurveParameter("Polyline", "P", "", GH_ParamAccess.list);
             pManager.AddBooleanParameter("TriggerBabies", "TB", "TB", GH_ParamAccess.item);
             pManager.AddIntegerParameter("ObjectCount", "OC", "OC", GH_ParamAccess.item);
+            pManager.AddMeshParameter("ColorMesh", "CM", "ColoredMeshInput", GH_ParamAccess.item);
 
             pManager[5].Optional = true;
         }
@@ -96,14 +96,16 @@ namespace Culebra_GH.Tests
             int ptCount = new int();
             bool trail = true;
             bool td = new bool();
-           
+
             float moveValue = 3.44f;
             float searchRad = 40.04f;
             float aligVal = 0.04f;
-            float sepVal = 0.55f;
+            float sepVal = 0.09f;
             float cohVal = 0.24f;
 
-            if(!DA.GetData(0, ref reset))return;
+            Mesh colorMesh = new Mesh();
+
+            if (!DA.GetData(0, ref reset)) return;
             if (!DA.GetData(1, ref this.minthick)) return;
             if (!DA.GetData(2, ref this.maxthick)) return;
             if (!DA.GetData(3, ref this.convert)) return;
@@ -111,6 +113,7 @@ namespace Culebra_GH.Tests
             if (!DA.GetDataList(5, crvList)) return;
             if (!DA.GetData(6, ref this.triggerBabies)) return;
             if (!DA.GetData(7, ref ptCount)) return;
+            if (!DA.GetData(8, ref colorMesh)) return;
 
             foreach (Curve crv in crvList)
             {
@@ -118,7 +121,7 @@ namespace Culebra_GH.Tests
                 crv.TryGetPolyline(out polyline);
                 plineList.Add(polyline);
             }
-            
+
             if (reset)
             { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
                 this.moveList = new List<Vector3d>();
@@ -144,13 +147,13 @@ namespace Culebra_GH.Tests
                 {
                     if (this.dimensions == false)
                     { //IF WE WANT 2D
-                        //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
-                        //this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
-                        this.moveVec = new Vector3d(rnd.Next(-1, 2) * 0.5, rnd.Next(-1, 2) * 0.5, 0); //move randomly in any direction 2d
-                        this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
+                        this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
+                        this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
+                        //this.moveVec = new Vector3d(rnd.Next(-1, 2) * 0.5, rnd.Next(-1, 2) * 0.5, 0); //move randomly in any direction 2d
+                        //this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
 
                         this.creep = new Creeper(this.startPos, this.moveVec, true, dimensions);
-                        this.creepList.Add(this.creep);                     
+                        this.creepList.Add(this.creep);
                     }
                     else
                     { //IF WE WANT 3D
@@ -181,12 +184,12 @@ namespace Culebra_GH.Tests
                 DataTree<Point3d> trailTree_ChildA = new DataTree<Point3d>();
                 DataTree<Point3d> trailTree_ChildB = new DataTree<Point3d>();
                 foreach (Creeper c in this.creepList)
-                {                  
+                {
                     networkList = new List<Line>();
                     c.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
 
                     //c.behaviors.multiPolylineTracker(plineList, 500.0f, 50.0f, 15.0f);
-                    c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
+                    //c.behaviors.multiPolylineTrackerBabyMaker(plineList, 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
                     this.childSpawners = c.behaviors.GetChildStartPositions();
                     this.childSpawnType = c.behaviors.GetChildSpawnTypes();
 
@@ -194,6 +197,7 @@ namespace Culebra_GH.Tests
                     if (c is BabyCreeper)
                     {
                         c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
+
                         //c.behaviors.flock3D(searchRad, cohVal, 0.09f, aligVal, 360f, this.creepList, false);
 
                         if (c.attributes.GetChildType() == "a")
@@ -222,7 +226,8 @@ namespace Culebra_GH.Tests
                     }
                     else
                     {
-                        c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
+                        //c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
+                        c.behaviors.Flock2DMap(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false, true, true, true, colorMesh);
                         //c.behaviors.flock3D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
                         //-------ADD POINTS TO GRAPHIC POINTS LIST---------
                         particleList.Add(c.attributes.GetLocation());
@@ -288,7 +293,7 @@ namespace Culebra_GH.Tests
             foreach (Vector3d px in this.childSpawners)
             {
                 Vector3d speed;
-                if(this.dimensions == false)
+                if (this.dimensions == false)
                 {
                     speed = new Vector3d(rnd.Next(-2, 2) * 0.5, rnd.Next(-2, 2) * 0.5, 0);
 
@@ -358,12 +363,13 @@ namespace Culebra_GH.Tests
             if (!this.convert)
             {
                 viz.DrawSprites(args, file, particleList);
-                //viz.DrawDiscoTrails(args, file, particleList, particleSet, randomGen, this.minthick, this.maxthick);
+                //viz.drawDiscoTrails(args, file, particleList, particleSet, randomGen, this.minthick, this.maxthick);
                 viz.DrawGradientTrails(args, file, particleList, particleSet, 0, this.minthick, this.maxthick);
                 viz.DrawGradientTrails(args, file, particleBabyAList, particleBabyASet, 1, this.minthick, this.maxthick);
                 viz.DrawGradientTrails(args, file, particleBabyBList, particleBabyBSet, 2, this.minthick, this.maxthick);
             }
         }
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -376,12 +382,13 @@ namespace Culebra_GH.Tests
                 return null;
             }
         }
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{ebac0952-2092-4c4c-893b-ec26f8bd7a2f}"); }
+            get { return new Guid("{fbd507a3-a56b-41e8-b0f8-89f0fc192869}"); }
         }
     }
 }

@@ -32,13 +32,13 @@ namespace CulebraData.Objects
             this.attributes = new CulebraData.Attributes.Attributes(this);
             this.actions = new CulebraData.Operations.Actions(this);
 
-            babycreeperObject = new culebra.objects.BabyCreeper(Utilities.Convert.toPVec(location), Utilities.Convert.toPVec(speed), Utilities.Convert.toJavaBool(instanceable), babyType, Utilities.Convert.toJavaBool(In3D), Utilities.Convert.toPApplet());
+            babycreeperObject = new culebra.objects.BabyCreeper(Utilities.Convert.ToPVec(location), Utilities.Convert.ToPVec(speed), Utilities.Convert.ToJavaBool(instanceable), babyType, Utilities.Convert.ToJavaBool(In3D), Utilities.Convert.ToPApplet());
         }
         /// <summary>
         /// Getter Method for retrieving the culebra java baby creeper object
         /// </summary>
         /// <returns>the culebra java baby creeper object</returns>
-        protected internal culebra.objects.BabyCreeper getBabyCreeperObject()
+        protected internal culebra.objects.BabyCreeper GetBabyCreeperObject()
         {
             return this.babycreeperObject;
         }

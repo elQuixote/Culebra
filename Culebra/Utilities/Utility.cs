@@ -22,7 +22,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pvec">the PVector to convert</param>
         /// <returns>the converted PVector to Vector3d</returns>
-        public static Vector3d toVector3d(PVector pvec)
+        public static Vector3d ToVector3d(PVector pvec)
         {
             Vector3d vector = new Vector3d(pvec.x, pvec.y, pvec.z);
             return vector;
@@ -32,7 +32,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pvec">the PVector to convert</param>
         /// <returns>the converted PVector to Vector3d</returns>
-        public static Point3d toPoint3d(PVector pvec)
+        public static Point3d ToPoint3d(PVector pvec)
         {
             Point3d newPt = new Point3d(pvec.x, pvec.y, pvec.z);
             return newPt;
@@ -42,7 +42,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pt">the point to convert</param>
         /// <returns>the converted Point3d to PVector</returns>
-        public static PVector toPVec(Point3d pt)
+        public static PVector ToPVec(Point3d pt)
         {
             PVector newPt = new PVector((float)pt.X, (float)pt.Y, (float)pt.Z);
             return newPt;
@@ -52,7 +52,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="vec">the PVector to convert</param>
         /// <returns>the converted Vector3d to PVector</returns>
-        public static PVector toPVec(Vector3d vec)
+        public static PVector ToPVec(Vector3d vec)
         {
             PVector newVec = new PVector((float)vec.X, (float)vec.Y, (float)vec.Z);
             return newVec;
@@ -62,7 +62,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="value">the value</param>
         /// <returns>the converted boolean</returns>
-        public static java.lang.Boolean toJavaBool(bool value)
+        public static java.lang.Boolean ToJavaBool(bool value)
         {
             java.lang.Boolean boolean = new java.lang.Boolean(value);
             return boolean;
@@ -72,7 +72,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="value">the value</param>
         /// <returns>the converted boolean</returns>
-        public static bool toBoolean(java.lang.Boolean value)
+        public static bool ToBoolean(java.lang.Boolean value)
         {
             bool boolean = value.booleanValue();
             return boolean;
@@ -81,7 +81,7 @@ namespace CulebraData.Utilities
         /// Returns an instance of processing.core.PApplet
         /// </summary>
         /// <returns>the PApplet</returns>
-        public static PApplet toPApplet()
+        public static PApplet ToPApplet()
         {
             PApplet app = new PApplet();
             return app;
@@ -91,12 +91,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="genericList">the list to convert</param>
         /// <returns>the java.util.List of java creepers</returns>
-        public static java.util.List toJavaList(List<CulebraData.Objects.Creeper> genericList)
+        public static java.util.List ToJavaList(List<CulebraData.Objects.Creeper> genericList)
         {
             java.util.List javalist = new java.util.ArrayList();
             foreach (CulebraData.Objects.Creeper c in genericList)
             {
-                javalist.add(c.getCreeperObject());
+                javalist.add(c.GetCreeperObject());
             }
             return javalist;
         }
@@ -105,12 +105,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="arrayList">the arraylist to convert</param>
         /// <returns>the list of Points</returns>
-        public static List<Point3d> toPointList(java.util.ArrayList arrayList)
+        public static List<Point3d> ToPointList(java.util.ArrayList arrayList)
         {
             List<Point3d> ptList = new List<Point3d>();
             foreach (PVector p in arrayList)
             {
-                ptList.Add(toPoint3d(p));
+                ptList.Add(ToPoint3d(p));
             }
             return ptList;
         }
@@ -119,12 +119,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="arrayList">the arraylist to convert</param>
         /// <returns>the list of Vectors</returns>
-        public static List<Vector3d> toVec3DList(java.util.ArrayList arrayList)
+        public static List<Vector3d> ToVec3DList(java.util.ArrayList arrayList)
         {
             List<Vector3d> vecList = new List<Vector3d>();
             foreach (PVector p in arrayList)
             {
-                vecList.Add(toVector3d(p));
+                vecList.Add(ToVector3d(p));
             }
             return vecList;
         }
@@ -133,13 +133,13 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="arrayList">the java.util.List to convert</param>
         /// <returns>the list of Vectors</returns>
-        public static List<Vector3d> toVec3DList(java.util.List arrayList)
+        public static List<Vector3d> ToVec3DList(java.util.List arrayList)
         {
             List<Vector3d> vecList = new List<Vector3d>();
             for (int i = 0; i < arrayList.size(); i ++)
             //foreach (PVector p in arrayList)
             {
-                vecList.Add(toVector3d((PVector)arrayList.get(i)));
+                vecList.Add(ToVector3d((PVector)arrayList.get(i)));
             }
             return vecList;
         }
@@ -148,12 +148,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="vectorList">the list to convert</param>
         /// <returns>the arraylist of PVectors</returns>
-        public static java.util.ArrayList toPVecList(List<Vector3d> vectorList)
+        public static java.util.ArrayList ToPVecList(List<Vector3d> vectorList)
         {
             java.util.ArrayList javalist = new java.util.ArrayList();
             foreach (Vector3d v in vectorList)
             {
-                javalist.add(toPVec(v));
+                javalist.add(ToPVec(v));
             }
             return javalist;
         }
@@ -162,7 +162,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="plineList">the list of polylines to convert</param>
         /// <returns>the arraylist of shapes</returns>
-        public static java.util.ArrayList polylinesToMultiShapes(List<Polyline> plineList)
+        public static java.util.ArrayList PolylinesToMultiShapes(List<Polyline> plineList)
         {
             java.util.ArrayList javalist = new java.util.ArrayList();           
             foreach (Polyline p in plineList)
@@ -170,7 +170,7 @@ namespace CulebraData.Utilities
                 java.util.ArrayList javalist2 = new java.util.ArrayList();
                 for (int i = 0; i < p.SegmentCount + 1; i++)
                 {
-                    javalist2.add(toPVec(p.PointAt(i)));
+                    javalist2.add(ToPVec(p.PointAt(i)));
                 }
                 javalist.add(javalist2);
             }
@@ -181,12 +181,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pline">the polyline to convert</param>
         /// <returns>the arraylist of shapes</returns>
-        public static java.util.ArrayList polylineToShape(Polyline pline)
+        public static java.util.ArrayList PolylineToShape(Polyline pline)
         {
             java.util.ArrayList javalist = new java.util.ArrayList();
             for (int i = 0; i < pline.SegmentCount + 1; i++)
             {
-                javalist.add(toPVec(pline.PointAt(i)));
+                javalist.add(ToPVec(pline.PointAt(i)));
             }             
             return javalist;
         }
@@ -195,7 +195,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="javaIntList">arraylist to convert</param>
         /// <returns>the list of integers</returns>
-        public static List<int> toIntList(java.util.ArrayList javaIntList)
+        public static List<int> ToIntList(java.util.ArrayList javaIntList)
         {
             List<int> intList = new List<int>();
 
@@ -212,12 +212,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="intList">the list of integer to convert</param>
         /// <returns>the converted list of integers as arraylist of java integers</returns>
-        public static java.util.ArrayList toJavaIntList(List<int> intList)
+        public static java.util.ArrayList ToJavaIntList(List<int> intList)
         {
             java.util.ArrayList javalist = new java.util.ArrayList();
             foreach (int i in intList)
             {
-                javalist.Add(toJavaInt(i));
+                javalist.Add(ToJavaInt(i));
             }
             return javalist;
         }
@@ -226,7 +226,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="integer">the integer to convert</param>
         /// <returns>the java.lang.Integer</returns>
-        public static java.lang.Integer toJavaInt(int integer)
+        public static java.lang.Integer ToJavaInt(int integer)
         {
             java.lang.Integer javaInt = new java.lang.Integer(integer);
             return javaInt;
@@ -240,7 +240,7 @@ namespace CulebraData.Utilities
         /// <param name="ostart">target min value</param>
         /// <param name="ostop">target max value</param>
         /// <returns></returns>
-        public static float map(float value, float istart, float istop, float ostart, float ostop) 
+        public static float Map(float value, float istart, float istop, float ostart, float ostop) 
         {
 		    return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 	    }
@@ -250,7 +250,7 @@ namespace CulebraData.Utilities
         /// <param name="dataToMap">data to map</param> 
         /// <param name="sourceMax">source max value</param> 
         /// <returns>the list of mapped values</returns> 
-        public static List<double> remapValues(List<double> dataToMap, double sourceMax)
+        public static List<double> RemapValues(List<double> dataToMap, double sourceMax)
         {
             double oldMin = 0.0;
             double NewMax = 1.0;
@@ -289,7 +289,7 @@ namespace CulebraData.Utilities
         /// <param name="sp">Sample Point</param> 
         /// <param name="coloredMesh">colors mesh to sample</param> 
         /// <returns>The Hue Saturation and Luminance at location</returns> 
-        public static Rhino.Display.ColorHSL getHueSatLum(Point3d sp, Mesh coloredMesh)
+        public static Rhino.Display.ColorHSL GetHueSatLum(Point3d sp, Mesh coloredMesh)
         {
             MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
             if (mp != null)
@@ -329,8 +329,9 @@ namespace CulebraData.Utilities
         /// <param name="sp">The sample point</param> 
         /// <param name="coloredMesh">The colored mesh to sample</param> 
         /// <returns>The color at that location</returns> 
-        public static Color getColor(Point3d sp, Mesh coloredMesh)
+        public static Color GetColor(Point3d sp, Mesh coloredMesh)
         {
+            coloredMesh.Faces.ConvertQuadsToTriangles();
             MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
             if (mp != null)
             {

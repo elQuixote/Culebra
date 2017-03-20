@@ -162,7 +162,7 @@ namespace Culebra_GH.Tests
                 int counter = 0;
                 foreach (Creeper c in this.creepList)
                 {                
-                    c.attributes.setMoveAttributes(3.44f, 0.3f, 1.5f);
+                    c.attributes.SetMoveAttributes(3.44f, 0.3f, 1.5f);
                     /*
                     if (c is BabyCreeper)
                     {
@@ -178,34 +178,34 @@ namespace Culebra_GH.Tests
                     Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass());
                     Rhino.RhinoApp.WriteLine("---------------------");
                     */
-                    c.behaviors.multiPolylineTrackerBabyMaker(plineList, 500.0f, 20.0f, 15.0f, triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
+                    c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 20.0f, 15.0f, triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
 
-                    this.childSpawners = c.behaviors.getChildStartPositions();
-                    this.childSpawnType = c.behaviors.getChildSpawnTypes();
+                    this.childSpawners = c.behaviors.GetChildStartPositions();
+                    this.childSpawnType = c.behaviors.GetChildSpawnTypes();
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
-                    c.behaviors.wander2D(true, false, 100.0f, 60.0f, 60.0f);
+                    c.behaviors.Wander2D(true, false, 100.0f, 60.0f, 60.0f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);                
-                    c.actions.move(5,1000);
-                    c.actions.bounce(bb);
+                    c.actions.Move(5,1000);
+                    c.actions.Bounce(bb);
 
                     GH_Path path = new GH_Path(counter);
                     if (c is BabyCreeper)
                     {
-                        if (c.attributes.getChildType() == "a")
+                        if (c.attributes.GetChildType() == "a")
                         {
-                            trailTree_ChildA.AddRange(c.attributes.getTrailPoints(), path);
+                            trailTree_ChildA.AddRange(c.attributes.GetTrailPoints(), path);
                         }
                         else
                         {
-                            trailTree_ChildB.AddRange(c.attributes.getTrailPoints(), path);
+                            trailTree_ChildB.AddRange(c.attributes.GetTrailPoints(), path);
                         }
                     }
                     else
                     {                      
-                        trailTree.AddRange(c.attributes.getTrailPoints(), path);
+                        trailTree.AddRange(c.attributes.GetTrailPoints(), path);
                     }
 
-                    currentPosList.Add(c.attributes.getVecLocation());
+                    currentPosList.Add(c.attributes.GetVecLocation());
                  
                     counter++;
                 }                            

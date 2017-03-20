@@ -26,12 +26,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="conversionData">the nested list to convert</param> 
         /// <returns>The data structure</returns> 
-        public static GH_Structure<IGH_Goo> convertToGHDataStructure(List<List<Point3d>> conversionData)
+        public static GH_Structure<IGH_Goo> ConvertToGHDataStructure(List<List<Point3d>> conversionData)
         {
             GH_Structure<IGH_Goo> ghStructure = new GH_Structure<IGH_Goo>();
             for (int i = 0; i < conversionData.Count; i++)
             {
-                List<GH_Point> ghPtList = convertTOGHPTList(conversionData[i]);
+                List<GH_Point> ghPtList = ConvertTOGHPTList(conversionData[i]);
                 ghStructure.AppendRange(ghPtList, new GH_Path(i));
             }
             return ghStructure;
@@ -41,12 +41,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="conversionData">the nested list to convert</param> 
         /// <returns>The data structure</returns> 
-        public static GH_Structure<IGH_Goo> convertToGHDataStructure(List<List<Line>> conversionData)
+        public static GH_Structure<IGH_Goo> ConvertToGHDataStructure(List<List<Line>> conversionData)
         {
             GH_Structure<IGH_Goo> ghStructure = new GH_Structure<IGH_Goo>();
             for (int i = 0; i < conversionData.Count; i++)
             {
-                List<GH_Line> ghLineList = convertTOGHLineList(conversionData[i]);
+                List<GH_Line> ghLineList = ConvertTOGHLineList(conversionData[i]);
                 ghStructure.AppendRange(ghLineList, new GH_Path(i));
             }
             return ghStructure;
@@ -56,12 +56,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="conversionData">the nested list to convert</param> 
         /// <returns>The data structure</returns> 
-        public static GH_Structure<IGH_Goo> convertToGHDataStructure(List<List<Polyline>> conversionData)
+        public static GH_Structure<IGH_Goo> ConvertToGHDataStructure(List<List<Polyline>> conversionData)
         {
             GH_Structure<IGH_Goo> ghStructure = new GH_Structure<IGH_Goo>();
             for (int i = 0; i < conversionData.Count; i++)
             {
-                List<GH_Curve> ghCurveList = convertTOGHCurveList(conversionData[i]);
+                List<GH_Curve> ghCurveList = ConvertTOGHCurveList(conversionData[i]);
                 ghStructure.AppendRange(ghCurveList, new GH_Path(i));
             }
             return ghStructure;
@@ -71,7 +71,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="conversionData">the nested list to convert</param> 
         /// <returns>The data structure</returns> 
-        public static DataTree<Point3d> convertToGHDataTree(List<List<Point3d>> conversionData)
+        public static DataTree<Point3d> ConvertToGHDataTree(List<List<Point3d>> conversionData)
         {
             DataTree<Point3d> ghTree = new DataTree<Point3d>();
             for (int i = 0; i < conversionData.Count; i++)
@@ -85,7 +85,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="conversionData">the nested list to convert</param> 
         /// <returns>The data structure</returns> 
-        public static DataTree<Line> convertToGHDataTree(List<List<Line>> conversionData)
+        public static DataTree<Line> ConvertToGHDataTree(List<List<Line>> conversionData)
         {
             DataTree<Line> ghTree = new DataTree<Line>();
             for (int i = 0; i < conversionData.Count; i++)
@@ -99,7 +99,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pt">The point to convert</param> 
         /// <returns>The GH_Point</returns> 
-        public static GH_Point convertToGHPoint(Point3d pt)
+        public static GH_Point ConvertToGHPoint(Point3d pt)
         {
             GH_Point ghp = new GH_Point();
             bool c = GH_Convert.ToGHPoint(pt, GH_Conversion.Both, ref ghp);
@@ -110,7 +110,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="line">The line to convert</param> 
         /// <returns>The GH_Line</returns> 
-        public static GH_Line convertToGHLine(Line line)
+        public static GH_Line ConvertToGHLine(Line line)
         {
             GH_Line ghl = new GH_Line();
             bool c = GH_Convert.ToGHLine(line, GH_Conversion.Both, ref ghl);
@@ -121,7 +121,7 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="pline">The polyline to convert</param> 
         /// <returns>The GH_Curve</returns> 
-        public static GH_Curve convertToGHCurve(Polyline pline)
+        public static GH_Curve ConvertToGHCurve(Polyline pline)
         {
             GH_Curve ghl = new GH_Curve();
             bool c = GH_Convert.ToGHCurve(pline, GH_Conversion.Both, ref ghl);
@@ -132,12 +132,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="ptList">The list to convert</param> 
         /// <returns>The list of GH_Points</returns> 
-        public static List<GH_Point> convertTOGHPTList(List<Point3d> ptList)
+        public static List<GH_Point> ConvertTOGHPTList(List<Point3d> ptList)
         {
             List<GH_Point> ghPtList = new List<GH_Point>();
             foreach (Point3d p in ptList)
             {
-                ghPtList.Add(convertToGHPoint(p));
+                ghPtList.Add(ConvertToGHPoint(p));
             }
             return ghPtList;
         }
@@ -146,12 +146,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="edgeList">The list to convert</param> 
         /// <returns>The list of GH_Lines</returns> 
-        public static List<GH_Line> convertTOGHLineList(List<Line> edgeList)
+        public static List<GH_Line> ConvertTOGHLineList(List<Line> edgeList)
         {
             List<GH_Line> ghLineList = new List<GH_Line>();
             foreach (Line p in edgeList)
             {
-                ghLineList.Add(convertToGHLine(p));
+                ghLineList.Add(ConvertToGHLine(p));
             }
             return ghLineList;
         }
@@ -160,12 +160,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="edgeList">The list to convert</param> 
         /// <returns>The list of GH_Curves</returns> 
-        public static List<GH_Curve> convertTOGHCurveList(List<Polyline> edgeList)
+        public static List<GH_Curve> ConvertTOGHCurveList(List<Polyline> edgeList)
         {
             List<GH_Curve> ghCurveList = new List<GH_Curve>();
             foreach (Polyline p in edgeList)
             {
-                ghCurveList.Add(convertToGHCurve(p));
+                ghCurveList.Add(ConvertToGHCurve(p));
             }
             return ghCurveList;
         }
