@@ -14,6 +14,9 @@ using CulebraData.Utilities;
 
 namespace CulebraData.Objects
 {
+    /// <summary>
+    /// Creeper Objects are the main implementation of the abstract Objects. They are able to implement any type of behavior and are meant as a do all type of object.
+    /// </summary>
     public class Creeper
     {
         private culebra.objects.Creeper creeperObject;

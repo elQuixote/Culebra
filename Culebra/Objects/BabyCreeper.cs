@@ -13,6 +13,9 @@ using CulebraData.Utilities;
 
 namespace CulebraData.Objects
 {
+    /// <summary>
+    /// Baby Creeper class which inherits from the Creeper Class - Object is meant to be used as a child of the Creeper Object 
+    /// </summary>
     public class BabyCreeper : Creeper
     {
         private String babyType = null;

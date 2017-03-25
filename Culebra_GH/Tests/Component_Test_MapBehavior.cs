@@ -227,7 +227,10 @@ namespace Culebra_GH.Tests
                     else
                     {
                         //c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
-                        c.behaviors.Flock2DMap(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false, true, true, true, colorMesh);
+
+                        //c.behaviors.Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false, true, true, true, colorMesh);
+                        c.behaviors.Separate(10, this.creepList, true, 0, 2, colorMesh);
+
                         //c.behaviors.flock3D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
                         //-------ADD POINTS TO GRAPHIC POINTS LIST---------
                         particleList.Add(c.attributes.GetLocation());
@@ -364,9 +367,9 @@ namespace Culebra_GH.Tests
             {
                 viz.DrawSprites(args, file, particleList);
                 //viz.drawDiscoTrails(args, file, particleList, particleSet, randomGen, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleList, particleSet, 0, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyAList, particleBabyASet, 1, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyBList, particleBabyBSet, 2, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
             }
         }
 

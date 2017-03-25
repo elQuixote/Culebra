@@ -15,6 +15,9 @@ using System.Drawing;
 
 namespace CulebraData.Utilities
 {
+    /// <summary>
+    /// Static Class to Convert Java & Processing Objects to .Net Geometry Objects
+    /// </summary>
     public static class Convert
     {
         /// <summary>
