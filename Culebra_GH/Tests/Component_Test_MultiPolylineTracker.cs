@@ -50,6 +50,10 @@ namespace Culebra_GH.Tests
         {
             pManager.AddBooleanParameter("reset", "r", "", GH_ParamAccess.item);
             pManager.AddCurveParameter("Polyline", "P", "", GH_ParamAccess.list);
+            pManager.AddMeshParameter("ColoredMesh", "CM", "", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("UseMap", "M", "", GH_ParamAccess.item, false);
+            pManager[2].Optional = true;
+            pManager[3].Optional = true;
         }
 
         /// <summary>
@@ -78,6 +82,8 @@ namespace Culebra_GH.Tests
 
             List<Polyline> plineList = new List<Polyline>();
 
+            bool useMap = new bool();
+            Mesh colorMesh = null;
 
             bool reset = new bool();
             int ptCount = 95;
@@ -92,7 +98,8 @@ namespace Culebra_GH.Tests
 
             if(!DA.GetData(0, ref reset))return;
             if (!DA.GetDataList(1,crvList)) return;
-
+            if (!DA.GetData(2, ref colorMesh)) return;
+            if (!DA.GetData(3, ref useMap)) return;
 
             foreach (Curve crv in crvList)
             {
@@ -165,7 +172,14 @@ namespace Culebra_GH.Tests
                 foreach (Creeper c in this.creepList)
                 {                
                     c.attributes.SetMoveAttributes(3.44f, 0.3f, 1.5f);
-                    c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f);
+                    if (useMap && colorMesh != null)
+                    {
+                        c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f, false, false, true, colorMesh);
+                    }
+                    else
+                    {
+                        c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f);
+                    }
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
                     c.behaviors.Wander2D(true, false, 100.0f, 60.0f, 60.0f);
 

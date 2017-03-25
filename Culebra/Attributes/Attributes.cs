@@ -14,6 +14,9 @@ using CulebraData.Objects;
 
 namespace CulebraData.Attributes
 {
+    /// <summary>
+    /// Attributes Class - Used to access Creeper Object's Attributes
+    /// </summary>
     public class Attributes
     {
         private Creeper creeper;

@@ -13,6 +13,9 @@ using CulebraData.Utilities;
 using CulebraData.Objects;
 namespace CulebraData.Operations
 {
+    /// <summary>
+    /// Actions Class - Used to access Creeper Object's Actions
+    /// </summary>
     public class Actions
     {
         private Creeper creeper;

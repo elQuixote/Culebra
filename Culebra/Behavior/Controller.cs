@@ -17,7 +17,7 @@ using Rhino.Display;
 namespace CulebraData.Behavior
 {
     /// <summary>
-    /// Controller Class - Used to acess Creeper Object's Behaviors
+    /// Controller Class - Used to access Creeper Object's Behaviors
     /// </summary>
     public class Controller
     {
@@ -79,15 +79,18 @@ namespace CulebraData.Behavior
         /// <param name="minVal">minimum value to remap color data</param>
         /// <param name="maxVal">maximum value to remap color data</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void SeparateMap(float maxSeparation, List<Creeper> collection, bool mapSeparation, float minVal, float maxVal, Mesh coloredMesh)
+        public void Separate(float maxSeparation, List<Creeper> collection, bool mapSeparation, float minVal, float maxVal, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             float mappedValue = Utilities.Convert.Map((float)hls.L, 0, 1.0f, minVal,maxVal);
             if (mapSeparation)
             {
-                maxSeparation *= mappedValue;
+                this.creeper.GetCreeperObject().behavior.separate(mappedValue, Utilities.Convert.ToJavaList(collection));
             }
-            this.creeper.GetCreeperObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
+            else
+            {
+                this.creeper.GetCreeperObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
+            }          
         }
         /// <summary>
         /// 2D Separation Algorithm with image color sampling override for any behavior attribute for use with culebra.objects.Object type
@@ -96,7 +99,7 @@ namespace CulebraData.Behavior
         /// <param name="collection">list of other culebra.objects.Object</param>
         /// <param name="mapSeparation">uses image color data as multiplier for separation value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void SeparateMap(float maxSeparation, List<Creeper> collection, bool mapSeparation, Mesh coloredMesh)
+        public void Separate(float maxSeparation, List<Creeper> collection, bool mapSeparation, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             if (mapSeparation)
@@ -147,7 +150,7 @@ namespace CulebraData.Behavior
         /// <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
         /// <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Flock2DMap(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
+        public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             if (mapAlignment) alignValue *= (float)hls.L;
@@ -170,7 +173,7 @@ namespace CulebraData.Behavior
         /// <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
         /// <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Flock3DMap(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
+        public void Flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             if (mapAlignment) alignValue *= (float)hls.L;
@@ -215,36 +218,12 @@ namespace CulebraData.Behavior
         /// <param name="mapWanderR">uses mesh color data as multiplier for wander circle radius value</param>
         /// <param name="mapWanderD">uses mesh color data as multiplier for wander circle distance value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Wander2DMap(bool randomize, bool addHeading, float change, float wanderR, float wanderD, bool mapChange, bool mapWanderR, bool mapWanderD, Mesh coloredMesh)
+        public void Wander2D(bool randomize, bool addHeading, float change, float wanderR, float wanderD, bool mapChange, bool mapWanderR, bool mapWanderD, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             if (mapChange) change *= (float)hls.L;
             if (mapWanderR) wanderR *= (float)hls.L;
             if (mapWanderD) wanderD *= (float)hls.L;
-
-            this.creeper.GetCreeperObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
-        }
-        /// <summary>
-        /// Mapped 2D Wandering Algorithm with image color sampling override for any behavior attribute 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it(in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle.That random point moves randomly around the circle in each frame of animation.And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
-        /// </summary>
-        /// <param name="randomize">if true then the change value will be randomly selected from change value to change value each frame</param>
-        /// <param name="addHeading">if true adds the heading to the wandertheta</param>
-        /// <param name="change">the incremented change value used to get the polar coordinates.</param>
-        /// <param name="wanderR">the radius for the circle</param>
-        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
-        /// <param name="mapChange">uses mesh color data as multiplier for wander change value</param>
-        /// <param name="mapWanderR">uses mesh color data as multiplier for wander circle radius value</param>
-        /// <param name="mapWanderD">uses mesh color data as multiplier for wander circle distance value</param>
-        /// <param name="minVal">minimum value to remap color data</param>
-        /// <param name="maxVal">maximum value to remap color data</param>
-        /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Wander2DMap(bool randomize, bool addHeading, float change, float wanderR, float wanderD, bool mapChange, bool mapWanderR, bool mapWanderD, float minVal, float maxVal, Mesh coloredMesh)
-        {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
-            float mappedValue = Utilities.Convert.Map((float)hls.L, 0, 1.0f, minVal, maxVal);
-            if (mapChange) change *= mappedValue;
-            if (mapWanderR) wanderR *= mappedValue;
-            if (mapWanderD) wanderD *= mappedValue;
 
             this.creeper.GetCreeperObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
         }
@@ -285,22 +264,24 @@ namespace CulebraData.Behavior
         /// <summary>
         /// Mapped 3D Wandering Algorithm with image color sampling override for any behavior attribute 3D Wandering Algorithm
         /// </summary>
-        /// <param name="change"></param>
-        /// <param name="wanderR"></param>
-        /// <param name="wanderD"></param>
-        /// <param name="rotationTrigger"></param>
-        /// <param name="mapChange"></param>
-        /// <param name="mapWanderR"></param>
-        /// <param name="mapWanderD"></param>
-        /// <param name="mapRotationTrigger"></param>
-        /// <param name="coloredMesh"></param>
-        public void Wander3DMap(float change, float wanderR, float wanderD, float rotationTrigger, bool mapChange, bool mapWanderR, bool mapWanderD, bool mapRotationTrigger, Mesh coloredMesh)
+        /// <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+        /// <param name="wanderR">the radius for the circle</param>
+        /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        /// <param name="mapChange">uses mesh color data as multiplier for change value</param>
+        /// <param name="mapWanderR">uses mesh color data as multiplier for radius value</param>
+        /// <param name="mapWanderD">uses mesh color data as multiplier for distance value</param>
+        /// <param name="mapRotationTrigger">uses mesh color data as multiplier for rotation trigger value</param>
+        /// <param name="coloredMesh">the colored mesh to sample</param>
+        public void Wander3D(float change, float wanderR, float wanderD, float rotationTrigger, bool mapChange, bool mapWanderR, bool mapWanderD, bool mapRotationTrigger, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
             if (mapChange) change *= (float)hls.L;
             if (mapWanderR) wanderR *= (float)hls.L;
             if (mapWanderD) wanderD *= (float)hls.L;
             if (mapRotationTrigger) rotationTrigger *= (float)hls.L;
+
+            this.creeper.GetCreeperObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// Expanded 3D Wandering Algorithm - Type "B" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -392,6 +373,26 @@ namespace CulebraData.Behavior
             this.creeper.GetCreeperObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
+        /// Multi Shape Following Algorithm with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
+        /// </summary>
+        /// <param name="multiShapeList">A list of polylines to track against</param>
+        /// <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+        /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+        /// <param name="shapeRadius">the radius of the shapes</param>
+        /// <param name="mapThreshold">uses mesh color data as multiplier for threshold value</param>
+        /// <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
+        /// <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
+        /// <param name="coloredMesh">the colored mesh to sample</param>
+        public void MultiPolylineTracker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
+        {
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            if (mapThreshold) shapeThreshold *= (float)hls.L;
+            if (mapDistance) projectionDistance *= (float)hls.L;
+            if (mapRadius) shapeRadius *= (float)hls.L;
+
+            this.creeper.GetCreeperObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
+        }
+        /// <summary>
         /// MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
         /// </summary>
         /// <param name="multiShapeList">A list of polylines to track against</param>
@@ -422,6 +423,32 @@ namespace CulebraData.Behavior
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
         public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
         {
+            this.creeper.attributes.GetObjType();
+            this.creeper.GetCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+        }
+        /// <summary>
+        /// MultiShape Following Algorithm capable of spawning children with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
+        /// </summary>
+        /// <param name="multiShapeList">A list of polylines to track against</param>
+        /// <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+        /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+        /// <param name="shapeRadius">the radius of the shapes</param>
+        /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+        /// <param name="maxChildren">the max number of children each agent can create</param>
+        /// <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+        /// <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+        /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        /// <param name="mapThreshold">uses mesh color data as multiplier for threshold value</param>
+        /// <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
+        /// <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
+        /// <param name="coloredMesh">the colored mesh to sample</param>
+        public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
+        {
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            if (mapThreshold) shapeThreshold *= (float)hls.L;
+            if (mapDistance) projectionDistance *= (float)hls.L;
+            if (mapRadius) shapeRadius *= (float)hls.L;
+
             this.creeper.attributes.GetObjType();
             this.creeper.GetCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
@@ -537,6 +564,26 @@ namespace CulebraData.Behavior
         /// <param name="velocity">value adds a jitter type of movement</param>
         public void Perlin(float scale, float strength, float multiplier, float velocity)
         {
+            this.creeper.GetCreeperObject().behavior.perlin(scale, strength, multiplier, velocity);
+        }
+        /// <summary>
+        /// 2D Improved Perlin Noise with mesh color sampling override for any behavior attribute
+        /// </summary>
+        /// <param name="scale">overall scale of the noise</param>
+        /// <param name="strength">overall strength of the noise</param>
+        /// <param name="multiplier">value adds a jitter type of movement</param>
+        /// <param name="velocity">value adds a jitter type of movement</param>
+        /// <param name="mapScale">uses mesh color data as multiplier for scale value</param>
+        /// <param name="mapStrength">uses mesh color data as multiplier for strength value</param>
+        /// <param name="mapMultiplier">uses mesh color data as multiplier for multiplier value</param>
+        /// <param name="coloredMesh">the colored mesh to sample</param>
+        public void Perlin2DMap(float scale, float strength, float multiplier, float velocity, bool mapScale, bool mapStrength, bool mapMultiplier, Mesh coloredMesh)
+        {
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            if (mapScale) scale *= (float)hls.L;
+            if (mapStrength) strength *= (float)hls.L;
+            if (mapMultiplier) multiplier *= (float)hls.L;
+
             this.creeper.GetCreeperObject().behavior.perlin(scale, strength, multiplier, velocity);
         }
         /// <summary>
