@@ -40,7 +40,7 @@ namespace Culebra_GH
         public ComponentTest_IMP()
             : base("Culebra_GH_IMP", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
 

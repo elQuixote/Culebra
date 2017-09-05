@@ -42,7 +42,7 @@ namespace Culebra_GH.Tests
         public Component_Test_MultiPolylineTrackerBabies()
             : base("Component_Test_MultiPolylineTrackerBabies", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
         /// <summary>

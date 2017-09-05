@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="core">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\core.dll</HintPath>
+      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CulebraData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -51,12 +51,13 @@
     </Reference>
     <Reference Include="culebra_og, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\culebra_og.dll</HintPath>
+      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\culebra_og.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IKVM.OpenJDK.Core, Version=8.0.5449.1, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\IKVM.OpenJDK.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\IKVM.OpenJDK.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,20 +70,30 @@
     </Reference>
     <Reference Include="Grasshopper">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GH_IO">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="toxiclibscore">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\toxiclibscore.dll</HintPath>
+      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\toxiclibscore.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\Behavior_Controller.cs" />
+    <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\Wandering_Behavior.cs" />
+    <Compile Include="Data Structures\BehaviorData.cs" />
+    <Compile Include="Data Structures\FlockingData.cs" />
+    <Compile Include="Data Structures\WanderingData.cs" />
+    <Compile Include="Engine\Creeper_Engine.cs" />
+    <Compile Include="Initialize\InitSettings.cs" />
+    <Compile Include="Objects\IGH_BehaviorData.cs" />
+    <Compile Include="SpawnTypes\Spawn_Box.cs" />
     <Compile Include="Tests\Component_Test_Conduit.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
     <Compile Include="Tests\Component_Test_Behaviors.cs" />
@@ -94,6 +105,7 @@
     <Compile Include="Culebra_GHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

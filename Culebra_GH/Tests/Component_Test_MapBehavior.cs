@@ -44,7 +44,7 @@ namespace Culebra_GH.Tests
         public Component_Test_MapBehavior()
             : base("Component_Test_MapBehavior", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
         /// <summary>
