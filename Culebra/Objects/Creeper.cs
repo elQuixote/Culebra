@@ -10,7 +10,7 @@ using culebra.behaviors;
 using Rhino;
 using Rhino.Geometry;
 using CulebraData.Utilities;
-
+using culebra.objects;
 
 namespace CulebraData.Objects
 {
@@ -47,8 +47,6 @@ namespace CulebraData.Objects
         {
             return this.creeperObject;
         }
-
-
     }
     
 }
