@@ -7,7 +7,6 @@ namespace Culebra_GH.Data_Structures
 {
     public struct BehaviorData
     {
-
         public FlockingData flockData { get; set; }
         public WanderingData wanderData { get; set; }
 
