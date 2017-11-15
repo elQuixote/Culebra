@@ -94,12 +94,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="genericList">the list to convert</param>
         /// <returns>the java.util.List of java creepers</returns>
-        public static java.util.List ToJavaList(List<CulebraData.Objects.Creeper> genericList)
+        public static java.util.List ToJavaList(List<CulebraData.Objects.CulebraObject> genericList)
         {
             java.util.List javalist = new java.util.ArrayList();
-            foreach (CulebraData.Objects.Creeper c in genericList)
+            foreach (CulebraData.Objects.CulebraObject c in genericList)
             {
-                javalist.add(c.GetCreeperObject());
+                javalist.add(c.GetObject());
             }
             return javalist;
         }
@@ -177,6 +177,32 @@ namespace CulebraData.Utilities
                 }
                 javalist.add(javalist2);
             }
+            return javalist;
+        }
+        /// <summary>
+        /// Converts a nested list of Object Trails to a nested ArrayList. This is meant to be used with the Trail Followers methods using Seeker Objects 
+        /// </summary>
+        /// <param name="nestedList">The nested list of Object Trails</param>
+        /// <returns>The nested arrayList</returns>
+        public static java.util.ArrayList NestedList_To_NestedArrayList(List<List<Vector3d>> nestedList)
+        {
+            java.util.ArrayList javalist = new java.util.ArrayList();
+            foreach (List<Vector3d> vectorList in nestedList)
+            {
+                java.util.ArrayList groupData = new java.util.ArrayList();
+                java.util.ArrayList javalist2 = new java.util.ArrayList();
+                java.util.ArrayList javalist3 = new java.util.ArrayList();
+                int counter = 0;
+                foreach (Vector3d v in vectorList)
+                {
+                    javalist3.add(counter);
+                    javalist2.add(ToPVec(v));
+                    counter++;             
+                }
+                groupData.add(javalist3);
+                groupData.add(javalist2);
+                javalist.add(groupData);
+            }        
             return javalist;
         }
         /// <summary>

@@ -23,7 +23,7 @@ namespace Culebra_GH.Tests
         private List<Vector3d> startList = new List<Vector3d>();
         private DataTree<Point3d> posTree;
         private Creeper creep;
-        private List<Creeper> creepList = new List<Creeper>();
+        private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
         private List<Line> networkList = new List<Line>();
         private Vector3d startPos = new Vector3d();
@@ -128,7 +128,7 @@ namespace Culebra_GH.Tests
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = td;
-                creepList = new List<Creeper>();
+                creepList = new List<CulebraObject>();
                 currentPosList = new List<Point3d>();
                 networkList = new List<Line>();
 

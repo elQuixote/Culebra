@@ -24,7 +24,7 @@ namespace Culebra_GH
 
         private BabyCreeper babyCreep;
         private Creeper creep;
-        private List<Creeper> creepList = new List<Creeper>();
+        private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
 
         private List<Line> networkList = new List<Line>();
@@ -97,7 +97,7 @@ namespace Culebra_GH
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = dimension;
-                creepList = new List<Creeper>();
+                creepList = new List<CulebraObject>();
                 currentPosList = new List<Point3d>();
 
                 networkList = new List<Line>();

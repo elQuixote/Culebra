@@ -99,6 +99,43 @@ namespace CulebraData.Drawing
             }
         }
         /// <summary>
+        /// Draws a gradient trail through the display pipeline
+        /// </summary>
+        /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
+        /// <param name="file"></param>
+        /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+        /// <param name="r_colorA">the target min color value for the r channel</param>
+        /// <param name="r_colorB">the target max color value for the r channel</param>
+        /// <param name="g_colorA">the targer min color value for the g channel</param>
+        /// <param name="g_colorB">the target max color value for the g channel</param>
+        /// <param name="b_colorA">the target min color value for the b channel</param>
+        /// <param name="b_colorB">the target max color value for the b channel</param>
+        /// <param name="minTrailThickness">the minimum trail thickness</param>
+        /// <param name="maxTrailThickness">the maximum trail thickness</param>
+        public void DrawGradientTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, float r_colorA, float r_colorB, float g_colorA, float g_colorB, float b_colorA, float b_colorB, float minTrailThickness, float maxTrailThickness)
+        {
+            Color color = args.WireColour;
+            for (int i = 0; i < particleSet.BranchCount; i++)
+            {
+                List<Point3d> ptlist = particleSet.Branch(i);
+                //-------DRAW TRAILS AS SEGMENTS WITH CUSTOM STROKE WIDTH---------
+                if (ptlist.Count > 0)
+                {
+                    for (int x = 0; x < ptlist.Count; x++)
+                    {
+                        if (x != 0)
+                        {
+                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float colorValueR = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, r_colorA, r_colorB);
+                            float colorValueG = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, g_colorA, g_colorB);
+                            float colorValueB = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, b_colorA, b_colorB);
+                            args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValueR, (int)colorValueG, (int)colorValueB), (int)stroke);
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
         /// Draws a polyline trail through the display pipeline
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
