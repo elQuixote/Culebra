@@ -19,16 +19,17 @@ namespace CulebraData.Attributes
     /// </summary>
     public class Attributes
     {
-        private Creeper creeper;
         private BabyCreeper babyCreeper;
+        private CulebraObject culebraObject;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="obj">The Creeper Object</param>
-        public Attributes(Creeper obj)
+        /// <param name="obj">The Culebra Object whose attributes you want to access</param>
+        public Attributes(CulebraObject obj)
         {
-            this.creeper = obj;
-        }     
+            this.culebraObject = obj;
+        } 
         /// <summary>
         /// Sets the move attributes for each object. This can be set up during the creation of the object in the sketch setup() method or it can be modified per object in the draw() method.
         /// </summary>
@@ -37,7 +38,7 @@ namespace CulebraData.Attributes
         /// <param name="velocityMult">a velocity multiplier to increase the speed</param>
         public void SetMoveAttributes(float maxSpeed, float maxForce, float velocityMult)
         {
-           this.creeper.GetCreeperObject().setMoveAttributes(maxSpeed, maxForce, velocityMult);         
+            this.culebraObject.GetObject().setMoveAttributes(maxSpeed, maxForce, velocityMult);
         }
         /// <summary>
         /// Retrieves the objects trail PVectors and converts to List of Points
@@ -45,7 +46,7 @@ namespace CulebraData.Attributes
         /// <returns>the list of trail converted PVectors</returns>
         public List<Point3d> GetTrailPoints()
         {
-            List<Point3d> transfer = Utilities.Convert.ToPointList(this.creeper.GetCreeperObject().getTrailPoints());    
+            List<Point3d> transfer = Utilities.Convert.ToPointList(this.culebraObject.GetObject().getTrailPoints());
             return transfer;
         }
         /// <summary>
@@ -54,7 +55,7 @@ namespace CulebraData.Attributes
         /// <returns>the list of trail converted PVectors</returns>
         public List<Vector3d> GetTrailVectors()
         {
-            List<Vector3d> transfer = Utilities.Convert.ToVec3DList(this.creeper.GetCreeperObject().getTrailPoints());
+            List<Vector3d> transfer = Utilities.Convert.ToVec3DList(this.culebraObject.GetObject().getTrailPoints());
             return transfer;
         }
         /// <summary>
@@ -63,7 +64,7 @@ namespace CulebraData.Attributes
         /// <returns>the objects location puller from the controller</returns>
         public Point3d GetLocation()
         {
-            Point3d loc = Utilities.Convert.ToPoint3d(this.creeper.GetCreeperObject().getLocation());         
+            Point3d loc = Utilities.Convert.ToPoint3d(this.culebraObject.GetObject().getLocation());         
             return loc;
         }
         /// <summary>
@@ -72,12 +73,12 @@ namespace CulebraData.Attributes
         /// <returns>the objects location puller from the controller</returns>
         public Vector3d GetVecLocation()
         {
-            Vector3d loc = Utilities.Convert.ToVector3d(this.creeper.GetCreeperObject().getLocation());
+            Vector3d loc = Utilities.Convert.ToVector3d(this.culebraObject.GetObject().getLocation());
             return loc;
         }
         public void SetLocation(Vector3d newLocation)
         {
-            this.creeper.GetCreeperObject().behavior.setLoc(Utilities.Convert.ToPVec(newLocation));
+            this.culebraObject.GetObject().behavior.setLoc(Utilities.Convert.ToPVec(newLocation));
         }
         /// <summary>
         /// Getter for retrieving the object speed
@@ -85,7 +86,7 @@ namespace CulebraData.Attributes
         /// <returns>the objects speed puller from the controller</returns>
         public Vector3d GetSpeed()
         {
-            Vector3d speed = Utilities.Convert.ToVector3d(this.creeper.GetCreeperObject().getSpeed());
+            Vector3d speed = Utilities.Convert.ToVector3d(this.culebraObject.GetObject().getSpeed());
             return speed;
         }
         /// <summary>
@@ -94,7 +95,7 @@ namespace CulebraData.Attributes
         /// <param name="newSpeed">the desired new speed</param>
         public void SetSpeed(Vector3d newSpeed)
         {
-            this.creeper.GetCreeperObject().behavior.setSpeed(Utilities.Convert.ToPVec(newSpeed));
+            this.culebraObject.GetObject().behavior.setSpeed(Utilities.Convert.ToPVec(newSpeed));
         }
         /// <summary>
         /// Getter for retrieving the objects behavior type
@@ -102,7 +103,7 @@ namespace CulebraData.Attributes
         /// <returns>the objects behavior type</returns>
         public string GetBehaviorType()
         {
-            return this.creeper.GetCreeperObject().behavior.getBehaviorType();
+            return this.culebraObject.GetObject().behavior.getBehaviorType();
         }
         /// <summary>
         /// Gets the superclass of the object
@@ -111,15 +112,15 @@ namespace CulebraData.Attributes
         public string GetSuperClass()
         {
             string superclass = "";
-            if (this.creeper is BabyCreeper)
+            if (this.culebraObject is BabyCreeper)
             {
-                this.babyCreeper = (BabyCreeper)this.creeper;
-                this.creeper.GetCreeperObject().behavior.setSuperClass(this.babyCreeper.GetBabyCreeperObject().getSuperClass());
+                this.babyCreeper = (BabyCreeper)this.culebraObject;
+                this.culebraObject.GetObject().behavior.setSuperClass(this.babyCreeper.GetBabyCreeperObject().getSuperClass());
                 superclass = this.babyCreeper.GetBabyCreeperObject().getSuperClass();
             }
             else
             {
-                superclass = this.creeper.GetCreeperObject().getSuperClass();
+                superclass = this.culebraObject.GetObject().getSuperClass();
             }
             return superclass;
         }
@@ -130,15 +131,15 @@ namespace CulebraData.Attributes
         public string GetObjType()
         {
             string objType = "";
-            if (this.creeper is BabyCreeper)
+            if (this.culebraObject is BabyCreeper)
             {
-                this.babyCreeper = (BabyCreeper)this.creeper;
-                this.creeper.GetCreeperObject().behavior.setObjType(this.babyCreeper.GetBabyCreeperObject().getObjectType());
+                this.babyCreeper = (BabyCreeper)this.culebraObject;
+                this.culebraObject.GetObject().behavior.setObjType(this.babyCreeper.GetBabyCreeperObject().getObjectType());
                 objType = this.babyCreeper.GetBabyCreeperObject().getObjectType();        
             }
             else
             {
-                objType = this.creeper.GetCreeperObject().getObjectType();            
+                objType = this.culebraObject.GetObject().getObjectType();            
             }
             return objType;
         }
@@ -149,9 +150,9 @@ namespace CulebraData.Attributes
         public string GetChildType()
         {
             string childType = "";
-            if (this.creeper is BabyCreeper)
+            if (this.culebraObject is BabyCreeper)
             {
-                this.babyCreeper = (BabyCreeper)this.creeper;
+                this.babyCreeper = (BabyCreeper)this.culebraObject;
                 childType = this.babyCreeper.GetBabyCreeperObject().getType();
             }
             return childType;
@@ -163,12 +164,12 @@ namespace CulebraData.Attributes
         public List<Vector3d> GetNetwork()
         {
             List<Vector3d> networkList = new List<Vector3d>();
-            if (this.creeper.GetCreeperObject().behavior.getDrawConnections() != null)
+            if (this.culebraObject.GetObject().behavior.getDrawConnections() != null)
             {
-                if (Utilities.Convert.ToBoolean(this.creeper.GetCreeperObject().behavior.getDrawConnections()))
+                if (Utilities.Convert.ToBoolean(this.culebraObject.GetObject().behavior.getDrawConnections()))
                 {
-                    networkList = Utilities.Convert.ToVec3DList(this.creeper.GetCreeperObject().behavior.getNetworkData());
-                    this.creeper.GetCreeperObject().behavior.setDrawConnections(Utilities.Convert.ToJavaBool(false));
+                    networkList = Utilities.Convert.ToVec3DList(this.culebraObject.GetObject().behavior.getNetworkData());
+                    this.culebraObject.GetObject().behavior.setDrawConnections(Utilities.Convert.ToJavaBool(false));
                 }
             }
             return networkList;

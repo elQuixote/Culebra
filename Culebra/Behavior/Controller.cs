@@ -21,14 +21,14 @@ namespace CulebraData.Behavior
     /// </summary>
     public class Controller
     {
-        private Creeper creeper;
+        private CulebraObject culebraObject;
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="obj">The Creeper Object whose behaviors you want to access</param>
-        public Controller(Creeper obj)
+        /// <param name="obj">The Culebra Object whose behaviors you want to access</param>
+        public Controller(CulebraObject obj)
         {
-            this.creeper = obj;
+            this.culebraObject = obj;
         }
         #region Flocking Behavior Methods
         /// <summary>
@@ -37,9 +37,9 @@ namespace CulebraData.Behavior
         /// <param name="searchRadius">distance each culebra.objects.Object can see</param>
         /// <param name="alignValue">steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
         /// <param name="collection">list of other Creeper Objects</param>
-        public void Align(float searchRadius, float alignValue, List<Creeper> collection)
+        public void Align(float searchRadius, float alignValue, List<CulebraObject> collection)
         {
-            this.creeper.GetCreeperObject().behavior.align(searchRadius, alignValue, Utilities.Convert.ToJavaList(collection));
+            this.culebraObject.GetObject().behavior.align(searchRadius, alignValue, Utilities.Convert.ToJavaList(collection));
         }
         /// <summary>
         /// Cohesion Behavior steers towards average positions of neighbors (long range attraction) for use with culebra.objects.Object type
@@ -47,9 +47,9 @@ namespace CulebraData.Behavior
         /// <param name="searchRadius">distance each culebra.objects.Object can see</param>
         /// <param name="cohesionValue">steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
         /// <param name="collection">list of other Creeper Objects</param>
-        public void Cohesion(float searchRadius, float cohesionValue, List<Creeper> collection)
+        public void Cohesion(float searchRadius, float cohesionValue, List<CulebraObject> collection)
         {
-            this.creeper.GetCreeperObject().behavior.cohesion(searchRadius, cohesionValue, Utilities.Convert.ToJavaList(collection));
+            this.culebraObject.GetObject().behavior.cohesion(searchRadius, cohesionValue, Utilities.Convert.ToJavaList(collection));
         }
         /// <summary>
         /// Separation Behavior for use with culebra.objects.Object type - avoids crowding neighbors (short range repulsion)
@@ -57,18 +57,18 @@ namespace CulebraData.Behavior
         /// <param name="searchRadius">distance each culebra.objects.Object can see</param>
         /// <param name="separateValue">avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
         /// <param name="collection">list of other Creeper Objects</param>
-        public void Separate(float searchRadius, float separateValue, List<Creeper> collection)
+        public void Separate(float searchRadius, float separateValue, List<CulebraObject> collection)
         {
-            this.creeper.GetCreeperObject().behavior.separate(searchRadius, separateValue, Utilities.Convert.ToJavaList(collection));
+            this.culebraObject.GetObject().behavior.separate(searchRadius, separateValue, Utilities.Convert.ToJavaList(collection));
         }
         /// <summary>
         /// Separation Behavior II for use with culebra.objects.Object type - avoids crowding neighbors (short range repulsion)
         /// </summary>
         /// <param name="maxSeparation">maxDistance threshold to enable separate</param>
         /// <param name="collection">list of other Creeper Objects</param>
-        public void Separate(float maxSeparation, List<Creeper> collection)
+        public void Separate(float maxSeparation, List<CulebraObject> collection)
         {
-            this.creeper.GetCreeperObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
+            this.culebraObject.GetObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
         }
         /// <summary>
         /// Overloaded 2D Separation Algorithm with image color sampling override for any behavior attribute with color value remapping for use with culebra.objects.Object type
@@ -79,17 +79,17 @@ namespace CulebraData.Behavior
         /// <param name="minVal">minimum value to remap color data</param>
         /// <param name="maxVal">maximum value to remap color data</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Separate(float maxSeparation, List<Creeper> collection, bool mapSeparation, float minVal, float maxVal, Mesh coloredMesh)
+        public void Separate(float maxSeparation, List<CulebraObject> collection, bool mapSeparation, float minVal, float maxVal, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             float mappedValue = Utilities.Convert.Map((float)hls.L, 0, 1.0f, minVal,maxVal);
             if (mapSeparation)
             {
-                this.creeper.GetCreeperObject().behavior.separate(mappedValue, Utilities.Convert.ToJavaList(collection));
+                this.culebraObject.GetObject().behavior.separate(mappedValue, Utilities.Convert.ToJavaList(collection));
             }
             else
             {
-                this.creeper.GetCreeperObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
+                this.culebraObject.GetObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
             }          
         }
         /// <summary>
@@ -99,14 +99,14 @@ namespace CulebraData.Behavior
         /// <param name="collection">list of other culebra.objects.Object</param>
         /// <param name="mapSeparation">uses image color data as multiplier for separation value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Separate(float maxSeparation, List<Creeper> collection, bool mapSeparation, Mesh coloredMesh)
+        public void Separate(float maxSeparation, List<CulebraObject> collection, bool mapSeparation, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapSeparation)
             {
                 maxSeparation *= (float)hls.L;
             }
-            this.creeper.GetCreeperObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
+            this.culebraObject.GetObject().behavior.separate(maxSeparation, Utilities.Convert.ToJavaList(collection));
         }
         /// <summary>
         /// Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
@@ -118,9 +118,9 @@ namespace CulebraData.Behavior
         /// <param name="viewAngle">allowable vision angle in degrees</param>
         /// <param name="creeperList">list of other Creeper Objects</param>
         /// <param name="drawSearchConnectivity">network visualizing search radius</param>
-        public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity)
+        public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<CulebraObject> creeperList, bool drawSearchConnectivity)
         {
-            this.creeper.GetCreeperObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), Utilities.Convert.ToJavaBool(drawSearchConnectivity));
+            this.culebraObject.GetObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), Utilities.Convert.ToJavaBool(drawSearchConnectivity));
         }
         /// <summary>
         /// Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
@@ -132,9 +132,9 @@ namespace CulebraData.Behavior
         /// <param name="viewAngle">allowable vision angle in degrees</param>
         /// <param name="creeperList">list of other Creeper Objects</param>
         /// <param name="drawSearchConnectivity">network visualizing search radius</param>
-        public void Flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity)
+        public void Flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<CulebraObject> creeperList, bool drawSearchConnectivity)
         {
-            this.creeper.GetCreeperObject().behavior.flock(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), drawSearchConnectivity);
+            this.culebraObject.GetObject().behavior.flock(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), drawSearchConnectivity);
         }
         /// <summary>
         /// 2D Flocking Algorithm with mesh color sampling override for any behavior attribute for use with culebra.objects.Object type
@@ -150,14 +150,14 @@ namespace CulebraData.Behavior
         /// <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
         /// <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
+        public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<CulebraObject> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapAlignment) alignValue *= (float)hls.L;
             if (mapSeparation) separateValue *= (float)hls.L;
             if (mapCohesion) cohesionValue *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), Utilities.Convert.ToJavaBool(drawSearchConnectivity));
+            this.culebraObject.GetObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), Utilities.Convert.ToJavaBool(drawSearchConnectivity));
         }
         /// <summary>
         /// 3D Flocking Algorithm with mesh color sampling override for any behavior attribute for use with culebra.objects.Object type
@@ -173,14 +173,14 @@ namespace CulebraData.Behavior
         /// <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
         /// <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
         /// <param name="coloredMesh">the colored Mesh to sample</param>
-        public void Flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<Creeper> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
+        public void Flock3D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<CulebraObject> creeperList, bool drawSearchConnectivity, bool mapAlignment, bool mapSeparation, bool mapCohesion, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapAlignment) alignValue *= (float)hls.L;
             if (mapSeparation) separateValue *= (float)hls.L;
             if (mapCohesion) cohesionValue *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.flock(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), drawSearchConnectivity);
+            this.culebraObject.GetObject().behavior.flock(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), drawSearchConnectivity);
         }
         #endregion
         #region Wandering Behavior Methods
@@ -194,7 +194,7 @@ namespace CulebraData.Behavior
         /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
         public void Wander2D(Boolean randomize, Boolean addHeading, float change, float wanderR, float wanderD)
         {
-            this.creeper.GetCreeperObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
         }
         /// <summary>
         /// Overloaded 2D Wander Algorithm - by default this one randmoizes the change value from -change to change and incorporates the heading 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -204,7 +204,7 @@ namespace CulebraData.Behavior
         /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
         public void Wander2D(float change, float wanderR, float wanderD)
         {
-            this.creeper.GetCreeperObject().behavior.wander2D(change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander2D(change, wanderR, wanderD);
         }
         /// <summary>
         /// Overloaded Mapped 2D Wandering Algorithm with image color sampling override for any behavior attribute.No remapping capabilities in this method, min and max image values are fixed 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation.And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -220,12 +220,12 @@ namespace CulebraData.Behavior
         /// <param name="coloredMesh">the colored Mesh to sample</param>
         public void Wander2D(bool randomize, bool addHeading, float change, float wanderR, float wanderD, bool mapChange, bool mapWanderR, bool mapWanderD, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapChange) change *= (float)hls.L;
             if (mapWanderR) wanderR *= (float)hls.L;
             if (mapWanderD) wanderD *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander2D(new java.lang.Boolean(randomize), new java.lang.Boolean(addHeading), change, wanderR, wanderD);
         }
         /// <summary>
         /// Overloaded Expanded 2D Wandering Algorithm using triggers to create a "weaving" type movement 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -236,7 +236,7 @@ namespace CulebraData.Behavior
         /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
         public void SuperWander2D(float change, float wanderR, float wanderD, float rotationTrigger)
         {
-            this.creeper.GetCreeperObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger);
+            this.culebraObject.GetObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// Expanded 2D Wandering Algorithm using triggers to create a "weaving" type movement. USE WITH NON CREEPER DERIVED OBJECTS, if you create your own object use this and pass the objtype below. 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -248,7 +248,7 @@ namespace CulebraData.Behavior
         /// <param name="objType">to use with generic objects not derrived from culebra.objects.Creeper. Input "Parent" for parent objects and "Child" for child objects</param>
         public void SuperWander2D(float change, float wanderR, float wanderD, float rotationTrigger, String objType)
         {
-            this.creeper.GetCreeperObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger, objType);
+            this.culebraObject.GetObject().behavior.superWander2D(change, wanderR, wanderD, rotationTrigger, objType);
         }
         /// <summary>
         /// Expanded 3D Wandering Algorithm - Type "Primary" using triggers to create a "weaving" type movement. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -259,7 +259,7 @@ namespace CulebraData.Behavior
         /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
         public void Wander3D(float change, float wanderR, float wanderD, float rotationTrigger)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
+            this.culebraObject.GetObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// Mapped 3D Wandering Algorithm with image color sampling override for any behavior attribute 3D Wandering Algorithm
@@ -275,13 +275,13 @@ namespace CulebraData.Behavior
         /// <param name="coloredMesh">the colored mesh to sample</param>
         public void Wander3D(float change, float wanderR, float wanderD, float rotationTrigger, bool mapChange, bool mapWanderR, bool mapWanderD, bool mapRotationTrigger, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapChange) change *= (float)hls.L;
             if (mapWanderR) wanderR *= (float)hls.L;
             if (mapWanderD) wanderD *= (float)hls.L;
             if (mapRotationTrigger) rotationTrigger *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
+            this.culebraObject.GetObject().behavior.wander3D(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// Expanded 3D Wandering Algorithm - Type "B" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -292,7 +292,7 @@ namespace CulebraData.Behavior
         /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
         public void Wander3D_subA(float change, float wanderR, float wanderD, float rotationTrigger)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D_subA(change, wanderR, wanderD, rotationTrigger);
+            this.culebraObject.GetObject().behavior.wander3D_subA(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// Expanded 3D Wandering Algorithm - Type "C" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -303,7 +303,7 @@ namespace CulebraData.Behavior
         /// <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
         public void Wander3D_subB(float change, float wanderR, float wanderD, float rotationTrigger)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D_subB(change, wanderR, wanderD, rotationTrigger);
+            this.culebraObject.GetObject().behavior.wander3D_subB(change, wanderR, wanderD, rotationTrigger);
         }
         /// <summary>
         /// 3D Wandering Algorithm - Type "MOD" uses no Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -313,7 +313,7 @@ namespace CulebraData.Behavior
         /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
         public void Wander3D_Mod(float change, float wanderR, float wanderD)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D_Mod(change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander3D_Mod(change, wanderR, wanderD);
         }
         /// <summary>
         /// 3D Wandering Algorithm - Type "MOD2" uses randomized sin and cos values with the wandertheta for the Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -323,7 +323,7 @@ namespace CulebraData.Behavior
         /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
         public void Wander3D_Mod2(float change, float wanderR, float wanderD)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D_Mod2(change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander3D_Mod2(change, wanderR, wanderD);
         }
         /// <summary>
         /// 3D Wandering Algorithm - Type "MOD3" uses randomized sin and cos values with the wandertheta for all PVector components These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
@@ -333,7 +333,7 @@ namespace CulebraData.Behavior
         /// <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
         public void Wander3D_Mod3(float change, float wanderR, float wanderD)
         {
-            this.creeper.GetCreeperObject().behavior.wander3D_Mod3(change, wanderR, wanderD);
+            this.culebraObject.GetObject().behavior.wander3D_Mod3(change, wanderR, wanderD);
         }
         #endregion
         #region Trail Chasing - Polyline Tracking Methods
@@ -348,7 +348,7 @@ namespace CulebraData.Behavior
         /// <param name="trailsPts">list of all PVectors from all trails - see example file</param>
         public void SelfTailChase(float tailViewAngle, float tailCohMag, float tailCohViewRange, float tailSepMag, float tailSepViewRange, List<Vector3d> trailsPts)
         {
-            this.creeper.GetCreeperObject().behavior.selfTailChaser(tailViewAngle, tailCohMag, tailCohViewRange, tailSepMag, tailSepViewRange, Utilities.Convert.ToPVecList(trailsPts));
+            this.culebraObject.GetObject().behavior.selfTailChaser(tailViewAngle, tailCohMag, tailCohViewRange, tailSepMag, tailSepViewRange, Utilities.Convert.ToPVecList(trailsPts));
         }
         /// <summary>
         /// Shape Following Algorithm - Requires a polyline to track against. - see example files
@@ -359,7 +359,7 @@ namespace CulebraData.Behavior
         /// <param name="shapeRadius">the radius of the shapes</param>
         public void PolylineTracker(Polyline polyline, float shapeThreshold, float projectionDistance, float shapeRadius)
         {
-            this.creeper.GetCreeperObject().behavior.shapeTracker(Utilities.Convert.PolylineToShape(polyline), shapeThreshold, projectionDistance, shapeRadius);
+            this.culebraObject.GetObject().behavior.shapeTracker(Utilities.Convert.PolylineToShape(polyline), shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
         /// Multi Shape Following Algorithm - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
@@ -370,7 +370,7 @@ namespace CulebraData.Behavior
         /// <param name="shapeRadius">the radius of the shapes</param>
         public void MultiPolylineTracker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius)
         {
-            this.creeper.GetCreeperObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
+            this.culebraObject.GetObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
         /// Multi Shape Following Algorithm with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
@@ -385,12 +385,12 @@ namespace CulebraData.Behavior
         /// <param name="coloredMesh">the colored mesh to sample</param>
         public void MultiPolylineTracker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapThreshold) shapeThreshold *= (float)hls.L;
             if (mapDistance) projectionDistance *= (float)hls.L;
             if (mapRadius) shapeRadius *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
+            this.culebraObject.GetObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -407,7 +407,7 @@ namespace CulebraData.Behavior
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
         public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, String objTypeOverride, List<Vector3d> childList, List<int> childTypeList)
         {
-            this.creeper.GetCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, objTypeOverride, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, objTypeOverride, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -423,8 +423,8 @@ namespace CulebraData.Behavior
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
         public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
         {
-            this.creeper.attributes.GetObjType();
-            this.creeper.GetCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.attributes.GetObjType();
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -444,13 +444,13 @@ namespace CulebraData.Behavior
         /// <param name="coloredMesh">the colored mesh to sample</param>
         public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapThreshold) shapeThreshold *= (float)hls.L;
             if (mapDistance) projectionDistance *= (float)hls.L;
             if (mapRadius) shapeRadius *= (float)hls.L;
 
-            this.creeper.attributes.GetObjType();
-            this.creeper.GetCreeperObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.attributes.GetObjType();
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// Other Object Trails Following Algorithm - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects - see example files
@@ -459,9 +459,9 @@ namespace CulebraData.Behavior
         /// <param name="trailThreshold">distance threshold enabling agents to see shapes</param>
         /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
         /// <param name="trailRadius">the radius of the shapes</param>
-        public void TrailFollowers(List<Vector3d> trailsPts, float trailThreshold, float projectionDistance, float trailRadius)
+        public void TrailFollowers(List<List<Vector3d>> trailsPts, float trailThreshold, float projectionDistance, float trailRadius)
         {
-            this.creeper.GetCreeperObject().behavior.trailFollower(Utilities.Convert.ToPVecList(trailsPts), trailThreshold, projectionDistance, trailRadius);
+            this.culebraObject.GetObject().behavior.trailFollower(Utilities.Convert.NestedList_To_NestedArrayList(trailsPts), trailThreshold, projectionDistance, trailRadius);
         }
         /// <summary>
         /// Other Object Trails Following Algorithm capable of spawning children - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects
@@ -477,7 +477,7 @@ namespace CulebraData.Behavior
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
         public void TrailFollowersBabyMakers(List<Vector3d> trailsPts, float trailThreshold, float projectionDistance, float trailRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
         {
-            this.creeper.GetCreeperObject().behavior.trailFollowerBabyMaker(Utilities.Convert.ToPVecList(trailsPts), trailThreshold, projectionDistance, trailRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.GetObject().behavior.trailFollowerBabyMaker(Utilities.Convert.ToPVecList(trailsPts), trailThreshold, projectionDistance, trailRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// Gets the child start positions if any
@@ -485,7 +485,7 @@ namespace CulebraData.Behavior
         /// <returns>the child start positions</returns>
         public List<Vector3d> GetChildStartPositions() 
         {
-            return Utilities.Convert.ToVec3DList(this.creeper.GetCreeperObject().behavior.getChildStartPositions());
+            return Utilities.Convert.ToVec3DList(this.culebraObject.GetObject().behavior.getChildStartPositions());
         }
         /// <summary>
         /// Gets the child spawn types if any
@@ -493,7 +493,7 @@ namespace CulebraData.Behavior
         /// <returns>the child spawn type</returns>
         public List<int> GetChildSpawnTypes() 
         {
-            return Utilities.Convert.ToIntList(this.creeper.GetCreeperObject().behavior.getChildSpawnType());
+            return Utilities.Convert.ToIntList(this.culebraObject.GetObject().behavior.getChildSpawnType());
         }
         #endregion
         #region Forces Methods
@@ -503,7 +503,7 @@ namespace CulebraData.Behavior
         /// <param name="targetVector">the target to steer towards</param>
         public void Seek(Vector3d targetVector)
         {
-            this.creeper.GetCreeperObject().behavior.seek(Utilities.Convert.ToPVec(targetVector));
+            this.culebraObject.GetObject().behavior.seek(Utilities.Convert.ToPVec(targetVector));
         }
         /// <summary>
         /// Calculates a steering force towards a target as defined by Daniel Shiffmans implementation of Craig Reynolds steering force.
@@ -512,7 +512,7 @@ namespace CulebraData.Behavior
         /// <param name="amplitude">amount to multiply the steer vectory by</param>
         public void Seek(Vector3d targetVector, float amplitude)
         {
-            this.creeper.GetCreeperObject().behavior.seek(Utilities.Convert.ToPVec(targetVector), amplitude);
+            this.culebraObject.GetObject().behavior.seek(Utilities.Convert.ToPVec(targetVector), amplitude);
         }
         /// <summary>
         /// Calculates a steering force towards a target as defined by Daniel Shiffmans implementation of Craig Reynolds steering force.
@@ -521,7 +521,7 @@ namespace CulebraData.Behavior
         /// <param name="normalize">option to normalize the desired parameter</param>
         public void Seek(Vector3d targetVector, bool normalize)
         {
-            this.creeper.GetCreeperObject().behavior.seek(Utilities.Convert.ToPVec(targetVector), normalize);
+            this.culebraObject.GetObject().behavior.seek(Utilities.Convert.ToPVec(targetVector), normalize);
         }
         /// <summary>
         /// Attracts a object towards a target. Differs from Seek
@@ -532,7 +532,7 @@ namespace CulebraData.Behavior
         /// <param name="maxAttraction">maximum attraction value</param>
         public void Attract(Vector3d target, float threshold, float attractionValue, float maxAttraction)
         {
-            this.creeper.GetCreeperObject().behavior.attract(Utilities.Convert.ToPVec(target), threshold, attractionValue, maxAttraction);
+            this.culebraObject.GetObject().behavior.attract(Utilities.Convert.ToPVec(target), threshold, attractionValue, maxAttraction);
         }
         /// <summary>
         /// Repels a object away from a target.
@@ -543,7 +543,7 @@ namespace CulebraData.Behavior
         /// <param name="maxRepel">maximum repulsion value</param>
         public void Repel(Vector3d target, float threshold, float repelValue, float maxRepel)
         {
-            this.creeper.GetCreeperObject().behavior.repel(Utilities.Convert.ToPVec(target), threshold, repelValue, maxRepel);
+            this.culebraObject.GetObject().behavior.repel(Utilities.Convert.ToPVec(target), threshold, repelValue, maxRepel);
         }
         /// <summary>
         /// Applies the force vector to the acceleration and adds it to the current speed.
@@ -551,7 +551,7 @@ namespace CulebraData.Behavior
         /// <param name="force">vector to add to acceleration</param>
         public void ApplyForce(Vector3d force)
         {
-            this.creeper.GetCreeperObject().behavior.applyForce(Utilities.Convert.ToPVec(force));
+            this.culebraObject.GetObject().behavior.applyForce(Utilities.Convert.ToPVec(force));
         }
         #endregion
         #region Noise Methods
@@ -564,7 +564,7 @@ namespace CulebraData.Behavior
         /// <param name="velocity">value adds a jitter type of movement</param>
         public void Perlin(float scale, float strength, float multiplier, float velocity)
         {
-            this.creeper.GetCreeperObject().behavior.perlin(scale, strength, multiplier, velocity);
+            this.culebraObject.GetObject().behavior.perlin(scale, strength, multiplier, velocity);
         }
         /// <summary>
         /// 2D Improved Perlin Noise with mesh color sampling override for any behavior attribute
@@ -579,12 +579,12 @@ namespace CulebraData.Behavior
         /// <param name="coloredMesh">the colored mesh to sample</param>
         public void Perlin2DMap(float scale, float strength, float multiplier, float velocity, bool mapScale, bool mapStrength, bool mapMultiplier, Mesh coloredMesh)
         {
-            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.creeper.attributes.GetLocation(), coloredMesh);
+            ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapScale) scale *= (float)hls.L;
             if (mapStrength) strength *= (float)hls.L;
             if (mapMultiplier) multiplier *= (float)hls.L;
 
-            this.creeper.GetCreeperObject().behavior.perlin(scale, strength, multiplier, velocity);
+            this.culebraObject.GetObject().behavior.perlin(scale, strength, multiplier, velocity);
         }
         /// <summary>
         /// 2D/3D Modified Improved Perlin Noise Type A. Randomized remapped Scale value adjustments.
@@ -598,7 +598,7 @@ namespace CulebraData.Behavior
         public void NoiseModified_A(float scale, float strength, float multiplier, float velocity, float modMultiplier,
             float modScaleDivider)
         {
-            this.creeper.GetCreeperObject().behavior.noiseModified_A(scale, strength, multiplier, velocity, modMultiplier, modScaleDivider);
+            this.culebraObject.GetObject().behavior.noiseModified_A(scale, strength, multiplier, velocity, modMultiplier, modScaleDivider);
         }
         /// <summary>
         /// 2D/3D Modified Improved Perlin Noise Type B. Randomized remapped Scale value adjustments.
@@ -610,7 +610,7 @@ namespace CulebraData.Behavior
         /// <param name="modMultiplier">multiplier value multiplied to the scale</param>
         public void NoiseModified_B(float scale, float strength, float multiplier, float velocity, float modMultiplier)
         {
-            this.creeper.GetCreeperObject().behavior.noiseModified_B(scale, strength, multiplier, velocity, modMultiplier);
+            this.culebraObject.GetObject().behavior.noiseModified_B(scale, strength, multiplier, velocity, modMultiplier);
         }
         /// <summary>
         /// 2D/3D Modified Improved Perlin Noise Type C. Randomized remapped Strength value adjustments.
@@ -622,7 +622,7 @@ namespace CulebraData.Behavior
         /// <param name="modMultiplier">multiplier value multiplied to the scale</param>
         public void NoiseModified_C(float scale, float strength, float multiplier, float velocity, float modMultiplier)
         {
-            this.creeper.GetCreeperObject().behavior.noiseModified_C(scale, strength, multiplier, velocity, modMultiplier);
+            this.culebraObject.GetObject().behavior.noiseModified_C(scale, strength, multiplier, velocity, modMultiplier);
         }
         #endregion
     }

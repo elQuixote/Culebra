@@ -17,14 +17,14 @@ using CulebraData.Drawing;
 
 namespace Culebra_GH.Tests
 {
-    public class Component_Test_Conduit : GH_Component
+    public class Component_Test_Conduit_Mod : GH_Component
     {
         //-----------------Global Variables---------------------------
         private List<Vector3d> moveList = new List<Vector3d>();
         private List<Vector3d> startList = new List<Vector3d>();
         private DataTree<Point3d> posTree;
         private Creeper creep;
-        private List<Creeper> creepList = new List<Creeper>();
+        private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
         private List<Line> networkList = new List<Line>();
         private Vector3d startPos = new Vector3d();
@@ -39,11 +39,19 @@ namespace Culebra_GH.Tests
         private List<Vector3d> childSpawners = new List<Vector3d>();
         private List<int> childSpawnType = new List<int>();
 
+        private List<Vector3d> allTrail = new List<Vector3d>();
+        private List<Vector3d> groupData = new List<Vector3d>();
+        private List<List<Vector3d>> allCombinedTrails = new List<List<Vector3d>>();
+
+        private bool triggerTailSeekers;
+        private Seeker creeperTracker;
+        private List<CulebraObject> seekerList = new List<CulebraObject>();
+
         /// <summary>
         /// Initializes a new instance of the ComponentTest class.
         /// </summary>
-        public Component_Test_Conduit()
-            : base("Compolnent_Test_Conduit", "Nickname",
+        public Component_Test_Conduit_Mod()
+            : base("Compolnent_Test_Conduit_Mod", "Nickname",
                 "Description",
                 "Culebra_GH", "Testing")
         {
@@ -61,6 +69,7 @@ namespace Culebra_GH.Tests
             pManager.AddCurveParameter("Polyline", "P", "", GH_ParamAccess.list);
             pManager.AddBooleanParameter("TriggerBabies", "TB", "TB", GH_ParamAccess.item);
             pManager.AddIntegerParameter("ObjectCount", "OC", "OC", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Trigger Seekers", "TS", "TS", GH_ParamAccess.item);
 
             pManager[5].Optional = true;
         }
@@ -96,14 +105,15 @@ namespace Culebra_GH.Tests
             int ptCount = new int();
             bool trail = true;
             bool td = new bool();
-           
+            bool ts = new bool();
+
             float moveValue = 3.44f;
             float searchRad = 40.04f;
             float aligVal = 0.04f;
             float sepVal = 0.55f;
             float cohVal = 0.24f;
 
-            if(!DA.GetData(0, ref reset))return;
+            if (!DA.GetData(0, ref reset)) return;
             if (!DA.GetData(1, ref this.minthick)) return;
             if (!DA.GetData(2, ref this.maxthick)) return;
             if (!DA.GetData(3, ref this.convert)) return;
@@ -111,6 +121,7 @@ namespace Culebra_GH.Tests
             if (!DA.GetDataList(5, crvList)) return;
             if (!DA.GetData(6, ref this.triggerBabies)) return;
             if (!DA.GetData(7, ref ptCount)) return;
+            if (!DA.GetData(8, ref ts)) return;
 
             foreach (Curve crv in crvList)
             {
@@ -118,19 +129,28 @@ namespace Culebra_GH.Tests
                 crv.TryGetPolyline(out polyline);
                 plineList.Add(polyline);
             }
-            
+
             if (reset)
             { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
                 this.moveList = new List<Vector3d>();
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = td;
-                creepList = new List<Creeper>();
+                creepList = new List<CulebraObject>();
                 currentPosList = new List<Point3d>();
                 networkList = new List<Line>();
 
                 this.childSpawners = new List<Vector3d>();
                 this.childSpawnType = new List<int>();
+
+                this.allTrail = new List<Vector3d>();
+                this.groupData = new List<Vector3d>();
+                this.allCombinedTrails = new List<List<Vector3d>>();
+
+                this.triggerTailSeekers = true;
+
+                this.seekerList = new List<CulebraObject>();
+
 
                 if (this.dimensions == false)
                 {
@@ -150,7 +170,7 @@ namespace Culebra_GH.Tests
                         this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
 
                         this.creep = new Creeper(this.startPos, this.moveVec, true, dimensions);
-                        this.creepList.Add(this.creep);                     
+                        this.creepList.Add(this.creep);
                     }
                     else
                     { //IF WE WANT 3D
@@ -180,14 +200,24 @@ namespace Culebra_GH.Tests
 
                 DataTree<Point3d> trailTree_ChildA = new DataTree<Point3d>();
                 DataTree<Point3d> trailTree_ChildB = new DataTree<Point3d>();
+
+                this.allTrail = new List<Vector3d>();
+                this.groupData = new List<Vector3d>();
+                this.allCombinedTrails = new List<List<Vector3d>>();
+
                 foreach (Creeper c in this.creepList)
-                {                  
+                {
                     networkList = new List<Line>();
                     c.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
 
                     c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
                     this.childSpawners = c.behaviors.GetChildStartPositions();
                     this.childSpawnType = c.behaviors.GetChildSpawnTypes();
+
+                    if (ts)
+                    {
+                        this.allCombinedTrails.Add(c.attributes.GetTrailVectors());
+                    }
 
                     GH_Path path = new GH_Path(counter);
                     if (c is BabyCreeper)
@@ -223,6 +253,7 @@ namespace Culebra_GH.Tests
                     {
                         c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
                         //c.behaviors.Flock3D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        c.behaviors.Separate(10.0f, this.creepList);
                         //-------ADD POINTS TO GRAPHIC POINTS LIST---------
                         particleList.Add(c.attributes.GetLocation());
                         this.particleSet.AddRange(c.attributes.GetTrailPoints(), path);
@@ -249,7 +280,7 @@ namespace Culebra_GH.Tests
                         }
                     }
                     //c.actions.move();
-                    c.actions.Move(0, 400);
+                    c.actions.Move(0, 200);
                     c.actions.Bounce(bb);
                     //c.actions.respawn(bb);                 
                     //-------PARTICLE STUFF---------
@@ -260,6 +291,38 @@ namespace Culebra_GH.Tests
                     //this.particleSystem.Add(particle);
                     counter++;
                 }
+                
+                if (ts)
+                {
+                    //this.allCombinedTrails.Add(groupData);
+                    //this.groupData.Clear();
+                }
+                
+                if (triggerTailSeekers & ts)
+                {
+                    spawnSeekers();
+                    triggerTailSeekers = !triggerTailSeekers;
+                }
+
+                int seekCount = 0;
+                
+                foreach (CulebraObject cObj in this.seekerList)
+                {           
+                    GH_Path seekPath = new GH_Path(seekCount);
+                    Seeker seek = (Seeker)cObj;
+                    seek.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
+
+                    seek.behaviors.TrailFollowers(allCombinedTrails, 500.0f, 50.0f, 15.0f);
+                    seek.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
+
+                    seeker_particleList.Add(seek.attributes.GetLocation());
+                    this.seeker_particleSet.AddRange(seek.attributes.GetTrailPoints(), seekPath);
+
+                    seek.actions.Move(0, 200);
+                    seek.actions.Bounce(bb);
+                    seekCount++;             
+                }
+
                 if (convert)
                 {
                     DA.SetDataList(0, currentPosList);
@@ -280,6 +343,31 @@ namespace Culebra_GH.Tests
                 DA.SetDataList(3, this.bb.GetEdges());
             }
         }
+        public void spawnSeekers()
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < 50; i++)
+            {
+                Seeker s;
+                Vector3d moveVector = new Vector3d();
+                Vector3d startPosition = new Vector3d();
+                if (this.dimensions == false)
+                { //IF WE WANT 2D
+                    moveVector = new Vector3d(rnd.Next(-1, 2) * 0.5, rnd.Next(-1, 2) * 0.5, 0); //move randomly in any direction 2d
+                    startPosition = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
+
+                    s = new Seeker(startPosition, moveVector, true, false);
+                }
+                else
+                { //IF WE WANT 3D
+
+                    moveVector = new Vector3d(rnd.Next(-2, 2) * 0.5, rnd.Next(-2, 2) * 0.5, rnd.Next(-2, 2) * 0.5); //move randomly in any direction 3d
+                    startPosition = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), rnd.Next((int)bb.Min[2], (int)bb.Max[2])); //spawn randomly inside the bounding area
+                    s = new Seeker(startPosition, moveVector, true, true);
+                }           
+                this.seekerList.Add(s);
+            }
+        }
         public void newDude()
         {
             Random rnd = new Random();
@@ -287,7 +375,7 @@ namespace Culebra_GH.Tests
             foreach (Vector3d px in this.childSpawners)
             {
                 Vector3d speed;
-                if(this.dimensions == false)
+                if (this.dimensions == false)
                 {
                     speed = new Vector3d(rnd.Next(-2, 2) * 0.5, rnd.Next(-2, 2) * 0.5, 0);
 
@@ -312,15 +400,21 @@ namespace Culebra_GH.Tests
             }
         }
         public List<Point3d> particleList = new List<Point3d>();
+        public List<Point3d> seeker_particleList = new List<Point3d>();
+
         public List<Point3d> particleBabyAList = new List<Point3d>();
         public List<Point3d> particleBabyBList = new List<Point3d>();
         public DataTree<Point3d> particleSet = new DataTree<Point3d>();
+        public DataTree<Point3d> seeker_particleSet = new DataTree<Point3d>();
+
         public DataTree<Point3d> particleBabyASet = new DataTree<Point3d>();
         public DataTree<Point3d> particleBabyBSet = new DataTree<Point3d>();
         public ParticleSystem particleSystem = new ParticleSystem();
         public Random randomGen = new Random();
         public Color randomColorAction = new Color();
         private BoundingBox _clippingBox;
+        private BoundingBox seeker_clippingBox;
+
         public Vizualization viz = new Vizualization();
         public string file = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop) + @"\NeGeo3.png";
 
@@ -329,13 +423,17 @@ namespace Culebra_GH.Tests
             if (!this.convert)
             {
                 this.particleList.Clear();
+                this.seeker_particleList.Clear();
+
                 this.particleBabyAList.Clear();
                 this.particleBabyBList.Clear();
                 this.particleSet.Clear();
+                this.seeker_particleSet.Clear();
                 this.particleBabyASet.Clear();
                 this.particleBabyBSet.Clear();
                 this.particleSystem.Clear();
                 _clippingBox = BoundingBox.Empty;
+                seeker_clippingBox = BoundingBox.Empty;
             }
         }
         protected override void AfterSolveInstance()
@@ -343,6 +441,7 @@ namespace Culebra_GH.Tests
             if (!this.convert)
             {
                 _clippingBox = new BoundingBox(particleList);
+                seeker_clippingBox = new BoundingBox(seeker_particleList);
             }
         }
         public override BoundingBox ClippingBox
@@ -357,10 +456,21 @@ namespace Culebra_GH.Tests
             if (!this.convert)
             {
                 viz.DrawSprites(args, file, particleList);
+                viz.DrawSprites(args, file, seeker_particleList);
                 //viz.DrawDiscoTrails(args, file, particleSet, randomGen, this.minthick, this.maxthick);
+                /*
                 viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, seeker_particleSet, 1, this.minthick, this.maxthick);
+
                 viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
                 viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
+                */
+                viz.DrawGradientTrails(args, file, particleSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 100.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, seeker_particleSet, 0.0f, 255.0f, 0.0f, 0.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
+
+                viz.DrawGradientTrails(args, file, particleBabyASet, 255.0f, 0.0f, 0.0f, 255.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, particleBabyBSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 255.0f, this.minthick, this.maxthick);
+
             }
         }
         /// <summary>
@@ -378,9 +488,12 @@ namespace Culebra_GH.Tests
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
+        /// <summary>
+        /// Gets the unique ID for this component. Do not change this ID after release.
+        /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("{ebac0952-2092-4c4c-893b-ec26f8bd7a2f}"); }
+            get { return new Guid("0c7c7762-485a-49ef-9d62-28931266ec60"); }
         }
     }
 }
