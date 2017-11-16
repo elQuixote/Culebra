@@ -76,6 +76,7 @@ namespace Culebra_GH.Behaviors
             int inputCount = Component.Params.Input.Count;
             BehaviorData behaviorData = new BehaviorData();
             List<string> stringlist = new List<string>();
+            List<string> behaviorNames = new List<string>();
             int hitCounter = 0;
             for (int i = 0; i < inputCount; i++)
             {
@@ -95,6 +96,7 @@ namespace Culebra_GH.Behaviors
                         Rhino.RhinoApp.WriteLine(worked.ToString());
                         Rhino.RhinoApp.WriteLine(fd.alignment_Value.ToString());
                         behaviorData.flockData = fd;
+                        behaviorNames.Add("Flocking");
 
                         stringlist.Add("Alignment Value = " + fd.alignment_Value.ToString());
                         stringlist.Add("Separation Value = " + fd.separation_Value.ToString());
@@ -110,6 +112,7 @@ namespace Culebra_GH.Behaviors
                         Rhino.RhinoApp.WriteLine(worked.ToString());
                         Rhino.RhinoApp.WriteLine(wd.wanderingRadius.ToString());
                         behaviorData.wanderData = wd;
+                        behaviorNames.Add("Wandering");
 
                         stringlist.Add("Wandering Radius Value = " + wd.wanderingRadius.ToString());
                         stringlist.Add("Wandering Distance Value = " + wd.wanderingDistance.ToString());
@@ -122,6 +125,7 @@ namespace Culebra_GH.Behaviors
             }
             if(hitCounter > 0)
             {
+                behaviorData.dataOrder = behaviorNames;
                 IGH_BehaviorData igh_Behavior = new IGH_BehaviorData(behaviorData);
                 DA.SetData(1, igh_Behavior);
             }

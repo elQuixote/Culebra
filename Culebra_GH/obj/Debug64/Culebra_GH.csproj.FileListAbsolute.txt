@@ -39,3 +39,5 @@ C:\Users\lquinones\Documents\COMPLICITMATTER\ComplicitMatter_SourceTree\C#\Culeb
 C:\Users\lquinones\Documents\COMPLICITMATTER\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\obj\Debug64\Culebra_GH.pdb
 C:\Users\lquinones\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\Culebra_GH.dll
 C:\Users\lquinones\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\Culebra_GH.pdb
+C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\Culebra_GH.dll
+C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\Culebra_GH.pdb

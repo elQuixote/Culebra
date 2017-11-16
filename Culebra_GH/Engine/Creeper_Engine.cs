@@ -62,13 +62,25 @@ namespace Culebra_GH.Engine
             }
             else
             {
-                IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)obj;
                 List<string> stringList = new List<string>();
-                stringList.Add("Wandering Radius Value = " + igh_Behavior.Value.wanderData.wanderingRadius.ToString());
-                stringList.Add("Wandering Distance Value = " + igh_Behavior.Value.wanderData.wanderingDistance.ToString());
-                stringList.Add("Flocking Alignment Value = " + igh_Behavior.Value.flockData.alignment_Value.ToString());
-                stringList.Add("Flocking Separation Value = " + igh_Behavior.Value.flockData.separation_Value.ToString());
-
+                IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)obj;
+                foreach(string s in igh_Behavior.Value.dataOrder)
+                {
+                    if(s == "Flocking")
+                    {
+                        stringList.Add("Flocking Alignment Value = " + igh_Behavior.Value.flockData.alignment_Value.ToString());
+                        stringList.Add("Flocking Separation Value = " + igh_Behavior.Value.flockData.separation_Value.ToString());
+                    }
+                    else if(s == "Wandering")
+                    {
+                        stringList.Add("Wandering Radius Value = " + igh_Behavior.Value.wanderData.wanderingRadius.ToString());
+                        stringList.Add("Wandering Distance Value = " + igh_Behavior.Value.wanderData.wanderingDistance.ToString());
+                    }
+                    else
+                    {
+                        stringList.Add("We got a behavior problem");
+                    }
+                }
                 DA.SetDataList(0, stringList); 
             }
         }

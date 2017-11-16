@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
+    <OutputPath>C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
@@ -42,8 +42,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="core">
-      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\libs\core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="culebra">
+      <HintPath>..\libs\culebra.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CulebraData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,36 +55,34 @@
     </Reference>
     <Reference Include="culebra_og, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\culebra_og.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\libs\culebra_og.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="IKVM.OpenJDK.Core, Version=8.0.5449.1, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\IKVM.OpenJDK.Core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\libs\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\libs\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="RhinoCommon">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Program Files (x86)\Rhinoceros 5\System\rhinocommon.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Grasshopper">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+      <HintPath>..\libs\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GH_IO">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+      <HintPath>..\libs\GH_IO.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="toxiclibscore">
-      <HintPath>..\..\..\..\..\ikvm-8.0.5449.1\bin\toxiclibscore.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\libs\toxiclibscore.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +94,7 @@
     <Compile Include="Data Structures\WanderingData.cs" />
     <Compile Include="Engine\Creeper_Engine.cs" />
     <Compile Include="Initialize\InitSettings.cs" />
+    <Compile Include="Move\Move_Settings.cs" />
     <Compile Include="Objects\IGH_BehaviorData.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
     <Compile Include="Tests\Component_Test_Conduit.cs" />

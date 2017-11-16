@@ -98,7 +98,6 @@ namespace Culebra_GH.Initialize
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Please input a valid spawn type");
                 return;
             }
-
         }
 
         /// <summary>
