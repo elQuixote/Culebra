@@ -90,11 +90,11 @@ namespace Culebra_GH.Behaviors
                     if(a.ToString() == "Culebra_GH.Data_Structures.FlockingData")
                     {
                         hitCounter++;
-                        Rhino.RhinoApp.WriteLine("INSIDE FLOCKING DATA");
+                        //Rhino.RhinoApp.WriteLine("INSIDE FLOCKING DATA");
                         FlockingData fd;
                         bool worked = a.CastTo(out fd);
-                        Rhino.RhinoApp.WriteLine(worked.ToString());
-                        Rhino.RhinoApp.WriteLine(fd.alignment_Value.ToString());
+                        //Rhino.RhinoApp.WriteLine(worked.ToString());
+                        //Rhino.RhinoApp.WriteLine(fd.alignment_Value.ToString());
                         behaviorData.flockData = fd;
                         behaviorNames.Add("Flocking");
 
@@ -105,12 +105,12 @@ namespace Culebra_GH.Behaviors
                     else if (a.ToString() == "Culebra_GH.Data_Structures.WanderingData")
                     {
                         hitCounter++;
-                        Rhino.RhinoApp.WriteLine("INSIDE WANDERING DATA");
+                        //Rhino.RhinoApp.WriteLine("INSIDE WANDERING DATA");
 
                         WanderingData wd;
                         bool worked = a.CastTo(out wd);
-                        Rhino.RhinoApp.WriteLine(worked.ToString());
-                        Rhino.RhinoApp.WriteLine(wd.wanderingRadius.ToString());
+                        //Rhino.RhinoApp.WriteLine(worked.ToString());
+                        //Rhino.RhinoApp.WriteLine(wd.wanderingRadius.ToString());
                         behaviorData.wanderData = wd;
                         behaviorNames.Add("Wandering");
 

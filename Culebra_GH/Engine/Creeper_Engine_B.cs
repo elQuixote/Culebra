@@ -15,10 +15,9 @@ using CulebraData;
 using CulebraData.Objects;
 using CulebraData.Utilities;
 using CulebraData.Drawing;
-
 namespace Culebra_GH.Engine
 {
-    public class Creeper_Engine : GH_Component
+    public class Creeper_Engine_B : GH_Component
     {
         private List<Vector3d> moveList;
         private List<Vector3d> startList;
@@ -45,13 +44,17 @@ namespace Culebra_GH.Engine
 
         private double initialSpeed, maxSpeed, maxForce, velMultiplier;
 
+        private bool convert = new bool();
+
+        private int minthick = new int();
+        private int maxthick = new int();
 
         /// <summary>
         /// Initializes a new instance of the Creeper_Engine class.
         /// </summary>
-        public Creeper_Engine()
-          : base("Creeper_Engine", "CE",
-              "Engine Module Test",
+        public Creeper_Engine_B()
+          : base("Creeper_Engine_B", "CE",
+              "Engine Module Test Viz",
               "Culebra_GH", "Testing")
         {
         }
@@ -98,6 +101,10 @@ namespace Culebra_GH.Engine
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("IKVM.OpenJDK.Core"));
 
             bool reset = new bool();
+
+            this.convert = false;
+            this.minthick = 1;
+            this.maxthick = 3;
 
             List<object> init_Settings = new List<object>();
             List<object> move_Settings = new List<object>();
@@ -289,17 +296,23 @@ namespace Culebra_GH.Engine
                             }
                         }
                         //DA.SetDataList(4, stringList);
-                      
+
                         GH_Path path = new GH_Path(counter);
-                        List<Vector3d> testList = c.attributes.GetNetwork();
-                        if (testList.Count > 0)
+                        particleList.Add(c.attributes.GetLocation());
+                        this.particleSet.AddRange(c.attributes.GetTrailPoints(), path);
+
+                        if (convert)
                         {
-                            foreach (Vector3d v in testList)
+                            List<Vector3d> testList = c.attributes.GetNetwork();
+                            if (testList.Count > 0)
                             {
-                                Line l = new Line(c.attributes.GetLocation(), (Point3d)v);
-                                networkList.Add(l);
+                                foreach (Vector3d v in testList)
+                                {
+                                    Line l = new Line(c.attributes.GetLocation(), (Point3d)v);
+                                    networkList.Add(l);
+                                }
+                                networkTree.AddRange(networkList, path);
                             }
-                            networkTree.AddRange(networkList, path);
                         }
 
                         c.actions.Move(0, 400);
@@ -308,14 +321,20 @@ namespace Culebra_GH.Engine
                             c.actions.Bounce(bb);
                         }
 
-                        currentPosList.Add(c.attributes.GetLocation());
-                        trailTree.AddRange(c.attributes.GetTrailPoints(), path);
+                        if (convert)
+                        {
+                            currentPosList.Add(c.attributes.GetLocation());
+                            trailTree.AddRange(c.attributes.GetTrailPoints(), path);
+                        }
 
                         counter++;
                     }
-                    DA.SetDataList(0, currentPosList);
-                    DA.SetDataTree(1, trailTree);                 
-                    DA.SetDataTree(2, networkTree);
+                    if (convert)
+                    {
+                        DA.SetDataList(0, currentPosList);
+                        DA.SetDataTree(1, trailTree);
+                        DA.SetDataTree(2, networkTree);
+                    }
                 }
                 /*
                 //------------------------------------------------DATA RETURN TEST----------------------------------------------------
@@ -343,6 +362,57 @@ namespace Culebra_GH.Engine
                 */
             }
         }
+        public List<Point3d> particleList = new List<Point3d>();
+        public DataTree<Point3d> particleSet = new DataTree<Point3d>();
+
+        public ParticleSystem particleSystem = new ParticleSystem();
+        public Random randomGen = new Random();
+        public Color randomColorAction = new Color();
+        private BoundingBox _clippingBox;
+
+        public Vizualization viz = new Vizualization();
+        public string file = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop) + @"\NeGeo3.png";
+
+        protected override void BeforeSolveInstance()
+        {
+            if (!this.convert)
+            {
+                this.particleList.Clear();
+                this.particleSet.Clear();
+                this.particleSystem.Clear();
+                _clippingBox = BoundingBox.Empty;
+            }
+        }
+        protected override void AfterSolveInstance()
+        {
+            if (!this.convert)
+            {
+                _clippingBox = new BoundingBox(particleList);
+            }
+        }
+        public override BoundingBox ClippingBox
+        {
+            get
+            {
+                return _clippingBox;
+            }
+        }
+        public override void DrawViewportWires(IGH_PreviewArgs args)
+        {
+            if (!this.convert)
+            {
+                viz.DrawSprites(args, file, particleList);
+                //viz.DrawDiscoTrails(args, file, particleSet, randomGen, this.minthick, this.maxthick);
+                /*
+                viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, seeker_particleSet, 1, this.minthick, this.maxthick);
+
+                viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
+                */
+                viz.DrawGradientTrails(args, file, particleSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 100.0f, this.minthick, this.maxthick);
+            }
+        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -361,7 +431,7 @@ namespace Culebra_GH.Engine
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("af68d5a9-fd6b-4df1-adfc-b9fb225edb51"); }
+            get { return new Guid("82e23b83-c763-4328-b346-12ee96bcfc34"); }
         }
     }
 }
