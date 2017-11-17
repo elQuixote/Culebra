@@ -15,7 +15,7 @@ namespace Culebra_GH.Behaviors
         public Wandering_Behavior()
           : base("Wandering", "Nickname",
               "Description",
-              "Culebra_GH", "Behaviors")
+              "Culebra_GH", "03 | Behaviors")
         {
         }
         public override GH_Exposure Exposure

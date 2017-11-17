@@ -17,7 +17,7 @@ namespace Culebra_GH.Initialize
         public Settings_Init()
             : base("Init Settings", "IS",
                 "Sends the init settings to the Creeper Engine.",
-                "Culebra_GH", "Initialize")
+                "Culebra_GH", "02 | Initialize")
         {
         }
         public override GH_Exposure Exposure

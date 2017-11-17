@@ -9,15 +9,13 @@ namespace Culebra_GH.Move
 {
     public class Move_Settings : GH_Component
     {
-        private string text;
-
         /// <summary>
         /// Initializes a new instance of the Settings_Init class.
         /// </summary>
         public Move_Settings()
             : base("Move Settings", "MS",
                 "Sends the move settings to the Creeper Engine.",
-                "Culebra_GH", "Initialize")
+                "Culebra_GH", "02 | Initialize")
         {
         }
         public override GH_Exposure Exposure

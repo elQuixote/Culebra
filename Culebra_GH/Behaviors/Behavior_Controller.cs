@@ -37,7 +37,7 @@ namespace Culebra_GH.Behaviors
         public Behavior_Controller()
           : base("Controller", "BC",
               "Behavior Merging Controller",
-              "Culebra_GH", "Behaviors")
+              "Culebra_GH", "03 | Behaviors")
         {
         }
         public override GH_Exposure Exposure

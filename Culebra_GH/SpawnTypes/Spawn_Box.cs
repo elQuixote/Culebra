@@ -14,7 +14,7 @@ namespace Culebra_GH.SpawnTypes
         public Spawn_Box()
             : base("Box Spawn", "BS",
                 "Uses a box to contain the creepers spawn area in 2D or 3D",
-                "Culebra_GH", "Spawn Types")
+                "Culebra_GH", "01 | Spawn Types")
         {
         }
 

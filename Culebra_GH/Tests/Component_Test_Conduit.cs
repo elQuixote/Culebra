@@ -358,9 +358,9 @@ namespace Culebra_GH.Tests
             {
                 viz.DrawSprites(args, file, particleList);
                 //viz.DrawDiscoTrails(args, file, particleSet, randomGen, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyASet, 1, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyBSet, 2, this.minthick, this.maxthick);
             }
         }
         /// <summary>

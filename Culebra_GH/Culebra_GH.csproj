@@ -84,13 +84,26 @@
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
+    <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
+    <Compile Include="Data Structures\TrailData.cs" />
+    <Compile Include="Data Structures\VisualData.cs" />
     <Compile Include="Data Structures\WanderingData.cs" />
     <Compile Include="Engine\Creeper_Engine.cs" />
     <Compile Include="Engine\Creeper_Engine_B.cs" />
-    <Compile Include="Initialize\InitSettings.cs" />
-    <Compile Include="Move\Move_Settings.cs" />
+    <Compile Include="Engine\Creeper_Engine_Test.cs" />
+    <Compile Include="Objects\IGH_VisualData.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\InitSettings.cs" />
+    <Compile Include="Settings\Move_Settings.cs" />
     <Compile Include="Objects\IGH_BehaviorData.cs" />
+    <Compile Include="Settings_Visual\Gradient_Color.cs" />
+    <Compile Include="Settings_Visual\Trail_Data.cs" />
+    <Compile Include="Settings_Visual\Visual_Settings.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
     <Compile Include="Tests\Component_Test_Conduit.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
@@ -104,7 +117,15 @@
     <Compile Include="Culebra_GHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

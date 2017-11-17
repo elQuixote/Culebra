@@ -15,7 +15,7 @@ namespace Culebra_GH.Behaviors
         public Flocking_Behavior()
           : base("Flocking", "Nickname",
               "Description",
-              "Culebra_GH", "Behaviors")
+              "Culebra_GH", "03 | Behaviors")
         {
         }
         public override GH_Exposure Exposure
