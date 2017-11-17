@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
+    <OutputPath>C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
