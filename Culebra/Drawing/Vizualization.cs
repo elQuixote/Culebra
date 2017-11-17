@@ -61,12 +61,11 @@ namespace CulebraData.Drawing
         /// Draws a gradient trail through the display pipeline
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
-        /// <param name="file"></param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="colorType">the color type</param>
         /// <param name="minTrailThickness">the minimum trail thickness</param>
         /// <param name="maxTrailThickness">the maximum trail thickness</param>
-        public void DrawGradientTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, int colorType, float minTrailThickness, float maxTrailThickness)
+        public void DrawGradientTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, int colorType, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
@@ -102,7 +101,6 @@ namespace CulebraData.Drawing
         /// Draws a gradient trail through the display pipeline
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
-        /// <param name="file"></param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="r_colorA">the target min color value for the r channel</param>
         /// <param name="r_colorB">the target max color value for the r channel</param>
@@ -112,7 +110,7 @@ namespace CulebraData.Drawing
         /// <param name="b_colorB">the target max color value for the b channel</param>
         /// <param name="minTrailThickness">the minimum trail thickness</param>
         /// <param name="maxTrailThickness">the maximum trail thickness</param>
-        public void DrawGradientTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, float r_colorA, float r_colorB, float g_colorA, float g_colorB, float b_colorA, float b_colorB, float minTrailThickness, float maxTrailThickness)
+        public void DrawGradientTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, float r_colorA, float r_colorB, float g_colorA, float g_colorB, float b_colorA, float b_colorB, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
@@ -162,12 +160,11 @@ namespace CulebraData.Drawing
         /// Draws a disco trail through the display pipeline. Trails flash different colors throughout the simulation
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
-        /// <param name="file">the texture file</param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="randomGen">an instance of the random class</param>
         /// <param name="minTrailThickness">the minimum trail thickness</param>
         /// <param name="maxTrailThickness">the maximum trail thickness</param>
-        public void DrawDiscoTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, Random randomGen, float minTrailThickness, float maxTrailThickness)
+        public void DrawDiscoTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, Random randomGen, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)

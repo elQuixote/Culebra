@@ -279,7 +279,7 @@ namespace Culebra_GH.Engine
                             {
                                 stringList.Add("Flocking Alignment Value = " + igh_Behavior.Value.flockData.alignment_Value.ToString());
                                 stringList.Add("Flocking Separation Value = " + igh_Behavior.Value.flockData.separation_Value.ToString());
-
+                                
                                 c.behaviors.Flock2D((float)igh_Behavior.Value.flockData.searchRadius, (float)igh_Behavior.Value.flockData.cohesion_Value, (float)igh_Behavior.Value.flockData.separation_Value, (float)igh_Behavior.Value.flockData.alignment_Value, (float)igh_Behavior.Value.flockData.viewAngle, this.creepList, igh_Behavior.Value.flockData.network);
 
                             }

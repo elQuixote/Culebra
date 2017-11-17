@@ -465,11 +465,11 @@ namespace Culebra_GH.Tests
                 viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
                 viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
                 */
-                viz.DrawGradientTrails(args, file, particleSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 100.0f, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, seeker_particleSet, 0.0f, 255.0f, 0.0f, 0.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 100.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, seeker_particleSet, 0.0f, 255.0f, 0.0f, 0.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
 
-                viz.DrawGradientTrails(args, file, particleBabyASet, 255.0f, 0.0f, 0.0f, 255.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyBSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 255.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyASet, 255.0f, 0.0f, 0.0f, 255.0f, 0.0f, 0.0f, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyBSet, 0.0f, 0.0f, 0.0f, 255.0f, 0.0f, 255.0f, this.minthick, this.maxthick);
 
             }
         }
