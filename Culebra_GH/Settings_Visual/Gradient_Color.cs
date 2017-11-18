@@ -15,7 +15,7 @@ namespace Culebra_GH.Settings_Visual
         /// </summary>
         public Gradient_Color()
           : base("Gradient_Color", "GC",
-              "Controls the Trail Data for the Visual Settings Component",
+              "Controls the Gradient Color trail options for the Visual Settings Component",
               "Culebra_GH", "05 | Display")
         {
         }
@@ -71,6 +71,7 @@ namespace Culebra_GH.Settings_Visual
             if (!DA.GetData(5, ref maxThickness)) return;
 
             ColorData colorData = new ColorData(path, redInterval, greenInterval, blueInterval, minThickness, maxThickness);
+            colorData.colorDataType = "Gradient";
             DA.SetData(0, colorData);
             /*
             object redInterval = null;

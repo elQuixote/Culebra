@@ -140,19 +140,19 @@ namespace CulebraData.Drawing
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="dottedPolyline">do you want a dotted polyline</param>
         /// <param name="thickness">the thickness of the trail</param>
-        public void DrawPolylineTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, bool dottedPolyline, int thickness)
+        /// <param name="color">the color of the trail</param>
+        public void DrawPolylineTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, bool dottedPolyline, int thickness, System.Drawing.Color color)
         {
-            Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
             {
                 List<Point3d> ptlist = particleSet.Branch(i);
                 if (dottedPolyline)
                 {
-                    args.Display.DrawDottedPolyline(ptlist, Color.FromArgb(0, 255, 0, 255), false);
+                    args.Display.DrawDottedPolyline(ptlist, color, false);
                 }
                 else
                 {
-                    args.Display.DrawPolyline(ptlist, Color.FromArgb(0, 255, 0, 255), thickness);
+                    args.Display.DrawPolyline(ptlist, color, thickness);
                 }
             }
         }

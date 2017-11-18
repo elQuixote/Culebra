@@ -90,37 +90,36 @@ namespace Culebra_GH.Behaviors
                     if(a.ToString() == "Culebra_GH.Data_Structures.FlockingData")
                     {
                         hitCounter++;
-                        //Rhino.RhinoApp.WriteLine("INSIDE FLOCKING DATA");
                         FlockingData fd;
                         bool worked = a.CastTo(out fd);
-                        //Rhino.RhinoApp.WriteLine(worked.ToString());
-                        //Rhino.RhinoApp.WriteLine(fd.alignment_Value.ToString());
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Flocking data structure, please check your inputs"); return; }
                         behaviorData.flockData = fd;
                         behaviorNames.Add("Flocking");
 
                         stringlist.Add("Alignment Value = " + fd.alignment_Value.ToString());
                         stringlist.Add("Separation Value = " + fd.separation_Value.ToString());
                     }
-                    //else if (a.GetType() == typeof(WanderingData))
                     else if (a.ToString() == "Culebra_GH.Data_Structures.WanderingData")
                     {
                         hitCounter++;
-                        //Rhino.RhinoApp.WriteLine("INSIDE WANDERING DATA");
-
                         WanderingData wd;
                         bool worked = a.CastTo(out wd);
-                        //Rhino.RhinoApp.WriteLine(worked.ToString());
-                        //Rhino.RhinoApp.WriteLine(wd.wanderingRadius.ToString());
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Wandering data structure, please check your inputs"); return; }
                         behaviorData.wanderData = wd;
                         behaviorNames.Add("Wandering");
 
                         stringlist.Add("Wandering Radius Value = " + wd.wanderingRadius.ToString());
                         stringlist.Add("Wandering Distance Value = " + wd.wanderingDistance.ToString());
-                    }
-                    else
+                    }else if(a.ToString() == "Culebra_GH.Data_Structures.TrackingData")
                     {
-                        AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data");
-                    }   
+                        hitCounter++;
+                        TrackingData td;
+                        bool worked = a.CastTo(out td);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Tracking data structure, please check your inputs"); return; }
+                        behaviorData.trackingData = td;
+                        behaviorNames.Add("Tracking");
+                    }
+                    else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
                 }                     
             }
             if(hitCounter > 0)

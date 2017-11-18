@@ -82,15 +82,18 @@
   <ItemGroup>
     <Compile Include="Behaviors\Behavior_Controller.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\Tracking_Behavior.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
+    <Compile Include="Data Structures\TrackingData.cs" />
     <Compile Include="Data Structures\TrailData.cs" />
     <Compile Include="Data Structures\VisualData.cs" />
     <Compile Include="Data Structures\WanderingData.cs" />
-    <Compile Include="Engine\Creeper_Engine.cs" />
-    <Compile Include="Engine\Creeper_Engine_B.cs" />
+    <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
+    <Compile Include="Tests\Creeper_Engine.cs" />
+    <Compile Include="Tests\Creeper_Engine_B.cs" />
     <Compile Include="Engine\Creeper_Engine_Test.cs" />
     <Compile Include="Objects\IGH_VisualData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -101,7 +104,9 @@
     <Compile Include="Settings\InitSettings.cs" />
     <Compile Include="Settings\Move_Settings.cs" />
     <Compile Include="Objects\IGH_BehaviorData.cs" />
+    <Compile Include="Settings_Visual\Disco_Color.cs" />
     <Compile Include="Settings_Visual\Gradient_Color.cs" />
+    <Compile Include="Settings_Visual\Graphic_Polyline.cs" />
     <Compile Include="Settings_Visual\Trail_Data.cs" />
     <Compile Include="Settings_Visual\Visual_Settings.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
