@@ -82,7 +82,7 @@ namespace CulebraData.Behavior
         public void Separate(float maxSeparation, List<CulebraObject> collection, bool mapSeparation, float minVal, float maxVal, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
-            float mappedValue = Utilities.Convert.Map((float)hls.L, 0, 1.0f, minVal,maxVal);
+            float mappedValue = Utilities.Mapping.Map((float)hls.L, 0, 1.0f, minVal,maxVal);
             if (mapSeparation)
             {
                 this.culebraObject.GetObject().behavior.separate(mappedValue, Utilities.Convert.ToJavaList(collection));

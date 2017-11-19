@@ -16,7 +16,7 @@ namespace Culebra_GH.Settings_Visual
         public Disco_Color()
           : base("Disco_Color", "DC",
               "Controls the Disco Color trail options for the Visual Settings Component",
-              "Culebra_GH", "05 | Display")
+              "Culebra_GH", "06 | Display")
         {
         }
         public override GH_Exposure Exposure

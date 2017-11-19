@@ -17,7 +17,7 @@ namespace Culebra_GH.Settings_Visual
         public Visual_Settings()
             : base("Visual Settings", "VS",
                 "Controls the visual settings for the Creeper Engine Outputs",
-                "Culebra_GH", "05 | Display")
+                "Culebra_GH", "06 | Display")
         {
         }
         public override GH_Exposure Exposure

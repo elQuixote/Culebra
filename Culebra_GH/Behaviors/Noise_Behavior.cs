@@ -7,13 +7,13 @@ using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Wandering_Behavior : GH_Component
+    public class Noise_Behavior : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Wandering_Behavior class.
+        /// Initializes a new instance of the Noise_Behavior class.
         /// </summary>
-        public Wandering_Behavior()
-          : base("Wandering", "Nickname",
+        public Noise_Behavior()
+          : base("Noise", "N",
               "Description",
               "Culebra_GH", "03 | Behaviors")
         {
@@ -22,19 +22,19 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.quarternary;
             }
         }
+
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "R", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "AH", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "C", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Radius", "WR", "WR", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Distance", "WD", "WD", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Scale", "S", "Input value specifying the noise scale", GH_ParamAccess.item, 300.0);
+            pManager.AddNumberParameter("Strength", "ST", "Input value specifying the noise strength", GH_ParamAccess.item, 7.0);
+            pManager.AddNumberParameter("Multiplier", "M", "Input value to add a jitter type of movement", GH_ParamAccess.item, 1.0);
+            pManager.AddNumberParameter("Velocity", "V", "Input value specifying the noise velocity multiplier", GH_ParamAccess.item, 0.5);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Noise Behavior", "SB", "The noise behavior data structure", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -51,23 +51,18 @@ namespace Culebra_GH.Behaviors
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool randomizeIt = new bool();
-            bool addHeadingTrajectory = new bool();
-            double change = new double();
-            double wanderRad = new double();
-            double wanderDist = new double();
-            double rotationTrigger = new double();
+            double scale = new double();
+            double strength = new double();
+            double multiplier = new double();
+            double velocity = new double();
 
-            if (!DA.GetData(0, ref randomizeIt)) return;
-            if (!DA.GetData(1, ref addHeadingTrajectory)) return;
-            if (!DA.GetData(2, ref change)) return;
-            if (!DA.GetData(3, ref wanderRad)) return;
-            if (!DA.GetData(4, ref wanderDist)) return;
+            if (!DA.GetData(0, ref scale)) return;
+            if (!DA.GetData(1, ref strength)) return;
+            if (!DA.GetData(2, ref multiplier)) return;
+            if (!DA.GetData(3, ref velocity)) return;
 
-            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory);
-            wanderData.wanderingType = "Wander";
-
-            DA.SetData(0, wanderData);
+            NoiseData noiseData = new NoiseData((float)scale, (float)strength, (float)multiplier, (float)velocity);
+            DA.SetData(0, noiseData);
         }
 
         /// <summary>
@@ -88,7 +83,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("6da52bc9-dc35-4168-8d99-9bc75fd8b607"); }
+            get { return new Guid("c6d25a5a-5379-443b-9021-15da22939ffb"); }
         }
     }
 }

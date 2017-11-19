@@ -66,7 +66,7 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(4, ref separateValue)) return;
             if (!DA.GetData(5, ref cohesionValue)) return;
 
-            FlockingData flockData = new FlockingData(alignValue, separateValue, cohesionValue, searchRadius, viewAngle, connect);
+            FlockingData flockData = new FlockingData((float)alignValue, (float)separateValue, (float)cohesionValue, (float)searchRadius, (float)viewAngle, connect);
             DA.SetData(0, flockData);
         }
 

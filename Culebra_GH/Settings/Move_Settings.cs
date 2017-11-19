@@ -30,7 +30,7 @@ namespace Culebra_GH.Move
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Initial Speed", "IS", "Input the initial speed vector or float value", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Initial Speed||Vector", "IS", "Input the initial speed vector or float value", GH_ParamAccess.item);
             pManager.AddGenericParameter("Max Speed", "MS", "Input the max speed value allowed", GH_ParamAccess.item);
             pManager.AddGenericParameter("Max Force", "MF", "Input the max force value allowed", GH_ParamAccess.item);
             pManager.AddGenericParameter("Velocity Multiplier", "VM", "Input the velocity mutiplier", GH_ParamAccess.item);

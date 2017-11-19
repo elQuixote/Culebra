@@ -78,8 +78,8 @@ namespace CulebraData.Drawing
                     {
                         if (x != 0)
                         {
-                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
-                            float colorValue = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, 0f, 255.0f);
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float colorValue = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, 0f, 255.0f);
                             if(colorType == 0)
                             {
                                 args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValue, 0, 100), (int)stroke);
@@ -123,10 +123,10 @@ namespace CulebraData.Drawing
                     {
                         if (x != 0)
                         {
-                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
-                            float colorValueR = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, r_colorA, r_colorB);
-                            float colorValueG = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, g_colorA, g_colorB);
-                            float colorValueB = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, b_colorA, b_colorB);
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float colorValueR = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, r_colorA, r_colorB);
+                            float colorValueG = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, g_colorA, g_colorB);
+                            float colorValueB = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, b_colorA, b_colorB);
                             args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValueR, (int)colorValueG, (int)colorValueB), (int)stroke);
                         }
                     }
@@ -171,14 +171,14 @@ namespace CulebraData.Drawing
             {
                 List<Point3d> ptlist = particleSet.Branch(i);
                 //-------DRAW TRAILS AS SEGMENTS WITH CUSTOM STROKE WIDTH---------
-                Color randomColorAction = CulebraData.Utilities.Convert.GetRandomColor(randomGen);
+                Color randomColorAction = CulebraData.Utilities.ColorUtility.GetRandomColor(randomGen);
                 if (ptlist.Count > 0)
                 {
                     for (int x = 0; x < ptlist.Count; x++)
                     {
                         if (x != 0)
                         {
-                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
                             args.Display.DrawLine(ptlist[x - 1], ptlist[x], randomColorAction, (int)stroke);
                         }
                     }

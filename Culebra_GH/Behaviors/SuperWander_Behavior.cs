@@ -7,13 +7,13 @@ using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Wandering_Behavior : GH_Component
+    public class SuperWandering_Behavior : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Wandering_Behavior class.
         /// </summary>
-        public Wandering_Behavior()
-          : base("Wandering", "Nickname",
+        public SuperWandering_Behavior()
+          : base("Weaving Wandering", "Nickname",
               "Description",
               "Culebra_GH", "03 | Behaviors")
         {
@@ -30,11 +30,11 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "R", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "AH", GH_ParamAccess.item);
             pManager.AddNumberParameter("Change", "C", "C", GH_ParamAccess.item);
             pManager.AddNumberParameter("Wander Radius", "WR", "WR", GH_ParamAccess.item);
             pManager.AddNumberParameter("Wander Distance", "WD", "WD", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Rotation Trigger", "RT", "WD", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Type", "T", "Input value specifying the type of Wandering (0 = Type A | 1 = Type B | 2 = Type C", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -51,36 +51,23 @@ namespace Culebra_GH.Behaviors
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool randomizeIt = new bool();
-            bool addHeadingTrajectory = new bool();
             double change = new double();
             double wanderRad = new double();
             double wanderDist = new double();
             double rotationTrigger = new double();
+            int type = new int();
 
-            if (!DA.GetData(0, ref randomizeIt)) return;
-            if (!DA.GetData(1, ref addHeadingTrajectory)) return;
-            if (!DA.GetData(2, ref change)) return;
-            if (!DA.GetData(3, ref wanderRad)) return;
-            if (!DA.GetData(4, ref wanderDist)) return;
+            if (!DA.GetData(0, ref change)) return;
+            if (!DA.GetData(1, ref wanderRad)) return;
+            if (!DA.GetData(2, ref wanderDist)) return;
+            if (!DA.GetData(3, ref rotationTrigger)) return;
+            if (!DA.GetData(4, ref type)) return;
 
-            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory);
-            wanderData.wanderingType = "Wander";
-
+            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger);
+            if (type == 0){wanderData.wanderingType = "SuperWander";}
+            if (type == 1) { wanderData.wanderingType = "SuperWander_B"; }
+            if (type == 2) { wanderData.wanderingType = "SuperWander_C"; }
             DA.SetData(0, wanderData);
-        }
-
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
-        protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
-            }
         }
 
         /// <summary>
@@ -88,7 +75,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("6da52bc9-dc35-4168-8d99-9bc75fd8b607"); }
+            get { return new Guid("26ce7eda-52f3-4bfa-bb98-47a375271c88"); }
         }
     }
 }

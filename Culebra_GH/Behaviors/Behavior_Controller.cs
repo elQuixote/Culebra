@@ -44,7 +44,7 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.senary;
             }
         }
         /// <summary>
@@ -78,6 +78,7 @@ namespace Culebra_GH.Behaviors
             List<string> stringlist = new List<string>();
             List<string> behaviorNames = new List<string>();
             int hitCounter = 0;
+            List<ForceData> forceDataList = new List<ForceData>();
             for (int i = 0; i < inputCount; i++)
             {
                 IGH_DocumentObject connectedComponent = Component.Params.Input[i].Sources[0].Attributes.GetTopLevel.DocObject;
@@ -86,7 +87,6 @@ namespace Culebra_GH.Behaviors
 
                 foreach (IGH_Goo a in Component.Params.Input[i].VolatileData.get_Branch(0))
                 {
-                    //if (a.GetType() == typeof(FlockingData))
                     if(a.ToString() == "Culebra_GH.Data_Structures.FlockingData")
                     {
                         hitCounter++;
@@ -118,6 +118,39 @@ namespace Culebra_GH.Behaviors
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Tracking data structure, please check your inputs"); return; }
                         behaviorData.trackingData = td;
                         behaviorNames.Add("Tracking");
+                    }else if(a.ToString() == "Culebra_GH.Data_Structures.StigmergyData")
+                    {
+                        hitCounter++;
+                        StigmergyData sd;
+                        bool worked = a.CastTo(out sd);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Stigmergy data structure, please check your inputs"); return; }
+                        behaviorData.stigmergyData = sd;
+                        behaviorNames.Add("Stigmergy");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.NoiseData")
+                    {
+                        hitCounter++;
+                        NoiseData nd;
+                        bool worked = a.CastTo(out nd);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Noise data structure, please check your inputs"); return; }
+                        behaviorData.noiseData = nd;
+                        behaviorNames.Add("Noise");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.ForceData")
+                    {
+                        hitCounter++;
+                        ForceData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Forces data structure, please check your inputs"); return; }
+                        forceDataList.Add(data);
+                        behaviorData.forceData = forceDataList;
+                        behaviorNames.Add("Force");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.SeparationData")
+                    {
+                        hitCounter++;
+                        SeparationData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Separation data structure, please check your inputs"); return; }
+                        behaviorData.separationData = data;
+                        behaviorNames.Add("Separation");
                     }
                     else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
                 }                     

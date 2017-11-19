@@ -16,7 +16,7 @@ namespace Culebra_GH.Settings
         public Trail_Data()
             : base("Trail Data", "TD",
                 "Controls the Trail Data for the Visual Settings Component",
-                "Culebra_GH", "05 | Display")
+                "Culebra_GH", "06 | Display")
         {
         }
         public override GH_Exposure Exposure

@@ -22,7 +22,7 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.primary;
+                return GH_Exposure.quinary;
             }
         }
         /// <summary>
@@ -70,11 +70,7 @@ namespace Culebra_GH.Behaviors
             }
             if(polylineList.Count == 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "None of the curves converted to polylines properly, please check your input curves or polylines"); return; }
 
-            TrackingData trackingData = new TrackingData();
-            trackingData.polylines = polylineList;
-            trackingData.pathThreshold = (float)threshold;
-            trackingData.projectionDistance = (float)projectionDistance;
-            trackingData.pathRadius = (float)radius;
+            TrackingData trackingData = new TrackingData(polylineList, (float)threshold, (float)projectionDistance, (float)radius);
 
             DA.SetData(0, trackingData);
         }

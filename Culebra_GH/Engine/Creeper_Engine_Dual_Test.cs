@@ -21,7 +21,7 @@ using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Engine
 {
-    public class Creeper_Engine_Test : GH_Component
+    public class Creeper_Engine_Dual_Test : GH_Component
     {
         private List<Vector3d> moveList;
         private List<Vector3d> startList;
@@ -71,8 +71,8 @@ namespace Culebra_GH.Engine
         /// <summary>
         /// Initializes a new instance of the Creeper_Engine class.
         /// </summary>
-        public Creeper_Engine_Test()
-          : base("Creeper_Engine_Test", "CE",
+        public Creeper_Engine_Dual_Test()
+          : base("Creeper_Engine_Dual_Test", "CED",
               "Engine Module Test Viz",
               "Culebra_GH", "05 | Engine")
         {
@@ -133,12 +133,12 @@ namespace Culebra_GH.Engine
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Move Settings Detected, please connect Move Settings to enable the component");
                 return;
-            }        
+            }
             if (!DA.GetData(3, ref visual_Settings) || visual_Settings == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Visual Settings Detected, please connect Visual Settings to enable the component");
                 return;
-            }          
+            }
             if (!DA.GetData(4, ref reset)) return;
             Random rnd = new Random();
             if (!DA.GetData(2, ref behavioral_Settings) || behavioral_Settings == null)
@@ -191,7 +191,8 @@ namespace Culebra_GH.Engine
                     {
                         GH_Vector value = (GH_Vector)move_Settings[0];
                         initialVector = value.Value;
-                    }else if(move_Settings[0].GetType() == typeof(GH_Number))
+                    }
+                    else if (move_Settings[0].GetType() == typeof(GH_Number))
                     {
                         GH_Number value = (GH_Number)move_Settings[0];
                         this.initialSpeed = value.Value;
@@ -220,12 +221,14 @@ namespace Culebra_GH.Engine
                     this.greenValues[1] = cd.greenChannel[1];
                     this.blueValues[0] = cd.blueChannel[0];
                     this.blueValues[1] = cd.blueChannel[1];
-                } else if (cd.colorDataType == "GraphicPolyline")
+                }
+                else if (cd.colorDataType == "GraphicPolyline")
                 {
                     this.polylineColor = cd.color;
                     this.dotted = cd.dotted;
                     this.maxthick = cd.maxThickness;
-                } else if (cd.colorDataType == "Disco")
+                }
+                else if (cd.colorDataType == "Disco")
                 {
                     this.maxthick = cd.maxThickness;
                     this.minthick = cd.minThickness;
@@ -274,7 +277,7 @@ namespace Culebra_GH.Engine
                                     this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
                                 }
                                 //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
-                                if(initialVector.Length > 0)
+                                if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
                                 }
@@ -299,7 +302,8 @@ namespace Culebra_GH.Engine
                             }
                             this.creep = new Creeper(this.startPos, this.moveVec, true, false);
                             this.creepList.Add(this.creep);
-                        }else
+                        }
+                        else
                         {
                             General.setViewport("Perspective", "Shaded");
                             if (create)
@@ -360,7 +364,7 @@ namespace Culebra_GH.Engine
                     DataTree<Line> networkTree = new DataTree<Line>();
                     if (this.moveList == null) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Please Reset the CreepyCrawlers Component"); return; }
                     int counter = 0;
-                    /*
+
                     foreach (Creeper c in this.creepList)
                     {
                         this.networkList = new List<Line>();
@@ -478,29 +482,12 @@ namespace Culebra_GH.Engine
                         }
                         counter++;
                     }
-                    */
-                    Tuple<List<Point3d>, DataTree<Point3d>, DataTree<Point3d>, DataTree<Line>> results = Engine_Global.Run(this.creepList, this.dimensions, behavioral_Settings, this.displayMode, this.networkList,
-                      this.maxSpeed, this.maxForce, this.velMultiplier, this.totTail, this.particleList, this.particleSet, networkTree, trailStep, maxTrailSize, bounds, bb, currentPosList, trail, trailTree);
-                    /*
                     DA.SetDataList(0, this.currentPosList);
                     if (this.displayMode == 1)
                     {                     
                         if (this.trail) { DA.SetDataTree(1, trailTree); }
                         DA.SetDataTree(2, networkTree);
                     }
-                    */
-                    this.currentPosList = results.Item1;
-                    trailTree = results.Item3;
-                    this.particleSet = results.Item2;
-                    networkTree = results.Item4;
-
-                    DA.SetDataList(0, this.currentPosList);
-                    if (this.displayMode == 1)
-                    {
-                        if (this.trail) { DA.SetDataTree(1, trailTree); }
-                        DA.SetDataTree(2, networkTree);
-                    }
-                    //------------------------------
                     this.totTail.Clear();
                 }
             }
@@ -540,22 +527,24 @@ namespace Culebra_GH.Engine
         }
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
-            if (this.displayMode == 0 )
+            if (this.displayMode == 0)
             {
-                if(this.particleTexture == string.Empty)
+                if (this.particleTexture == string.Empty)
                 {
-                   this.particleTexture = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + @"\Grasshopper\Libraries\Culebra_GH\textures\texture.png";
+                    this.particleTexture = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + @"\Grasshopper\Libraries\Culebra_GH\textures\texture.png";
                 }
                 //viz.DrawSprites(args, particleTexture, particleList);
                 if (this.trail)
                 {
-                    if(this.graphicType == "Gradient")
+                    if (this.graphicType == "Gradient")
                     {
                         viz.DrawGradientTrails(args, particleSet, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
-                    }else if(this.graphicType == "GraphicPolyline")
+                    }
+                    else if (this.graphicType == "GraphicPolyline")
                     {
                         viz.DrawPolylineTrails(args, particleSet, this.dotted, this.maxthick, this.polylineColor);
-                    }else if(this.graphicType == "Disco")
+                    }
+                    else if (this.graphicType == "Disco")
                     {
                         viz.DrawDiscoTrails(args, particleSet, randomGen, this.minthick, this.maxthick);
                     }
@@ -574,12 +563,13 @@ namespace Culebra_GH.Engine
                 return null;
             }
         }
+
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("08d1cf36-17ab-4576-a4e5-7c0724ab8eb8"); }
+            get { return new Guid("dfb426a8-13c4-40c7-be21-5179dd3ff1e5"); }
         }
     }
 }

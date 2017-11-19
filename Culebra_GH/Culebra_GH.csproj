@@ -80,18 +80,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\Attract_Behavior.cs" />
     <Compile Include="Behaviors\Behavior_Controller.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\Noise_Behavior.cs" />
+    <Compile Include="Behaviors\Repel_Behavior.cs" />
+    <Compile Include="Behaviors\Separation_Behavior.cs" />
+    <Compile Include="Behaviors\Stigmergy_Behavior.cs" />
+    <Compile Include="Behaviors\SuperWander_Behavior.cs" />
     <Compile Include="Behaviors\Tracking_Behavior.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
+    <Compile Include="Data Structures\ForceData.cs" />
+    <Compile Include="Data Structures\NoiseData.cs" />
+    <Compile Include="Data Structures\SeparationData.cs" />
+    <Compile Include="Data Structures\StigmergyData.cs" />
     <Compile Include="Data Structures\TrackingData.cs" />
     <Compile Include="Data Structures\TrailData.cs" />
     <Compile Include="Data Structures\VisualData.cs" />
     <Compile Include="Data Structures\WanderingData.cs" />
+    <Compile Include="Engine\Creeper_Engine_Dual_Test.cs" />
     <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
+    <Compile Include="Engine\Engine_Global.cs" />
     <Compile Include="Tests\Creeper_Engine.cs" />
     <Compile Include="Tests\Creeper_Engine_B.cs" />
     <Compile Include="Engine\Creeper_Engine_Test.cs" />

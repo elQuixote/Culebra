@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Wandering_Behavior : GH_Component
+    public class Separation_Behavior : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the Wandering_Behavior class.
+        /// Initializes a new instance of the Separation_Behavior class.
         /// </summary>
-        public Wandering_Behavior()
-          : base("Wandering", "Nickname",
+        public Separation_Behavior()
+          : base("Separation", "Nickname",
               "Description",
               "Culebra_GH", "03 | Behaviors")
         {
@@ -22,7 +21,7 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.secondary;
+                return GH_Exposure.primary;
             }
         }
         /// <summary>
@@ -30,11 +29,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "R", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "AH", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "C", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Radius", "WR", "WR", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Distance", "WD", "WD", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Max Separation", "MS", "Input value specifying maxDistance threshold to enable separate", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,7 +37,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Separation Behavior", "SB", "The separation behavior data structure", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -51,23 +46,12 @@ namespace Culebra_GH.Behaviors
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool randomizeIt = new bool();
-            bool addHeadingTrajectory = new bool();
-            double change = new double();
-            double wanderRad = new double();
-            double wanderDist = new double();
-            double rotationTrigger = new double();
+            double maxSep = new double();
 
-            if (!DA.GetData(0, ref randomizeIt)) return;
-            if (!DA.GetData(1, ref addHeadingTrajectory)) return;
-            if (!DA.GetData(2, ref change)) return;
-            if (!DA.GetData(3, ref wanderRad)) return;
-            if (!DA.GetData(4, ref wanderDist)) return;
+            if (!DA.GetData(0, ref maxSep)) return;
 
-            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory);
-            wanderData.wanderingType = "Wander";
-
-            DA.SetData(0, wanderData);
+            SeparationData separationData = new SeparationData((float)maxSep);
+            DA.SetData(0, separationData);
         }
 
         /// <summary>
@@ -88,7 +72,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("6da52bc9-dc35-4168-8d99-9bc75fd8b607"); }
+            get { return new Guid("12d1e218-2d02-4c6a-8971-20426e077bdb"); }
         }
     }
 }
