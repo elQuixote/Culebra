@@ -23,50 +23,40 @@ namespace Culebra_GH.Engine
 {
     public class Creeper_Engine_Test : GH_Component
     {
-        private List<Vector3d> moveList;
-        private List<Vector3d> startList;
-        private List<Point3d> ptList;
-
-        private Vector3d startPos = new Vector3d();
-        private Vector3d moveVec;
-        private BoundingBox bb;
-        private int dimensions;
-
-        private bool bounds;
-        private Box box;
-
-        private int spawnType;
-        private int pointCount;
-        private string spawnData;
-
+        //----------------Creeper Fields-------------------------
         private Creeper creep;
         private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
         private List<Line> networkList = new List<Line>();
-
+        private List<Vector3d> moveList;
+        private List<Vector3d> startList;
+        private List<Point3d> ptList;
+        private Vector3d startPos = new Vector3d();
+        private Vector3d moveVec;
         private double initialSpeed, maxSpeed, maxForce, velMultiplier;
-
+        private BoundingBox bb;
+        private Box box;
+        private int dimensions;
+        private bool bounds;
+        private string spawnData;
+        private int spawnType;
+        private int pointCount;
+        //----------------Graphics/Trail Fields-------------------------
         private int minthick = new int();
         private int maxthick = new int();
-
         private bool trail = new bool();
         private int displayMode;
-
         private int trailStep;
         private int maxTrailSize;
-
         private string particleTexture = "";
-
         private double[] redValues = new double[2];
         private double[] greenValues = new double[2];
         private double[] blueValues = new double[2];
-
         private Color polylineColor;
         private bool dotted;
         private string graphicType;
-
+        //----------------SelfTail Chasing Fields-------------------------
         private List<Vector3d> totTail = new List<Vector3d>();
-
 
         /// <summary>
         /// Initializes a new instance of the Creeper_Engine class.
@@ -360,7 +350,7 @@ namespace Culebra_GH.Engine
                     DataTree<Line> networkTree = new DataTree<Line>();
                     if (this.moveList == null) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Please Reset the CreepyCrawlers Component"); return; }
                     int counter = 0;
-                    /*
+                    
                     foreach (Creeper c in this.creepList)
                     {
                         this.networkList = new List<Line>();
@@ -445,7 +435,6 @@ namespace Culebra_GH.Engine
                             }
                             else { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Houston we have a problem, no behavior data read"); return; }
                         }
-
                         GH_Path path = new GH_Path(counter);
                         if (this.displayMode == 0)
                         {              
@@ -478,29 +467,13 @@ namespace Culebra_GH.Engine
                         }
                         counter++;
                     }
-                    */
-                    Tuple<List<Point3d>, DataTree<Point3d>, DataTree<Point3d>, DataTree<Line>> results = Engine_Global.Run(this.creepList, this.dimensions, behavioral_Settings, this.displayMode, this.networkList,
-                      this.maxSpeed, this.maxForce, this.velMultiplier, this.totTail, this.particleList, this.particleSet, networkTree, trailStep, maxTrailSize, bounds, bb, currentPosList, trail, trailTree);
-                    /*
+                                      
                     DA.SetDataList(0, this.currentPosList);
                     if (this.displayMode == 1)
                     {                     
                         if (this.trail) { DA.SetDataTree(1, trailTree); }
                         DA.SetDataTree(2, networkTree);
-                    }
-                    */
-                    this.currentPosList = results.Item1;
-                    trailTree = results.Item3;
-                    this.particleSet = results.Item2;
-                    networkTree = results.Item4;
-
-                    DA.SetDataList(0, this.currentPosList);
-                    if (this.displayMode == 1)
-                    {
-                        if (this.trail) { DA.SetDataTree(1, trailTree); }
-                        DA.SetDataTree(2, networkTree);
-                    }
-                    //------------------------------
+                    }                 
                     this.totTail.Clear();
                 }
             }

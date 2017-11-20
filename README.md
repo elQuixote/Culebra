@@ -23,7 +23,7 @@ Culebra is a live agent based C# Library and Plugin for Grasshopper. A collectio
 * Zombie and Live mode for simulations
 
 ##### Culebra API #####
-* Access to Culebra classes and methods through the Culebra Data DLL
+* Access to Culebra Java Library classes and methods through the .Net Culebra Data DLL
 
 ##### Culebra GHA #####
 * Will expand on the components built in version 1

@@ -88,6 +88,7 @@
     <Compile Include="Behaviors\Separation_Behavior.cs" />
     <Compile Include="Behaviors\Stigmergy_Behavior.cs" />
     <Compile Include="Behaviors\SuperWander_Behavior.cs" />
+    <Compile Include="Behaviors\Tracking_BabyMaker.cs" />
     <Compile Include="Behaviors\Tracking_Behavior.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
@@ -104,8 +105,6 @@
     <Compile Include="Engine\Creeper_Engine_Dual_Test.cs" />
     <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
     <Compile Include="Engine\Engine_Global.cs" />
-    <Compile Include="Tests\Creeper_Engine.cs" />
-    <Compile Include="Tests\Creeper_Engine_B.cs" />
     <Compile Include="Engine\Creeper_Engine_Test.cs" />
     <Compile Include="Objects\IGH_VisualData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
