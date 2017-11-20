@@ -94,12 +94,12 @@ namespace CulebraData.Utilities
         /// </summary>
         /// <param name="genericList">the list to convert</param>
         /// <returns>the java.util.List of java creepers</returns>
-        public static java.util.List ToJavaList(List<CulebraData.Objects.Creeper> genericList)
-        {
+        public static java.util.List ToJavaList(List<CulebraData.Objects.CulebraObject> genericList)
+        {         
             java.util.List javalist = new java.util.ArrayList();
-            foreach (CulebraData.Objects.Creeper c in genericList)
+            foreach (CulebraData.Objects.CulebraObject c in genericList)
             {
-                javalist.add(c.GetCreeperObject());
+                javalist.add(c.GetObject());
             }
             return javalist;
         }
@@ -180,6 +180,32 @@ namespace CulebraData.Utilities
             return javalist;
         }
         /// <summary>
+        /// Converts a nested list of Object Trails to a nested ArrayList. This is meant to be used with the Trail Followers methods using Seeker Objects 
+        /// </summary>
+        /// <param name="nestedList">The nested list of Object Trails</param>
+        /// <returns>The nested arrayList</returns>
+        public static java.util.ArrayList NestedList_To_NestedArrayList(List<List<Vector3d>> nestedList)
+        {
+            java.util.ArrayList javalist = new java.util.ArrayList();
+            foreach (List<Vector3d> vectorList in nestedList)
+            {
+                java.util.ArrayList groupData = new java.util.ArrayList();
+                java.util.ArrayList javalist2 = new java.util.ArrayList();
+                java.util.ArrayList javalist3 = new java.util.ArrayList();
+                int counter = 0;
+                foreach (Vector3d v in vectorList)
+                {
+                    javalist3.add(counter);
+                    javalist2.add(ToPVec(v));
+                    counter++;             
+                }
+                groupData.add(javalist3);
+                groupData.add(javalist2);
+                javalist.add(groupData);
+            }        
+            return javalist;
+        }
+        /// <summary>
         /// Converts a single polyline to a shape for Culebra Java Tracking Behaviors
         /// </summary>
         /// <param name="pline">the polyline to convert</param>
@@ -234,139 +260,5 @@ namespace CulebraData.Utilities
             java.lang.Integer javaInt = new java.lang.Integer(integer);
             return javaInt;
         }
-        /// <summary>
-        /// Remaps a value 
-        /// </summary>
-        /// <param name="value">value to map</param>
-        /// <param name="istart">source min value</param>
-        /// <param name="istop">source max value</param>
-        /// <param name="ostart">target min value</param>
-        /// <param name="ostop">target max value</param>
-        /// <returns></returns>
-        public static float Map(float value, float istart, float istop, float ostart, float ostop) 
-        {
-		    return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
-	    }
-        /// <summary>
-        /// Reparametrizes Values
-        /// </summary>
-        /// <param name="dataToMap">data to map</param> 
-        /// <param name="sourceMax">source max value</param> 
-        /// <returns>the list of mapped values</returns> 
-        public static List<double> RemapValues(List<double> dataToMap, double sourceMax)
-        {
-            double oldMin = 0.0;
-            double NewMax = 1.0;
-            double NewMin = 0.0;
-            for (int i = 0; i < dataToMap.Count; i++)
-            {
-                double oldValue = dataToMap[i];
-                double oldRange = (sourceMax - oldMin);
-                double newRange = (NewMax - NewMin);
-                dataToMap[i] = (((oldValue - oldMin) * newRange) / oldRange) + NewMin;
-            }
-            return dataToMap;
-        }
-        /// <summary>
-        /// Generates a random color
-        /// </summary>
-        /// <param name="randomGen">the random object instance</param>
-        /// <returns></returns>
-        public static Color GetRandomColor(Random randomGen)
-        {
-            KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
-            KnownColor randomColorName = names[randomGen.Next(names.Length)];
-            Color randomColor = Color.FromKnownColor(randomColorName);
-
-            return randomColor;
-        }
-    }
-    /// <summary>
-    /// Provides a set of color utilities for mesh editing
-    /// </summary>
-    public static class ColorUtility
-    {
-        /// <summary>
-        /// Gets the HLS of a mesh at a specified location
-        /// </summary>
-        /// <param name="sp">Sample Point</param> 
-        /// <param name="coloredMesh">colors mesh to sample</param> 
-        /// <returns>The Hue Saturation and Luminance at location</returns> 
-        public static Rhino.Display.ColorHSL GetHueSatLum(Point3d sp, Mesh coloredMesh)
-        {
-            MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
-            if (mp != null)
-            {
-                MeshFace face = coloredMesh.Faces[mp.FaceIndex];
-                Color colorA = coloredMesh.VertexColors[face.A];
-                Color colorB = coloredMesh.VertexColors[face.B];
-                Color colorC = coloredMesh.VertexColors[face.C];
-
-                double colorSampleA = colorA.A * mp.T[0] + colorB.A * mp.T[1] + colorC.A * mp.T[2];
-                double colorSampleR = colorA.R * mp.T[0] + colorB.R * mp.T[1] + colorC.R * mp.T[2];
-                double colorSampleG = colorA.G * mp.T[0] + colorB.G * mp.T[1] + colorC.G * mp.T[2];
-                double colorSampleB = colorA.B * mp.T[0] + colorB.B * mp.T[1] + colorC.B * mp.T[2];
-
-                int Alpha = (int)colorSampleA;
-                int Red = (int)colorSampleR;
-                int Green = (int)colorSampleG;
-                int Blue = (int)colorSampleB;
-
-                Color colour = Color.FromArgb(Alpha, Red, Green, Blue);
-
-                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL(colour);
-                double H = HSL.H;
-                double lum = HSL.L;
-                double S = HSL.S;
-                return HSL;
-            }
-            else
-            {
-                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL();
-                return HSL;
-            }
-        }
-        /// <summary>
-        /// Gets the color of a mesh at a specified point
-        /// </summary>
-        /// <param name="sp">The sample point</param> 
-        /// <param name="coloredMesh">The colored mesh to sample</param> 
-        /// <returns>The color at that location</returns> 
-        public static Color GetColor(Point3d sp, Mesh coloredMesh)
-        {
-            coloredMesh.Faces.ConvertQuadsToTriangles();
-            MeshPoint mp = coloredMesh.ClosestMeshPoint(sp, 0);
-            if (mp != null)
-            {
-                MeshFace face = coloredMesh.Faces[mp.FaceIndex];
-                Color colorA = coloredMesh.VertexColors[face.A];
-                Color colorB = coloredMesh.VertexColors[face.B];
-                Color colorC = coloredMesh.VertexColors[face.C];
-
-                double colorSampleA = colorA.A * mp.T[0] + colorB.A * mp.T[1] + colorC.A * mp.T[2];
-                double colorSampleR = colorA.R * mp.T[0] + colorB.R * mp.T[1] + colorC.R * mp.T[2];
-                double colorSampleG = colorA.G * mp.T[0] + colorB.G * mp.T[1] + colorC.G * mp.T[2];
-                double colorSampleB = colorA.B * mp.T[0] + colorB.B * mp.T[1] + colorC.B * mp.T[2];
-
-                int Alpha = (int)colorSampleA;
-                int Red = (int)colorSampleR;
-                int Green = (int)colorSampleG;
-                int Blue = (int)colorSampleB;
-
-                Color colour = Color.FromArgb(Alpha, Red, Green, Blue);
-
-                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL(colour);
-                double H = HSL.H;
-                double lum = HSL.L;
-                double S = HSL.S;
-                return HSL;
-            }
-            else
-            {
-                Rhino.Display.ColorHSL HSL = new Rhino.Display.ColorHSL();
-                return HSL;
-            }
-        }
-
     }
 }

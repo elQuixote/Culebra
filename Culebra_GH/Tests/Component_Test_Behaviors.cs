@@ -25,7 +25,7 @@ namespace Culebra_GH.Tests
 
         private BabyCreeper babyCreep;
         private Creeper creep;
-        private List<Creeper> creepList = new List<Creeper>();
+        private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
 
         private List<Line> networkList = new List<Line>();
@@ -41,7 +41,7 @@ namespace Culebra_GH.Tests
         public Component_Test_Behaviors()
             : base("Component_Test_Behaviors", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
 
@@ -148,7 +148,7 @@ namespace Culebra_GH.Tests
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = dimension;
-                creepList = new List<Creeper>();
+                creepList = new List<CulebraObject>();
                 currentPosList = new List<Point3d>();
 
                 networkList = new List<Line>();
@@ -211,13 +211,14 @@ namespace Culebra_GH.Tests
                 {
                     networkList = new List<Line>();
 
-                    c.attributes.SetMoveAttributes(2.5f, 0.0830f, 1.5f);
+                    c.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
                     //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
                     //bool w, w2, sw, a, s, s2, c, s3, att, r, p, nma, nmb, nmc = new bool();
                     if (w) c.behaviors.Wander2D(true, false, 2.0f, 80.0f, 26.0f);
                     if (w2) c.behaviors.Wander2D(2.0f, 80.0f, 26.0f);
                     if (sw) c.behaviors.SuperWander2D(100.0f, 60.0f, 60.0f, 6.0f);
-                    if (a) c.behaviors.Align(30.0f, 0.045f, this.creepList);
+                    //if (a) c.behaviors.Align(30.0f, 0.045f, this.creepList);
+                    if (a) c.behaviors.Flock2D(200.0f, 0.24f, 0.09f, 0.04f, 360, this.creepList, false);
                     if (s) c.behaviors.Separate(10.0f, this.creepList);
                     if (s2) c.behaviors.Separate(30.0f, 0.09f, this.creepList);
                     if (c2) c.behaviors.Cohesion(30.0f, 0.024f, this.creepList);

@@ -41,7 +41,7 @@ namespace Culebra_GH.Tests
         public Component_Test_SelfTailChasers()
             : base("Component_Test_SelfTailChasers", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
 

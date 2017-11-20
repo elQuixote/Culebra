@@ -31,28 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="core">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\core.dll</HintPath>
+    <Reference Include="core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="culebra_og">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\culebra_og.dll</HintPath>
+    <Reference Include="culebra_og, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\culebra_og.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GH_IO">
-      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\GH_IO.dll</HintPath>
+      <HintPath>..\libs\GH_IO.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>C:\Users\Quixote\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\Grasshopper (b45a29b1-4343-4035-989e-044e8580d9cf)\0.9.76.0\Grasshopper.dll</HintPath>
+      <HintPath>..\libs\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\IKVM.OpenJDK.Core.dll</HintPath>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.0.5449.1, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\IKVM.OpenJDK.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RhinoCommon">
-      <HintPath>C:\Program Files (x86)\Rhinoceros 5\System\RhinoCommon.dll</HintPath>
+    <Reference Include="RhinoCommon, Version=5.1.30000.15, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\RhinoCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -63,8 +67,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="toxiclibscore">
-      <HintPath>..\..\..\..\ikvm-8.0.5449.1\bin\toxiclibscore.dll</HintPath>
+    <Reference Include="toxiclibscore, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\toxiclibscore.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -75,10 +80,15 @@
     <Compile Include="Geometry\Path.cs" />
     <Compile Include="Objects\BabyCreeper.cs" />
     <Compile Include="Objects\Creeper.cs" />
+    <Compile Include="Objects\CulebraObject.cs" />
+    <Compile Include="Objects\Seeker.cs" />
     <Compile Include="Operations\Actions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ColorUtility.cs" />
+    <Compile Include="Utilities\General.cs" />
     <Compile Include="Utilities\GHSupport.cs" />
-    <Compile Include="Utilities\Utility.cs" />
+    <Compile Include="Utilities\Mapping.cs" />
+    <Compile Include="Utilities\Convert.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

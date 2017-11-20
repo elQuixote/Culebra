@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Culebra_GH", "Culebra_GH\Culebra_GH.csproj", "{EAFD453C-2A3B-43C9-8B31-D29370E7593D}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CulebraData", "Culebra\CulebraData.csproj", "{91FFA7B8-A9AF-4FE2-900B-6194813FC475}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug64|Any CPU = Debug64|Any CPU

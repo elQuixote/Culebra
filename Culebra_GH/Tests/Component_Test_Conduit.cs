@@ -45,7 +45,7 @@ namespace Culebra_GH.Tests
         public Component_Test_Conduit()
             : base("Compolnent_Test_Conduit", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
         /// <summary>
@@ -185,7 +185,6 @@ namespace Culebra_GH.Tests
                     networkList = new List<Line>();
                     c.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
 
-                    //c.behaviors.multiPolylineTracker(plineList, 500.0f, 50.0f, 15.0f);
                     c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
                     this.childSpawners = c.behaviors.GetChildStartPositions();
                     this.childSpawnType = c.behaviors.GetChildSpawnTypes();
@@ -223,7 +222,7 @@ namespace Culebra_GH.Tests
                     else
                     {
                         c.behaviors.Wander3D(2.0f, 10.0f, 20.0f, 6.0f);
-                        //c.behaviors.flock3D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                        //c.behaviors.Flock3D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
                         //-------ADD POINTS TO GRAPHIC POINTS LIST---------
                         particleList.Add(c.attributes.GetLocation());
                         this.particleSet.AddRange(c.attributes.GetTrailPoints(), path);
@@ -358,10 +357,10 @@ namespace Culebra_GH.Tests
             if (!this.convert)
             {
                 viz.DrawSprites(args, file, particleList);
-                //viz.DrawDiscoTrails(args, file, particleList, particleSet, randomGen, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
+                //viz.DrawDiscoTrails(args, file, particleSet, randomGen, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyASet, 1, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyBSet, 2, this.minthick, this.maxthick);
             }
         }
         /// <summary>

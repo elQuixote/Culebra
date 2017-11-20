@@ -10,19 +10,19 @@ using culebra.behaviors;
 using Rhino;
 using Rhino.Geometry;
 using CulebraData.Utilities;
-
+using culebra.objects;
 
 namespace CulebraData.Objects
 {
     /// <summary>
     /// Creeper Objects are the main implementation of the abstract Objects. They are able to implement any type of behavior and are meant as a do all type of object.
     /// </summary>
-    public class Creeper
+    public class Creeper : CulebraObject
     {
         private culebra.objects.Creeper creeperObject;
-        public CulebraData.Behavior.Controller behaviors;
-        public CulebraData.Attributes.Attributes attributes;
-        public CulebraData.Operations.Actions actions;
+        //public CulebraData.Behavior.Controller behaviors;
+        //public CulebraData.Attributes.Attributes attributes;
+        //public CulebraData.Operations.Actions actions;
 
         /// <summary>
         /// Constructor
@@ -43,12 +43,10 @@ namespace CulebraData.Objects
         /// Getter Method for retrieving the culebra java creeper object
         /// </summary>
         /// <returns>the culebra java creeper object</returns>
-        protected internal culebra.objects.Creeper GetCreeperObject()
+        protected internal override culebra.objects.Object GetObject()
         {
             return this.creeperObject;
         }
-
-
     }
     
 }

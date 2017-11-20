@@ -61,12 +61,11 @@ namespace CulebraData.Drawing
         /// Draws a gradient trail through the display pipeline
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
-        /// <param name="file"></param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="colorType">the color type</param>
         /// <param name="minTrailThickness">the minimum trail thickness</param>
         /// <param name="maxTrailThickness">the maximum trail thickness</param>
-        public void DrawGradientTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, int colorType, float minTrailThickness, float maxTrailThickness)
+        public void DrawGradientTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, int colorType, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
@@ -79,8 +78,8 @@ namespace CulebraData.Drawing
                     {
                         if (x != 0)
                         {
-                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
-                            float colorValue = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, 0f, 255.0f);
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float colorValue = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, 0f, 255.0f);
                             if(colorType == 0)
                             {
                                 args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValue, 0, 100), (int)stroke);
@@ -99,25 +98,61 @@ namespace CulebraData.Drawing
             }
         }
         /// <summary>
+        /// Draws a gradient trail through the display pipeline
+        /// </summary>
+        /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
+        /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+        /// <param name="r_colorA">the target min color value for the r channel</param>
+        /// <param name="r_colorB">the target max color value for the r channel</param>
+        /// <param name="g_colorA">the targer min color value for the g channel</param>
+        /// <param name="g_colorB">the target max color value for the g channel</param>
+        /// <param name="b_colorA">the target min color value for the b channel</param>
+        /// <param name="b_colorB">the target max color value for the b channel</param>
+        /// <param name="minTrailThickness">the minimum trail thickness</param>
+        /// <param name="maxTrailThickness">the maximum trail thickness</param>
+        public void DrawGradientTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, float r_colorA, float r_colorB, float g_colorA, float g_colorB, float b_colorA, float b_colorB, float minTrailThickness, float maxTrailThickness)
+        {
+            Color color = args.WireColour;
+            for (int i = 0; i < particleSet.BranchCount; i++)
+            {
+                List<Point3d> ptlist = particleSet.Branch(i);
+                //-------DRAW TRAILS AS SEGMENTS WITH CUSTOM STROKE WIDTH---------
+                if (ptlist.Count > 0)
+                {
+                    for (int x = 0; x < ptlist.Count; x++)
+                    {
+                        if (x != 0)
+                        {
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float colorValueR = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, r_colorA, r_colorB);
+                            float colorValueG = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, g_colorA, g_colorB);
+                            float colorValueB = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, b_colorA, b_colorB);
+                            args.Display.DrawLine(ptlist[x - 1], ptlist[x], Color.FromArgb(0, (int)colorValueR, (int)colorValueG, (int)colorValueB), (int)stroke);
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
         /// Draws a polyline trail through the display pipeline
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="dottedPolyline">do you want a dotted polyline</param>
         /// <param name="thickness">the thickness of the trail</param>
-        public void DrawPolylineTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, bool dottedPolyline, int thickness)
+        /// <param name="color">the color of the trail</param>
+        public void DrawPolylineTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, bool dottedPolyline, int thickness, System.Drawing.Color color)
         {
-            Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
             {
                 List<Point3d> ptlist = particleSet.Branch(i);
                 if (dottedPolyline)
                 {
-                    args.Display.DrawDottedPolyline(ptlist, Color.FromArgb(0, 255, 0, 255), false);
+                    args.Display.DrawDottedPolyline(ptlist, color, false);
                 }
                 else
                 {
-                    args.Display.DrawPolyline(ptlist, Color.FromArgb(0, 255, 0, 255), thickness);
+                    args.Display.DrawPolyline(ptlist, color, thickness);
                 }
             }
         }
@@ -125,26 +160,25 @@ namespace CulebraData.Drawing
         /// Draws a disco trail through the display pipeline. Trails flash different colors throughout the simulation
         /// </summary>
         /// <param name="args">preview Display Args for IGH_PreviewObjects</param>
-        /// <param name="file">the texture file</param>
         /// <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
         /// <param name="randomGen">an instance of the random class</param>
         /// <param name="minTrailThickness">the minimum trail thickness</param>
         /// <param name="maxTrailThickness">the maximum trail thickness</param>
-        public void DrawDiscoTrails(IGH_PreviewArgs args, string file, DataTree<Point3d> particleSet, Random randomGen, float minTrailThickness, float maxTrailThickness)
+        public void DrawDiscoTrails(IGH_PreviewArgs args, DataTree<Point3d> particleSet, Random randomGen, float minTrailThickness, float maxTrailThickness)
         {
             Color color = args.WireColour;
             for (int i = 0; i < particleSet.BranchCount; i++)
             {
                 List<Point3d> ptlist = particleSet.Branch(i);
                 //-------DRAW TRAILS AS SEGMENTS WITH CUSTOM STROKE WIDTH---------
-                Color randomColorAction = CulebraData.Utilities.Convert.GetRandomColor(randomGen);
+                Color randomColorAction = CulebraData.Utilities.ColorUtility.GetRandomColor(randomGen);
                 if (ptlist.Count > 0)
                 {
                     for (int x = 0; x < ptlist.Count; x++)
                     {
                         if (x != 0)
                         {
-                            float stroke = CulebraData.Utilities.Convert.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
+                            float stroke = CulebraData.Utilities.Mapping.Map(x / (1.0f * ptlist.Count), 0.0f, 1.0f, minTrailThickness, maxTrailThickness);
                             args.Display.DrawLine(ptlist[x - 1], ptlist[x], randomColorAction, (int)stroke);
                         }
                     }

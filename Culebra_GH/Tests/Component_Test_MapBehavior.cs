@@ -23,7 +23,7 @@ namespace Culebra_GH.Tests
         private List<Vector3d> startList = new List<Vector3d>();
         private DataTree<Point3d> posTree;
         private Creeper creep;
-        private List<Creeper> creepList = new List<Creeper>();
+        private List<CulebraObject> creepList = new List<CulebraObject>();
         private List<Point3d> currentPosList = new List<Point3d>();
         private List<Line> networkList = new List<Line>();
         private Vector3d startPos = new Vector3d();
@@ -44,7 +44,7 @@ namespace Culebra_GH.Tests
         public Component_Test_MapBehavior()
             : base("Component_Test_MapBehavior", "Nickname",
                 "Description",
-                "Culebra_GH", "Subcategory")
+                "Culebra_GH", "Testing")
         {
         }
         /// <summary>
@@ -128,7 +128,7 @@ namespace Culebra_GH.Tests
                 this.startList = new List<Vector3d>();
                 this.posTree = new DataTree<Point3d>();
                 this.dimensions = td;
-                creepList = new List<Creeper>();
+                creepList = new List<CulebraObject>();
                 currentPosList = new List<Point3d>();
                 networkList = new List<Line>();
 
@@ -367,9 +367,9 @@ namespace Culebra_GH.Tests
             {
                 viz.DrawSprites(args, file, particleList);
                 //viz.drawDiscoTrails(args, file, particleList, particleSet, randomGen, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleSet, 0, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyASet, 1, this.minthick, this.maxthick);
-                viz.DrawGradientTrails(args, file, particleBabyBSet, 2, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyASet, 1, this.minthick, this.maxthick);
+                viz.DrawGradientTrails(args, particleBabyBSet, 2, this.minthick, this.maxthick);
             }
         }
 
