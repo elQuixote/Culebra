@@ -26,6 +26,10 @@ namespace Culebra_GH.Settings_Visual
                 return GH_Exposure.tertiary;
             }
         }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 2);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>

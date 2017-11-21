@@ -25,6 +25,10 @@ namespace Culebra_GH.Behaviors
                 return GH_Exposure.quinary;
             }
         }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -70,7 +74,8 @@ namespace Culebra_GH.Behaviors
             }
             if(polylineList.Count == 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "None of the curves converted to polylines properly, please check your input curves or polylines"); return; }
 
-            TrackingData trackingData = new TrackingData(polylineList, (float)threshold, (float)projectionDistance, (float)radius);
+            java.util.List jData = CulebraData.Utilities.Convert.PolylinesToMultiShapes(polylineList);
+            TrackingData trackingData = new TrackingData(jData, (float)threshold, (float)projectionDistance, (float)radius);
 
             DA.SetData(0, trackingData);
         }

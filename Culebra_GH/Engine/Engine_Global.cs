@@ -25,8 +25,12 @@ namespace Culebra_GH.Engine
     {
         public List<Vector3d> childSpawners = new List<Vector3d>();
         public List<int> childSpawnType = new List<int>();
-
-        public void SpawnChild(int dimensions, List<CulebraObject> creepList)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensions"></param>
+        /// <param name="creepList"></param>
+        private void SpawnChild(int dimensions, List<CulebraObject> creepList)
         {
             Random rnd = new Random();
             int babyCount = 0;
@@ -58,8 +62,143 @@ namespace Culebra_GH.Engine
                 babyCount++;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="creepList"></param>
+        /// <param name="dimensions"></param>
+        /// <param name="behavioral_Settings"></param>
+        /// <param name="displayMode"></param>
+        /// <param name="networkList"></param>
+        /// <param name="maxSpeed"></param>
+        /// <param name="maxForce"></param>
+        /// <param name="velMultiplier"></param>
+        /// <param name="totTail"></param>
+        /// <param name="particleList"></param>
+        /// <param name="particleSet"></param>
+        /// <param name="networkTree"></param>
+        /// <param name="trailStep"></param>
+        /// <param name="maxTrailSize"></param>
+        /// <param name="bounds"></param>
+        /// <param name="bb"></param>
+        /// <param name="currentPosList"></param>
+        /// <param name="trail"></param>
+        /// <param name="trailTree"></param>
+        /// <param name="child_maxSpeed"></param>
+        /// <param name="child_maxForce"></param>
+        /// <param name="child_velMultiplier"></param>
+        /// <param name="child_behavioral_Settings"></param>
+        /// <param name="child_displayMode"></param>
+        /// <param name="child_trail"></param>
+        /// <param name="child_trailStep"></param>
+        /// <param name="child_maxTrailSize"></param>
+        /// <param name="particleBabyASet"></param>
+        /// <param name="particleBabyBSet"></param>
+        /// <param name="trailTree_ChildA"></param>
+        /// <param name="trailTree_ChildB"></param>
+        public void Action(List<CulebraObject> creepList, int dimensions, object behavioral_Settings, int displayMode, List<Line> networkList, double maxSpeed, double maxForce, double velMultiplier,
+            List<Vector3d> totTail, List<Point3d> particleList, DataTree<Point3d> particleSet, DataTree<Line> networkTree, int trailStep, int maxTrailSize, bool bounds, BoundingBox bb, List<Point3d> currentPosList,
+            bool trail, DataTree<Point3d> trailTree, double child_maxSpeed = 0.0, double child_maxForce = 0.0, double child_velMultiplier = 0.0, object child_behavioral_Settings = null, int child_displayMode = 0, bool child_trail = false, int child_trailStep = 0,
+            int child_maxTrailSize = 0, DataTree<Point3d>particleBabyASet = null, DataTree<Point3d>particleBabyBSet = null, DataTree<Point3d>trailTree_ChildA = null, DataTree<Point3d>trailTree_ChildB = null)
+        {
+            int counter = 0;
+            foreach (Creeper c in creepList)
+            {
+                networkList = new List<Line>();
+                GH_Path path = new GH_Path(counter);
+                if (c is BabyCreeper)
+                {
+                    c.attributes.SetMoveAttributes((float)child_maxSpeed, (float)child_maxForce, (float)child_velMultiplier);
+                    try { FilterBehaviors(c, creepList, child_behavioral_Settings, dimensions, childSpawners, childSpawnType, totTail); }
+                    catch (Exception e) { throw new Exception(e.Message); }
+                    if (c.attributes.GetChildType() == "a")
+                    {
+                        //-------ADD POINTS TO GRAPHIC POINTS LIST---------
+                        if (child_displayMode == 0)
+                        {
+                            particleList.Add(c.attributes.GetLocation());
+                            particleBabyASet.AddRange(c.attributes.GetTrailPoints(), path);
+                        }
+                        else if (child_displayMode == 1 && child_trail)
+                        {
+                            trailTree_ChildA.AddRange(c.attributes.GetTrailPoints(), path);
+                        }
+                        currentPosList.Add(c.attributes.GetLocation());
+                    }
+                    else
+                    {
+                        //-------ADD POINTS TO GRAPHIC POINTS LIST---------
+                        if (child_displayMode == 0)
+                        {
+                            particleList.Add(c.attributes.GetLocation());
+                            particleBabyBSet.AddRange(c.attributes.GetTrailPoints(), path);
+                        }
+                        else if (child_displayMode == 1 && child_trail)
+                        {
+                            trailTree_ChildB.AddRange(c.attributes.GetTrailPoints(), path);
+                        }
+                        currentPosList.Add(c.attributes.GetLocation());
+                    }
+                    c.actions.Move(child_trailStep, child_maxTrailSize);
+                }
+                else
+                {
+                    c.attributes.SetMoveAttributes((float)maxSpeed, (float)maxForce, (float)velMultiplier);
 
-        public void FilterBehaviors(Creeper c, List<CulebraObject> creepList, object behavioral_Settings, int dimensions, List<Vector3d> childSpawners, List<int> childSpawnType, List<Vector3d> totTail)
+                    try { FilterBehaviors(c, creepList, behavioral_Settings, dimensions, this.childSpawners, this.childSpawnType, totTail); }
+                    catch (Exception e) { throw new Exception(e.Message); }
+
+                    if (displayMode == 0)
+                    {
+                        particleList.Add(c.attributes.GetLocation());
+                        particleSet.AddRange(c.attributes.GetTrailPoints(), path);
+                    }
+                    currentPosList.Add(c.attributes.GetLocation());
+
+                    if (displayMode == 1 || displayMode == 0)
+                    {
+                        List<Vector3d> testList = c.attributes.GetNetwork();
+                        if (testList.Count > 0)
+                        {
+                            foreach (Vector3d v in testList)
+                            {
+                                Line l = new Line(c.attributes.GetLocation(), (Point3d)v);
+                                networkList.Add(l);
+                            }
+                            networkTree.AddRange(networkList, path);
+                        }
+                    }
+                    if (displayMode == 1 && trail)
+                    {
+                        trailTree.AddRange(c.attributes.GetTrailPoints(), path);
+                    }
+                    c.actions.Move(trailStep, maxTrailSize);
+                }
+                if (bounds)
+                {
+                    if (dimensions == 0) { c.actions.Bounce(bb); }
+                    else if (dimensions == 1) { c.actions.Bounce3D(bb); }
+                }
+                counter++;
+            }
+            if (this.childSpawners.Count > 0)
+            {
+                SpawnChild(dimensions, creepList);
+                this.childSpawners = new List<Vector3d>();
+                this.childSpawnType = new List<int>();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="creepList"></param>
+        /// <param name="behavioral_Settings"></param>
+        /// <param name="dimensions"></param>
+        /// <param name="childSpawners"></param>
+        /// <param name="childSpawnType"></param>
+        /// <param name="totTail"></param>
+        private void FilterBehaviors(Creeper c, List<CulebraObject> creepList, object behavioral_Settings, int dimensions, List<Vector3d> childSpawners, List<int> childSpawnType, List<Vector3d> totTail)
         {
             IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)behavioral_Settings;
             foreach (string s in igh_Behavior.Value.dataOrder)

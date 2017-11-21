@@ -17,7 +17,10 @@ namespace Culebra_GH.SpawnTypes
                 "Culebra_GH", "01 | Spawn Types")
         {
         }
-
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 1);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>

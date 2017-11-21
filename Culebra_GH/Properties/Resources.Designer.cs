@@ -59,5 +59,15 @@ namespace Culebra_GH.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Engine_CreepyCrawlers_B {
+            get {
+                object obj = ResourceManager.GetObject("Engine_CreepyCrawlers_B", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -210,7 +210,7 @@ namespace Culebra_GH.Tests
                     networkList = new List<Line>();
                     c.attributes.SetMoveAttributes(3.44f, 0.330f, 1.5f);
 
-                    c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
+                    c.behaviors.MultiPolylineTrackerBabyMaker(CulebraData.Utilities.Convert.PolylinesToMultiShapes(plineList), 500.0f, 50.0f, 15.0f, this.triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
                     this.childSpawners = c.behaviors.GetChildStartPositions();
                     this.childSpawnType = c.behaviors.GetChildSpawnTypes();
 

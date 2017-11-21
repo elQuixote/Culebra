@@ -8,14 +8,14 @@ namespace Culebra_GH.Data_Structures
 {
     public struct TrackingData
     {
-        public List<Polyline> polylines { get; set; }
+        public java.util.List polylines { get; set; }
         public float pathThreshold { get; set; }
         public float projectionDistance { get; set; }
         public float pathRadius { get; set; }
         public bool triggerBabies { get; set; }
         public int maxChildren { get; set; }
          
-        public TrackingData(List<Polyline> polylines, float path_Threshold, float projection_Distance, float path_Radius, bool trigger_Babies = false, int max_Children = 2)
+        public TrackingData(java.util.List polylines, float path_Threshold, float projection_Distance, float path_Radius, bool trigger_Babies = false, int max_Children = 2)
         {
             this.polylines = polylines;
             this.pathThreshold = path_Threshold;
