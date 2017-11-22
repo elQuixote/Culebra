@@ -3,16 +3,7 @@ using System.Collections.Generic;
 using Rhino.Geometry;
 using Grasshopper;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Data;
-using Grasshopper.Kernel.Types;
 using System.Drawing;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using CulebraData;
-using CulebraData.Objects;
-using CulebraData.Utilities;
 
 namespace CulebraData.Drawing
 {

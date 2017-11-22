@@ -50,6 +50,10 @@ namespace Culebra_GH
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddBooleanParameter("reset", "r", "", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Mesh", "M", "M", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Threshold", "T", "T", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Amplitude", "A", "A", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Mult", "M", "M", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -74,21 +78,24 @@ namespace Culebra_GH
             Random rnd = new Random();
             List<Vector3d> vecs = new List<Vector3d>();
             List<Point3d> returnedvecs = new List<Point3d>();
-
-            
+            Mesh m = new Mesh();
+            double amp = new double();
+            double thresh = new double();
 
             bool reset = new bool();
-            int ptCount = 95;
-            int dimension = 0;
+            int ptCount = 200;
+            int dimension = 1;
             bool trail = true;
+            double mult = new double();
 
             float moveValue = 3.44f;
-            float searchRad = 44.04f;
-            float aligVal = 0.04f;
-            float sepVal = 0.15f;
-            float cohVal = 0.24f;
 
             if(!DA.GetData(0, ref reset))return;
+            if (!DA.GetData(1, ref m)) return;
+            if (!DA.GetData(2, ref thresh)) return;
+            if (!DA.GetData(3, ref amp)) return;
+            if (!DA.GetData(4, ref mult)) return;
+
 
             if (reset)
             { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
@@ -104,11 +111,11 @@ namespace Culebra_GH
 
                 if (this.dimensions == 0)
                 {
-                    this.bb = new BoundingBox(-250, -250, 0, 250, 250, 0);
+                    this.bb = new BoundingBox(-500, -500, 0, 500, 500, 0);
                 }
                 else
                 {
-                    this.bb = new BoundingBox(-250, -250, -250, 250, 250, 500);
+                    this.bb = new BoundingBox(-500, -500, -500, 500, 500, 500);
                 }
 
                 for (int i = 0; i < ptCount; i++)
@@ -116,9 +123,13 @@ namespace Culebra_GH
 
                     if (this.dimensions == 0)
                     { //IF WE WANT 2D
-                        this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
-                        this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
+                      //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only
+                        this.moveVec = new Vector3d(rnd.Next(-1, 2) * 0.7, rnd.Next(-1, 2) * 0.7, 0); //move randomly in any direction 2d 
 
+                        this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
+
+                        //this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
+                        /*
                         if (i <= ptCount / 2)
                         {
                             this.creep = new Creeper(this.startPos, this.moveVec, true, false);
@@ -129,14 +140,25 @@ namespace Culebra_GH
                             this.babyCreep = new BabyCreeper(this.startPos, this.moveVec, true, "a", false);
                             this.creepList.Add(this.babyCreep);
                         }
-                        
+                        */
                     }
                     else
                     { //IF WE WANT 3D
-                        this.moveVec = new Vector3d(rnd.Next(-1, 2), rnd.Next(-1, 2), 0.5); //move randomly in the xy axis and up in the z axis
-                        this.moveVec *= moveValue;
-                        this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), (int)bb.Min[2]); //start randomly on the lowest plane of the 3d bounds
+                      /*
+                      this.moveVec = new Vector3d(rnd.Next(-1, 2), rnd.Next(-1, 2), 0.5); //move randomly in the xy axis and up in the z axis
+                      this.moveVec *= moveValue;
+                      this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), (int)bb.Min[2]); //start randomly on the lowest plane of the 3d bounds
+                     
+                        this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), rnd.Next((int)bb.Min[2], (int)bb.Max[2])); //start randomly inside the 3d bounds
+                        this.moveVec = new Vector3d(rnd.Next(-2, 2) * 0.7, rnd.Next(-2, 2) * 0.7, rnd.Next(-2, 2) * 0.7); //move randomly in any direction 3d
+                        */
+                        this.startPos = new Vector3d((int)bb.Max[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), rnd.Next((int)bb.Min[2], (int)bb.Max[2])); //start randomly inside the 3d bounds
+                        this.moveVec = new Vector3d(rnd.Next(-2, 2) * 0.7, rnd.Next(-2, 2) * 0.7, rnd.Next(-2, 2) * 0.7); //move randomly in any direction 3d
+
                     }
+                    this.creep = new Creeper(this.startPos, this.moveVec, true, false);
+                    this.creepList.Add(this.creep);
+
                     this.startList.Add(this.startPos); //add the initial starting positions to the list to pass once we start running
                     this.moveList.Add(this.moveVec); //add the initial move vectors to the list to pass once we start running
                 }
@@ -151,27 +173,15 @@ namespace Culebra_GH
                 DataTree<Point3d> trailTree = new DataTree<Point3d>();
                 DataTree<Line> networkTree = new DataTree<Line>();
 
-
                 int counter = 0;
                 foreach (Creeper c in this.creepList)
                 {
                     networkList = new List<Line>();
+                    c.attributes.SetMoveAttributes(6.00f, 0.295f, 1.5f);
 
-                    c.attributes.SetMoveAttributes(3.44f, 0.130f, 1.5f);
-                    //c.behaviors.wander2D();
-                    if (c is BabyCreeper)
-                    {
-                        BabyCreeper bc = (BabyCreeper)c;
-                        //bc.behaviors.wander2D();
-                        bc.behaviors.Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
-                        //Rhino.RhinoApp.WriteLine(bc.attributes.getSuperClass().ToString());
-                    }
-                    else
-                    {
-                        c.behaviors.Flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, true);
-                        //Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass().ToString());
-                    }
-                    //c.behaviors.flock2D(searchRad, cohVal, sepVal, aligVal, 360f, this.creepList, false);
+                    //c.behaviors.MeshWalk(m, (float)thresh, CulebraData.Utilities.Convert.ToPVec(c.attributes.GetLocation()), CulebraData.Utilities.Convert.ToPVec(c.attributes.GetSpeed()), (float)amp, (float)mult);
+                    //c.behaviors.ApplyForce(dir);
+                    c.behaviors.Wander3D_Mod2(100.0f, 10.0f, 20.0f);
 
                     GH_Path path = new GH_Path(counter);
 
@@ -188,23 +198,19 @@ namespace Culebra_GH
                         networkTree.AddRange(networkList, path);
                     }
 
-                    c.actions.Move();
-
-
+                    c.actions.Move(0,1000);
                     c.actions.Bounce(bb);
                     //c.actions.respawn(bb);
                     currentPosList.Add(c.attributes.GetLocation());
-                                    
-                    
+                                                       
                     trailTree.AddRange(c.attributes.GetTrailPoints(),path);
                     
                     counter++;
                 }
                 DA.SetDataList(0, currentPosList);
-                if (trail)
-                {
-                    DA.SetDataTree(1, trailTree);
-                }
+
+                DA.SetDataTree(1, trailTree);
+
                 DA.SetDataTree(2, networkTree);
             }
         }

@@ -244,6 +244,10 @@ namespace Culebra_GH.Engine
                 {
                     this.maxthick = cd.maxThickness;
                     this.minthick = cd.minThickness;
+                } else if (cd.colorDataType == "Base")
+                {
+                    this.maxthick = 3;
+                    this.minthick = 1;
                 }
                 //-----------------------------------------------------------------
                 this.bb = new BoundingBox();
@@ -454,6 +458,9 @@ namespace Culebra_GH.Engine
                     {
                         this.randomGen = new Random();
                         viz.DrawDiscoTrails(args, particleSet, randomGen, this.minthick, this.maxthick);
+                    }else if (this.graphicType == "Base")
+                    {
+                        viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
                     }
                 }
             }

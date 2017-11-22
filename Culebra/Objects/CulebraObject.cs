@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CulebraData.Objects
+﻿namespace CulebraData.Objects
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class CulebraObject
     {
-        public CulebraData.Behavior.Controller behaviors;
-        public CulebraData.Attributes.Attributes attributes;
-        public CulebraData.Operations.Actions actions;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public Behavior.Controller behaviors;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Attributes.Attributes attributes;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Operations.Actions actions;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         protected abstract internal culebra.objects.Object GetObject();
     }
 }

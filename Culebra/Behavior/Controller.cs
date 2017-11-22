@@ -13,6 +13,8 @@ using CulebraData.Utilities;
 using CulebraData.Objects;
 using System.Drawing;
 using Rhino.Display;
+using toxi.geom;
+using CulebraData.Geometry;
 
 namespace CulebraData.Behavior
 {
@@ -21,6 +23,7 @@ namespace CulebraData.Behavior
     /// </summary>
     public class Controller
     {
+        private MeshCrawler meshCrawler;
         private CulebraObject culebraObject;
         /// <summary>
         /// Constructor
@@ -29,7 +32,40 @@ namespace CulebraData.Behavior
         public Controller(CulebraObject obj)
         {
             this.culebraObject = obj;
+            this.meshCrawler = new MeshCrawler();
         }
+        public MeshCrawler GetMeshCrawler() { return this.meshCrawler; }
+        #region MeshCrawling Behavior Methods
+        /// <summary>
+        /// Mesh Crawling allows agent to move along a mesh object
+        /// </summary>
+        /// <param name="mesh">the mesh object</param>
+        /// <param name="meshThreshold">min distance current position needs to be from mesh in order to move to it</param>
+        /// <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
+        /// <param name="multiplier"></param>
+        /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+        /// <param name="instanceable">if the object is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable.Child objects cannot produce more children</param>
+        /// <param name="maxChildren">the max number of children each agent can create</param>
+        /// <param name="childList"></param>
+        /// <param name="childTypeList"></param>
+        public void MeshWalk(Mesh mesh, float meshThreshold, float amplitude, float multiplier, bool triggerBabies = false, bool instanceable = false, int maxChildren = 0, List<Vector3d> childList = null, List<int> childTypeList = null)
+        {
+            this.culebraObject.attributes.GetObjType();
+            this.culebraObject.GetObject().behavior.setBehaviorType("Crawler");
+            Vector3d direction;       
+            if ((this.culebraObject.GetObject().behavior.getObjType() != "culebra.objects.BabyCreeper" && this.culebraObject.GetObject().behavior.getObjType() != "culebra.objects.BabySeeker")
+                    || (this.culebraObject.GetObject().behavior.getSuperClass() != "culebra.objects.BabyCreeper"
+                            && this.culebraObject.GetObject().behavior.getSuperClass() != "culebra.objects.BabySeeker"))
+            {
+                direction = this.meshCrawler.MeshWalk(mesh, meshThreshold, Utilities.Convert.ToPVec(this.culebraObject.attributes.GetLocation()), Utilities.Convert.ToPVec(this.culebraObject.attributes.GetSpeed()), amplitude, multiplier, triggerBabies, instanceable, maxChildren, childList, childTypeList);
+            }
+            else
+            {
+                direction = this.meshCrawler.MeshWalk(mesh, meshThreshold, Utilities.Convert.ToPVec(this.culebraObject.attributes.GetLocation()), Utilities.Convert.ToPVec(this.culebraObject.attributes.GetSpeed()), amplitude, multiplier, triggerBabies, false, maxChildren);
+            }
+            this.culebraObject.behaviors.ApplyForce(direction);
+        }
+        #endregion
         #region Flocking Behavior Methods
         /// <summary>
         /// Alignment Behavior steers towards average heading of neighbors for use with culebra.objects.Object type

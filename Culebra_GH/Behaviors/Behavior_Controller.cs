@@ -1,29 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Grasshopper;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel.Data;
-using System.Linq;
 using Grasshopper.Kernel.Parameters;
-
-using Rhino;
-using Rhino.DocObjects;
-using Rhino.Collections;
-
-using GH_IO;
-using GH_IO.Serialization;
-
-using System.IO;
-
-using System.Drawing;
-using System.Reflection;
-using System.Collections;
-using System.Windows.Forms;
-
-using System.Runtime.InteropServices;
 using Culebra_GH.Data_Structures;
 using Culebra_GH.Objects;
 
@@ -44,7 +23,7 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.senary;
+                return GH_Exposure.septenary;
             }
         }
         public override void CreateAttributes()
@@ -155,6 +134,14 @@ namespace Culebra_GH.Behaviors
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Separation data structure, please check your inputs"); return; }
                         behaviorData.separationData = data;
                         behaviorNames.Add("Separation");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.MeshCrawlData")
+                    {
+                        hitCounter++;
+                        MeshCrawlData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Mesh Crawl data structure, please check your inputs"); return; }
+                        behaviorData.meshCrawlData = data;
+                        behaviorNames.Add("Crawl");
                     }
                     else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
                 }                     

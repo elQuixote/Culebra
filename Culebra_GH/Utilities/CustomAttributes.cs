@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Grasshopper.Kernel;
-using Grasshopper.Kernel.Parameters;
-using Grasshopper;
-using Grasshopper.Kernel.Data;
-using Grasshopper.Kernel.Types;
-using GH_IO;
-using GH_IO.Serialization;
+﻿using Grasshopper.Kernel;
 using Grasshopper.GUI.Canvas;
 using System.Drawing;
 

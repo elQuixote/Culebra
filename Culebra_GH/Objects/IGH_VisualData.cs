@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Culebra_GH.Data_Structures;
-using Grasshopper;
+﻿using Culebra_GH.Data_Structures;
 using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
-using Grasshopper.Kernel.Geometry;
 
 namespace Culebra_GH.Objects
 {

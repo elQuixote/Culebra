@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors

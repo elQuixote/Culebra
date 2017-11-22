@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Culebra_GH.Data_Structures;
-
-namespace Culebra_GH.Data_Structures
+﻿namespace Culebra_GH.Data_Structures
 {
     public struct VisualData
     {

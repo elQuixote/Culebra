@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using Rhino;
 using Rhino.Geometry;
-using CulebraData.Utilities;
 using CulebraData.Objects;
+
 namespace CulebraData.Operations
 {
     /// <summary>

@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Culebra_GH.Objects;
 using Grasshopper;
-using System.Reflection;
 using Grasshopper.Kernel.Data;
-using Grasshopper.Kernel.Types;
-using System.Drawing;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using CulebraData;
 using CulebraData.Objects;
-using CulebraData.Utilities;
-using CulebraData.Drawing;
-using System.Collections;
-using System.Linq;
-using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Engine
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Engine_Global
     {
-        public List<Vector3d> childSpawners = new List<Vector3d>();
-        public List<int> childSpawnType = new List<int>();
+        private List<Vector3d> childSpawners = new List<Vector3d>();
+        private List<int> childSpawnType = new List<int>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Vector3d> GetChildSpawners() { return this.childSpawners; } 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetChildSpawnTypes() { return this.childSpawnType; }
         /// <summary>
         /// 
         /// </summary>
@@ -255,6 +255,19 @@ namespace Culebra_GH.Engine
                     else
                     {
                         c.behaviors.MultiPolylineTracker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius);
+                    }
+                }
+                else if(s == "Crawl")
+                {
+                    if (igh_Behavior.Value.meshCrawlData.triggerBabies)
+                    {
+                        c.behaviors.MeshWalk(igh_Behavior.Value.meshCrawlData.mesh, igh_Behavior.Value.meshCrawlData.meshThreshold, igh_Behavior.Value.meshCrawlData.meshProjectionDistance, igh_Behavior.Value.meshCrawlData.multiplier, igh_Behavior.Value.meshCrawlData.triggerBabies, true, igh_Behavior.Value.meshCrawlData.maxChildren, childSpawners, childSpawnType);
+                        this.childSpawners = c.behaviors.GetMeshCrawler().GetChildStartPositions();
+                        this.childSpawnType = c.behaviors.GetMeshCrawler().GetChildSpawnType();
+                    }
+                    else
+                    {
+                        c.behaviors.MeshWalk(igh_Behavior.Value.meshCrawlData.mesh, igh_Behavior.Value.meshCrawlData.meshThreshold, igh_Behavior.Value.meshCrawlData.meshProjectionDistance, igh_Behavior.Value.meshCrawlData.multiplier);
                     }
                 }
                 else if (s == "Stigmergy")

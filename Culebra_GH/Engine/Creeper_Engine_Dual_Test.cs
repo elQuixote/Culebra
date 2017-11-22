@@ -5,7 +5,6 @@ using Rhino.Geometry;
 using Culebra_GH.Objects;
 using Grasshopper;
 using System.Reflection;
-using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using System.Drawing;
 using CulebraData.Objects;
@@ -313,6 +312,10 @@ namespace Culebra_GH.Engine
                 {
                     this.maxthick = cd.maxThickness;
                     this.minthick = cd.minThickness;
+                }else if(cd.colorDataType == "Base")
+                {
+                    this.maxthick = 3;
+                    this.minthick = 1;
                 }
                 //------------------------Child Visual Settings--------------------------
                 TrailData ctd = child_visual_Settings.Value.trailData;
@@ -345,6 +348,11 @@ namespace Culebra_GH.Engine
                 {
                     this.child_maxthick = ccd.maxThickness;
                     this.child_minthick = ccd.minThickness;
+                }
+                else if (ccd.colorDataType == "Base")
+                {
+                    this.child_maxthick = 3;
+                    this.child_minthick = 1;
                 }
                 //-----------------------------------------------------------------
                 IGH_PreviewObject comp = (IGH_PreviewObject)this;
@@ -589,6 +597,9 @@ namespace Culebra_GH.Engine
                     {
                         this.randomGen = new Random();
                         viz.DrawDiscoTrails(args, particleSet, randomGen, this.minthick, this.maxthick);
+                    }else if (this.graphicType == "Base")
+                    {
+                        viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
                     }
                 }
             }
@@ -598,8 +609,8 @@ namespace Culebra_GH.Engine
                 {
                     if (this.child_graphicType == "Gradient")
                     {
-                        viz.DrawGradientTrails(args, particleBabyASet, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[1], (float)this.child_greenValues[0], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
-                        viz.DrawGradientTrails(args, particleBabyBSet, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[1], (float)this.child_greenValues[0], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, particleBabyASet, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, particleBabyBSet, (float)this.child_redValues[0], (float)this.child_redValues[1], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
                     }
                     else if (this.child_graphicType == "GraphicPolyline")
                     {
@@ -612,6 +623,10 @@ namespace Culebra_GH.Engine
                         viz.DrawDiscoTrails(args, particleBabyASet, randomGen, this.child_minthick, this.child_maxthick);
                         this.randomGen = new Random();
                         viz.DrawDiscoTrails(args, particleBabyBSet, randomGen, this.child_minthick, this.child_maxthick);
+                    }else if(this.child_graphicType == "Base")
+                    {
+                        viz.DrawGradientTrails(args, this.particleBabyASet, 1, this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, this.particleBabyBSet, 2, this.child_minthick, this.child_maxthick);
                     }
                 }
             }

@@ -83,6 +83,8 @@
     <Compile Include="Behaviors\Attract_Behavior.cs" />
     <Compile Include="Behaviors\Behavior_Controller.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\MeshCrawl_BabyMaker.cs" />
+    <Compile Include="Behaviors\MeshCrawl_Behavior.cs" />
     <Compile Include="Behaviors\Noise_Behavior.cs" />
     <Compile Include="Behaviors\Repel_Behavior.cs" />
     <Compile Include="Behaviors\Separation_Behavior.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
     <Compile Include="Data Structures\ForceData.cs" />
+    <Compile Include="Data Structures\MeshCrawlData.cs" />
     <Compile Include="Data Structures\NoiseData.cs" />
     <Compile Include="Data Structures\SeparationData.cs" />
     <Compile Include="Data Structures\StigmergyData.cs" />

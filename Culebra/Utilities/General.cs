@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CulebraData.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class General
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="displayType"></param>
         public static void setViewport(String view, String displayType)
         {
             //-------Set viewport to specific view and maximize it & set display type--------
