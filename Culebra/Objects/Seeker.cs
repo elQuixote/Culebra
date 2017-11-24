@@ -3,6 +3,7 @@
 namespace CulebraData.Objects
 {
     /// <summary>
+    /// Seeker Objects are the technically also main implementation of the abstract Objects, like Creeper Objects, they poses the same capabilities. They are able to implement any type of behavior but are meant to be used as Objects which "Seek" other objects.They should be used in conjunction with behaviors.trailFollowing Methods. I have not restricted their behavior implementations at this stage but might do so in the future to make certain behaviors more Object type specific.
     /// </summary>
     public class Seeker : CulebraObject
     {

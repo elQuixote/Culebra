@@ -134,7 +134,7 @@ namespace CulebraData.Operations
         /// </summary>
         public void Move()
         {
-            this.culebraObject.GetObject().move(100, 100);
+            this.culebraObject.GetObject().move(0, 1000);
         }
         /// <summary>
         /// Overloaded move method for moving the object. This method allows for a minimum amount of steps to be taken before adding and storing a trail point. You can also specify the max amount of trail points stored. This will certainly help with performance over time. This method is also the best to use with the behaviors.selfTrailChasing methods

@@ -6,14 +6,14 @@ using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Tracking_Behavior : GH_Component
+    public class Tracking_Mapped_BabyMaker : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Tracking_Behavior class.
         /// </summary>
-        public Tracking_Behavior()
-          : base("Tracking", "T",
-              "Multi Path Following Algorithm",
+        public Tracking_Mapped_BabyMaker()
+          : base("Tracking II Mapped", "TT",
+              "MultiShape Path Following Algorithm capable of spawning children with image color sampling override for any path attributes and remaping of color values - see example files",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -34,9 +34,15 @@ namespace Culebra_GH.Behaviors
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddCurveParameter("Polylines", "P", "Input a list of polylines you want to follow", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Polyline Threshold","PT","Input the distance threshold enabling agents to see shapes", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Polyline Threshold", "PT", "Input the distance threshold enabling agents to see shapes", GH_ParamAccess.item);
             pManager.AddNumberParameter("Projection Distance", "PD", "Input the projection distance of point ahead on the path to seek", GH_ParamAccess.item);
             pManager.AddNumberParameter("Polyline Radius", "PR", "Input the radius of the shapes", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the path parameters", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Threshold", "MT", "Input value specifying if you want the path threshold value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Projection", "MP", "Input value specifying if you want the projection value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Radius", "MR", "Input value specifying if you want the path radius value to be color driven", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -57,11 +63,31 @@ namespace Culebra_GH.Behaviors
             double threshold = new double();
             double projectionDistance = new double();
             double radius = new double();
+            bool trigger = new bool();
+            int maxChildren = new int();
+
+            Mesh mesh = null;
+            bool mapThreshold = new bool();
+            bool mapProjection = new bool();
+            bool mapRadius = new bool();
 
             if (!DA.GetDataList(0, crvList)) return;
             if (!DA.GetData(1, ref threshold)) return;
             if (!DA.GetData(2, ref projectionDistance)) return;
             if (!DA.GetData(3, ref radius)) return;
+            if (!DA.GetData(4, ref trigger)) return;
+            if (!DA.GetData(5, ref maxChildren)) return;
+            if (!DA.GetData(6, ref mesh)) return;
+
+            if (mesh == null || mesh.VertexColors.Count == 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
+                return;
+            }
+
+            if (!DA.GetData(7, ref mapThreshold)) return;
+            if (!DA.GetData(8, ref mapProjection)) return;
+            if (!DA.GetData(9, ref mapRadius)) return;
 
             List<Polyline> polylineList = new List<Polyline>();
             foreach (Curve crv in crvList)
@@ -71,10 +97,10 @@ namespace Culebra_GH.Behaviors
                 if (!convert) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert curve to polyline, please ensure that you do not input a 3 degree nurbs curve"); }
                 polylineList.Add(polyline);
             }
-            if(polylineList.Count == 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "None of the curves converted to polylines properly, please check your input curves or polylines"); return; }
+            if (polylineList.Count == 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "None of the curves converted to polylines properly, please check your input curves or polylines"); return; }
 
             java.util.List jData = CulebraData.Utilities.Convert.PolylinesToMultiShapes(polylineList);
-            TrackingData trackingData = new TrackingData(jData, (float)threshold, (float)projectionDistance, (float)radius);
+            TrackingData trackingData = new TrackingData(jData, (float)threshold, (float)projectionDistance, (float)radius, trigger, maxChildren, mesh, mapThreshold, mapProjection, mapRadius);
 
             DA.SetData(0, trackingData);
         }
@@ -96,7 +122,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("ceda61d2-2e40-4bf4-8195-b1f653d47658"); }
+            get { return new Guid("8ccf4d7f-60f6-439b-b4f7-51b2b0b4c4a2"); }
         }
     }
 }

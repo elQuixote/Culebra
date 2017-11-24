@@ -1,17 +1,18 @@
 ﻿using System;
 using Grasshopper.Kernel;
 using Culebra_GH.Data_Structures;
+using Rhino.Geometry;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Wandering_Behavior : GH_Component
+    public class Wandering_Mapped_Behavior : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Wandering_Behavior class.
         /// </summary>
-        public Wandering_Behavior()
-          : base("Wandering", "WA",
-              "2D Wandering Algorithm",
+        public Wandering_Mapped_Behavior()
+          : base("Wandering Mapped", "Nickname",
+              "Description",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -36,6 +37,10 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item);
             pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item);
             pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the wandering parameters", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Change", "MC", "Input value specifying if you want the change value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Radius", "MR", "Input value specifying if you want the radius value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Distance", "MD", "Input value specifying if you want the distance value to be color driven", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -59,14 +64,29 @@ namespace Culebra_GH.Behaviors
             double wanderDist = new double();
             double rotationTrigger = new double();
 
+            Mesh mesh = null;
+            bool mapChange = new bool();
+            bool mapRadius = new bool();
+            bool mapDistance = new bool();
+
             if (!DA.GetData(0, ref randomizeIt)) return;
             if (!DA.GetData(1, ref addHeadingTrajectory)) return;
             if (!DA.GetData(2, ref change)) return;
             if (!DA.GetData(3, ref wanderRad)) return;
             if (!DA.GetData(4, ref wanderDist)) return;
+            if (!DA.GetData(5, ref mesh)) return;
 
-            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory);
-            wanderData.wanderingType = "Wander";
+            if (mesh == null || mesh.VertexColors.Count == 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
+                return;
+            }
+
+            if (!DA.GetData(6, ref mapRadius)) return;
+            if (!DA.GetData(7, ref mapDistance)) return;
+
+            WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory,
+                "Wander", mesh, mapChange, mapRadius, mapDistance);
 
             DA.SetData(0, wanderData);
         }
@@ -89,7 +109,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("6da52bc9-dc35-4168-8d99-9bc75fd8b607"); }
+            get { return new Guid("46515778-a1e3-40b2-a541-4eb9d17396a6"); }
         }
     }
 }

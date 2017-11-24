@@ -13,7 +13,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public MeshCrawl_BabyMaker()
           : base("Mesh Crawl II", "MC",
-              "Description",
+              "Mesh Crawling allows agent to move along a mesh object and is capable of spawning children",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -83,7 +83,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.MeshCrawl;
             }
         }
 

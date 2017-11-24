@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
@@ -83,16 +83,20 @@
     <Compile Include="Behaviors\Attract_Behavior.cs" />
     <Compile Include="Behaviors\Behavior_Controller.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\Flocking_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\MeshCrawl_BabyMaker.cs" />
     <Compile Include="Behaviors\MeshCrawl_Behavior.cs" />
     <Compile Include="Behaviors\Noise_Behavior.cs" />
+    <Compile Include="Behaviors\Noise_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\Repel_Behavior.cs" />
     <Compile Include="Behaviors\Separation_Behavior.cs" />
     <Compile Include="Behaviors\Stigmergy_Behavior.cs" />
     <Compile Include="Behaviors\SuperWander_Behavior.cs" />
     <Compile Include="Behaviors\Tracking_BabyMaker.cs" />
     <Compile Include="Behaviors\Tracking_Behavior.cs" />
+    <Compile Include="Behaviors\Tracking_Mapped_BabyMaker.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
+    <Compile Include="Behaviors\Wandering_Mapped_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
@@ -144,9 +148,35 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\MoveSettings.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Engine_CreepyCrawlers_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings_Init.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spawn_Box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Repel_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attract_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine_CreepyCrawlers_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshCrawl_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Controller.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

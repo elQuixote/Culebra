@@ -5,7 +5,7 @@ using System.Linq;
 namespace CulebraData.Utilities
 {
     /// <summary>
-    /// 
+    /// Provides a set of general Utilities
     /// </summary>
     public static class General
     {

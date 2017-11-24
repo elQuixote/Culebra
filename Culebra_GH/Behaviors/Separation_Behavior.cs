@@ -12,8 +12,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Separation_Behavior class.
         /// </summary>
         public Separation_Behavior()
-          : base("Separation", "Nickname",
-              "Description",
+          : base("Separation", "SB",
+              "Separation Behavior II - avoids crowding neighbors (short range repulsion)",
               "Culebra_GH", "03 | Behaviors")
         {
         }

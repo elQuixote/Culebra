@@ -5,7 +5,7 @@ using System;
 namespace CulebraData.Utilities
 {
     /// <summary>
-    /// Provides a set of color utilities for mesh editing
+    /// Provides a static set of color utilities
     /// </summary>
     public static class ColorUtility
     {

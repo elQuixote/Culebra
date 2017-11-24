@@ -3,7 +3,7 @@
 namespace CulebraData.Utilities
 {
     /// <summary>
-    /// 
+    /// Provides a set of static mapping Utilities
     /// </summary>
     public static class Mapping
     {

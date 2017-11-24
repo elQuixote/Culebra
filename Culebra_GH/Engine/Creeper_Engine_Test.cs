@@ -399,10 +399,10 @@ namespace Culebra_GH.Engine
                         return;
                     }
                     DA.SetDataList(0, this.currentPosList);
-                    if (this.displayMode == 1)
+                    DA.SetDataTree(2, networkTree);
+                    if (this.displayMode == 1 && this.trail)
                     {                     
-                        if (this.trail) { DA.SetDataTree(1, trailTree); }
-                        DA.SetDataTree(2, networkTree);
+                        DA.SetDataTree(1, trailTree); 
                     }                 
                     this.totTail.Clear();
                     this.totTail.TrimExcess();
@@ -488,7 +488,7 @@ namespace Culebra_GH.Engine
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Culebra_GH.Properties.Resources.Engine_CreepyCrawlers_B;
+                return Culebra_GH.Properties.Resources.Engine_CreepyCrawlers_A;
             }
         }
         /// <summary>

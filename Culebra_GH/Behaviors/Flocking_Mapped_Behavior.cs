@@ -1,17 +1,18 @@
 ﻿using System;
 using Grasshopper.Kernel;
 using Culebra_GH.Data_Structures;
+using Rhino.Geometry;
 
 namespace Culebra_GH.Behaviors
 {
-    public class Flocking_Behavior : GH_Component
+    public class Flocking_Mapped_Behavior : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the Flocking_Behavior class.
         /// </summary>
-        public Flocking_Behavior()
-          : base("Flocking", "FL",
-              "Flocking Algorithm",
+        public Flocking_Mapped_Behavior()
+          : base("Flocking Mapped", "FM",
+              "Flocking Algorithm with image color sampling override for any flocking attributes and remaping of color values",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -37,6 +38,11 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Align Value", "AV", "Input a float value specifying alignment vector scale value", GH_ParamAccess.item);
             pManager.AddNumberParameter("Separation Value", "SV", "Input a float value specifying separation vector scale value", GH_ParamAccess.item);
             pManager.AddNumberParameter("Cohesion Value", "CV", "Input a float value specifying cohesion vector scale value", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the flocking parameters", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Alignment", "MA", "Input value specifying if you want the alignment value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Separation", "MS", "Input value specifying if you want the separation value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Cohesion", "MC", "Input value specifying if you want the cohesion value to be color driven", GH_ParamAccess.item);
+
         }
 
         /// <summary>
@@ -60,6 +66,11 @@ namespace Culebra_GH.Behaviors
             double separateValue = new double();
             double cohesionValue = new double();
 
+            Mesh mesh = null;
+            bool mapAlign = new bool();
+            bool mapSep = new bool();
+            bool mapCoh = new bool();
+
             if (!DA.GetData(0, ref connect)) return;
             if (!DA.GetData(1, ref viewAngle)) return;
             if (!DA.GetData(2, ref searchRadius)) return;
@@ -67,7 +78,20 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(4, ref separateValue)) return;
             if (!DA.GetData(5, ref cohesionValue)) return;
 
-            FlockingData flockData = new FlockingData((float)alignValue, (float)separateValue, (float)cohesionValue, (float)searchRadius, (float)viewAngle, connect);
+            if (!DA.GetData(6, ref mesh)) return;
+
+            if(mesh == null || mesh.VertexColors.Count == 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
+                return;
+            }
+
+            if (!DA.GetData(7, ref mapAlign)) return;
+            if (!DA.GetData(8, ref mapSep)) return;
+            if (!DA.GetData(9, ref mapCoh)) return;
+
+            FlockingData flockData = new FlockingData((float)alignValue, (float)separateValue, (float)cohesionValue, (float)searchRadius, (float)viewAngle, connect,
+                mesh, mapAlign, mapSep, mapCoh);
             DA.SetData(0, flockData);
         }
 
@@ -89,7 +113,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("cc85ce0e-ac5e-4415-ad97-4167e426d0c1"); }
+            get { return new Guid("a8003d3a-f9d2-4f4d-9e7d-7a3fc2caf83a"); }
         }
     }
 }

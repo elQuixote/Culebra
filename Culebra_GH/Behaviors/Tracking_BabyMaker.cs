@@ -13,7 +13,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Tracking_BabyMaker()
           : base("Tracking II", "TT",
-              "Description",
+              "MultiShape Path Following Algorithm capable of spawning children - see example files",
               "Culebra_GH", "03 | Behaviors")
         {
         }
