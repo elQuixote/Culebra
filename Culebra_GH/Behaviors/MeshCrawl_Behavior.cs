@@ -12,7 +12,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public MeshCrawl_Behavior()
           : base("Mesh Crawl", "MC",
-              "Description",
+              "Mesh Crawling allows agent to move along a mesh object",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -75,7 +75,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.MeshCrawl_B;
             }
         }
 

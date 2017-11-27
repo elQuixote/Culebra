@@ -10,8 +10,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Flocking_Behavior class.
         /// </summary>
         public Flocking_Behavior()
-          : base("Flocking", "Nickname",
-              "Description",
+          : base("Flocking", "FL",
+              "Flocking Algorithm",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -79,8 +79,7 @@ namespace Culebra_GH.Behaviors
             get
             {
                 //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Flocking;
             }
         }
 

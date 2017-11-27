@@ -10,8 +10,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Wandering_Behavior class.
         /// </summary>
         public Wandering_Behavior()
-          : base("Wandering", "Nickname",
-              "Description",
+          : base("Wandering", "WA",
+              "2D Wandering Algorithm",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -31,11 +31,11 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "R", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "AH", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "C", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Radius", "WR", "WR", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Distance", "WD", "WD", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Wandering;
             }
         }
 

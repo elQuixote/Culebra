@@ -12,8 +12,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Stigmergy_Behavior class.
         /// </summary>
         public Stigmergy_Behavior()
-          : base("Stigmergy", "S",
-              "Description",
+          : base("Stigmergy", "ST",
+              "2D/3D Trail Chasing Algorithm - Agents will chase agents trails. When using this algorithm in your main sketch use the overloaded move method, recommended values are move(6,100), in GH Trail Data TrailSet(6) Max Trails(100)",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -88,7 +88,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Engine;
             }
         }
 

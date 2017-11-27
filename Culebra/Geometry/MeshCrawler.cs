@@ -6,7 +6,7 @@ using toxi.geom;
 namespace CulebraData.Geometry
 {
     /// <summary>
-    /// 
+    /// Mesh Crawler Class - Used with a Rhino Mesh to navigate along a mesh, navigation is not topology dependent
     /// </summary>
     public class MeshCrawler
     {
@@ -24,7 +24,7 @@ namespace CulebraData.Geometry
         private Vec3D cp = new Vec3D();
         private Vec3D delta = new Vec3D();
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         public MeshCrawler()
         {
@@ -33,15 +33,15 @@ namespace CulebraData.Geometry
             this.childSpawnType = new List<int>();
         }
         /// <summary>
-        /// 
+        /// Mesh Walking allows agent to move along a mesh object
         /// </summary>
-        /// <param name="mesh"></param>
-        /// <param name="meshThreshold"></param>
-        /// <param name="location"></param>
-        /// <param name="speed"></param>
-        /// <param name="amplitude"></param>
+        /// <param name="mesh">the mesh object to crawl on</param>
+        /// <param name="meshThreshold">min distance the object needs to be from mesh in order to move to it</param>
+        /// <param name="location">the current object location</param>
+        /// <param name="speed">the current objects speed</param>
+        /// <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
         /// <param name="multiplier"></param>
-        /// <param name="triggerBabies"></param>
+        /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
         /// <param name="instanceable"></param>
         /// <param name="maxChildren"></param>
         /// <param name="childSpawner"></param>
@@ -84,7 +84,7 @@ namespace CulebraData.Geometry
             return Utilities.Convert.ToVector3d(newVec);
         }
         /// <summary>
-        /// 
+        /// Gets the child start positions if any
         /// </summary>
         /// <returns></returns>
         public List<Vector3d> GetChildStartPositions()
@@ -94,7 +94,7 @@ namespace CulebraData.Geometry
             return childList;
         }
         /// <summary>
-        /// 
+        /// Gets the child spawn types if any
         /// </summary>
         /// <returns></returns>
         public List<int> GetChildSpawnType()
@@ -104,21 +104,21 @@ namespace CulebraData.Geometry
             return returnedList;
         }
         /// <summary>
-        /// 
+        /// Resets the child start position list
         /// </summary>
         public void ResetChildStartPositions()
         {
             this.childSpawners = new List<Vector3d>();
         }
         /// <summary>
-        /// 
+        /// Resets the child spawn types list
         /// </summary>
         public void ResetChildSpawnType()
         {
             this.childSpawnType = new List<int>();
         }
         /// <summary>
-        /// 
+        /// Checks if the separate feature is active
         /// </summary>
         /// <returns></returns>
         public bool IsSeparateActive()
@@ -126,7 +126,7 @@ namespace CulebraData.Geometry
             return this.sepActive;
         }
         /// <summary>
-        /// 
+        /// Sets the separate feature inactive
         /// </summary>
         public void SetSeparateInactive()
         {

@@ -13,8 +13,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Attract_Behavior class.
         /// </summary>
         public Attract_Behavior()
-          : base("Attraction Force", "Nickname",
-              "Description",
+          : base("Attraction Force", "AF",
+              "Attracts a object towards a set of targets. Differs from Seek",
               "Culebra_GH", "04 | Forces")
         {
         }
@@ -92,7 +92,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Attract_A;
             }
         }
 
