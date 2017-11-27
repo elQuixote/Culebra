@@ -230,6 +230,10 @@ namespace Culebra_GH.Engine
                         }
                     }
                 }
+                else if( s == "Bundling")
+                {
+                    throw new Exception("You have input bundling behavior, Creepers engine cannot run bundling behavior, please use Bundling Engine");
+                }
                 else if (s == "Wandering")
                 {
                     if (dimensions == 0)

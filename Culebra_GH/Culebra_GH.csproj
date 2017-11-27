@@ -82,6 +82,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\Attract_Behavior.cs" />
     <Compile Include="Behaviors\Behavior_Controller.cs" />
+    <Compile Include="Behaviors\Bundling_Behavior.cs" />
+    <Compile Include="Behaviors\Bundling_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
     <Compile Include="Behaviors\Flocking_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\MeshCrawl_BabyMaker.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
     <Compile Include="Behaviors\Wandering_Mapped_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
+    <Compile Include="Data Structures\BundlingData.cs" />
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
     <Compile Include="Data Structures\ForceData.cs" />
@@ -109,10 +112,11 @@
     <Compile Include="Data Structures\TrailData.cs" />
     <Compile Include="Data Structures\VisualData.cs" />
     <Compile Include="Data Structures\WanderingData.cs" />
-    <Compile Include="Engine\Creeper_Engine_Dual_Test.cs" />
+    <Compile Include="Engine\Bundling_Engine.cs" />
+    <Compile Include="Engine\Creeper_Engine_Dual.cs" />
     <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
     <Compile Include="Engine\Engine_Global.cs" />
-    <Compile Include="Engine\Creeper_Engine_Test.cs" />
+    <Compile Include="Engine\Creeper_Engine.cs" />
     <Compile Include="Objects\IGH_VisualData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -177,6 +181,84 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Controller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GradientTrail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GraphicPolyline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VisualSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrailData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiscoTrail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiscoTrail_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flocking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flocking_Map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering_Weave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_Baby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_Baby_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_Baby1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_BabyMapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PerlinNoise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PerlinNoise_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Separate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zombie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Testing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine_Bundling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bundling_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bundling.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

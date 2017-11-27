@@ -11,8 +11,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Wandering_Behavior class.
         /// </summary>
         public Wandering_Mapped_Behavior()
-          : base("Wandering Mapped", "Nickname",
-              "Description",
+          : base("Wandering Mapped", "WM",
+              "2D Wandering Algorithm with image color sampling override for any wandering attributes and remaping of color values",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -100,7 +100,7 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Wandering_Mapped;
             }
         }
 

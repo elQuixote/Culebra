@@ -35,7 +35,6 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            //pManager.AddGenericParameter("Behavior A", "B", "Connect Desired Behavior Here", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -141,6 +140,14 @@ namespace Culebra_GH.Behaviors
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Mesh Crawl data structure, please check your inputs"); return; }
                         behaviorData.meshCrawlData = data;
                         behaviorNames.Add("Crawl");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.BundlingData")
+                    {
+                        hitCounter++;
+                        BundlingData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Bundling data structure, please check your inputs"); return; }
+                        behaviorData.bundlingData = data;
+                        behaviorNames.Add("Bundling");
                     }
                     else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
                 }                     

@@ -15,6 +15,7 @@ using System.Drawing;
 using Rhino.Display;
 using toxi.geom;
 using CulebraData.Geometry;
+using CulebraData.Behavior.Types;
 
 namespace CulebraData.Behavior
 {

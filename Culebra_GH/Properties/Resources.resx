@@ -121,14 +121,44 @@
   <data name="Attract_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Attract_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Bundling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bundling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bundling_Mapped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bundling_Mapped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Controller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DiscoTrail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiscoTrail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DiscoTrail_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiscoTrail_B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Engine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Engine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Engine_Bundling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Engine_Bundling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Engine_CreepyCrawlers_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Engine_CreepyCrawlers_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Engine_CreepyCrawlers_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Engine_CreepyCrawlers_B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Flocking" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Flocking.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Flocking_Map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Flocking_Map.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GradientTrail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GradientTrail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GraphicPolyline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GraphicPolyline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MeshCrawl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MeshCrawl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,13 +169,52 @@
   <data name="MoveSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MoveSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PerlinNoise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PerlinNoise.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PerlinNoise_Mapped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PerlinNoise_Mapped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Repel_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Repel_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Separate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Separate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Settings_Init" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Settings_Init.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Spawn_Box" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spawn_Box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Testing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Testing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tracking" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tracking.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tracking_Baby" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tracking_Baby.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tracking_BabyMapped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tracking_BabyMapped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TrailData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TrailData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VisualSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VisualSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wandering" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wandering.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wandering_Mapped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wandering_Mapped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wandering_Weave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wandering_Weave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
