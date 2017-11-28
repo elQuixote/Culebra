@@ -54,6 +54,7 @@ namespace Culebra_GH.Engine
         //----------------SelfTail Chasing Fields-------------------------
         private List<Vector3d> totTail = new List<Vector3d>();
         private Engine_Global globalEngine;
+        //----------------------Timer-------------------------------------
         private int cycles;
         private Timer timer = new Timer();
         //------------------Graphics Globals------------------------------
@@ -124,7 +125,6 @@ namespace Culebra_GH.Engine
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("IKVM.OpenJDK.Core"));
 
             bool reset = new bool();
-            timer.Start();
 
             List<object> init_Settings = new List<object>();
             List<object> move_Settings = new List<object>();
@@ -173,7 +173,6 @@ namespace Culebra_GH.Engine
                         GH_String value = (GH_String)init_Settings[0];
                         init_Convert = value.Value;
                     }
-
                     if (init_Convert == "Box")
                     {
                         this.spawnData = "box";
@@ -189,6 +188,7 @@ namespace Culebra_GH.Engine
                         var wrapperToGoo = GH_Convert.ToGoo(init_Settings[3]);
                         wrapperToGoo.CastTo<List<Point3d>>(out this.ptList);
                         GH_Convert.ToInt32(init_Settings[1], out this.dimensions, GH_Conversion.Primary);
+                        GH_Convert.ToBox_Primary(init_Settings[4], ref this.box);
                     }
                     GH_Convert.ToBoolean(init_Settings[2], out this.bounds, GH_Conversion.Primary);
                 }
@@ -245,29 +245,35 @@ namespace Culebra_GH.Engine
                     this.minthick = 1;
                 }
                 //-----------------------------------------------------------------
-                this.bb = new BoundingBox();
-                int loopCount = new int();
-                bool create = new bool();
-                if (this.spawnData == "box")
+                IGH_PreviewObject comp = (IGH_PreviewObject)this;
+                if (comp.Hidden && (this.displayMode == 0))
                 {
-                    this.bb = this.box.BoundingBox;
-                    loopCount = this.pointCount;
-                    create = true;
-                }
-                else if (this.spawnData == "Points")
-                {
-                    loopCount = this.ptList.Count;
-                    create = false;
-                    this.bounds = false;
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Component preview must be enabled to see Graphic Mode on Canvas, right click on component and set preview on");
                 }
                 #endregion
                 #region Pre Simulation Code
                 //------------------------RESET STARTS HERE--------------------------
                 if (reset)
                 { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
+                    //-----------------------------------------------------------------
+                    this.bb = new BoundingBox();
+                    int loopCount = new int();
+                    bool create = new bool();
+                    if (this.spawnData == "box")
+                    {
+                        this.bb = this.box.BoundingBox;
+                        loopCount = this.pointCount;
+                        create = true;
+                    }
+                    else if (this.spawnData == "Points")
+                    {
+                        loopCount = this.ptList.Count;
+                        create = false;
+                        this.bb = this.box.BoundingBox;
+                    }
+                    //-----------------------------------------------------------------
                     this.globalEngine = new Engine_Global();
                     this.cycles = 0;
-                    this.timer.Reset();
                     
                     this.moveList = new List<Vector3d>();
                     this.startList = new List<Vector3d>();
@@ -302,9 +308,8 @@ namespace Culebra_GH.Engine
                                 }
                             }
                             else
-                            {
-                                this.startPos = (Vector3d)this.ptList[i];
-                                this.bb.Union(this.ptList[i]);
+                            {                           
+                                this.startPos = (Vector3d)this.ptList[i];                             
                                 //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
@@ -350,7 +355,6 @@ namespace Culebra_GH.Engine
                             else
                             {
                                 this.startPos = (Vector3d)this.ptList[i];
-                                this.bb.Union(this.ptList[i]);
                                 //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
@@ -395,10 +399,14 @@ namespace Culebra_GH.Engine
                     }
                     DA.SetDataList(0, this.currentPosList);
                     DA.SetDataTree(2, networkTree);
+                    if (this.displayMode == 1)
+                    {
+                        DA.SetData(3, this.bb);
+                    }
                     if (this.displayMode == 1 && this.trail)
                     {                     
                         DA.SetDataTree(1, trailTree); 
-                    }                 
+                    }
                     this.totTail.Clear();
                     this.totTail.TrimExcess();
 
@@ -406,7 +414,6 @@ namespace Culebra_GH.Engine
                 }
                 #endregion
             }
-            timer.Stop();
             timer.DisplayMessage(this, "Single", this.cycles, this.myBool);
         }
         #endregion

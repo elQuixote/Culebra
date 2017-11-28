@@ -80,6 +80,7 @@ namespace Culebra_GH.Initialize
             else if (this.text == "Points")
             {
                 myAL.Add(Spawn_Type[1]);
+                myAL.Add(Spawn_Type[2]);
                 DA.SetDataList(0, myAL);
             }
             else if (this.text == "Mesh")

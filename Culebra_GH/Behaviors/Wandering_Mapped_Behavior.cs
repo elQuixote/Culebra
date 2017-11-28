@@ -12,7 +12,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Wandering_Mapped_Behavior()
           : base("Wandering Mapped", "WM",
-              "2D Wandering Algorithm with image color sampling override for any wandering attributes and remaping of color values",
+              "2D Wandering Algorithm with image color sampling override for any wandering attributes and remaping of color values, Wandering is a type of random steering which has some long term order",
               "Culebra_GH", "03 | Behaviors")
         {
         }

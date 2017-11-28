@@ -67,11 +67,11 @@ namespace Culebra_GH.Utilities
             {
                 if (engineType == "Single")
                 {
-                    thisobj.Message = "Creeper Engine | Cycles : " + cycles +  " | ElapsedTime : " + base.Elapsed.Seconds + "." + base.Elapsed.Milliseconds;
+                    thisobj.Message = "Creeper Engine | Cycles : " + cycles;
                 }
                 else if (engineType == "Double")
                 {
-                    thisobj.Message = "Multi Creeper Engine | Cycles : " + cycles + " | ElapsedTime : " + base.Elapsed.Seconds + "." + base.Elapsed.Milliseconds;
+                    thisobj.Message = "Multi Creeper Engine | Cycles : " + cycles;
                 }
             }else
             {

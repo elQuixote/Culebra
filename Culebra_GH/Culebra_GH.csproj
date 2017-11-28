@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
+    <OutputPath>C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
@@ -132,6 +132,7 @@
     <Compile Include="Settings_Visual\Trail_Data.cs" />
     <Compile Include="Settings_Visual\Visual_Settings.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
+    <Compile Include="SpawnTypes\Spawn_Point.cs" />
     <Compile Include="Tests\Component_Test_Conduit.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
     <Compile Include="Tests\Component_Test_Behaviors.cs" />
@@ -259,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Bundling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spawn_Point.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

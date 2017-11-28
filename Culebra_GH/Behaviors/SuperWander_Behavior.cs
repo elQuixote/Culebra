@@ -11,7 +11,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public SuperWandering_Behavior()
           : base("Weaving Wandering", "SW",
-              "Expanded 2D Wandering Algorithm using triggers to create a weaving type movement 2D Wandering Algorithm",
+              "Expanded 2D Wandering Algorithm using step triggers to create a weaving type movement 2D Wandering Algorithm, Wandering is a type of random steering which has some long term order",
               "Culebra_GH", "03 | Behaviors")
         {
         }

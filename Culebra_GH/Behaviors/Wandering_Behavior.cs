@@ -11,7 +11,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Wandering_Behavior()
           : base("Wandering", "WA",
-              "2D Wandering Algorithm",
+              "2D Wandering Algorithm, Wandering is a type of random steering which has some long term order",
               "Culebra_GH", "03 | Behaviors")
         {
         }

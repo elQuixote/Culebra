@@ -30,21 +30,21 @@ namespace Culebra_GH.Utilities
                 {
                     GH_Skin.palette_normal_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.Chartreuse);
                     GH_Skin.palette_normal_selected = new GH_PaletteStyle(Color.Chartreuse, Color.Red, Color.Black);
-                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.Chartreuse);
+                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Gray, Color.Chartreuse);
                     GH_Skin.palette_hidden_selected = new GH_PaletteStyle(Color.Chartreuse, Color.Red, Color.Black);
                 }
                 if (this.type == 1)
                 {
                     GH_Skin.palette_normal_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.DarkGray);
                     GH_Skin.palette_normal_selected = new GH_PaletteStyle(Color.DarkGray, Color.Red, Color.Black);
-                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.DarkGray);
+                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Gray, Color.DarkGray);
                     GH_Skin.palette_hidden_selected = new GH_PaletteStyle(Color.DarkGray, Color.Red, Color.Black);
                 }
                 if (this.type == 2)
                 {
                     GH_Skin.palette_normal_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.HotPink);
                     GH_Skin.palette_normal_selected = new GH_PaletteStyle(Color.HotPink, Color.Red, Color.Black);
-                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Black, Color.HotPink);
+                    GH_Skin.palette_hidden_standard = new GH_PaletteStyle(Color.Black, Color.Gray, Color.HotPink);
                     GH_Skin.palette_hidden_selected = new GH_PaletteStyle(Color.HotPink, Color.Red, Color.Black);
                 }
             }

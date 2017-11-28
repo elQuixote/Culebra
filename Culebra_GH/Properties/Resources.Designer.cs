@@ -293,6 +293,16 @@ namespace Culebra_GH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Spawn_Point {
+            get {
+                object obj = ResourceManager.GetObject("Spawn_Point", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Testing {
             get {
                 object obj = ResourceManager.GetObject("Testing", resourceCulture);

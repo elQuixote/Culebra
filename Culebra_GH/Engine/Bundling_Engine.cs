@@ -4,14 +4,9 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Culebra_GH.Objects;
 using Grasshopper;
-using System.Reflection;
-using Grasshopper.Kernel.Types;
 using System.Drawing;
-using CulebraData.Objects;
-using CulebraData.Utilities;
 using CulebraData.Drawing;
 using Culebra_GH.Data_Structures;
-using Culebra_GH.Utilities;
 using CulebraData.Behavior.Types;
 
 namespace Culebra_GH.Engine

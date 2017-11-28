@@ -208,8 +208,6 @@ namespace Culebra_GH.Behaviors
                 Component.Params.OnParametersChanged();
             }
         }
-        //-------------------------------------------
-        //-------------------------------------------
         /// <summary>
         /// Provides an Icon for every component that will be visible in the User Interface.
         /// Icons need to be 24x24 pixels.

@@ -156,7 +156,6 @@ namespace Culebra_GH.Engine
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("culebra"));
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("IKVM.OpenJDK.Core"));
 
-            this.timer.Start();
             bool reset = new bool();
 
             List<object> init_Settings = new List<object>();
@@ -240,6 +239,7 @@ namespace Culebra_GH.Engine
                         var wrapperToGoo = GH_Convert.ToGoo(init_Settings[3]);
                         wrapperToGoo.CastTo<List<Point3d>>(out this.ptList);
                         GH_Convert.ToInt32(init_Settings[1], out this.dimensions, GH_Conversion.Primary);
+                        GH_Convert.ToBox_Primary(init_Settings[4], ref this.box);
                     }
                     GH_Convert.ToBoolean(init_Settings[2], out this.bounds, GH_Conversion.Primary);
                 }
@@ -360,30 +360,31 @@ namespace Culebra_GH.Engine
                 {
                     AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Component preview must be enabled to see Graphic Mode on Canvas, right click on component and set preview on");
                 }
-                //-----------------------------------------------------------------
-                this.bb = new BoundingBox();
-                int loopCount = new int();
-                bool create = new bool();
-                if (this.spawnData == "box")
-                {
-                    this.bb = this.box.BoundingBox;
-                    loopCount = this.pointCount;
-                    create = true;
-                }
-                else if (this.spawnData == "Points")
-                {
-                    loopCount = this.ptList.Count;
-                    create = false;
-                    this.bounds = false;
-                }
+
                 #endregion
                 #region Pre Simulation Code
                 //------------------------RESET STARTS HERE--------------------------
                 if (reset)
                 { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
+                    //-----------------------------------------------------------------
+                    this.bb = new BoundingBox();
+                    int loopCount = new int();
+                    bool create = new bool();
+                    if (this.spawnData == "box")
+                    {
+                        this.bb = this.box.BoundingBox;
+                        loopCount = this.pointCount;
+                        create = true;
+                    }
+                    else if (this.spawnData == "Points")
+                    {
+                        loopCount = this.ptList.Count;
+                        create = false;
+                        this.bb = this.box.BoundingBox;
+                    }
+                    //-----------------------------------------------------------------
                     this.globalEngine = new Engine_Global();
                     this.cycles = 0;
-                    this.timer.Reset();
 
                     this.moveList = new List<Vector3d>();
                     this.startList = new List<Vector3d>();
@@ -519,6 +520,10 @@ namespace Culebra_GH.Engine
                     #region Set all outputs
                     DA.SetDataList(0, this.currentPosList);
                     DA.SetDataTree(2, networkTree);
+                    if(this.displayMode == 1)
+                    {
+                        DA.SetData(3, this.bb);
+                    }
                     if (this.displayMode == 1 && this.trail)
                     {                     
                         DA.SetDataTree(1, trailTree); 
@@ -535,7 +540,6 @@ namespace Culebra_GH.Engine
                 }
                 #endregion
             }
-            timer.Stop();
             timer.DisplayMessage(this, "Double", this.cycles, this.myBool);
         }
         #endregion

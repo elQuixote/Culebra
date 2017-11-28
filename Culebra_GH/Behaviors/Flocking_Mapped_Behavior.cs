@@ -32,12 +32,12 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Connect", "C", "Input a boolean toggle - True = Connect the heads (visualizes their search radius) | False = Do not draw connectivity", GH_ParamAccess.item);
-            pManager.AddNumberParameter("View Angle", "VA", "Input a float value specifying the view angle each agent can see", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Search Radius", "SR", "Input a float value specifying the distance each creeper can see", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Align Value", "AV", "Input a float value specifying alignment vector scale value", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Separation Value", "SV", "Input a float value specifying separation vector scale value", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Cohesion Value", "CV", "Input a float value specifying cohesion vector scale value", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Connect", "C", "Input a boolean toggle - True = Connect the heads (visualizes their search radius, DRAMATICALLY REDUCES PERFORMANCE) | False = Do not draw connectivity", GH_ParamAccess.item, false);
+            pManager.AddNumberParameter("View Angle", "VA", "Input a float value specifying the view angle each agent can see", GH_ParamAccess.item, 180);
+            pManager.AddNumberParameter("Search Radius", "SR", "Input a float value specifying the distance each creeper can see", GH_ParamAccess.item, 70);
+            pManager.AddNumberParameter("Align Value", "AV", "Input a float value specifying alignment (Steer towards the average heading of local flockmates) vector scale value", GH_ParamAccess.item, 0.24);
+            pManager.AddNumberParameter("Separation Value", "SV", "Input a float value specifying separation (Steer to avoid crowding local flockmates) vector scale value", GH_ParamAccess.item, 0.09);
+            pManager.AddNumberParameter("Cohesion Value", "CV", "Input a float value specifying cohesion (Steer to move toward the average position of local flockmates) vector scale value", GH_ParamAccess.item, 0.045);
             pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the flocking parameters", GH_ParamAccess.item);
             pManager.AddBooleanParameter("Map Alignment", "MA", "Input value specifying if you want the alignment value to be color driven", GH_ParamAccess.item);
             pManager.AddBooleanParameter("Map Separation", "MS", "Input value specifying if you want the separation value to be color driven", GH_ParamAccess.item);
@@ -77,10 +77,19 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(3, ref alignValue)) return;
             if (!DA.GetData(4, ref separateValue)) return;
             if (!DA.GetData(5, ref cohesionValue)) return;
-
             if (!DA.GetData(6, ref mesh)) return;
 
-            if(mesh == null || mesh.VertexColors.Count == 0)
+            if (viewAngle > 360)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be higher than 360, please reduce value");
+                return;
+            }
+            if (viewAngle <= 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be less than or equal to 0, please increase value");
+                return;
+            }
+            if (mesh == null || mesh.VertexColors.Count == 0)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
                 return;
