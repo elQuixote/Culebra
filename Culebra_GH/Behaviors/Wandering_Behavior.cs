@@ -31,11 +31,11 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item, true);
+            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item, 100.0);
+            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item, 20.0);
+            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item, 80.0);
         }
 
         /// <summary>

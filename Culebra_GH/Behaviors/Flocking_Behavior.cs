@@ -77,7 +77,10 @@ namespace Culebra_GH.Behaviors
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be less than or equal to 0, please increase value");
                 return;
             }
-
+            if (connect)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Use this feature to visualize your search radius, however it drastically affects performance so use wisely");
+            }
             FlockingData flockData = new FlockingData((float)alignValue, (float)separateValue, (float)cohesionValue, (float)searchRadius, (float)viewAngle, connect);
             DA.SetData(0, flockData);
         }

@@ -12,7 +12,7 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Tracking_Behavior class.
         /// </summary>
         public Tracking_BabyMaker()
-          : base("Tracking II", "TT",
+          : base("Multi Path Tracking II", "TT",
               "MultiShape Path Following Algorithm capable of spawning children - see example files",
               "Culebra_GH", "03 | Behaviors")
         {
@@ -33,12 +33,12 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddCurveParameter("Polylines", "P", "Input a list of polylines you want to follow", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Polyline Threshold", "PT", "Input the distance threshold enabling agents to see shapes", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Projection Distance", "PD", "Input the projection distance of point ahead on the path to seek", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Polyline Radius", "PR", "Input the radius of the shapes", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Polylines", "P", "Input a list of polylines you want to follow, POLYLINE RESOLUTION IS IMPORTANT, KEEP AS LOW AS POSSIBLE", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Polyline Threshold", "PT", "Input the distance threshold enabling agents to see shapes", GH_ParamAccess.item, 500.0);
+            pManager.AddNumberParameter("Projection Distance", "PD", "Input the projection distance of point ahead on the path to seek", GH_ParamAccess.item, 50.0);
+            pManager.AddNumberParameter("Polyline Radius", "PR", "Input the radius of the shapes", GH_ParamAccess.item, 15.0);
+            pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item, true);
+            pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have, careful how large you make this number", GH_ParamAccess.item, 2);
         }
 
         /// <summary>

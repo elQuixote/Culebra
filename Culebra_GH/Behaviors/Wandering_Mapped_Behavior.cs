@@ -32,15 +32,15 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item, true);
+            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item, 100.0);
+            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item, 20.0);
+            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item, 80.0);
             pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the wandering parameters", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Change", "MC", "Input value specifying if you want the change value to be color driven", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Radius", "MR", "Input value specifying if you want the radius value to be color driven", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Distance", "MD", "Input value specifying if you want the distance value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Change", "MC", "Input value specifying if you want the change value to be color driven", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Map Radius", "MR", "Input value specifying if you want the radius value to be color driven", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Map Distance", "MD", "Input value specifying if you want the distance value to be color driven", GH_ParamAccess.item, true);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace Culebra_GH.Behaviors
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
                 return;
             }
-
-            if (!DA.GetData(6, ref mapRadius)) return;
-            if (!DA.GetData(7, ref mapDistance)) return;
+            if (!DA.GetData(6, ref mapChange)) return;
+            if (!DA.GetData(7, ref mapRadius)) return;
+            if (!DA.GetData(8, ref mapDistance)) return;
 
             WanderingData wanderData = new WanderingData((float)change, (float)wanderRad, (float)wanderDist, (float)rotationTrigger, randomizeIt, addHeadingTrajectory,
                 "Wander", mesh, mapChange, mapRadius, mapDistance);

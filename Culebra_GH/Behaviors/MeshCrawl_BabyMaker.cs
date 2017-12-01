@@ -34,11 +34,11 @@ namespace Culebra_GH.Behaviors
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddMeshParameter("Mesh", "M", "The mesh object to crawl on", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Mesh Threshold", "MT", "Input the distance threshold, the min distance current position needs to be from mesh in order to move towards it", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Mesh Projection Distance", "MPD", "Input the amount to project the current location along the current speed", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Multiplier", "M", "Input the multiplier value", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Mesh Threshold", "MT", "Input the distance threshold, the min distance current position needs to be from mesh in order to move towards it", GH_ParamAccess.item, 1.5);
+            pManager.AddNumberParameter("Mesh Projection Distance", "MPD", "Input the amount to project the current location along the current speed", GH_ParamAccess.item, 2.0);
+            pManager.AddNumberParameter("Multiplier", "M", "Input the multiplier value", GH_ParamAccess.item, 1.5);
+            pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item, true);
+            pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have, careful how large you make this number", GH_ParamAccess.item, 2);
         }
 
         /// <summary>

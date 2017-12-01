@@ -37,9 +37,9 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Multiplier", "M", "Input value to add a jitter type of movement", GH_ParamAccess.item, 1.0);
             pManager.AddNumberParameter("Velocity", "V", "Input value specifying the noise velocity multiplier", GH_ParamAccess.item, 0.5);
             pManager.AddMeshParameter("Colored Mesh", "CM", "Input a color mesh to drive the flocking parameters", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Scale", "MS", "Input value specifying if you want the scale value to be color driven", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Strength", "MST", "Input value specifying if you want the strength value to be color driven", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Map Multiplier", "MM", "Input value specifying if you want the multiplier value to be color driven", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Map Scale", "MS", "Input value specifying if you want the scale value to be color driven", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Map Strength", "MST", "Input value specifying if you want the strength value to be color driven", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Map Multiplier", "MM", "Input value specifying if you want the multiplier value to be color driven", GH_ParamAccess.item, false);
         }
 
         /// <summary>

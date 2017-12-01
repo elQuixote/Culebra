@@ -71,6 +71,17 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(4, ref sr)) return;
             DA.GetDataList(5, trails);
 
+            if (va > 360)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be higher than 360, please reduce value");
+                return;
+            }
+            if (va <= 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be less than or equal to 0, please increase value");
+                return;
+            }
+
             StigmergyData stigmergy = new StigmergyData((float)va, (float)cm, (float)cr, (float)sm, (float)sr);
             if(trails.Count > 0)
             {

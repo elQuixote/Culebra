@@ -32,7 +32,7 @@ namespace Culebra_GH.Engine
         private BoundingBox bb;
         private Box box;
         private int dimensions;
-        private bool bounds;
+        private int bounds;
         private string spawnData;
         private int spawnType;
         private int pointCount;
@@ -190,7 +190,7 @@ namespace Culebra_GH.Engine
                         GH_Convert.ToInt32(init_Settings[1], out this.dimensions, GH_Conversion.Primary);
                         GH_Convert.ToBox_Primary(init_Settings[4], ref this.box);
                     }
-                    GH_Convert.ToBoolean(init_Settings[2], out this.bounds, GH_Conversion.Primary);
+                    GH_Convert.ToInt32(init_Settings[2], out this.bounds, GH_Conversion.Primary);
                 }
                 //------------------------Move Settings--------------------------
                 Vector3d initialVector = new Vector3d();

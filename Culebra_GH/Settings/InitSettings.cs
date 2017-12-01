@@ -37,7 +37,7 @@ namespace Culebra_GH.Initialize
         {
             pManager.AddGenericParameter("Spawn Settings", "ST", "Input the Spawn Settings output of any of the Spawn Types", GH_ParamAccess.list);
             pManager.AddGenericParameter("Dimension", "D", "Input an integer specifying which dimension you want to live in (0 = 2D | 1 = 3D", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Bounds", "B", "Input a boolean toggle specifying the boundary condition ( True = Enable boundary interaction | False = Ignore the boundary", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Boundary", "B", "Input an integer specifying the bounds condition ( 0 = Bounce | 1 = Respawn | 2 = Do Nothing", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Culebra_GH.Initialize
 
             List<Object> Spawn_Type = new List<Object>();
             int Dimension = new int();
-            bool Bounds = new bool();
+            int Bounds = new int();
 
             if (!DA.GetDataList(0, Spawn_Type)) return;
             if (!DA.GetData(1, ref Dimension)) return;

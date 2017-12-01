@@ -12,7 +12,7 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Tracking_Behavior class.
         /// </summary>
         public Tracking_Mapped_BabyMaker()
-          : base("Tracking II Mapped", "TT",
+          : base("Multi Path Tracking II Mapped", "TT",
               "MultiShape Path Following Algorithm capable of spawning children with image color sampling override for any path attributes and remaping of color values - see example files",
               "Culebra_GH", "03 | Behaviors")
         {
@@ -33,7 +33,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddCurveParameter("Polylines", "P", "Input a list of polylines you want to follow", GH_ParamAccess.list);
+            pManager.AddCurveParameter("Polylines", "P", "Input a list of polylines you want to follow, POLYLINE RESOLUTION IS IMPORTANT, KEEP AS LOW AS POSSIBLE", GH_ParamAccess.list);
             pManager.AddNumberParameter("Polyline Threshold", "PT", "Input the distance threshold enabling agents to see shapes", GH_ParamAccess.item);
             pManager.AddNumberParameter("Projection Distance", "PD", "Input the projection distance of point ahead on the path to seek", GH_ParamAccess.item);
             pManager.AddNumberParameter("Polyline Radius", "PR", "Input the radius of the shapes", GH_ParamAccess.item);

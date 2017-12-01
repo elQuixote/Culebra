@@ -97,7 +97,7 @@ namespace Culebra_GH.Engine
         /// <param name="trailTree_ChildA"></param>
         /// <param name="trailTree_ChildB"></param>
         public void Action(List<CulebraObject> creepList, int dimensions, object behavioral_Settings, int displayMode, List<Line> networkList, double maxSpeed, double maxForce, double velMultiplier,
-            List<Vector3d> totTail, List<Point3d> particleList, DataTree<Point3d> particleSet, DataTree<Line> networkTree, int trailStep, int maxTrailSize, bool bounds, BoundingBox bb, List<Point3d> currentPosList,
+            List<Vector3d> totTail, List<Point3d> particleList, DataTree<Point3d> particleSet, DataTree<Line> networkTree, int trailStep, int maxTrailSize, int bounds, BoundingBox bb, List<Point3d> currentPosList,
             bool trail, DataTree<Point3d> trailTree, double child_maxSpeed = 0.0, double child_maxForce = 0.0, double child_velMultiplier = 0.0, object child_behavioral_Settings = null, int child_displayMode = 0, bool child_trail = false, int child_trailStep = 0,
             int child_maxTrailSize = 0, DataTree<Point3d>particleBabyASet = null, DataTree<Point3d>particleBabyBSet = null, DataTree<Point3d>trailTree_ChildA = null, DataTree<Point3d>trailTree_ChildB = null)
         {
@@ -174,10 +174,14 @@ namespace Culebra_GH.Engine
                     }
                     c.actions.Move(trailStep, maxTrailSize);
                 }
-                if (bounds)
+                if (bounds == 0)
                 {
                     if (dimensions == 0) { c.actions.Bounce(bb); }
                     else if (dimensions == 1) { c.actions.Bounce3D(bb); }
+                }else if(bounds == 1)
+                {
+                    if (dimensions == 0) { c.actions.Respawn(bb); }
+                    else if (dimensions == 1) { c.actions.Respawn(bb,false, true); }
                 }
                 counter++;
             }

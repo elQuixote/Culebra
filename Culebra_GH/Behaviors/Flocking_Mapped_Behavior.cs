@@ -94,7 +94,10 @@ namespace Culebra_GH.Behaviors
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
                 return;
             }
-
+            if (connect)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Use this feature to visualize your search radius, however it drastically affects performance so use wisely");
+            }
             if (!DA.GetData(7, ref mapAlign)) return;
             if (!DA.GetData(8, ref mapSep)) return;
             if (!DA.GetData(9, ref mapCoh)) return;
