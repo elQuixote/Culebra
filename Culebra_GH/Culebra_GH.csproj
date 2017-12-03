@@ -226,15 +226,6 @@
     <None Include="Resources\Tracking_Baby.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Tracking_Baby_Mapped.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tracking_Baby1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tracking1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Tracking_BabyMapped.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,39 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Rhino.Geometry;
 using Grasshopper;
 using Grasshopper.Kernel.Data;
 
 namespace CulebraData.Behavior.Types
 {
+    /// <summary>
+    /// SelfOrganize Class - Base class for bundling operations, not currently optimized in beta. Self-organization is a process where some form of overall order or coordination arises out of the local interactions between smaller component parts of an initially disordered system. The process of self-organization can be spontaneous, and it is not necessarily controlled by any auxiliary agent outside of the system. 
+    /// </summary>
     public class SelfOrganize
     {
-        public List<Curve> Bundling(List<Point3d> particleList, DataTree<Point3d> particleSet, List<Curve> crvList, double thresh, double ratio, int weldCount, bool rebuild, int ptCount, Mesh dMesh = null, bool useColor = false)
+        /// <summary>
+        /// Generates curve bundling
+        /// </summary>
+        /// <param name="particleList"></param>
+        /// <param name="particleSet">The empty datatree which will be populated with the new post bundled curve positions per path </param>
+        /// <param name="crvList">The list of curves to bundle</param>
+        /// <param name="thresh">The search distance for each point on each curve</param>
+        /// <param name="ratio">The amount to move per iteration</param>
+        /// <param name="weldCount">The number of points you would like to weld from the existing curve</param>
+        /// <param name="rebuild">Rebuilds the curve pre simulation</param>
+        /// <param name="ptCount">The number of points to rebuilt the curve to</param>
+        /// <param name="colorMesh">The color mesh to use for input mapping</param>
+        /// <param name="useColor">Use the color data or not</param>
+        /// <returns>The list of bundled curves</returns>
+        public List<Curve> Bundling(List<Point3d> particleList, DataTree<Point3d> particleSet, List<Curve> crvList, double thresh, double ratio, int weldCount, bool rebuild, int ptCount, Mesh colorMesh = null, bool useColor = false)
         {
             bool color_Override = false;
             double multiplier = new double();
             //-----------SelfOrg---------------------
             for (int j = 0; j < crvList.Count; j++)
             { //go through each curve
-
                 GH_Path path = new GH_Path(j);
-
                 List<Point3d> arrNewPos = new List<Point3d>();
-
                 if (rebuild || (!rebuild && crvList[j].Degree == 3))
                 { //rebuild curve
                     crvList[j] = crvList[j].Rebuild(ptCount, 1, false);
                 }
-
-                Rhino.Geometry.Polyline pline = new Rhino.Geometry.Polyline();
+                Polyline pline = new Rhino.Geometry.Polyline();
                 bool conv = crvList[j].TryGetPolyline(out pline); //get polyline from curve
                 if (!conv)
                 {
                     throw new Exception("Could not convert to a polyline, had to abort");
                 }
-
                 List<Point3d> ptList = new List<Point3d>();
                 for (int z = 0; z < pline.SegmentCount + 1; z++)
                 {
@@ -52,7 +62,7 @@ namespace CulebraData.Behavior.Types
                     //-----------Color---------------------
                     if (useColor)
                     {
-                        multiplier = Utilities.ColorUtility.GetHueSatLum(subList[k], dMesh).L;
+                        multiplier = Utilities.ColorUtility.GetHueSatLum(subList[k], colorMesh).L;
                         if (multiplier == 0)
                         {
                             color_Override = true;

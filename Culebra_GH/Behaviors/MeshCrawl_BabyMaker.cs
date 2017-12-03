@@ -40,7 +40,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddBooleanParameter("Trigger Spawn", "TS", "Input value specifying if creeper is now allowed to spawn any children objects stored", GH_ParamAccess.item, true);
             pManager.AddIntegerParameter("Max Children", "MC", "Input value specifying the maximum number of children each creeper can have, careful how large you make this number", GH_ParamAccess.item, 2);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -48,7 +47,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Mesh Crawling Behavior", "MCB", "The mesh crawling behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -69,11 +67,9 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(4, ref trigger)) return;
             if (!DA.GetData(5, ref maxChildren)) return;
 
-
             MeshCrawlData mcd = new MeshCrawlData(mesh, (float)threshold, (float)amplitude, (float)multiplier, trigger, maxChildren);
             DA.SetData(0, mcd);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -81,12 +77,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.MeshCrawl;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

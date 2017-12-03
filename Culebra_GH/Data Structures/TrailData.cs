@@ -1,5 +1,8 @@
 ﻿namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Trail Data Structure
+    /// </summary>
     public struct TrailData
     {
         public bool createTrail { get; set; }

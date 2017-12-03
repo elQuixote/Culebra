@@ -3,8 +3,15 @@ using Rhino.Geometry;
 using System.Collections.Generic;
 using toxi.geom;
 
-namespace CulebraData.Geometry
+namespace CulebraData.Behavior.Types
 {
+    /// <summary>
+    /// The <see cref="Types"/> namespace contains all additions to the Culebra Objects Behavior Types
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
     /// <summary>
     /// Mesh Crawler Class - Used with a Rhino Mesh to navigate along a mesh, navigation is not topology dependent
     /// </summary>
@@ -40,13 +47,13 @@ namespace CulebraData.Geometry
         /// <param name="location">the current object location</param>
         /// <param name="speed">the current objects speed</param>
         /// <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
-        /// <param name="multiplier"></param>
+        /// <param name="multiplier">the multiplier value for the output vector</param>
         /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
-        /// <param name="instanceable"></param>
-        /// <param name="maxChildren"></param>
-        /// <param name="childSpawner"></param>
-        /// <param name="childSpawnType"></param>
-        /// <returns></returns>
+        /// <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+        /// <param name="maxChildren">the max number of children each agent can create</param>
+        /// <param name="childSpawner">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+        /// <param name="childSpawnType">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        /// <returns>The vector to apply</returns>
         public Vector3d MeshWalk(Mesh mesh, float meshThreshold, PVector location, PVector speed, float amplitude, float multiplier, bool triggerBabies, bool instanceable, int maxChildren, List<Vector3d> childSpawner = null, List<int> childSpawnType = null)
         {
             this.maxChildren = maxChildren;
@@ -86,7 +93,7 @@ namespace CulebraData.Geometry
         /// <summary>
         /// Gets the child start positions if any
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The child start positions</returns>
         public List<Vector3d> GetChildStartPositions()
         {
             List<Vector3d> childList = this.childSpawners;
@@ -96,7 +103,7 @@ namespace CulebraData.Geometry
         /// <summary>
         /// Gets the child spawn types if any
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The child spawn types</returns>
         public List<int> GetChildSpawnType()
         {
             List<int> returnedList = this.childSpawnType;
@@ -120,7 +127,7 @@ namespace CulebraData.Geometry
         /// <summary>
         /// Checks if the separate feature is active
         /// </summary>
-        /// <returns></returns>
+        /// <returns>If the separate is active</returns>
         public bool IsSeparateActive()
         {
             return this.sepActive;

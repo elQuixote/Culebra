@@ -12,7 +12,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Wandering_Mapped_Behavior()
           : base("Wandering Mapped", "WM",
-              "2D Wandering Algorithm with image color sampling override for any wandering attributes and remaping of color values, Wandering is a type of random steering which has some long term order",
+              "2D Wandering Algorithm with image color sampling override for any wandering attributes and remaping of color values, Wandering is a type of random steering which has some long term order. Force Values from Move Settings have a strong effect on behavior",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -42,7 +42,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddBooleanParameter("Map Radius", "MR", "Input value specifying if you want the radius value to be color driven", GH_ParamAccess.item, true);
             pManager.AddBooleanParameter("Map Distance", "MD", "Input value specifying if you want the distance value to be color driven", GH_ParamAccess.item, true);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -50,7 +49,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -63,7 +61,6 @@ namespace Culebra_GH.Behaviors
             double wanderRad = new double();
             double wanderDist = new double();
             double rotationTrigger = new double();
-
             Mesh mesh = null;
             bool mapChange = new bool();
             bool mapRadius = new bool();
@@ -75,7 +72,6 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(3, ref wanderRad)) return;
             if (!DA.GetData(4, ref wanderDist)) return;
             if (!DA.GetData(5, ref mesh)) return;
-
             if (mesh == null || mesh.VertexColors.Count == 0)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input mesh must have vertex colors, please check your input");
@@ -90,7 +86,6 @@ namespace Culebra_GH.Behaviors
 
             DA.SetData(0, wanderData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -98,12 +93,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Wandering_Mapped;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

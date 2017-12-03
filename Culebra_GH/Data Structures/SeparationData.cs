@@ -1,5 +1,8 @@
 ﻿namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Separation Data Structure
+    /// </summary>
     public struct SeparationData
     {
         public float maxSeparation { get; set; }

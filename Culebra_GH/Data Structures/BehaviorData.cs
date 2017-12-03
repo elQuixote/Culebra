@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Behavior Data Structure
+    /// </summary>
     public struct BehaviorData
     {
         public FlockingData flockData { get; set; }

@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Polyline Tracking Data Structure
+    /// </summary>
     public struct TrackingData
     {
         public java.util.List polylines { get; set; }

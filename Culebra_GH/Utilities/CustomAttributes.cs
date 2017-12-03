@@ -4,6 +4,9 @@ using System.Drawing;
 
 namespace Culebra_GH.Utilities
 {
+    /// <summary>
+    /// Custom Component Colors
+    /// </summary>
     public class CustomAttributes : Grasshopper.Kernel.Attributes.GH_ComponentAttributes
     {
         public int type = new int();
@@ -15,7 +18,6 @@ namespace Culebra_GH.Utilities
         {
             Grasshopper.GUI.Canvas.GH_PaletteStyle styleStandard = null;
             Grasshopper.GUI.Canvas.GH_PaletteStyle styleSelected = null;
-
             Grasshopper.GUI.Canvas.GH_PaletteStyle styleStandard_Hidden = null;
             Grasshopper.GUI.Canvas.GH_PaletteStyle styleSelected_Hidden = null;
             if (channel == GH_CanvasChannel.Objects)
@@ -50,7 +52,6 @@ namespace Culebra_GH.Utilities
             }
             // Allow the base class to render itself.
             base.Render(canvas, graphics, channel);
-
             if (channel == GH_CanvasChannel.Objects)
             {
                 // Restore the cached styles.

@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Wandering Data Structure
+    /// </summary>
     public struct WanderingData
     {
         public bool randomize { get; set; }
@@ -33,6 +36,5 @@ namespace Culebra_GH.Data_Structures
             this.mapRadius = map_Radius;
             this.mapDistance = map_Distance;
         }
-
     }
 }

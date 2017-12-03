@@ -37,7 +37,6 @@ namespace Culebra_GH.Move
             pManager.AddGenericParameter("Max Force", "MF", "Input the max force value allowed", GH_ParamAccess.item);
             pManager.AddGenericParameter("Velocity Multiplier", "VM", "Input the velocity mutiplier", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -45,7 +44,6 @@ namespace Culebra_GH.Move
         {
             pManager.AddGenericParameter("Move Settings", "MS", "Outputs the move settings for the Creeper Engine", GH_ParamAccess.list);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -93,12 +91,9 @@ namespace Culebra_GH.Move
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.MoveSettings;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

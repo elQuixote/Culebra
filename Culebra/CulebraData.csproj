@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Culebra_GH\bin\CulebraData.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,7 +55,7 @@
       <HintPath>..\libs\IKVM.OpenJDK.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RhinoCommon, Version=5.1.30000.15, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
+    <Reference Include="RhinoCommon, Version=5.1.30000.16, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\RhinoCommon.dll</HintPath>
       <Private>False</Private>
@@ -78,7 +79,7 @@
     <Compile Include="Behavior\Controller.cs" />
     <Compile Include="Behavior\Types\SelfOrganize.cs" />
     <Compile Include="Drawing\Vizualization.cs" />
-    <Compile Include="Geometry\MeshCrawler.cs" />
+    <Compile Include="Behavior\Types\MeshCrawler.cs" />
     <Compile Include="Objects\BabyCreeper.cs" />
     <Compile Include="Objects\Creeper.cs" />
     <Compile Include="Objects\CulebraObject.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="Utilities\GHSupport.cs" />
     <Compile Include="Utilities\Mapping.cs" />
     <Compile Include="Utilities\Convert.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Geometry\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

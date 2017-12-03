@@ -41,7 +41,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddBooleanParameter("Map Strength", "MST", "Input value specifying if you want the strength value to be color driven", GH_ParamAccess.item, false);
             pManager.AddBooleanParameter("Map Multiplier", "MM", "Input value specifying if you want the multiplier value to be color driven", GH_ParamAccess.item, false);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -49,7 +48,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Noise Behavior", "SB", "The noise behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -60,7 +58,6 @@ namespace Culebra_GH.Behaviors
             double strength = new double();
             double multiplier = new double();
             double velocity = new double();
-
             Mesh mesh = null;
             bool mapScale = new bool();
             bool mapStrength = new bool();
@@ -85,7 +82,6 @@ namespace Culebra_GH.Behaviors
             NoiseData noiseData = new NoiseData((float)scale, (float)strength, (float)multiplier, (float)velocity, mesh, mapScale, mapStrength, mapMultiplier);
             DA.SetData(0, noiseData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -93,12 +89,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.PerlinNoise_Mapped;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

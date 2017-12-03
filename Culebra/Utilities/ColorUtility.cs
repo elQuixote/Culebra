@@ -5,6 +5,14 @@ using System;
 namespace CulebraData.Utilities
 {
     /// <summary>
+    /// The <see cref="Utilities"/> namespace contains all Culebra Utilities Classes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Provides a static set of color utilities
     /// </summary>
     public static class ColorUtility
@@ -89,7 +97,7 @@ namespace CulebraData.Utilities
         /// Generates a random color
         /// </summary>
         /// <param name="randomGen">the random object instance</param>
-        /// <returns></returns>
+        /// <returns>The random color</returns>
         public static Color GetRandomColor(Random randomGen)
         {
             KnownColor[] names = (KnownColor[])Enum.GetValues(typeof(KnownColor));

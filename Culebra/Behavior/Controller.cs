@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using Rhino;
 using Rhino.Geometry;
-using CulebraData.Utilities;
 using CulebraData.Objects;
-using System.Drawing;
 using Rhino.Display;
-using toxi.geom;
-using CulebraData.Geometry;
 using CulebraData.Behavior.Types;
 
 namespace CulebraData.Behavior
 {
     /// <summary>
-    /// Controller Class - Used to access Creeper Object's Behaviors
+    /// The <see cref="Behavior"/> namespace contains all Culebra Objects Behaviors
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
+    /// Controller Class - Used to access Creeper Object's Behaviors. This class wraps the Culebra Java Objects behavior controller
     /// </summary>
     public class Controller
     {
@@ -35,6 +31,10 @@ namespace CulebraData.Behavior
             this.culebraObject = obj;
             this.meshCrawler = new MeshCrawler();
         }
+        /// <summary>
+        /// Gets the Mesh Crawler 
+        /// </summary>
+        /// <returns>The meshcrawler class instance </returns>
         public MeshCrawler GetMeshCrawler() { return this.meshCrawler; }
         #region MeshCrawling Behavior Methods
         /// <summary>

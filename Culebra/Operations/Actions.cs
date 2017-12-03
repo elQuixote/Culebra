@@ -5,6 +5,14 @@ using CulebraData.Objects;
 namespace CulebraData.Operations
 {
     /// <summary>
+    /// The <see cref="Operations"/> namespace contains all Culebra Objects Operations Classes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Actions Class - Used to access Creeper Object's Actions
     /// </summary>
     public class Actions

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2017.5.15.0" projectFile="F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\CulebraDataDocs.shfbproj" started="12/3/2017 2:19:42 PM">
+<buildStep step="Initializing">
+Finding tools...
+The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
+Searching for HTML Help 1 compiler...
+Found HTML Help 1 compiler in &#39;C:\Program Files (x86)\HTML Help Workshop\&#39;
+Locating components in the following folder(s):
+    F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API
+    C:\ProgramData\EWSoftware\Sandcastle Help File Builder\Components and Plug-Ins\
+    C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
+Using framework reflection data for &#39;.NET Framework 4.0&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Data\.NETFramework&#39;
+Using presentation style &#39;VS2013&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013&#39;
+Loading and initializing plug-ins...
+Lightweight Website Style Version 2017.5.15.0
+Copyright &#169; 2006-2017, Eric Woodruff, All Rights Reserved
+Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
+</buildStep>
+<buildStep step="ValidatingDocumentationSources">
+Validating and copying documentation source information
+Source: C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\CulebraData.dll
+    Found assembly &#39;C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\CulebraData.dll&#39;
+Source: C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\CulebraData.xml
+
+References to include (excluding framework assemblies):
+    Grasshopper
+    RhinoCommon
+
+Copying XML comments files
+    C:\Users\Quixote\AppData\Roaming\Grasshopper\Libraries\Culebra_GH\CulebraData.xml -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\CulebraData.xml
+</buildStep>
+<buildStep step="GenerateSharedContent">
+Generating shared content files (en-US, English (United States))...
+<plugIn name="Lightweight Website Style" behavior="After" priority="1000">
+</plugIn>    Last step completed in 00:00:00.0230
+</buildStep>
+<buildStep step="GenerateApiFilter">
+Generating API filter for MRefBuilder...
+    Last step completed in 00:00:00.0010
+</buildStep>
+<buildStep step="GenerateReflectionInfo">
+Generating reflection information...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - GenerateRefInfo.proj]
+Build started 12/3/2017 2:19:43 PM.
+Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
+PrepareForBuild:
+  Creating directory &quot;obj\Debug\&quot;.
+GenerateRefInfo:
+  MRefBuilder (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  No source code context base path specified.  Source context information is unavailable.
+  Loaded 1 assemblies for reflection and 3 dependency assemblies.
+  Wrote information on 7 namespaces, 15 types, and 133 members
+  Copying file from &quot;reflection.org&quot; to &quot;reflection.all&quot;.
+  XslTransform (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
+Done Building Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\GenerateRefInfo.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.84
+    Last step completed in 00:00:00.9811
+</buildStep>
+<buildStep step="TransformReflectionInfo">
+Transforming reflection output...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - TransformManifest.proj]
+Build started 12/3/2017 2:19:44 PM.
+Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\TransformManifest.proj&quot; on node 1 (default targets).
+TransformManifest:
+  XslTransform (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
+  Copying file from &quot;reflection.xml&quot; to &quot;reflection.nofilenames&quot;.
+  XslTransform (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\AddFilenames.xsl&#39;.
+  XslTransform (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
+Done Building Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\TransformManifest.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.51
+    Last step completed in 00:00:00.6290
+</buildStep>
+<buildStep step="GenerateNamespaceSummaries">
+Generating namespace summary information...
+    Last step completed in 00:00:00.0080
+</buildStep>
+<buildStep step="CopyAdditionalContent">
+Copying additional content files...
+No additional content to copy
+    Last step completed in 00:00:00.0000
+</buildStep>
+<buildStep step="MergeTablesOfContents">
+Merging conceptual and additional tables of contents...
+    Last step completed in 00:00:00.0000
+</buildStep>
+<buildStep step="GenerateIntermediateTableOfContents">
+Generating intermediate table of contents file...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - GenerateIntermediateTOC.proj]
+Build started 12/3/2017 2:19:44 PM.
+Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
+GenerateIntermediateTOC:
+  XslTransform (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
+Done Building Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\GenerateIntermediateTOC.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.14
+Generating conceptual content intermediate TOC file...
+    Last step completed in 00:00:00.2470
+</buildStep>
+<buildStep step="CreateBuildAssemblerConfigs">
+Creating Sandcastle configuration files...
+    sandcastle.config
+    Last step completed in 00:00:00.1360
+</buildStep>
+<buildStep step="MergeCustomConfigs">
+Merging custom build component configurations
+F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\sandcastle.config
+  Updating reference topic configurations.
+  No conceptual content.  Removing conceptual content components.
+    Last step completed in 00:00:00.0020
+</buildStep>
+<buildStep step="BuildTopics">
+Building help topics...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - BuildTopics.proj]
+Build started 12/3/2017 2:19:45 PM.
+Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj&quot; on node 1 (default targets).
+BuildTopics:
+  BuildAssembler (v2017.5.15.0)
+  Copyright c 2006-2017, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright c 2006-2016, Eric Woodruff, All Rights Reserved.
+  Loading configuration...
+  Processing topics...
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetLocation] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetNetwork] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetSpeed] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetTrailPoints] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetTrailVectors] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.GetVecLocation] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Attributes.Attributes.SetLocation(Rhino.Geometry.Vector3d)] Missing &lt;summary&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Attributes.Attributes.SetLocation(Rhino.Geometry.Vector3d)] Missing &lt;param name=&quot;newLocation&quot;/&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.SetLocation(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Attributes.Attributes.SetSpeed(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.ApplyForce(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Attract(Rhino.Geometry.Vector3d,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Flock2D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Flock3D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.GetChildStartPositions] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Missing &lt;param name=&quot;multiplier&quot;/&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Missing &lt;param name=&quot;childList&quot;/&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Missing &lt;param name=&quot;childTypeList&quot;/&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTracker(java.util.List,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTracker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTracker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.String,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.String,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Perlin2DMap(System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.PolylineTracker(Rhino.Geometry.Polyline,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Repel(Rhino.Geometry.Vector3d,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.SelfTailChase(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{Rhino.Geometry.Vector3d})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Separate(System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Separate(System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Single,System.Single,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.TrailFollowers(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Vector3d}},System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.TrailFollowersBabyMakers(System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.TrailFollowersBabyMakers(System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Wander2D(System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Controller.Wander3D(System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.GetChildStartPositions] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Missing &lt;param name=&quot;particleList&quot;/&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Curve&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Curve&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawDiscoTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Random,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawDiscoTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Random,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawDiscoTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Random,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawParticles(Grasshopper.Kernel.IGH_PreviewArgs,System.String,Rhino.Geometry.ParticleSystem)] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawParticles(Grasshopper.Kernel.IGH_PreviewArgs,System.String,Rhino.Geometry.ParticleSystem)] Unknown reference link target &#39;T:Rhino.Geometry.ParticleSystem&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawPointGraphic(Grasshopper.Kernel.IGH_PreviewArgs,System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawPointGraphic(Grasshopper.Kernel.IGH_PreviewArgs,System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawPolylineTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Boolean,System.Int32,System.Drawing.Color)] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawPolylineTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Boolean,System.Int32,System.Drawing.Color)] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawPolylineTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Boolean,System.Int32,System.Drawing.Color)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawSprites(Grasshopper.Kernel.IGH_PreviewArgs,System.String,System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Grasshopper.Kernel.IGH_PreviewArgs&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Drawing.Vizualization.DrawSprites(Grasshopper.Kernel.IGH_PreviewArgs,System.String,System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.BabyCreeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.String,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.BabyCreeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.String,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.BabyCreeper.GetBabyCreeperObject] Unknown reference link target &#39;T:culebra.objects.BabyCreeper&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Creeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Creeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Creeper.GetObject] Unknown reference link target &#39;T:culebra.objects.Object&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:CulebraData.Objects.CulebraObject.GetObject] Missing &lt;returns&gt; documentation [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.CulebraObject.GetObject] Unknown reference link target &#39;T:culebra.objects.Object&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Seeker.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Seeker.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Objects.Seeker.GetObject] Unknown reference link target &#39;T:culebra.objects.Object&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Operations.Actions.Bounce(Rhino.Geometry.BoundingBox)] Unknown reference link target &#39;T:Rhino.Geometry.BoundingBox&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Operations.Actions.Bounce3D(Rhino.Geometry.BoundingBox)] Unknown reference link target &#39;T:Rhino.Geometry.BoundingBox&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Operations.Actions.Respawn(Rhino.Geometry.BoundingBox)] Unknown reference link target &#39;T:Rhino.Geometry.BoundingBox&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Operations.Actions.Respawn(Rhino.Geometry.BoundingBox,System.Boolean,System.Boolean)] Unknown reference link target &#39;T:Rhino.Geometry.BoundingBox&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.ColorUtility.GetColor(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.ColorUtility.GetColor(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.ColorUtility.GetHueSatLum(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.ColorUtility.GetHueSatLum(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Geometry.Mesh&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.ColorUtility.GetHueSatLum(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)] Unknown reference link target &#39;T:Rhino.Display.ColorHSL&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.NestedList_To_NestedArrayList(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Vector3d}})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.NestedList_To_NestedArrayList(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Vector3d}})] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.PolylinesToMultiShapes(System.Collections.Generic.List{Rhino.Geometry.Polyline})] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.PolylinesToMultiShapes(System.Collections.Generic.List{Rhino.Geometry.Polyline})] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.PolylineToShape(Rhino.Geometry.Polyline)] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.PolylineToShape(Rhino.Geometry.Polyline)] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToBoolean(java.lang.Boolean)] Unknown reference link target &#39;T:java.lang.Boolean&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToIntList(java.util.ArrayList)] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToJavaBool(System.Boolean)] Unknown reference link target &#39;T:java.lang.Boolean&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToJavaInt(System.Int32)] Unknown reference link target &#39;T:java.lang.Integer&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToJavaIntList(System.Collections.Generic.List{System.Int32})] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToJavaList(System.Collections.Generic.List{CulebraData.Objects.CulebraObject})] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPApplet] Unknown reference link target &#39;T:processing.core.PApplet&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPoint3d(processing.core.PVector)] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPoint3d(processing.core.PVector)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPointList(java.util.ArrayList)] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPointList(java.util.ArrayList)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Point3d)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Point3d)] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Vector3d)] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVecList(System.Collections.Generic.List{Rhino.Geometry.Vector3d})] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToPVecList(System.Collections.Generic.List{Rhino.Geometry.Vector3d})] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVec3DList(java.util.ArrayList)] Unknown reference link target &#39;T:java.util.ArrayList&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVec3DList(java.util.ArrayList)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVec3DList(java.util.List)] Unknown reference link target &#39;T:java.util.List&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVec3DList(java.util.List)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVector3d(processing.core.PVector)] Unknown reference link target &#39;T:processing.core.PVector&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.Convert.ToVector3d(processing.core.PVector)] Unknown reference link target &#39;T:Rhino.Geometry.Vector3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHCurve(Rhino.Geometry.Polyline)] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHCurve(Rhino.Geometry.Polyline)] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Curve&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHCurveList(System.Collections.Generic.List{Rhino.Geometry.Polyline})] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHCurveList(System.Collections.Generic.List{Rhino.Geometry.Polyline})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Curve&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Rhino.Geometry.Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Data.GH_Structure`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.IGH_Goo&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Data.GH_Structure`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.IGH_Goo&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Polyline}})] Unknown reference link target &#39;T:Rhino.Geometry.Polyline&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Polyline}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Data.GH_Structure`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Polyline}})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.IGH_Goo&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Rhino.Geometry.Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})] Unknown reference link target &#39;T:Rhino.Geometry.Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Grasshopper.DataTree`1&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHLine(Rhino.Geometry.Line)] Unknown reference link target &#39;T:Rhino.Geometry.Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHLine(Rhino.Geometry.Line)] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHLineList(System.Collections.Generic.List{Rhino.Geometry.Line})] Unknown reference link target &#39;T:Rhino.Geometry.Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHLineList(System.Collections.Generic.List{Rhino.Geometry.Line})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Line&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHPoint(Rhino.Geometry.Point3d)] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertToGHPoint(Rhino.Geometry.Point3d)] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Point&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHPTList(System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Rhino.Geometry.Point3d&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:CulebraData.Utilities.GHSupport.ConvertTOGHPTList(System.Collections.Generic.List{Rhino.Geometry.Point3d})] Unknown reference link target &#39;T:Grasshopper.Kernel.Types.GH_Point&#39;. [F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj]
+  Processed 190 topic(s)
+  151 warning(s)
+  CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 4 of 15.
+  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 2 of 30.
+Done Building Project &quot;F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\BuildTopics.proj&quot; (default targets).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.71
+    Last step completed in 00:00:06.8434
+</buildStep>
+<buildStep step="CombiningIntermediateTocFiles">
+Combining conceptual and API intermediate TOC files...
+    Last step completed in 00:00:00.0010
+</buildStep>
+<buildStep step="ExtractingHtmlInfo">
+Extracting HTML info for HTML Help 1 and/or website...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - ExtractHtmlInfo.proj]
+Sandcastle Help File Builder and Tools, version 2017.5.15.0
+Copyright c 2006-2017, Eric Woodruff, All Rights Reserved
+E-Mail: Eric@EWoodruff.us
+
+Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
+
+Processing Help 1 files in F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1
+Processed 190 HTML files
+Sorting keywords and generating See Also indices
+Saving HTML Help 1 keyword index to F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Documentation.hhk
+Saving HTML Help 1 table of contents to F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Documentation.hhc
+    Last step completed in 00:00:00.2430
+</buildStep>
+<buildStep step="CopyStandardHelpContent">
+Copying standard help content...
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\AlertCaution.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\AlertNote.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\AlertSecurity.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\CFW.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\CodeExample.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\favicon.ico
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\privstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protoperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\protstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\puboperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\pubstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\SectionCollapsed.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\SectionExpanded.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\slMobile.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\static.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\icons\xna.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\scripts\branding.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-cs-CZ.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-de-DE.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-en-US.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-es-ES.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-fr-FR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-Help1.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-HelpViewer.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-it-IT.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-ja-JP.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-ko-KR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-pl-PL.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-pt-BR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-ru-RU.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-tr-TR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-Website.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-zh-CN.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding-zh-TW.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; F:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\styles\branding.css
+    Last step completed in 00:00:00.6280
+</buildStep>
+<buildStep step="GenerateHelpFormatTableOfContents">
+Generating HTML Help 1 table of contents file...
+    Last step completed in 00:00:00.0000
+</buildStep>
+<buildStep step="GenerateHelpFileIndex">
+Generating HTML Help 1 index file...
+    Last step completed in 00:00:00.0000
+</buildStep>
+<buildStep step="GenerateHelpProject">
+Generating HTML Help 1 project file...
+    Last step completed in 00:00:00.0040
+</buildStep>
+<buildStep step="CompilingHelpFile">
+Compiling HTML Help 1 file...
+[C:\Program Files (x86)\MSBuild\14.0\bin\amd64\MSBuild.exe - Build1xHelpFile.proj]
+  Microsoft HTML Help Compiler 4.74.8702
+  
+  
+  
+  Compiling f:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\Documentation.chm
+  
+  
+  
+  
+  
+  Compile time: 0 minutes, 1 second
+  
+  192	Topics
+  
+  1,904	Local links
+  
+  664	Internet links
+  
+  0	Graphics
+  
+  
+  
+  
+  
+  Created f:\Complicit-Matter\Computation\Plugins\culebra_2.0\API\Help\Working\Output\HtmlHelp1\Documentation.chm, 309,671 bytes
+  
+  Compression decreased file by 1,495,908 bytes.
+  
+    Last step completed in 00:00:01.9621
+</buildStep>
+<buildStep step="CleanIntermediates">
+Removing intermediate files...
+    Last step completed in 00:00:00.2310
+</buildStep>
+<buildStep step="Completed">
+
+Build completed successfully at 12/3/2017 2:19:54 PM.  Total time: 00:00:12.3427
+
+</buildStep>
+</shfbBuild>

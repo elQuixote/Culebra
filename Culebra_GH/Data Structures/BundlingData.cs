@@ -3,6 +3,9 @@ using Rhino.Geometry;
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Bundling Data Structure
+    /// </summary>
     public struct BundlingData
     {
         public Mesh colorMesh { get; set; }

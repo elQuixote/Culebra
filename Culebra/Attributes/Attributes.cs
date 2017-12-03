@@ -5,6 +5,14 @@ using CulebraData.Objects;
 namespace CulebraData.Attributes
 {
     /// <summary>
+    /// The <see cref="Attributes"/> namespace contains all Culebra Objects Attributes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Attributes Class - Used to access Creeper Object's Attributes
     /// </summary>
     public class Attributes

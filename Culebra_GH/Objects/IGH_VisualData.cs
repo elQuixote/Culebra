@@ -3,10 +3,12 @@ using Grasshopper.Kernel.Types;
 
 namespace Culebra_GH.Objects
 {
+    /// <summary>
+    /// The IGH  Visual Data
+    /// </summary>
     public class IGH_VisualData : GH_Goo<VisualData>
     {
         private IGH_VisualData iGH_vizData;
-
         public IGH_VisualData(VisualData vizData)
         {
             this.Value = vizData;
@@ -29,7 +31,6 @@ namespace Culebra_GH.Objects
                 return "IGH Version of VisualData Object";
             }
         }
-
         public override string TypeName
         {
             get
@@ -41,7 +42,6 @@ namespace Culebra_GH.Objects
         {
             return new IGH_VisualData(this);
         }
-
         public override string ToString()
         {
             return this.Value.GetType().Name.ToString();

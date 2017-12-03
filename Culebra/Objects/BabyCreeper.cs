@@ -4,6 +4,14 @@ using Rhino.Geometry;
 namespace CulebraData.Objects
 {
     /// <summary>
+    /// The <see cref="Objects"/> namespace contains all Culebra Objects
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Baby Creeper class which inherits from the Creeper Class - Object is meant to be used as a child of the Creeper Object 
     /// </summary>
     public class BabyCreeper : Creeper

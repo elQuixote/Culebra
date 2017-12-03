@@ -38,7 +38,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Projection Distance", "PD", "Input the projection distance of point ahead on the path to seek", GH_ParamAccess.item, 50.0);
             pManager.AddNumberParameter("Polyline Radius", "PR", "Input the radius of the shapes", GH_ParamAccess.item, 15.0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -46,7 +45,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Tracking Behavior", "TB", "The tracking behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>

@@ -10,10 +10,10 @@ namespace CulebraData.Utilities
     public static class General
     {
         /// <summary>
-        /// 
+        /// Sets the viewport in rhino
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="displayType"></param>
+        /// <param name="view">the name of the view</param>
+        /// <param name="displayType">the display type, wireframe, shaded etc</param>
         public static void setViewport(String view, String displayType)
         {
             //-------Set viewport to specific view and maximize it & set display type--------

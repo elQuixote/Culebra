@@ -8,6 +8,14 @@ using System.Drawing;
 namespace CulebraData.Drawing
 {
     /// <summary>
+    /// The <see cref="Drawing"/> namespace contains all Culebra Objects Visualization Classes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Visualization Class - Used to access Creeper Object's Viz properties
     /// </summary>
     public class Vizualization

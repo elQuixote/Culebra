@@ -13,8 +13,8 @@ namespace Culebra_GH.Engine
 {
     public class Bundling_Engine : GH_Component
     {
+        #region Globals
         private SelfOrganize selfOrg = new SelfOrganize();
-
         private List<Curve> crvList = new List<Curve>();
         private int ptCount;
         private bool rebuild;
@@ -22,7 +22,6 @@ namespace Culebra_GH.Engine
         private double ratio;
         private int weldCount;
         private Mesh dMesh;
-
         //----------------Graphics/Trail Fields-------------------------
         private int minthick = new int();
         private int maxthick = new int();
@@ -47,7 +46,7 @@ namespace Culebra_GH.Engine
         public Color randomColorAction = new Color();
         private BoundingBox _clippingBox;
         public Vizualization viz = new Vizualization();
-
+        #endregion
         /// <summary>
         /// Initializes a new instance of the Bundling_Engine class.
         /// </summary>
@@ -74,7 +73,6 @@ namespace Culebra_GH.Engine
             pManager.AddGenericParameter("Visual Settings", "VS", "Input the visual settings output of Viz component", GH_ParamAccess.item);
             pManager.AddGenericParameter("Reset", "R", "Input a button to reset the sim and reset all fields", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -82,7 +80,7 @@ namespace Culebra_GH.Engine
         {
             pManager.AddGenericParameter("Geometry", "G", "Self_Organized Set of curves", GH_ParamAccess.list);
         }
-
+        #region Solution Code
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -118,10 +116,8 @@ namespace Culebra_GH.Engine
                 return;
             }
             if (!DA.GetData(3, ref reset)) return;
-
             //------------------------Visual Settings--------------------------
             IGH_VisualData igh_Visual = (IGH_VisualData)visual_Settings;
-
             TrailData td = igh_Visual.Value.trailData;
             ColorData cd = igh_Visual.Value.colorData;
             this.trail = td.createTrail;
@@ -212,6 +208,8 @@ namespace Culebra_GH.Engine
                 }
             }
         }
+        #endregion
+        #region Visuals
         protected override void BeforeSolveInstance()
         {
             this.particleList.Clear();
@@ -268,11 +266,11 @@ namespace Culebra_GH.Engine
                 }
             }
         }
-
         public override void CreateAttributes()
         {
             base.m_attributes = new Utilities.CustomAttributes(this, 0);
         }
+        #endregion
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -280,12 +278,9 @@ namespace Culebra_GH.Engine
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Engine_Bundling;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

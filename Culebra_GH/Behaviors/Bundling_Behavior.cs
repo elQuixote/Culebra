@@ -33,13 +33,12 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Threshold", "T", "Input float value specifying the distance threshold for self org", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Ratio", "R", "Input a float value specifying the distance each point can move per cycle", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Rebuild", "RB", "Input a boolean toggle - True = Rebuild | False = Do not rebuild input curve", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Point Count", "PC", "Input integer specifying rebuild curve point value", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Weld Count", "WC", "Input integer value specifying how many points on each side of the curve you would like to weld", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Threshold", "T", "Input float value specifying the distance threshold for self org", GH_ParamAccess.item, 100.0);
+            pManager.AddNumberParameter("Ratio", "R", "Input a float value specifying the distance each point can move per cycle", GH_ParamAccess.item, 0.5);
+            pManager.AddBooleanParameter("Rebuild", "RB", "Input a boolean toggle - True = Rebuild | False = Do not rebuild input curve", GH_ParamAccess.item, true);
+            pManager.AddIntegerParameter("Point Count", "PC", "Input integer specifying rebuild curve point value", GH_ParamAccess.item, 40);
+            pManager.AddIntegerParameter("Weld Count", "WC", "Input integer value specifying how many points on each side of the curve you would like to weld", GH_ParamAccess.item, 2);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -47,7 +46,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Bundling Behavior", "BB", "The bundling behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -66,10 +64,15 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetData(3, ref pointCount)) return;
             if (!DA.GetData(4, ref weldCount)) return;
 
+            if (pointCount <= (weldCount / 2))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Your point count cant be less than half of the weldcount, please increase point count or decrease weld count");
+                return;
+            }
+
             BundlingData bundling = new BundlingData(thresh, ratio, rebuild, pointCount, weldCount);
             DA.SetData(0, bundling);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -77,12 +80,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Bundling;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

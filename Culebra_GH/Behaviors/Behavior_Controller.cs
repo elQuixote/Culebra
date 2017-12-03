@@ -10,9 +10,9 @@ namespace Culebra_GH.Behaviors
 {
     public class Behavior_Controller : GH_Component, IGH_VariableParameterComponent
     {
-        GH_Document GrasshopperDocument;
-        IGH_Component Component;
-
+        private GH_Document GrasshopperDocument;
+        private IGH_Component Component;
+    
         public Behavior_Controller()
           : base("Controller", "BC",
               "Behavior Merging Controller, you can add/remove/rearrange behaviors. The input order will be the behavior execution stack",
@@ -36,7 +36,6 @@ namespace Culebra_GH.Behaviors
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -56,10 +55,11 @@ namespace Culebra_GH.Behaviors
 
             int inputCount = Component.Params.Input.Count;
             BehaviorData behaviorData = new BehaviorData();
+            List<ForceData> forceDataList = new List<ForceData>();
             List<string> stringlist = new List<string>();
             List<string> behaviorNames = new List<string>();
+
             int hitCounter = 0;
-            List<ForceData> forceDataList = new List<ForceData>();
             for (int i = 0; i < inputCount; i++)
             {
                 IGH_DocumentObject connectedComponent = Component.Params.Input[i].Sources[0].Attributes.GetTopLevel.DocObject;
@@ -159,7 +159,6 @@ namespace Culebra_GH.Behaviors
                 DA.SetData(0, igh_Behavior);
             }
         }
-        //-------------------------------------------
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {
             if (side == GH_ParameterSide.Input)
@@ -219,7 +218,6 @@ namespace Culebra_GH.Behaviors
                 return Culebra_GH.Properties.Resources.Controller;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

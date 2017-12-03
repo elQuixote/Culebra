@@ -39,7 +39,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Attraction Value", "AV", "Input a value specifying attraction, this is the magnitude", GH_ParamAccess.item, 0.97);
             pManager.AddNumberParameter("Max Attraction", "MA", "Input the maximum attraction value", GH_ParamAccess.item, 0.06);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -48,7 +47,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddGenericParameter("Attraction Force", "AB", "The attraction behavior data structure", GH_ParamAccess.item);
             pManager.AddCircleParameter("Attraction Threshold Viz", "V", "Visual representation of attaction targets and thresholds", GH_ParamAccess.list);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -64,7 +62,6 @@ namespace Culebra_GH.Behaviors
             if (!DA.GetDataList(1, thresholds)) return;
             if (!DA.GetData(2, ref av)) return;
             if (!DA.GetData(3, ref ma)) return;
-
             if(targets.Count != thresholds.Count) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "List lengths for targets and thresholds must match, please check your inputs"); return; }
 
             List<Circle> circles = new List<Circle>();
@@ -74,7 +71,6 @@ namespace Culebra_GH.Behaviors
                 circles.Add(new Circle(p, thresholds[count]));
                 count++;
             }
-
             List<float> floatThresholds = thresholds.Select<double, float>(i => (float)i).ToList();
             ForceData forceData = new ForceData(targets, floatThresholds, (float)av, (float)ma);
             forceData.forceType = "Attract";
@@ -82,7 +78,6 @@ namespace Culebra_GH.Behaviors
             DA.SetData(0, forceData);
             DA.SetDataList(1, circles);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -90,12 +85,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Attract_A;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

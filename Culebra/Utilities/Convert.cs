@@ -6,7 +6,7 @@ using Rhino.Geometry;
 namespace CulebraData.Utilities
 {
     /// <summary>
-    /// Static Class to Convert Java & Processing Objects to .Net Geometry Objects
+    /// Static Class to Convert Java and Processing Objects to .Net Geometry Objects
     /// </summary>
     public static class Convert
     {

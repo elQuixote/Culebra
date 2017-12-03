@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Noise Data Structure
+    /// </summary>
     public struct NoiseData
     {
         public float scale { get; set; }

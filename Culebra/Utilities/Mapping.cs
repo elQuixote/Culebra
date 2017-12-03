@@ -15,7 +15,7 @@ namespace CulebraData.Utilities
         /// <param name="istop">source max value</param>
         /// <param name="ostart">target min value</param>
         /// <param name="ostop">target max value</param>
-        /// <returns></returns>
+        /// <returns>the mapped float value</returns>
         public static float Map(float value, float istart, float istop, float ostart, float ostop)
         {
             return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));

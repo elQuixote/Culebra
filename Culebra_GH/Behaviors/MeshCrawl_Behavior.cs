@@ -37,7 +37,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Mesh Projection Distance", "MPD", "Input the amount to project the current location along the current speed", GH_ParamAccess.item, 2.0);
             pManager.AddNumberParameter("Multiplier", "M", "Input the multiplier value", GH_ParamAccess.item, 1.5);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -45,7 +44,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Mesh Crawling Behavior", "MCB", "The mesh crawling behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -65,7 +63,6 @@ namespace Culebra_GH.Behaviors
             MeshCrawlData mcd = new MeshCrawlData(mesh, (float)threshold, (float)amplitude, (float)multiplier);
             DA.SetData(0, mcd);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -73,12 +70,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.MeshCrawl_B;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

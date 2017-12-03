@@ -33,9 +33,8 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Max Separation", "MS", "Input value specifying maxDistance threshold to enable separate", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Max Separation", "MS", "Input value specifying maxDistance threshold to enable separate", GH_ParamAccess.item, 5.0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -43,7 +42,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Separation Behavior", "SB", "The separation behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -57,7 +55,6 @@ namespace Culebra_GH.Behaviors
             SeparationData separationData = new SeparationData((float)maxSep);
             DA.SetData(0, separationData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -70,7 +67,6 @@ namespace Culebra_GH.Behaviors
                 return Culebra_GH.Properties.Resources.Separate;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

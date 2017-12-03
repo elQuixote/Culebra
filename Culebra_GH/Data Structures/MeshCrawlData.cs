@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Mesh Crawling Data Structure
+    /// </summary>
     public struct MeshCrawlData
     {
         public Mesh mesh { get; set; }

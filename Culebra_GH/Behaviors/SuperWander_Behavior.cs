@@ -11,7 +11,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public SuperWandering_Behavior()
           : base("Weaving Wandering", "SW",
-              "Expanded 2D Wandering Algorithm using step triggers to create a weaving type movement 2D Wandering Algorithm, Wandering is a type of random steering which has some long term order",
+              "Expanded 2D Wandering Algorithm using step triggers to create a weaving type movement 2D Wandering Algorithm, Wandering is a type of random steering which has some long term order. Force Values from Move Settings have a strong effect on behavior",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -37,7 +37,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Rotation Trigger", "RT", "this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.", GH_ParamAccess.item, 6.0);
             pManager.AddIntegerParameter("Type", "T", "Input value specifying the type of Wandering (0 = Type A | 1 = Type B | 2 = Type C", GH_ParamAccess.item, 0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -45,7 +44,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -68,6 +66,7 @@ namespace Culebra_GH.Behaviors
             if (type == 0){wanderData.wanderingType = "SuperWander";}
             if (type == 1) { wanderData.wanderingType = "SuperWander_B"; }
             if (type == 2) { wanderData.wanderingType = "SuperWander_C"; }
+            if(type > 2) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Type value cannot be greater than 2, please input correct number"); }
             DA.SetData(0, wanderData);
         }
         /// <summary>
@@ -77,8 +76,6 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Wandering_Weave;
             }
         }

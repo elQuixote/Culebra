@@ -44,7 +44,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddBooleanParameter("Map Cohesion", "MC", "Input value specifying if you want the cohesion value to be color driven", GH_ParamAccess.item);
 
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -52,7 +51,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Flocking Behavior", "FB", "The flocking behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -106,7 +104,6 @@ namespace Culebra_GH.Behaviors
                 mesh, mapAlign, mapSep, mapCoh);
             DA.SetData(0, flockData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -114,11 +111,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
                 return Culebra_GH.Properties.Resources.Flocking_Map;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

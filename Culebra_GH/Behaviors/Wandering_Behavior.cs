@@ -11,7 +11,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Wandering_Behavior()
           : base("Wandering", "WA",
-              "2D Wandering Algorithm, Wandering is a type of random steering which has some long term order",
+              "2D Wandering Algorithm, Wandering is a type of random steering which has some long term order. Force Values from Move Settings have a strong effect on behavior",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -37,7 +37,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item, 20.0);
             pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item, 80.0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -45,7 +44,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -70,7 +68,6 @@ namespace Culebra_GH.Behaviors
 
             DA.SetData(0, wanderData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -78,12 +75,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Wandering;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

@@ -52,7 +52,7 @@ namespace Culebra_GH.Engine
         private string graphicType;
         private bool useTexture;
         //----------------SelfTail Chasing Fields-------------------------
-        private List<Vector3d> totTail = new List<Vector3d>();
+        private List<Vector3d> flattenedTrails = new List<Vector3d>();
         private Engine_Global globalEngine;
         //----------------------Timer-------------------------------------
         private int cycles;
@@ -105,7 +105,6 @@ namespace Culebra_GH.Engine
             pManager.AddPointParameter("Creepers", "C", "Outputs the heads of the creepers", GH_ParamAccess.list);
             pManager.AddGenericParameter("Trails", "T", "Outputs data trees for each Creeper with its trail polyline", GH_ParamAccess.tree);
             pManager.AddGenericParameter("Connectivity", "CN", "Outputs curves connecting from creeper heads which indicate their search rad", GH_ParamAccess.list);
-            pManager.AddGenericParameter("BoundingBox", "BB", "Outputs the working bounds of the sim", GH_ParamAccess.item);
         }
         #region Solution Code
         /// <summary>
@@ -125,7 +124,6 @@ namespace Culebra_GH.Engine
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("IKVM.OpenJDK.Core"));
 
             bool reset = new bool();
-
             List<object> init_Settings = new List<object>();
             List<object> move_Settings = new List<object>();
             IGH_VisualData visual_Settings = null;
@@ -167,7 +165,6 @@ namespace Culebra_GH.Engine
                 if (init_Settings.Count != 0)
                 {
                     String init_Convert = "";
-                    //GH_Convert.ToString(init_Settings[0], out init_Convert, GH_Conversion.Primary);
                     if (init_Settings[0].GetType() == typeof(GH_String))
                     {
                         GH_String value = (GH_String)init_Settings[0];
@@ -205,7 +202,6 @@ namespace Culebra_GH.Engine
                         GH_Number value = (GH_Number)move_Settings[0];
                         this.initialSpeed = value.Value;
                     }
-                    //GH_Convert.ToDouble(move_Settings[0], out this.initialSpeed, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[1], out this.maxSpeed, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[2], out this.maxForce, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[3], out this.velMultiplier, GH_Conversion.Primary);
@@ -254,7 +250,7 @@ namespace Culebra_GH.Engine
                 #region Pre Simulation Code
                 //------------------------RESET STARTS HERE--------------------------
                 if (reset)
-                { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
+                { //We are using the reset to reinitialize all the variables and positions
                     //-----------------------------------------------------------------
                     this.bb = new BoundingBox();
                     int loopCount = new int();
@@ -280,15 +276,15 @@ namespace Culebra_GH.Engine
                     this.creepList = new List<CulebraObject>();
                     this.currentPosList = new List<Point3d>();
                     this.networkList = new List<Line>();
-                    totTail = new List<Vector3d>();
+                    flattenedTrails = new List<Vector3d>();
   
                     for (int i = 0; i < loopCount; i++)
                     {
                         if (this.dimensions == 0)
-                        { //IF WE WANT 2D
+                        { //If we want 2D
                             General.setViewport("Top", "Shaded");
                             if (create)
-                            {
+                            { //If are creating random points inside bbox
                                 if (this.spawnType == 0 || this.spawnType == 2)
                                 {
                                     this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
@@ -297,7 +293,6 @@ namespace Culebra_GH.Engine
                                 {
                                     this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
                                 }
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if(initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
@@ -308,9 +303,8 @@ namespace Culebra_GH.Engine
                                 }
                             }
                             else
-                            {                           
+                            { //If we are using user defined points                           
                                 this.startPos = (Vector3d)this.ptList[i];                             
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
@@ -323,10 +317,10 @@ namespace Culebra_GH.Engine
                             this.creep = new Creeper(this.startPos, this.moveVec, true, false);
                             this.creepList.Add(this.creep);
                         }else
-                        {
+                        { //If we want 3D
                             General.setViewport("Perspective", "Shaded");
                             if (create)
-                            {
+                            { //If are creating random points inside bbox
                                 if (this.spawnType == 0 || this.spawnType == 2)
                                 {
                                     this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), (int)bb.Min[2]); //start randomly on the lowest plane of the 3d bounds
@@ -353,9 +347,8 @@ namespace Culebra_GH.Engine
                                 }
                             }
                             else
-                            {
+                            { //If we are using user defined points   
                                 this.startPos = (Vector3d)this.ptList[i];
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
@@ -391,7 +384,7 @@ namespace Culebra_GH.Engine
                     try
                     {
                         globalEngine.Action(this.creepList, this.dimensions, behavioral_Settings, this.displayMode, this.networkList,
-                        this.maxSpeed, this.maxForce, this.velMultiplier, this.totTail, this.particleList, this.particleSet, networkTree, trailStep, maxTrailSize, bounds, bb, currentPosList, trail, trailTree);
+                        this.maxSpeed, this.maxForce, this.velMultiplier, this.flattenedTrails, this.particleList, this.particleSet, networkTree, trailStep, maxTrailSize, bounds, bb, currentPosList, trail, trailTree);
                     }catch(Exception e)
                     {
                         AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.Message.ToString());
@@ -399,16 +392,12 @@ namespace Culebra_GH.Engine
                     }
                     DA.SetDataList(0, this.currentPosList);
                     DA.SetDataTree(2, networkTree);
-                    if (this.displayMode == 1)
-                    {
-                        DA.SetData(3, this.bb);
-                    }
                     if (this.displayMode == 1 && this.trail)
                     {                     
                         DA.SetDataTree(1, trailTree); 
                     }
-                    this.totTail.Clear();
-                    this.totTail.TrimExcess();
+                    this.flattenedTrails.Clear();
+                    this.flattenedTrails.TrimExcess();
 
                     this.cycles++;
                 }
@@ -492,8 +481,6 @@ namespace Culebra_GH.Engine
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.Engine_CreepyCrawlers_B;
             }
         }

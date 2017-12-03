@@ -35,7 +35,7 @@ namespace Culebra_GH.Settings_Visual
         {
             pManager.AddGenericParameter("Trail Data", "TD", "Input the Trail Data output from the Trail Data Component", GH_ParamAccess.item);
             pManager.AddGenericParameter("Color Data", "CD", "Input the Trail Color Data output from the Gradient Color Component", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Apply Texture", "AT", "Input boolean specifying the application of texture as particle - WARNING VERY UNSTABLE", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Apply Texture", "AT", "Input boolean specifying the application of texture as particle - WARNING VERY UNSTABLE", GH_ParamAccess.item, false);
             pManager.AddGenericParameter("Display Mode", "DM", "Input an integer specifying the Display Mode (0 = Graphic | 1 = Geometry)", GH_ParamAccess.item);
 
             pManager[1].Optional = true;
@@ -68,13 +68,6 @@ namespace Culebra_GH.Settings_Visual
                 return;
             }
             DA.GetData(1, ref colorData);
-            /*
-            if (!DA.GetData(1, ref colorData) || colorData == null)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Color Data Detected, please connect Color Data to enable the component");
-                return;
-            }
-            */
             string dataType = trailData.GetType().Name.ToString();
             if (trailData.ToString() == "Culebra_GH.Data_Structures.TrailData")
             {
@@ -125,7 +118,7 @@ namespace Culebra_GH.Settings_Visual
                 visualData.colorData = color;
             }
             if (!DA.GetData(2, ref texture)) return;
-            if(texture) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "WARNING USING TEXTURE MAKES SIMULATION VERY UNSTABLE AND MAY CRASH WITHOUT WARNING, I RECOMMEND USING THE GH BUILT IN CLOUD DISPLAY FOR THE CREEPERS OUTPUT FOR BEST PERFORMANCE"); }
+            if(texture) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "WARNING USING TEXTURE CAN MAKE THE SIMULATION VERY UNSTABLE AND MAY CRASH WITHOUT WARNING, I RECOMMEND USING THE GH BUILT IN CLOUD DISPLAY FOR THE CREEPERS OUTPUT"); }
             visualData.useTexture = texture;
 
             if (!DA.GetData(3, ref displayMode)) return;
@@ -150,7 +143,6 @@ namespace Culebra_GH.Settings_Visual
             IGH_VisualData igh_Viz = new IGH_VisualData(visualData);
             DA.SetData(0, igh_Viz);          
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -158,12 +150,9 @@ namespace Culebra_GH.Settings_Visual
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.VisualSettings;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

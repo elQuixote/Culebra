@@ -38,7 +38,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Separation Value", "SV", "Input a float value specifying separation (Steer to avoid crowding local flockmates) vector scale value", GH_ParamAccess.item, 0.09);
             pManager.AddNumberParameter("Cohesion Value", "CV", "Input a float value specifying cohesion (Steer to move toward the average position of local flockmates) vector scale value", GH_ParamAccess.item, 0.045);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -46,7 +45,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Flocking Behavior", "FB", "The flocking behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -84,7 +82,6 @@ namespace Culebra_GH.Behaviors
             FlockingData flockData = new FlockingData((float)alignValue, (float)separateValue, (float)cohesionValue, (float)searchRadius, (float)viewAngle, connect);
             DA.SetData(0, flockData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -92,11 +89,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
                 return Culebra_GH.Properties.Resources.Flocking;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

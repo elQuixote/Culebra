@@ -34,12 +34,11 @@ namespace Culebra_GH.Settings_Visual
         {
             pManager.AddTextParameter("Particle Texture Path", "PT", "Input path to particle texture, a png file", GH_ParamAccess.item);
             pManager.AddColourParameter("Color", "C", "Input a color to use for the graphical polyline drawing", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Dotted", "D", "Input a boolean value to specify polyline dotting (True = Solid | False = Dotted)", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Thickness", "T", "Input the polyline thickness", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Dotted", "D", "Input a boolean value to specify polyline dotting (True = Solid | False = Dotted)", GH_ParamAccess.item, true);
+            pManager.AddIntegerParameter("Thickness", "T", "Input the polyline thickness", GH_ParamAccess.item, 1);
 
             pManager[0].Optional = true;
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -47,7 +46,6 @@ namespace Culebra_GH.Settings_Visual
         {
             pManager.AddGenericParameter("Trail Color Data", "TCD", "Outputs the Trail Color Data for the Visual Settings Component", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -64,6 +62,9 @@ namespace Culebra_GH.Settings_Visual
             if (!DA.GetData(2, ref dotted)) return;
             if (!DA.GetData(3, ref thickness)) return;
 
+            if (thickness < 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Thickness has to be greater than 0, please increase"); return; }
+            if (thickness > 4) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "There is a performance decrease if the thickness is greater than 3, keep an eye on your value"); return; }
+
             ColorData colorData = new ColorData();
             colorData.color = color;
             colorData.particleTexture = path;
@@ -74,7 +75,6 @@ namespace Culebra_GH.Settings_Visual
 
             DA.SetData(0, colorData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -82,12 +82,9 @@ namespace Culebra_GH.Settings_Visual
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Culebra_GH.Properties.Resources.GraphicPolyline;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

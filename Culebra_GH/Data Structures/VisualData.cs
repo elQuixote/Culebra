@@ -1,5 +1,8 @@
 ﻿namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// VisualData Structure
+    /// </summary>
     public struct VisualData
     {
         public TrailData trailData { get; set; }

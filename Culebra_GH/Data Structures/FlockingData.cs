@@ -2,6 +2,9 @@
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Flocking Data Structure
+    /// </summary>
     public struct FlockingData
     {
         public bool network { get; set; }
