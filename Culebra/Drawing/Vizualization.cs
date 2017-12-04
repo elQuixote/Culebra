@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using Rhino.Geometry;
 using Grasshopper;
 using Grasshopper.Kernel;
-using Grasshopper.Kernel.Data;
-using Grasshopper.Kernel.Types;
 using System.Drawing;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using CulebraData;
-using CulebraData.Objects;
-using CulebraData.Utilities;
 
 namespace CulebraData.Drawing
 {
+    /// <summary>
+    /// The <see cref="Drawing"/> namespace contains all Culebra Objects Visualization Classes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
     /// <summary>
     /// Visualization Class - Used to access Creeper Object's Viz properties
     /// </summary>
@@ -54,7 +53,7 @@ namespace CulebraData.Drawing
             Bitmap bm = new Bitmap(file);
             Rhino.Display.DisplayBitmap dbm = new Rhino.Display.DisplayBitmap(bm);
             Rhino.Display.DisplayBitmapDrawList ddl = new Rhino.Display.DisplayBitmapDrawList();         
-            ddl.SetPoints(particleList, Color.FromArgb(25, 255, 255, 255));
+            ddl.SetPoints(particleList, Color.FromArgb(255, 255, 255, 255));
             args.Display.DrawSprites(dbm, ddl, 2.0f, new Vector3d(0, 0, 1), true);
         }
         /// <summary>

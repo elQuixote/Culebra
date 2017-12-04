@@ -12,8 +12,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Stigmergy_Behavior class.
         /// </summary>
         public Stigmergy_Behavior()
-          : base("Stigmergy", "S",
-              "Description",
+          : base("Stigmergy", "ST",
+              "2D/3D Trail Chasing Algorithm - Agents will chase agents trails. When using this algorithm in your main sketch use the overloaded move method, recommended values are move(6,100), in GH Trail Data TrailSet(6) Max Trails(100)",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -23,6 +23,10 @@ namespace Culebra_GH.Behaviors
             {
                 return GH_Exposure.tertiary;
             }
+        }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
         }
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -34,11 +38,7 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Cohesion Range", "CR", "Input float value for cohesion threshold, value within range will enable tailCohMag", GH_ParamAccess.item, 80.0);
             pManager.AddNumberParameter("Separation Mag", "SM", "Input float value for separation value to avoids crowding on trail", GH_ParamAccess.item, 0.0);
             pManager.AddNumberParameter("Separation Range", "SR", "Input float value for separation threshold, value within range will enable tailSepMag", GH_ParamAccess.item, 5.0);
-            pManager.AddGenericParameter("Trails", "T", "Input a flattened list of trails from the Engine outputs. Use this if you are running multiple sims and want to link. If not specified the trails of the current engine will be used", GH_ParamAccess.list);
-
-            pManager[5].Optional = true;
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -46,7 +46,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Stigmergy Behavior", "SB", "The stigmergy behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -58,23 +57,27 @@ namespace Culebra_GH.Behaviors
             double cr = new double();
             double sm = new double();
             double sr = new double();
-            List<Vector3d> trails = new List<Vector3d>();
 
             if (!DA.GetData(0, ref va)) return;
             if (!DA.GetData(1, ref cm)) return;
             if (!DA.GetData(2, ref cr)) return;
             if (!DA.GetData(3, ref sm)) return;
             if (!DA.GetData(4, ref sr)) return;
-            DA.GetDataList(5, trails);
+
+            if (va > 360)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be higher than 360, please reduce value");
+                return;
+            }
+            if (va <= 0)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Angle cannot be less than or equal to 0, please increase value");
+                return;
+            }
 
             StigmergyData stigmergy = new StigmergyData((float)va, (float)cm, (float)cr, (float)sm, (float)sr);
-            if(trails.Count > 0)
-            {
-                stigmergy.trails = trails;
-            }
             DA.SetData(0, stigmergy);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -82,12 +85,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Engine;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

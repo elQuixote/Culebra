@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ComplicitMatter")]
 [assembly: AssemblyProduct("CulebraData")]
-[assembly: AssemblyCopyright("Copyright © ComplicitMatter 2016")]
+[assembly: AssemblyCopyright("Copyright © ComplicitMatter 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

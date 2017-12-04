@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using Rhino;
 using Rhino.Geometry;
-using CulebraData.Utilities;
 using CulebraData.Objects;
-using System.Drawing;
 using Rhino.Display;
+using CulebraData.Behavior.Types;
 
 namespace CulebraData.Behavior
 {
     /// <summary>
-    /// Controller Class - Used to access Creeper Object's Behaviors
+    /// The <see cref="Behavior"/> namespace contains all Culebra Objects Behaviors
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
+    /// Controller Class - Used to access Creeper Object's Behaviors. This class wraps the Culebra Java Objects behavior controller
     /// </summary>
     public class Controller
     {
+        private MeshCrawler meshCrawler;
         private CulebraObject culebraObject;
         /// <summary>
         /// Constructor
@@ -29,7 +29,44 @@ namespace CulebraData.Behavior
         public Controller(CulebraObject obj)
         {
             this.culebraObject = obj;
+            this.meshCrawler = new MeshCrawler();
         }
+        /// <summary>
+        /// Gets the Mesh Crawler 
+        /// </summary>
+        /// <returns>The meshcrawler class instance </returns>
+        public MeshCrawler GetMeshCrawler() { return this.meshCrawler; }
+        #region MeshCrawling Behavior Methods
+        /// <summary>
+        /// Mesh Crawling allows agent to move along a mesh object
+        /// </summary>
+        /// <param name="mesh">the mesh object</param>
+        /// <param name="meshThreshold">min distance current position needs to be from mesh in order to move to it</param>
+        /// <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
+        /// <param name="multiplier"></param>
+        /// <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+        /// <param name="instanceable">if the object is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable.Child objects cannot produce more children</param>
+        /// <param name="maxChildren">the max number of children each agent can create</param>
+        /// <param name="childList"></param>
+        /// <param name="childTypeList"></param>
+        public void MeshWalk(Mesh mesh, float meshThreshold, float amplitude, float multiplier, bool triggerBabies = false, bool instanceable = false, int maxChildren = 0, List<Vector3d> childList = null, List<int> childTypeList = null)
+        {
+            this.culebraObject.attributes.GetObjType();
+            this.culebraObject.GetObject().behavior.setBehaviorType("Crawler");
+            Vector3d direction;       
+            if ((this.culebraObject.GetObject().behavior.getObjType() != "culebra.objects.BabyCreeper" && this.culebraObject.GetObject().behavior.getObjType() != "culebra.objects.BabySeeker")
+                    || (this.culebraObject.GetObject().behavior.getSuperClass() != "culebra.objects.BabyCreeper"
+                            && this.culebraObject.GetObject().behavior.getSuperClass() != "culebra.objects.BabySeeker"))
+            {
+                direction = this.meshCrawler.MeshWalk(mesh, meshThreshold, Utilities.Convert.ToPVec(this.culebraObject.attributes.GetLocation()), Utilities.Convert.ToPVec(this.culebraObject.attributes.GetSpeed()), amplitude, multiplier, triggerBabies, instanceable, maxChildren, childList, childTypeList);
+            }
+            else
+            {
+                direction = this.meshCrawler.MeshWalk(mesh, meshThreshold, Utilities.Convert.ToPVec(this.culebraObject.attributes.GetLocation()), Utilities.Convert.ToPVec(this.culebraObject.attributes.GetSpeed()), amplitude, multiplier, triggerBabies, false, maxChildren);
+            }
+            this.culebraObject.behaviors.ApplyForce(direction);
+        }
+        #endregion
         #region Flocking Behavior Methods
         /// <summary>
         /// Alignment Behavior steers towards average heading of neighbors for use with culebra.objects.Object type
@@ -121,6 +158,7 @@ namespace CulebraData.Behavior
         public void Flock2D(float searchRadius, float cohesionValue, float separateValue, float alignValue, float viewAngle, List<CulebraObject> creeperList, bool drawSearchConnectivity)
         {
             this.culebraObject.GetObject().behavior.flock2D(searchRadius, cohesionValue, separateValue, alignValue, viewAngle, Utilities.Convert.ToJavaList(creeperList), Utilities.Convert.ToJavaBool(drawSearchConnectivity));
+
         }
         /// <summary>
         /// Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
@@ -368,9 +406,9 @@ namespace CulebraData.Behavior
         /// <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
         /// <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
         /// <param name="shapeRadius">the radius of the shapes</param>
-        public void MultiPolylineTracker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius)
+        public void MultiPolylineTracker(java.util.List multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius)
         {
-            this.culebraObject.GetObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
+            this.culebraObject.GetObject().behavior.multiShapeTracker(multiShapeList, shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
         /// Multi Shape Following Algorithm with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
@@ -383,14 +421,14 @@ namespace CulebraData.Behavior
         /// <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
         /// <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
         /// <param name="coloredMesh">the colored mesh to sample</param>
-        public void MultiPolylineTracker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
+        public void MultiPolylineTracker(java.util.List multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapThreshold) shapeThreshold *= (float)hls.L;
             if (mapDistance) projectionDistance *= (float)hls.L;
             if (mapRadius) shapeRadius *= (float)hls.L;
 
-            this.culebraObject.GetObject().behavior.multiShapeTracker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius);
+            this.culebraObject.GetObject().behavior.multiShapeTracker(multiShapeList, shapeThreshold, projectionDistance, shapeRadius);
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -405,9 +443,9 @@ namespace CulebraData.Behavior
         /// <param name="objTypeOverride">input type to override objtype in even of custom object. Use "Parent" as the string override for objects you want to be able to spawn children</param>
         /// <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
-        public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, String objTypeOverride, List<Vector3d> childList, List<int> childTypeList)
+        public void MultiPolylineTrackerBabyMaker(java.util.List multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, String objTypeOverride, List<Vector3d> childList, List<int> childTypeList)
         {
-            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, objTypeOverride, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(multiShapeList, shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, objTypeOverride, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -421,10 +459,10 @@ namespace CulebraData.Behavior
         /// <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
         /// <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
         /// <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
-        public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
+        public void MultiPolylineTrackerBabyMaker(java.util.List multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList)
         {
             this.culebraObject.attributes.GetObjType();
-            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(multiShapeList, shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// MultiShape Following Algorithm capable of spawning children with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
@@ -442,7 +480,7 @@ namespace CulebraData.Behavior
         /// <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
         /// <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
         /// <param name="coloredMesh">the colored mesh to sample</param>
-        public void MultiPolylineTrackerBabyMaker(List<Polyline> multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
+        public void MultiPolylineTrackerBabyMaker(java.util.List multiShapeList, float shapeThreshold, float projectionDistance, float shapeRadius, bool triggerBabies, int maxChildren, bool instanceable, List<Vector3d> childList, List<int> childTypeList, bool mapThreshold, bool mapDistance, bool mapRadius, Mesh coloredMesh)
         {
             ColorHSL hls = Utilities.ColorUtility.GetHueSatLum(this.culebraObject.attributes.GetLocation(), coloredMesh);
             if (mapThreshold) shapeThreshold *= (float)hls.L;
@@ -450,7 +488,7 @@ namespace CulebraData.Behavior
             if (mapRadius) shapeRadius *= (float)hls.L;
 
             this.culebraObject.attributes.GetObjType();
-            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(Utilities.Convert.PolylinesToMultiShapes(multiShapeList), shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
+            this.culebraObject.GetObject().behavior.multiShapeTrackerBabyMaker(multiShapeList, shapeThreshold, projectionDistance, shapeRadius, triggerBabies, maxChildren, instanceable, Utilities.Convert.ToPVecList(childList), Utilities.Convert.ToJavaIntList(childTypeList));
         }
         /// <summary>
         /// Other Object Trails Following Algorithm - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects - see example files

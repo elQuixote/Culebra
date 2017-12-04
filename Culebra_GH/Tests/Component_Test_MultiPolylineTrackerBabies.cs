@@ -178,7 +178,7 @@ namespace Culebra_GH.Tests
                     Rhino.RhinoApp.WriteLine(c.attributes.getSuperClass());
                     Rhino.RhinoApp.WriteLine("---------------------");
                     */
-                    c.behaviors.MultiPolylineTrackerBabyMaker(plineList, 500.0f, 20.0f, 15.0f, triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
+                    c.behaviors.MultiPolylineTrackerBabyMaker(CulebraData.Utilities.Convert.PolylinesToMultiShapes(plineList), 500.0f, 20.0f, 15.0f, triggerBabies, 2, true, this.childSpawners, this.childSpawnType);
 
                     this.childSpawners = c.behaviors.GetChildStartPositions();
                     this.childSpawnType = c.behaviors.GetChildSpawnTypes();
@@ -259,7 +259,7 @@ namespace Culebra_GH.Tests
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Testing;
             }
         }
         /// <summary>

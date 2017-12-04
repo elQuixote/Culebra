@@ -1,11 +1,11 @@
 ﻿using Rhino.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Graphics Visual Data Structure
+    /// </summary>
     public struct ColorData
     {
         public string colorDataType { get; set; }
@@ -16,9 +16,9 @@ namespace Culebra_GH.Data_Structures
         public int minThickness { get; set; }
         public int maxThickness { get; set; }
         public bool dotted { get; set; }
-        public System.Drawing.Color color { get; set; }
+        public Color color { get; set; }
 
-        public ColorData(string particle_Texture, Interval red_Channel, Interval green_Channel, Interval blue_Channel, int min_Thickness, int max_Thickness, bool dotted = false, System.Drawing.Color color = new System.Drawing.Color(), string colorDataType = "")
+        public ColorData(string particle_Texture, Interval red_Channel, Interval green_Channel, Interval blue_Channel, int min_Thickness, int max_Thickness, bool dotted = false, Color color = new System.Drawing.Color(), string colorDataType = "")
         {
             this.particleTexture = particle_Texture;
             this.redChannel = red_Channel;

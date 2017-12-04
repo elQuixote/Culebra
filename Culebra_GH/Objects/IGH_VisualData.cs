@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Culebra_GH.Data_Structures;
-using Grasshopper;
+﻿using Culebra_GH.Data_Structures;
 using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel;
-using Grasshopper.Kernel.Geometry;
 
 namespace Culebra_GH.Objects
 {
+    /// <summary>
+    /// The IGH  Visual Data
+    /// </summary>
     public class IGH_VisualData : GH_Goo<VisualData>
     {
         private IGH_VisualData iGH_vizData;
-
         public IGH_VisualData(VisualData vizData)
         {
             this.Value = vizData;
@@ -36,7 +31,6 @@ namespace Culebra_GH.Objects
                 return "IGH Version of VisualData Object";
             }
         }
-
         public override string TypeName
         {
             get
@@ -48,7 +42,6 @@ namespace Culebra_GH.Objects
         {
             return new IGH_VisualData(this);
         }
-
         public override string ToString()
         {
             return this.Value.GetType().Name.ToString();

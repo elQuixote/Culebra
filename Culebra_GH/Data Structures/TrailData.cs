@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Culebra_GH.Data_Structures
+﻿namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Trail Data Structure
+    /// </summary>
     public struct TrailData
     {
         public bool createTrail { get; set; }

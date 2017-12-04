@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using Rhino;
+﻿using System.Collections.Generic;
 using Rhino.Geometry;
-using CulebraData.Utilities;
 using CulebraData.Objects;
 
 namespace CulebraData.Attributes
 {
+    /// <summary>
+    /// The <see cref="Attributes"/> namespace contains all Culebra Objects Attributes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
     /// <summary>
     /// Attributes Class - Used to access Creeper Object's Attributes
     /// </summary>

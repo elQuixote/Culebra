@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CulebraData.Utilities
 {
+    /// <summary>
+    /// Provides a set of general Utilities
+    /// </summary>
     public static class General
     {
+        /// <summary>
+        /// Sets the viewport in rhino
+        /// </summary>
+        /// <param name="view">the name of the view</param>
+        /// <param name="displayType">the display type, wireframe, shaded etc</param>
         public static void setViewport(String view, String displayType)
         {
             //-------Set viewport to specific view and maximize it & set display type--------

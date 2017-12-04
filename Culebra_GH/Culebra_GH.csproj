@@ -82,19 +82,29 @@
   <ItemGroup>
     <Compile Include="Behaviors\Attract_Behavior.cs" />
     <Compile Include="Behaviors\Behavior_Controller.cs" />
+    <Compile Include="Behaviors\Bundling_Behavior.cs" />
+    <Compile Include="Behaviors\Bundling_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\Flocking_Behavior.cs" />
+    <Compile Include="Behaviors\Flocking_Mapped_Behavior.cs" />
+    <Compile Include="Behaviors\MeshCrawl_BabyMaker.cs" />
+    <Compile Include="Behaviors\MeshCrawl_Behavior.cs" />
     <Compile Include="Behaviors\Noise_Behavior.cs" />
+    <Compile Include="Behaviors\Noise_Mapped_Behavior.cs" />
     <Compile Include="Behaviors\Repel_Behavior.cs" />
     <Compile Include="Behaviors\Separation_Behavior.cs" />
     <Compile Include="Behaviors\Stigmergy_Behavior.cs" />
     <Compile Include="Behaviors\SuperWander_Behavior.cs" />
     <Compile Include="Behaviors\Tracking_BabyMaker.cs" />
     <Compile Include="Behaviors\Tracking_Behavior.cs" />
+    <Compile Include="Behaviors\Tracking_Mapped_BabyMaker.cs" />
     <Compile Include="Behaviors\Wandering_Behavior.cs" />
+    <Compile Include="Behaviors\Wandering_Mapped_Behavior.cs" />
     <Compile Include="Data Structures\BehaviorData.cs" />
+    <Compile Include="Data Structures\BundlingData.cs" />
     <Compile Include="Data Structures\ColorData.cs" />
     <Compile Include="Data Structures\FlockingData.cs" />
     <Compile Include="Data Structures\ForceData.cs" />
+    <Compile Include="Data Structures\MeshCrawlData.cs" />
     <Compile Include="Data Structures\NoiseData.cs" />
     <Compile Include="Data Structures\SeparationData.cs" />
     <Compile Include="Data Structures\StigmergyData.cs" />
@@ -102,10 +112,11 @@
     <Compile Include="Data Structures\TrailData.cs" />
     <Compile Include="Data Structures\VisualData.cs" />
     <Compile Include="Data Structures\WanderingData.cs" />
-    <Compile Include="Engine\Creeper_Engine_Dual_Test.cs" />
-    <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
+    <Compile Include="Engine\Bundling_Engine.cs" />
+    <Compile Include="Engine\Creeper_Engine_Dual.cs" />
+    <Compile Include="Engine\Creeper_Engine_Zombie.cs" />
     <Compile Include="Engine\Engine_Global.cs" />
-    <Compile Include="Engine\Creeper_Engine_Test.cs" />
+    <Compile Include="Engine\Creeper_Engine.cs" />
     <Compile Include="Objects\IGH_VisualData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -121,6 +132,7 @@
     <Compile Include="Settings_Visual\Trail_Data.cs" />
     <Compile Include="Settings_Visual\Visual_Settings.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
+    <Compile Include="SpawnTypes\Spawn_Point.cs" />
     <Compile Include="Tests\Component_Test_Conduit.cs" />
     <Compile Include="Tests\ComponentTest_IMP.cs" />
     <Compile Include="Tests\Component_Test_Behaviors.cs" />
@@ -132,6 +144,8 @@
     <Compile Include="Tests\Component_Test_SelfTailChasers.cs" />
     <Compile Include="Culebra_GHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CustomAttributes.cs" />
+    <Compile Include="Utilities\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -140,7 +154,106 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\MoveSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine_CreepyCrawlers_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings_Init.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spawn_Box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Repel_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attract_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine_CreepyCrawlers_A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshCrawl_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Controller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GradientTrail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GraphicPolyline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VisualSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TrailData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiscoTrail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiscoTrail_B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flocking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flocking_Map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wandering_Weave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_Baby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tracking_BabyMapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PerlinNoise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PerlinNoise_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Separate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zombie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Testing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engine_Bundling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bundling_Mapped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bundling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spawn_Point.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

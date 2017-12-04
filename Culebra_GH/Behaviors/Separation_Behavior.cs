@@ -12,8 +12,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Separation_Behavior class.
         /// </summary>
         public Separation_Behavior()
-          : base("Separation", "Nickname",
-              "Description",
+          : base("Separation", "SB",
+              "Separation Behavior II - avoids crowding neighbors (short range repulsion)",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -24,14 +24,17 @@ namespace Culebra_GH.Behaviors
                 return GH_Exposure.primary;
             }
         }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Max Separation", "MS", "Input value specifying maxDistance threshold to enable separate", GH_ParamAccess.item);
+            pManager.AddNumberParameter("Max Separation", "MS", "Input value specifying maxDistance threshold to enable separate", GH_ParamAccess.item, 5.0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -39,7 +42,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Separation Behavior", "SB", "The separation behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -53,7 +55,6 @@ namespace Culebra_GH.Behaviors
             SeparationData separationData = new SeparationData((float)maxSep);
             DA.SetData(0, separationData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -63,10 +64,9 @@ namespace Culebra_GH.Behaviors
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Separate;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

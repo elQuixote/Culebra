@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using Rhino;
 using Rhino.Geometry;
-using CulebraData.Utilities;
 using CulebraData.Objects;
+
 namespace CulebraData.Operations
 {
+    /// <summary>
+    /// The <see cref="Operations"/> namespace contains all Culebra Objects Operations Classes
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
     /// <summary>
     /// Actions Class - Used to access Creeper Object's Actions
     /// </summary>
@@ -143,7 +142,7 @@ namespace CulebraData.Operations
         /// </summary>
         public void Move()
         {
-            this.culebraObject.GetObject().move(100, 100);
+            this.culebraObject.GetObject().move(0, 1000);
         }
         /// <summary>
         /// Overloaded move method for moving the object. This method allows for a minimum amount of steps to be taken before adding and storing a trail point. You can also specify the max amount of trail points stored. This will certainly help with performance over time. This method is also the best to use with the behaviors.selfTrailChasing methods

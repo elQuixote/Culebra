@@ -1,0 +1,1177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CulebraData</name>
+    </assembly>
+    <members>
+        <member name="T:CulebraData.Attributes.NamespaceDoc">
+            <summary>
+            The <see cref="T:CulebraData.Attributes.Attributes"/> namespace contains all Culebra Objects Attributes
+            </summary>
+        </member>
+        <member name="T:CulebraData.Attributes.Attributes">
+            <summary>
+            Attributes Class - Used to access Creeper Object's Attributes
+            </summary>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.#ctor(CulebraData.Objects.CulebraObject)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="obj">The Culebra Object whose attributes you want to access</param>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.SetMoveAttributes(System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the move attributes for each object. This can be set up during the creation of the object in the sketch setup() method or it can be modified per object in the draw() method.
+            </summary>
+            <param name="maxSpeed">the maximum speed each object can have</param>
+            <param name="maxForce">the maximum force each object can have</param>
+            <param name="velocityMult">a velocity multiplier to increase the speed</param>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetTrailPoints">
+            <summary>
+            Retrieves the objects trail PVectors and converts to List of Points
+            </summary>
+            <returns>the list of trail converted PVectors</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetTrailVectors">
+            <summary>
+            Retrieves the objects trail PVectors and converts to List of Vector3D
+            </summary>
+            <returns>the list of trail converted PVectors</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetLocation">
+            <summary>
+            Getter method for retrieving object location as Point3d
+            </summary>
+            <returns>the objects location puller from the controller</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetVecLocation">
+            <summary>
+            Getter method for retrieving object location as Vector3D
+            </summary>
+            <returns>the objects location puller from the controller</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetSpeed">
+            <summary>
+            Getter for retrieving the object speed
+            </summary>
+            <returns>the objects speed puller from the controller</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.SetSpeed(Rhino.Geometry.Vector3d)">
+            <summary>
+            Setter for objects speed
+            </summary>
+            <param name="newSpeed">the desired new speed</param>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetBehaviorType">
+            <summary>
+            Getter for retrieving the objects behavior type
+            </summary>
+            <returns>the objects behavior type</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetSuperClass">
+            <summary>
+            Gets the superclass of the object
+            </summary>
+            <returns>the superclass as string</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetObjType">
+            <summary>
+            Getter for retrieving the objectType uses the java getClass().getName() method
+            </summary>
+            <returns>the object type specified from java getClass().getName() method</returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetChildType">
+            <summary>
+            Gets the type of baby
+            </summary>
+            <returns>the baby type as a string </returns>
+        </member>
+        <member name="M:CulebraData.Attributes.Attributes.GetNetwork">
+            <summary>
+            Gets the connectivity between each object and any objects within its search radius
+            </summary>
+            <returns>network data which visualizes the search radius between agents</returns>
+        </member>
+        <member name="T:CulebraData.Behavior.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Behavior"/> namespace contains all Culebra Objects Behaviors
+            </summary>
+        </member>
+        <member name="T:CulebraData.Behavior.Controller">
+            <summary>
+            Controller Class - Used to access Creeper Object's Behaviors. This class wraps the Culebra Java Objects behavior controller
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.#ctor(CulebraData.Objects.CulebraObject)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="obj">The Culebra Object whose behaviors you want to access</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.GetMeshCrawler">
+            <summary>
+            Gets the Mesh Crawler 
+            </summary>
+            <returns>The meshcrawler class instance </returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MeshWalk(Rhino.Geometry.Mesh,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Mesh Crawling allows agent to move along a mesh object
+            </summary>
+            <param name="mesh">the mesh object</param>
+            <param name="meshThreshold">min distance current position needs to be from mesh in order to move to it</param>
+            <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
+            <param name="multiplier"></param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="instanceable">if the object is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable.Child objects cannot produce more children</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="childList"></param>
+            <param name="childTypeList"></param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Align(System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject})">
+            <summary>
+            Alignment Behavior steers towards average heading of neighbors for use with culebra.objects.Object type
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="alignValue">steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+            <param name="collection">list of other Creeper Objects</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Cohesion(System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject})">
+            <summary>
+            Cohesion Behavior steers towards average positions of neighbors (long range attraction) for use with culebra.objects.Object type
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="cohesionValue">steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="collection">list of other Creeper Objects</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Separate(System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject})">
+            <summary>
+            Separation Behavior for use with culebra.objects.Object type - avoids crowding neighbors (short range repulsion)
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="separateValue">avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="collection">list of other Creeper Objects</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Separate(System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject})">
+            <summary>
+            Separation Behavior II for use with culebra.objects.Object type - avoids crowding neighbors (short range repulsion)
+            </summary>
+            <param name="maxSeparation">maxDistance threshold to enable separate</param>
+            <param name="collection">list of other Creeper Objects</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Separate(System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Single,System.Single,Rhino.Geometry.Mesh)">
+            <summary>
+            Overloaded 2D Separation Algorithm with image color sampling override for any behavior attribute with color value remapping for use with culebra.objects.Object type
+            </summary>
+            <param name="maxSeparation">maxDistance threshold to enable separate</param>
+            <param name="collection">list of culebra.objects.Object</param>
+            <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
+            <param name="minVal">minimum value to remap color data</param>
+            <param name="maxVal">maximum value to remap color data</param>
+            <param name="coloredMesh">the colored Mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Separate(System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            2D Separation Algorithm with image color sampling override for any behavior attribute for use with culebra.objects.Object type
+            </summary>
+            <param name="maxSeparation">maxDistance threshold to enable separate</param>
+            <param name="collection">list of other culebra.objects.Object</param>
+            <param name="mapSeparation">uses image color data as multiplier for separation value</param>
+            <param name="coloredMesh">the colored Mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Flock2D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean)">
+            <summary>
+            Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="cohesionValue">cohesion value steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="separateValue">separateValue separate value avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="alignValue">align value steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+            <param name="viewAngle">allowable vision angle in degrees</param>
+            <param name="creeperList">list of other Creeper Objects</param>
+            <param name="drawSearchConnectivity">network visualizing search radius</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Flock3D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean)">
+            <summary>
+            Overloaded 2D Flocking for use with culebra.objects.Object type - this example adds an angle parameter which allows agents to see only within the angle specified
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="cohesionValue">cohesion value steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="separateValue">separateValue separate value avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="alignValue">align value steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+            <param name="viewAngle">allowable vision angle in degrees</param>
+            <param name="creeperList">list of other Creeper Objects</param>
+            <param name="drawSearchConnectivity">network visualizing search radius</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Flock2D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            2D Flocking Algorithm with mesh color sampling override for any behavior attribute for use with culebra.objects.Object type
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="cohesionValue">cohesion value steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="separateValue">separateValue separate value avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="alignValue">align value steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+            <param name="viewAngle">allowable vision angle in degrees</param>
+            <param name="creeperList">list of other Creeper Objects</param>
+            <param name="drawSearchConnectivity">network visualizing search radius</param>
+            <param name="mapAlignment">uses mesh color data as multiplier for alignment value</param>
+            <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
+            <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
+            <param name="coloredMesh">the colored Mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Flock3D(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{CulebraData.Objects.CulebraObject},System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            3D Flocking Algorithm with mesh color sampling override for any behavior attribute for use with culebra.objects.Object type
+            </summary>
+            <param name="searchRadius">distance each culebra.objects.Object can see</param>
+            <param name="cohesionValue">cohesion value steers towards average positions of neighbors (long range attraction). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="separateValue">separateValue separate value avoids crowding neighbors (short range repulsion). Is only enabled for whatever agents are within the search radius.</param>
+            <param name="alignValue">align value steers towards average heading of neighbors. Is only enabled for whatever agents are within the search radius.</param>
+            <param name="viewAngle">allowable vision angle in degrees</param>
+            <param name="creeperList">list of other Creeper Objects</param>
+            <param name="drawSearchConnectivity">network visualizing search radius</param>
+            <param name="mapAlignment">uses mesh color data as multiplier for alignment value</param>
+            <param name="mapSeparation">uses mesh color data as multiplier for separation value</param>
+            <param name="mapCohesion">uses mesh color data as multiplier for cohesion value</param>
+            <param name="coloredMesh">the colored Mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander2D(System.Boolean,System.Boolean,System.Single,System.Single,System.Single)">
+            <summary>
+            2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="randomize">if true then the change value will be randomly selected from -change value to change value each frame</param>
+            <param name="addHeading">if true adds the heading to the wandertheta</param>
+            <param name="change">the incremented change value used to get the polar coordinates.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander2D(System.Single,System.Single,System.Single)">
+            <summary>
+            Overloaded 2D Wander Algorithm - by default this one randmoizes the change value from -change to change and incorporates the heading 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">the incremented change value used to get the polar coordinates.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander2D(System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            Overloaded Mapped 2D Wandering Algorithm with image color sampling override for any behavior attribute.No remapping capabilities in this method, min and max image values are fixed 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation.And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="randomize">if true then the change value will be randomly selected from change value to change value each frame</param>
+            <param name="addHeading">if true adds the heading to the wandertheta</param>
+            <param name="change">the incremented change value used to get the polar coordinates.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="mapChange">uses mesh color data as multiplier for wander change value</param>
+            <param name="mapWanderR">uses mesh color data as multiplier for wander circle radius value</param>
+            <param name="mapWanderD">uses mesh color data as multiplier for wander circle distance value</param>
+            <param name="coloredMesh">the colored Mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.SuperWander2D(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Overloaded Expanded 2D Wandering Algorithm using triggers to create a "weaving" type movement 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.SuperWander2D(System.Single,System.Single,System.Single,System.Single,System.String)">
+            <summary>
+            Expanded 2D Wandering Algorithm using triggers to create a "weaving" type movement. USE WITH NON CREEPER DERIVED OBJECTS, if you create your own object use this and pass the objtype below. 2D Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+            <param name="objType">to use with generic objects not derrived from culebra.objects.Creeper. Input "Parent" for parent objects and "Child" for child objects</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Expanded 3D Wandering Algorithm - Type "Primary" using triggers to create a "weaving" type movement. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D(System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            Mapped 3D Wandering Algorithm with image color sampling override for any behavior attribute 3D Wandering Algorithm
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+            <param name="mapChange">uses mesh color data as multiplier for change value</param>
+            <param name="mapWanderR">uses mesh color data as multiplier for radius value</param>
+            <param name="mapWanderD">uses mesh color data as multiplier for distance value</param>
+            <param name="mapRotationTrigger">uses mesh color data as multiplier for rotation trigger value</param>
+            <param name="coloredMesh">the colored mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D_subA(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Expanded 3D Wandering Algorithm - Type "B" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D_subB(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Expanded 3D Wandering Algorithm - Type "C" using triggers to create a "weaving" type movement. Type B uses a different assortment of Heading variations creating a differnt type of behavior. These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+            <param name="rotationTrigger">this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D_Mod(System.Single,System.Single,System.Single)">
+            <summary>
+            3D Wandering Algorithm - Type "MOD" uses no Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D_Mod2(System.Single,System.Single,System.Single)">
+            <summary>
+            3D Wandering Algorithm - Type "MOD2" uses randomized sin and cos values with the wandertheta for the Z value These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Wander3D_Mod3(System.Single,System.Single,System.Single)">
+            <summary>
+            3D Wandering Algorithm - Type "MOD3" uses randomized sin and cos values with the wandertheta for all PVector components These variations are best used with tracking behaviors. Wandering Algorithm - "Agent predicts its future location as a fixed distance in front of it (in the direction of its velocity), draws a circle with radius r at that location, and picks a random point along the circumference of the circle. That random point moves randomly around the circle in each frame of animation. And that random point is the vehicles target, its desired vector pointing in that direction" - Daniel Shiffman on Craig Reynolds Wandering Behavior
+            </summary>
+            <param name="change">NON incremented change value used to get the polar coordinates. As opposed to other wander examples this one does not increment the theta value, we simply use whichever value is given and use the trigger to specify which direction the rotation will occur.</param>
+            <param name="wanderR">the radius for the circle</param>
+            <param name="wanderD">the distance for the wander circle, this is a projection value in the direction of the objects speed vector.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.SelfTailChase(System.Single,System.Single,System.Single,System.Single,System.Single,System.Collections.Generic.List{Rhino.Geometry.Vector3d})">
+            <summary>
+            2D/3D Trail Chasing Algorithm - Agents will chase all other agents trails. When using this algorithm in your main sketch use the overloaded move method, recommended values are move(6,100)
+            </summary>
+            <param name="tailViewAngle">allowable vision angle in degrees.</param>
+            <param name="tailCohMag">cohesion value steers towards average positions.</param>
+            <param name="tailCohViewRange">cohesion threshold, value within range will enable tailCohMag</param>
+            <param name="tailSepMag">separation value avoids crowding on trail.</param>
+            <param name="tailSepViewRange">separation threshold, value within range will enable tailSepMag</param>
+            <param name="trailsPts">list of all PVectors from all trails - see example file</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.PolylineTracker(Rhino.Geometry.Polyline,System.Single,System.Single,System.Single)">
+            <summary>
+            Shape Following Algorithm - Requires a polyline to track against. - see example files
+            </summary>
+            <param name="polyline">A single polyline to track</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MultiPolylineTracker(java.util.List,System.Single,System.Single,System.Single)">
+            <summary>
+            Multi Shape Following Algorithm - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
+            </summary>
+            <param name="multiShapeList">A list of polylines to track against</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MultiPolylineTracker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            Multi Shape Following Algorithm with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points. - see example files
+            </summary>
+            <param name="multiShapeList">A list of polylines to track against</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+            <param name="mapThreshold">uses mesh color data as multiplier for threshold value</param>
+            <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
+            <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
+            <param name="coloredMesh">the colored mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.String,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
+            </summary>
+            <param name="multiShapeList">A list of polylines to track against</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+            <param name="objTypeOverride">input type to override objtype in even of custom object. Use "Parent" as the string override for objects you want to be able to spawn children</param>
+            <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+            <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            MultiShape Following Algorithm capable of spawning children - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
+            </summary>
+            <param name="multiShapeList">A list of polylines to track against</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+            <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+            <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.MultiPolylineTrackerBabyMaker(java.util.List,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            MultiShape Following Algorithm capable of spawning children with mesh color sampling override for any shape attributes - Requires list of Polylines, the polylines get converted into Arraylist of PVectors defining a each shapes points - see example files
+            </summary>
+            <param name="multiShapeList">A list of polylines to track against</param>
+            <param name="shapeThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="shapeRadius">the radius of the shapes</param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+            <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+            <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+            <param name="mapThreshold">uses mesh color data as multiplier for threshold value</param>
+            <param name="mapDistance">uses mesh color data as multiplier for distance value</param>
+            <param name="mapRadius">uses mesh color data as multiplier for radius value</param>
+            <param name="coloredMesh">the colored mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.TrailFollowers(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Vector3d}},System.Single,System.Single,System.Single)">
+            <summary>
+            Other Object Trails Following Algorithm - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects - see example files
+            </summary>
+            <param name="trailsPts">list of all PVectors from all trails</param>
+            <param name="trailThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="trailRadius">the radius of the shapes</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.TrailFollowersBabyMakers(System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Boolean,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Other Object Trails Following Algorithm capable of spawning children - Meant for Seeker or sub Seeker types of objects. These objects will chase the trails of other objects
+            </summary>
+            <param name="trailsPts">list of all PVectors from all trails</param>
+            <param name="trailThreshold">distance threshold enabling agents to see shapes</param>
+            <param name="projectionDistance">Reynolds "point ahead on the path" to seek</param>
+            <param name="trailRadius">the radius of the shapes</param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+            <param name="childList">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+            <param name="childTypeList">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.GetChildStartPositions">
+            <summary>
+            Gets the child start positions if any
+            </summary>
+            <returns>the child start positions</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.GetChildSpawnTypes">
+            <summary>
+            Gets the child spawn types if any
+            </summary>
+            <returns>the child spawn type</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d)">
+            <summary>
+            Calculates a steering force towards a target as defined by Daniel Shiffmans implementation of Craig Reynolds steering force.
+            </summary>
+            <param name="targetVector">the target to steer towards</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d,System.Single)">
+            <summary>
+            Calculates a steering force towards a target as defined by Daniel Shiffmans implementation of Craig Reynolds steering force.
+            </summary>
+            <param name="targetVector">the target to steer towards</param>
+            <param name="amplitude">amount to multiply the steer vectory by</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Seek(Rhino.Geometry.Vector3d,System.Boolean)">
+            <summary>
+            Calculates a steering force towards a target as defined by Daniel Shiffmans implementation of Craig Reynolds steering force.
+            </summary>
+            <param name="targetVector">the target to steer towards</param>
+            <param name="normalize">option to normalize the desired parameter</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Attract(Rhino.Geometry.Vector3d,System.Single,System.Single,System.Single)">
+            <summary>
+            Attracts a object towards a target. Differs from Seek
+            </summary>
+            <param name="target">target to attract towards</param>
+            <param name="threshold">if target is within this threshold then attract towards it</param>
+            <param name="attractionValue">value specifying attraction, this is the magnitude.</param>
+            <param name="maxAttraction">maximum attraction value</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Repel(Rhino.Geometry.Vector3d,System.Single,System.Single,System.Single)">
+            <summary>
+            Repels a object away from a target.
+            </summary>
+            <param name="target">target to repel away from</param>
+            <param name="threshold">if target is within this threshold then repel away from it</param>
+            <param name="repelValue">value specifying repulsion, this is the magnitude.</param>
+            <param name="maxRepel">maximum repulsion value</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.ApplyForce(Rhino.Geometry.Vector3d)">
+            <summary>
+            Applies the force vector to the acceleration and adds it to the current speed.
+            </summary>
+            <param name="force">vector to add to acceleration</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Perlin(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            2D/3D Improved Perlin Noise
+            </summary>
+            <param name="scale">overall scale of the noise</param>
+            <param name="strength">overall strength of the noise</param>
+            <param name="multiplier">value adds a jitter type of movement</param>
+            <param name="velocity">value adds a jitter type of movement</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.Perlin2DMap(System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Boolean,Rhino.Geometry.Mesh)">
+            <summary>
+            2D Improved Perlin Noise with mesh color sampling override for any behavior attribute
+            </summary>
+            <param name="scale">overall scale of the noise</param>
+            <param name="strength">overall strength of the noise</param>
+            <param name="multiplier">value adds a jitter type of movement</param>
+            <param name="velocity">value adds a jitter type of movement</param>
+            <param name="mapScale">uses mesh color data as multiplier for scale value</param>
+            <param name="mapStrength">uses mesh color data as multiplier for strength value</param>
+            <param name="mapMultiplier">uses mesh color data as multiplier for multiplier value</param>
+            <param name="coloredMesh">the colored mesh to sample</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.NoiseModified_A(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            2D/3D Modified Improved Perlin Noise Type A. Randomized remapped Scale value adjustments.
+            </summary>
+            <param name="scale">overall scale of the noise</param>
+            <param name="strength">overall strength of the noise</param>
+            <param name="multiplier">value adds a jitter type of movement</param>
+            <param name="velocity">multiplier value for velocity</param>
+            <param name="modMultiplier">multiplier value multiplied to the scale</param>
+            <param name="modScaleDivider">number to divide the result of the scale * modMultiplier</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.NoiseModified_B(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            2D/3D Modified Improved Perlin Noise Type B. Randomized remapped Scale value adjustments.
+            </summary>
+            <param name="scale">overall scale of the noise</param>
+            <param name="strength">overall strength of the noise</param>
+            <param name="multiplier">value adds a jitter type of movement</param>
+            <param name="velocity">multiplier value for velocity</param>
+            <param name="modMultiplier">multiplier value multiplied to the scale</param>
+        </member>
+        <member name="M:CulebraData.Behavior.Controller.NoiseModified_C(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            2D/3D Modified Improved Perlin Noise Type C. Randomized remapped Strength value adjustments.
+            </summary>
+            <param name="scale">overall scale of the noise</param>
+            <param name="strength">overall strength of the noise</param>
+            <param name="multiplier">value adds a jitter type of movement</param>
+            <param name="velocity">multiplier value for velocity</param>
+            <param name="modMultiplier">multiplier value multiplied to the scale</param>
+        </member>
+        <member name="T:CulebraData.Behavior.Types.SelfOrganize">
+            <summary>
+            SelfOrganize Class - Base class for bundling operations, not currently optimized in beta. Self-organization is a process where some form of overall order or coordination arises out of the local interactions between smaller component parts of an initially disordered system. The process of self-organization can be spontaneous, and it is not necessarily controlled by any auxiliary agent outside of the system. 
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.SelfOrganize.Bundling(System.Collections.Generic.List{Rhino.Geometry.Point3d},Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Collections.Generic.List{Rhino.Geometry.Curve},System.Double,System.Double,System.Int32,System.Boolean,System.Int32,Rhino.Geometry.Mesh,System.Boolean)">
+            <summary>
+            Generates curve bundling
+            </summary>
+            <param name="particleList"></param>
+            <param name="particleSet">The empty datatree which will be populated with the new post bundled curve positions per path </param>
+            <param name="crvList">The list of curves to bundle</param>
+            <param name="thresh">The search distance for each point on each curve</param>
+            <param name="ratio">The amount to move per iteration</param>
+            <param name="weldCount">The number of points you would like to weld from the existing curve</param>
+            <param name="rebuild">Rebuilds the curve pre simulation</param>
+            <param name="ptCount">The number of points to rebuilt the curve to</param>
+            <param name="colorMesh">The color mesh to use for input mapping</param>
+            <param name="useColor">Use the color data or not</param>
+            <returns>The list of bundled curves</returns>
+        </member>
+        <member name="T:CulebraData.Behavior.Types.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Behavior.Types"/> namespace contains all additions to the Culebra Objects Behavior Types
+            </summary>
+        </member>
+        <member name="T:CulebraData.Behavior.Types.MeshCrawler">
+            <summary>
+            Mesh Crawler Class - Used with a Rhino Mesh to navigate along a mesh, navigation is not topology dependent
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.MeshWalk(Rhino.Geometry.Mesh,System.Single,processing.core.PVector,processing.core.PVector,System.Single,System.Single,System.Boolean,System.Boolean,System.Int32,System.Collections.Generic.List{Rhino.Geometry.Vector3d},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Mesh Walking allows agent to move along a mesh object
+            </summary>
+            <param name="mesh">the mesh object to crawl on</param>
+            <param name="meshThreshold">min distance the object needs to be from mesh in order to move to it</param>
+            <param name="location">the current object location</param>
+            <param name="speed">the current objects speed</param>
+            <param name="amplitude">the amount to project the current location along the current speed to get the predicted next location</param>
+            <param name="multiplier">the multiplier value for the output vector</param>
+            <param name="triggerBabies">if true agent is now allowed to spawn any babies stored</param>
+            <param name="instanceable">if the child is instanceable it can reproduce. Only objects which inherit from the culebra.objects.Object class are instanceable. Child objects cannot produce more children</param>
+            <param name="maxChildren">the max number of children each agent can create</param>
+            <param name="childSpawner">list of stored children to spawn next. use (current object).behaviors.getChildStartPositions() to get them</param>
+            <param name="childSpawnType">list of values used to alter types of children. use (current object).behaviors.getChildSpawnType() to get it.</param>
+            <returns>The vector to apply</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.GetChildStartPositions">
+            <summary>
+            Gets the child start positions if any
+            </summary>
+            <returns>The child start positions</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.GetChildSpawnType">
+            <summary>
+            Gets the child spawn types if any
+            </summary>
+            <returns>The child spawn types</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.ResetChildStartPositions">
+            <summary>
+            Resets the child start position list
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.ResetChildSpawnType">
+            <summary>
+            Resets the child spawn types list
+            </summary>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.IsSeparateActive">
+            <summary>
+            Checks if the separate feature is active
+            </summary>
+            <returns>If the separate is active</returns>
+        </member>
+        <member name="M:CulebraData.Behavior.Types.MeshCrawler.SetSeparateInactive">
+            <summary>
+            Sets the separate feature inactive
+            </summary>
+        </member>
+        <member name="T:CulebraData.Drawing.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Drawing"/> namespace contains all Culebra Objects Visualization Classes
+            </summary>
+        </member>
+        <member name="T:CulebraData.Drawing.Vizualization">
+            <summary>
+            Visualization Class - Used to access Creeper Object's Viz properties
+            </summary>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawPointGraphic(Grasshopper.Kernel.IGH_PreviewArgs,System.Collections.Generic.List{Rhino.Geometry.Point3d})">
+            <summary>
+            Draws a Point Graphic through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="particleList">the list of points representing the particle positions</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawParticles(Grasshopper.Kernel.IGH_PreviewArgs,System.String,Rhino.Geometry.ParticleSystem)">
+            <summary>
+            Draws a Particle through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="file">the texture file</param>
+            <param name="particleSystem">the particle system</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawSprites(Grasshopper.Kernel.IGH_PreviewArgs,System.String,System.Collections.Generic.List{Rhino.Geometry.Point3d})">
+            <summary>
+            Draws Sprites through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="file">the texture file</param>
+            <param name="particleList">the list of points representing the particle positions</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single)">
+            <summary>
+            Draws a gradient trail through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+            <param name="colorType">the color type</param>
+            <param name="minTrailThickness">the minimum trail thickness</param>
+            <param name="maxTrailThickness">the maximum trail thickness</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Draws a gradient trail through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+            <param name="r_colorA">the target min color value for the r channel</param>
+            <param name="r_colorB">the target max color value for the r channel</param>
+            <param name="g_colorA">the targer min color value for the g channel</param>
+            <param name="g_colorB">the target max color value for the g channel</param>
+            <param name="b_colorA">the target min color value for the b channel</param>
+            <param name="b_colorB">the target max color value for the b channel</param>
+            <param name="minTrailThickness">the minimum trail thickness</param>
+            <param name="maxTrailThickness">the maximum trail thickness</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawPolylineTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Boolean,System.Int32,System.Drawing.Color)">
+            <summary>
+            Draws a polyline trail through the display pipeline
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+            <param name="dottedPolyline">do you want a dotted polyline</param>
+            <param name="thickness">the thickness of the trail</param>
+            <param name="color">the color of the trail</param>
+        </member>
+        <member name="M:CulebraData.Drawing.Vizualization.DrawDiscoTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Random,System.Single,System.Single)">
+            <summary>
+            Draws a disco trail through the display pipeline. Trails flash different colors throughout the simulation
+            </summary>
+            <param name="args">preview Display Args for IGH_PreviewObjects</param>
+            <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+            <param name="randomGen">an instance of the random class</param>
+            <param name="minTrailThickness">the minimum trail thickness</param>
+            <param name="maxTrailThickness">the maximum trail thickness</param>
+        </member>
+        <member name="T:CulebraData.Objects.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Objects"/> namespace contains all Culebra Objects
+            </summary>
+        </member>
+        <member name="T:CulebraData.Objects.BabyCreeper">
+            <summary>
+            Baby Creeper class which inherits from the Creeper Class - Object is meant to be used as a child of the Creeper Object 
+            </summary>
+        </member>
+        <member name="M:CulebraData.Objects.BabyCreeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="location">the location of the creeper object</param>
+            <param name="speed">speed of the creeper object</param>
+            <param name="instanceable">is the creeper instanceable</param>
+            <param name="babyType">specifies which type of baby is created. Use either "a" or "b"</param>
+            <param name="In3D">specifies if we are in 2D or 3D</param>
+        </member>
+        <member name="M:CulebraData.Objects.BabyCreeper.GetBabyCreeperObject">
+            <summary>
+            Getter Method for retrieving the culebra java baby creeper object
+            </summary>
+            <returns>the culebra java baby creeper object</returns>
+        </member>
+        <member name="T:CulebraData.Objects.Creeper">
+            <summary>
+            Creeper Objects are the main implementation of the abstract Objects. They are able to implement any type of behavior and are meant as a do all type of object.
+            </summary>
+        </member>
+        <member name="M:CulebraData.Objects.Creeper.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="location">the location of the creeper object</param>
+            <param name="speed">speed of the creeper object</param>
+            <param name="instanceable">is the creeper instanceable</param>
+            <param name="In3D">specifies if we are in 2D or 3D</param> 
+        </member>
+        <member name="M:CulebraData.Objects.Creeper.GetObject">
+            <summary>
+            Getter Method for retrieving the culebra java creeper object
+            </summary>
+            <returns>the culebra java creeper object</returns>
+        </member>
+        <member name="T:CulebraData.Objects.CulebraObject">
+            <summary>
+            CulebraObject Class - Abstract class of Object from which other objects can inherit from. This class defines the basic abstract methods required by any object attempting to interface with the system.
+            </summary>
+        </member>
+        <member name="F:CulebraData.Objects.CulebraObject.behaviors">
+            <summary>
+            Controller Instance
+            </summary>
+        </member>
+        <member name="F:CulebraData.Objects.CulebraObject.attributes">
+            <summary>
+            Attributes Instance
+            </summary>
+        </member>
+        <member name="F:CulebraData.Objects.CulebraObject.actions">
+            <summary>
+            Actions Instance
+            </summary>
+        </member>
+        <member name="M:CulebraData.Objects.CulebraObject.GetObject">
+            <summary>
+            Gets the culebra java object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CulebraData.Objects.Seeker">
+            <summary>
+            Seeker Objects are the technically also main implementation of the abstract Objects, like Creeper Objects, they poses the same capabilities. They are able to implement any type of behavior but are meant to be used as Objects which "Seek" other objects.They should be used in conjunction with behaviors.trailFollowing Methods. I have not restricted their behavior implementations at this stage but might do so in the future to make certain behaviors more Object type specific.
+            </summary>
+        </member>
+        <member name="M:CulebraData.Objects.Seeker.#ctor(Rhino.Geometry.Vector3d,Rhino.Geometry.Vector3d,System.Boolean,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="location">the location of the creeper object</param>
+            <param name="speed">speed of the creeper object</param>
+            <param name="instanceable">is the seeker instanceable</param>
+            <param name="In3D">specifies if we are in 2D or 3D</param> 
+        </member>
+        <member name="M:CulebraData.Objects.Seeker.GetObject">
+            <summary>
+            Getter Method for retrieving the culebra java seeker object
+            </summary>
+            <returns>the culebra java seeker object</returns>
+        </member>
+        <member name="T:CulebraData.Operations.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Operations"/> namespace contains all Culebra Objects Operations Classes
+            </summary>
+        </member>
+        <member name="T:CulebraData.Operations.Actions">
+            <summary>
+            Actions Class - Used to access Creeper Object's Actions
+            </summary>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.#ctor(CulebraData.Objects.CulebraObject)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="obj">The Culebra Object whose actions you want to access</param>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Bounce(Rhino.Geometry.BoundingBox)">
+            <summary>
+            2D bounce method for boundary
+            </summary>
+            <param name="bbox">the bounding box to use as container</param>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Bounce3D(Rhino.Geometry.BoundingBox)">
+            <summary>
+            3D bounce method for boundary
+            </summary>
+            <param name="bbox">the bounding box to use as container</param>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Respawn(Rhino.Geometry.BoundingBox)">
+            <summary>
+            2D Respawn method for when objects reach the sketch or any defined boundary
+            </summary>
+            <param name="bbox">the bounding box to use as container</param>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Respawn(Rhino.Geometry.BoundingBox,System.Boolean,System.Boolean)">
+            <summary>
+            3D Respawn method for when object reached the sketch or any defined boundary
+            </summary>
+            <param name="bbox">the bounding box to use as container</param>
+            <param name="spawnOnGround">do you want all the new respawns to spawn on the ground?</param>
+            <param name="spawnRandomly">do you want all the new respawns to spawn randomly in space?</param>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.ReverseSpeed">
+            <summary>
+            Reverses the current objects speed
+            </summary>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Move">
+            <summary>
+            Move method for moving the object.
+            </summary>
+        </member>
+        <member name="M:CulebraData.Operations.Actions.Move(System.Int32,System.Int32)">
+            <summary>
+            Overloaded move method for moving the object. This method allows for a minimum amount of steps to be taken before adding and storing a trail point. You can also specify the max amount of trail points stored. This will certainly help with performance over time. This method is also the best to use with the behaviors.selfTrailChasing methods
+            </summary>
+            <param name="minStepAmount">minimum amount of steps that must be taken before we store a trail PVector</param>
+            <param name="maxPositions_Stored">maximum amount of allowable trail PVectors per object.</param>
+        </member>
+        <member name="T:CulebraData.Utilities.NamespaceDoc">
+            <summary>
+            The <see cref="N:CulebraData.Utilities"/> namespace contains all Culebra Utilities Classes
+            </summary>
+        </member>
+        <member name="T:CulebraData.Utilities.ColorUtility">
+            <summary>
+            Provides a static set of color utilities
+            </summary>
+        </member>
+        <member name="M:CulebraData.Utilities.ColorUtility.GetHueSatLum(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)">
+            <summary>
+            Gets the HLS of a mesh at a specified location
+            </summary>
+            <param name="sp">Sample Point</param> 
+            <param name="coloredMesh">colors mesh to sample</param> 
+            <returns>The Hue Saturation and Luminance at location</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.ColorUtility.GetColor(Rhino.Geometry.Point3d,Rhino.Geometry.Mesh)">
+            <summary>
+            Gets the color of a mesh at a specified point
+            </summary>
+            <param name="sp">The sample point</param> 
+            <param name="coloredMesh">The colored mesh to sample</param> 
+            <returns>The color at that location</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.ColorUtility.GetRandomColor(System.Random)">
+            <summary>
+            Generates a random color
+            </summary>
+            <param name="randomGen">the random object instance</param>
+            <returns>The random color</returns>
+        </member>
+        <member name="T:CulebraData.Utilities.General">
+            <summary>
+            Provides a set of general Utilities
+            </summary>
+        </member>
+        <member name="M:CulebraData.Utilities.General.setViewport(System.String,System.String)">
+            <summary>
+            Sets the viewport in rhino
+            </summary>
+            <param name="view">the name of the view</param>
+            <param name="displayType">the display type, wireframe, shaded etc</param>
+        </member>
+        <member name="T:CulebraData.Utilities.GHSupport">
+            <summary>
+            GHSupport class is meant to ease the pain of dealing with DataTrees(for scripting components) and GH_Structure(for GHA Dev),
+            it allows you to create nested lists that cannot be used in grasshopper, for example getAllFaceVertices returns a (List List Point3d ), 
+            this data cannot be returned in grasshopper as points in space, so using GHSupport.convertToGHDataTree() we can convert that nested list into a 
+            data tree structure and we can now use nested lists of whatever
+            </summary>
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})">
+            <summary>
+            Converts nested list of points into GH_Structure (for gha dev)
+            </summary>
+            <param name="conversionData">the nested list to convert</param> 
+            <returns>The data structure</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})">
+            <summary>
+            Converts nested list of lines into GH_Structure (for gha dev)
+            </summary>
+            <param name="conversionData">the nested list to convert</param> 
+            <returns>The data structure</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHDataStructure(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Polyline}})">
+            <summary>
+            Converts nested list of polylines into GH_Structure (for gha dev)
+            </summary>
+            <param name="conversionData">the nested list to convert</param> 
+            <returns>The data structure</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Point3d}})">
+            <summary>
+            Converts nested list of points into data tree (for scripting components inside gh)
+            </summary>
+            <param name="conversionData">the nested list to convert</param> 
+            <returns>The data structure</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHDataTree(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Line}})">
+            <summary>
+            Converts nested list of lines into data tree (for scripting components inside gh)
+            </summary>
+            <param name="conversionData">the nested list to convert</param> 
+            <returns>The data structure</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHPoint(Rhino.Geometry.Point3d)">
+            <summary>
+            Converts a point into a GH_Point
+            </summary>
+            <param name="pt">The point to convert</param> 
+            <returns>The GH_Point</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHLine(Rhino.Geometry.Line)">
+            <summary>
+            Converts a line into a GH_Line
+            </summary>
+            <param name="line">The line to convert</param> 
+            <returns>The GH_Line</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertToGHCurve(Rhino.Geometry.Polyline)">
+            <summary>
+            Converts a polyline into a GH_Curve
+            </summary>
+            <param name="pline">The polyline to convert</param> 
+            <returns>The GH_Curve</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertTOGHPTList(System.Collections.Generic.List{Rhino.Geometry.Point3d})">
+            <summary>
+            Converts a point list into a list of GH_Points
+            </summary>
+            <param name="ptList">The list to convert</param> 
+            <returns>The list of GH_Points</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertTOGHLineList(System.Collections.Generic.List{Rhino.Geometry.Line})">
+            <summary>
+            Converts a list of lines into a list of GH_Lines
+            </summary>
+            <param name="edgeList">The list to convert</param> 
+            <returns>The list of GH_Lines</returns> 
+        </member>
+        <member name="M:CulebraData.Utilities.GHSupport.ConvertTOGHCurveList(System.Collections.Generic.List{Rhino.Geometry.Polyline})">
+            <summary>
+            Converts a list of polylines into a list of GH_Curves
+            </summary>
+            <param name="edgeList">The list to convert</param> 
+            <returns>The list of GH_Curves</returns> 
+        </member>
+        <member name="T:CulebraData.Utilities.Mapping">
+            <summary>
+            Provides a set of static mapping Utilities
+            </summary>
+        </member>
+        <member name="M:CulebraData.Utilities.Mapping.Map(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Remaps a value 
+            </summary>
+            <param name="value">value to map</param>
+            <param name="istart">source min value</param>
+            <param name="istop">source max value</param>
+            <param name="ostart">target min value</param>
+            <param name="ostop">target max value</param>
+            <returns>the mapped float value</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Mapping.RemapValues(System.Collections.Generic.List{System.Double},System.Double)">
+            <summary>
+            Reparametrizes Values
+            </summary>
+            <param name="dataToMap">data to map</param> 
+            <param name="sourceMax">source max value</param> 
+            <returns>the list of mapped values</returns> 
+        </member>
+        <member name="T:CulebraData.Utilities.Convert">
+            <summary>
+            Static Class to Convert Java and Processing Objects to .Net Geometry Objects
+            </summary>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToVector3d(processing.core.PVector)">
+            <summary>
+            Converts PVector to Vector3D
+            </summary>
+            <param name="pvec">the PVector to convert</param>
+            <returns>the converted PVector to Vector3d</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPoint3d(processing.core.PVector)">
+            <summary>
+            Converts PVector to Point3D
+            </summary>
+            <param name="pvec">the PVector to convert</param>
+            <returns>the converted PVector to Vector3d</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Point3d)">
+            <summary>
+            Converts Point3D to PVector
+            </summary>
+            <param name="pt">the point to convert</param>
+            <returns>the converted Point3d to PVector</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPVec(Rhino.Geometry.Vector3d)">
+            <summary>
+            Converts Vector3D to PVector
+            </summary>
+            <param name="vec">the PVector to convert</param>
+            <returns>the converted Vector3d to PVector</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToJavaBool(System.Boolean)">
+            <summary>
+            Converts System Boolean to java.lang.Boolean
+            </summary>
+            <param name="value">the value</param>
+            <returns>the converted boolean</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToBoolean(java.lang.Boolean)">
+            <summary>
+            Converts java.lang.Boolean to System.Boolean
+            </summary>
+            <param name="value">the value</param>
+            <returns>the converted boolean</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPApplet">
+            <summary>
+            Returns an instance of processing.core.PApplet
+            </summary>
+            <returns>the PApplet</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToJavaList(System.Collections.Generic.List{CulebraData.Objects.CulebraObject})">
+            <summary>
+            Converts List of Creeper objects to a java.util.List of java creepers 
+            </summary>
+            <param name="genericList">the list to convert</param>
+            <returns>the java.util.List of java creepers</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPointList(java.util.ArrayList)">
+            <summary>
+            Converts an arraylist of PVectors to a list of Point3D
+            </summary>
+            <param name="arrayList">the arraylist to convert</param>
+            <returns>the list of Points</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToVec3DList(java.util.ArrayList)">
+            <summary>
+            Converts an arraylist of PVectors to a list of Vector3D
+            </summary>
+            <param name="arrayList">the arraylist to convert</param>
+            <returns>the list of Vectors</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToVec3DList(java.util.List)">
+            <summary>
+            Converts a java.util.List of PVectors to a list of Vector3D
+            </summary>
+            <param name="arrayList">the java.util.List to convert</param>
+            <returns>the list of Vectors</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToPVecList(System.Collections.Generic.List{Rhino.Geometry.Vector3d})">
+            <summary>
+            Converts a list of Vector3D to an arraylist of PVectors
+            </summary>
+            <param name="vectorList">the list to convert</param>
+            <returns>the arraylist of PVectors</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.PolylinesToMultiShapes(System.Collections.Generic.List{Rhino.Geometry.Polyline})">
+            <summary>
+            Converts a list of Polylines to a list of shapes for Culebra Java Tracking Behaviors
+            </summary>
+            <param name="plineList">the list of polylines to convert</param>
+            <returns>the arraylist of shapes</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.NestedList_To_NestedArrayList(System.Collections.Generic.List{System.Collections.Generic.List{Rhino.Geometry.Vector3d}})">
+            <summary>
+            Converts a nested list of Object Trails to a nested ArrayList. This is meant to be used with the Trail Followers methods using Seeker Objects 
+            </summary>
+            <param name="nestedList">The nested list of Object Trails</param>
+            <returns>The nested arrayList</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.PolylineToShape(Rhino.Geometry.Polyline)">
+            <summary>
+            Converts a single polyline to a shape for Culebra Java Tracking Behaviors
+            </summary>
+            <param name="pline">the polyline to convert</param>
+            <returns>the arraylist of shapes</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToIntList(java.util.ArrayList)">
+            <summary>
+            Converts arraylist of java.lang.Integer to a list of integers
+            </summary>
+            <param name="javaIntList">arraylist to convert</param>
+            <returns>the list of integers</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToJavaIntList(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Converts list of integer to arraylist of java integers
+            </summary>
+            <param name="intList">the list of integer to convert</param>
+            <returns>the converted list of integers as arraylist of java integers</returns>
+        </member>
+        <member name="M:CulebraData.Utilities.Convert.ToJavaInt(System.Int32)">
+            <summary>
+            Converts 32 bit integer to java.lang.Integer
+            </summary>
+            <param name="integer">the integer to convert</param>
+            <returns>the java.lang.Integer</returns>
+        </member>
+    </members>
+</doc>

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using System.Collections;
 
 namespace Culebra_GH.Initialize
 {
     public class Settings_Init : GH_Component
     {
-
         private string text;
-
         /// <summary>
         /// Initializes a new instance of the Settings_Init class.
         /// </summary>
@@ -27,6 +24,10 @@ namespace Culebra_GH.Initialize
                 return GH_Exposure.primary;
             }
         }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 1);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -34,9 +35,8 @@ namespace Culebra_GH.Initialize
         {
             pManager.AddGenericParameter("Spawn Settings", "ST", "Input the Spawn Settings output of any of the Spawn Types", GH_ParamAccess.list);
             pManager.AddGenericParameter("Dimension", "D", "Input an integer specifying which dimension you want to live in (0 = 2D | 1 = 3D", GH_ParamAccess.item);
-            pManager.AddGenericParameter("Bounds", "B", "Input a boolean toggle specifying the boundary condition ( True = Enable boundary interaction | False = Ignore the boundary", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Boundary", "B", "Input an integer specifying the bounds condition ( 0 = Bounce | 1 = Respawn | 2 = Do Nothing", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -44,26 +44,25 @@ namespace Culebra_GH.Initialize
         {
             pManager.AddGenericParameter("Init Settings", "IS", "Outputs the init settings for the Creeper Engine", GH_ParamAccess.list);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-
             List<Object> Spawn_Type = new List<Object>();
             int Dimension = new int();
-            bool Bounds = new bool();
+            int Bounds = new int();
 
             if (!DA.GetDataList(0, Spawn_Type)) return;
             if (!DA.GetData(1, ref Dimension)) return;
             if (!DA.GetData(2, ref Bounds)) return;
 
+            if (Dimension > 1 || Dimension < 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Dimension value cannot be less than 0 and higher than 1, please adjust"); return; }
+            if (Bounds > 2 || Bounds < 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Boundary value cannot be less than 0 and higher than 2, please adjust"); return; }
+
             GH_Convert.ToString(Spawn_Type[0], out this.text, GH_Conversion.Both);
-
             ArrayList myAL = new ArrayList();
-
             myAL.Add(Spawn_Type[0]);
             myAL.Add(Dimension);
             myAL.Add(Bounds);
@@ -77,6 +76,7 @@ namespace Culebra_GH.Initialize
             else if (this.text == "Points")
             {
                 myAL.Add(Spawn_Type[1]);
+                myAL.Add(Spawn_Type[2]);
                 DA.SetDataList(0, myAL);
             }
             else if (this.text == "Mesh")
@@ -99,7 +99,6 @@ namespace Culebra_GH.Initialize
                 return;
             }
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -107,12 +106,9 @@ namespace Culebra_GH.Initialize
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Settings_Init;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

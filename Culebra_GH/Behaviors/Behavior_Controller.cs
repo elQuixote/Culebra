@@ -1,29 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Grasshopper;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using Grasshopper.Kernel.Types;
-using Grasshopper.Kernel.Data;
-using System.Linq;
 using Grasshopper.Kernel.Parameters;
-
-using Rhino;
-using Rhino.DocObjects;
-using Rhino.Collections;
-
-using GH_IO;
-using GH_IO.Serialization;
-
-using System.IO;
-
-using System.Drawing;
-using System.Reflection;
-using System.Collections;
-using System.Windows.Forms;
-
-using System.Runtime.InteropServices;
 using Culebra_GH.Data_Structures;
 using Culebra_GH.Objects;
 
@@ -31,12 +10,12 @@ namespace Culebra_GH.Behaviors
 {
     public class Behavior_Controller : GH_Component, IGH_VariableParameterComponent
     {
-        GH_Document GrasshopperDocument;
-        IGH_Component Component;
-
+        private GH_Document GrasshopperDocument;
+        private IGH_Component Component;
+    
         public Behavior_Controller()
           : base("Controller", "BC",
-              "Behavior Merging Controller",
+              "Behavior Merging Controller, you can add/remove/rearrange behaviors. The input order will be the behavior execution stack",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -44,23 +23,24 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return GH_Exposure.senary;
+                return GH_Exposure.septenary;
             }
+        }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
         }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            //pManager.AddGenericParameter("Behavior A", "B", "Connect Desired Behavior Here", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("Behavior Settings", "B", "Behavior Settings - These connect to the engine component", GH_ParamAccess.list);
             pManager.AddGenericParameter("Behavior Data Object", "BDO", "The behaviorData object", GH_ParamAccess.item);
         }
         /// <summary>
@@ -75,10 +55,11 @@ namespace Culebra_GH.Behaviors
 
             int inputCount = Component.Params.Input.Count;
             BehaviorData behaviorData = new BehaviorData();
+            List<ForceData> forceDataList = new List<ForceData>();
             List<string> stringlist = new List<string>();
             List<string> behaviorNames = new List<string>();
+
             int hitCounter = 0;
-            List<ForceData> forceDataList = new List<ForceData>();
             for (int i = 0; i < inputCount; i++)
             {
                 IGH_DocumentObject connectedComponent = Component.Params.Input[i].Sources[0].Attributes.GetTopLevel.DocObject;
@@ -151,6 +132,22 @@ namespace Culebra_GH.Behaviors
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Separation data structure, please check your inputs"); return; }
                         behaviorData.separationData = data;
                         behaviorNames.Add("Separation");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.MeshCrawlData")
+                    {
+                        hitCounter++;
+                        MeshCrawlData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Mesh Crawl data structure, please check your inputs"); return; }
+                        behaviorData.meshCrawlData = data;
+                        behaviorNames.Add("Crawl");
+                    }else if (a.ToString() == "Culebra_GH.Data_Structures.BundlingData")
+                    {
+                        hitCounter++;
+                        BundlingData data;
+                        bool worked = a.CastTo(out data);
+                        if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Bundling data structure, please check your inputs"); return; }
+                        behaviorData.bundlingData = data;
+                        behaviorNames.Add("Bundling");
                     }
                     else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
                 }                     
@@ -159,11 +156,9 @@ namespace Culebra_GH.Behaviors
             {
                 behaviorData.dataOrder = behaviorNames;
                 IGH_BehaviorData igh_Behavior = new IGH_BehaviorData(behaviorData);
-                DA.SetData(1, igh_Behavior);
+                DA.SetData(0, igh_Behavior);
             }
-            DA.SetDataList(0, stringlist);
         }
-        //-------------------------------------------
         public bool CanInsertParameter(GH_ParameterSide side, int index)
         {
             if (side == GH_ParameterSide.Input)
@@ -212,8 +207,6 @@ namespace Culebra_GH.Behaviors
                 Component.Params.OnParametersChanged();
             }
         }
-        //-------------------------------------------
-        //-------------------------------------------
         /// <summary>
         /// Provides an Icon for every component that will be visible in the User Interface.
         /// Icons need to be 24x24 pixels.
@@ -222,10 +215,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                return null;
+                return Culebra_GH.Properties.Resources.Controller;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
-using System.Collections;
 using Grasshopper.Kernel.Types;
 using Culebra_GH.Data_Structures;
 using Culebra_GH.Objects;
@@ -27,7 +24,10 @@ namespace Culebra_GH.Settings_Visual
                 return GH_Exposure.primary;
             }
         }
-
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 2);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -35,7 +35,10 @@ namespace Culebra_GH.Settings_Visual
         {
             pManager.AddGenericParameter("Trail Data", "TD", "Input the Trail Data output from the Trail Data Component", GH_ParamAccess.item);
             pManager.AddGenericParameter("Color Data", "CD", "Input the Trail Color Data output from the Gradient Color Component", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Apply Texture", "AT", "Input boolean specifying the application of texture as particle - WARNING VERY UNSTABLE", GH_ParamAccess.item, false);
             pManager.AddGenericParameter("Display Mode", "DM", "Input an integer specifying the Display Mode (0 = Graphic | 1 = Geometry)", GH_ParamAccess.item);
+
+            pManager[1].Optional = true;
         }
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace Culebra_GH.Settings_Visual
         {
             IGH_Goo trailData = null;
             IGH_Goo colorData = null;
+            bool texture = new bool();
             object displayMode = null;
 
             VisualData visualData = new VisualData();
@@ -63,12 +67,7 @@ namespace Culebra_GH.Settings_Visual
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Trail Data Detected, please connect Trail Data to enable the component");
                 return;
             }
-            if (!DA.GetData(1, ref colorData) || colorData == null)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Color Data Detected, please connect Color Data to enable the component");
-                return;
-            }
-
+            DA.GetData(1, ref colorData);
             string dataType = trailData.GetType().Name.ToString();
             if (trailData.ToString() == "Culebra_GH.Data_Structures.TrailData")
             {
@@ -88,29 +87,41 @@ namespace Culebra_GH.Settings_Visual
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Please input Trail Data Output value for Trail Data not a " + dataType);
                 return;
             }
-
-            string colorType = colorData.GetType().Name.ToString();
-            if (colorData.ToString() == "Culebra_GH.Data_Structures.ColorData")
+            if(colorData != null)
             {
-                ColorData cd;
-                bool worked = colorData.CastTo(out cd);
-                if (worked)
+                string colorType = colorData.GetType().Name.ToString();
+                if (colorData.ToString() == "Culebra_GH.Data_Structures.ColorData")
                 {
-                    visualData.colorData = cd;
+                    ColorData cd;
+                    bool worked = colorData.CastTo(out cd);
+                    if (worked)
+                    {
+                        visualData.colorData = cd;
+                    }
+                    else
+                    {
+                        AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Could not convert color data, ensure you have the correct inputs");
+                        return;
+                    }
                 }
                 else
                 {
-                    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Could not convert color data, ensure you have the correct inputs");
+
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Please input Trail Data Output value for Trail Data not a " + colorType);
                     return;
                 }
             }
             else
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Please input Trail Data Output value for Trail Data not a " + colorType);
-                return;
+                ColorData color = new ColorData();
+                color.colorDataType = "Base";
+                visualData.colorData = color;
             }
+            if (!DA.GetData(2, ref texture)) return;
+            if(texture) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "WARNING USING TEXTURE CAN MAKE THE SIMULATION VERY UNSTABLE AND MAY CRASH WITHOUT WARNING, I RECOMMEND USING THE GH BUILT IN CLOUD DISPLAY FOR THE CREEPERS OUTPUT"); }
+            visualData.useTexture = texture;
 
-            if (!DA.GetData(2, ref displayMode)) return;
+            if (!DA.GetData(3, ref displayMode)) return;
             string type2 = displayMode.GetType().Name.ToString();
             if (displayMode.GetType() != typeof(GH_Integer) && displayMode.GetType() != typeof(GH_Number))
             {
@@ -132,7 +143,6 @@ namespace Culebra_GH.Settings_Visual
             IGH_VisualData igh_Viz = new IGH_VisualData(visualData);
             DA.SetData(0, igh_Viz);          
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -140,12 +150,9 @@ namespace Culebra_GH.Settings_Visual
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.VisualSettings;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
@@ -14,7 +11,7 @@ namespace Culebra_GH.Behaviors
         /// </summary>
         public Noise_Behavior()
           : base("Noise", "N",
-              "Description",
+              "2D/3D Improved Perlin Noise",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -25,7 +22,10 @@ namespace Culebra_GH.Behaviors
                 return GH_Exposure.quarternary;
             }
         }
-
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
@@ -36,7 +36,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Multiplier", "M", "Input value to add a jitter type of movement", GH_ParamAccess.item, 1.0);
             pManager.AddNumberParameter("Velocity", "V", "Input value specifying the noise velocity multiplier", GH_ParamAccess.item, 0.5);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -44,7 +43,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Noise Behavior", "SB", "The noise behavior data structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -64,7 +62,6 @@ namespace Culebra_GH.Behaviors
             NoiseData noiseData = new NoiseData((float)scale, (float)strength, (float)multiplier, (float)velocity);
             DA.SetData(0, noiseData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -72,12 +69,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.PerlinNoise;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>

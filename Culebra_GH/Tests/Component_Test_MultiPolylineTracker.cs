@@ -174,11 +174,11 @@ namespace Culebra_GH.Tests
                     c.attributes.SetMoveAttributes(3.44f, 0.3f, 1.5f);
                     if (useMap && colorMesh != null)
                     {
-                        c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f, false, false, true, colorMesh);
+                        //c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f, false, false, true, colorMesh);
                     }
                     else
                     {
-                        c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f);
+                        //c.behaviors.MultiPolylineTracker(plineList, 500.0f, 20.0f, 15.0f);
                     }
                     //c.behaviors.wander2D(true,false,2.0f, 80.0f, 26.0f);
                     c.behaviors.Wander2D(true, false, 100.0f, 60.0f, 60.0f);
@@ -210,7 +210,7 @@ namespace Culebra_GH.Tests
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Testing;
             }
         }
         /// <summary>

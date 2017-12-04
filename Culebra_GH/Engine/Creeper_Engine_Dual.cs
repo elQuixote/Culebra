@@ -5,24 +5,19 @@ using Rhino.Geometry;
 using Culebra_GH.Objects;
 using Grasshopper;
 using System.Reflection;
-using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using System.Drawing;
-using ikvm;
-using processing.core;
-using culebra.behaviors;
-using CulebraData;
 using CulebraData.Objects;
 using CulebraData.Utilities;
 using CulebraData.Drawing;
-using System.Collections;
-using System.Linq;
 using Culebra_GH.Data_Structures;
+using Culebra_GH.Utilities;
 
 namespace Culebra_GH.Engine
 {
-    public class Creeper_Engine_Test : GH_Component
+    public class Creeper_Engine_Dual : GH_Component
     {
+        #region Globals
         //----------------Creeper Fields-------------------------
         private Creeper creep;
         private List<CulebraObject> creepList = new List<CulebraObject>();
@@ -34,17 +29,18 @@ namespace Culebra_GH.Engine
         private Vector3d startPos = new Vector3d();
         private Vector3d moveVec;
         private double initialSpeed, maxSpeed, maxForce, velMultiplier;
+        private double child_initialSpeed, child_maxSpeed, child_maxForce, child_velMultiplier;
         private BoundingBox bb;
         private Box box;
         private int dimensions;
-        private bool bounds;
+        private int bounds;
         private string spawnData;
         private int spawnType;
         private int pointCount;
         //----------------Graphics/Trail Fields-------------------------
-        private int minthick = new int();
-        private int maxthick = new int();
-        private bool trail = new bool();
+        private int minthick;
+        private int maxthick;
+        private bool trail;
         private int displayMode;
         private int trailStep;
         private int maxTrailSize;
@@ -55,15 +51,55 @@ namespace Culebra_GH.Engine
         private Color polylineColor;
         private bool dotted;
         private string graphicType;
+        private bool useTexture;
+        //----------------Child Graphics/Trail Fields---------------------
+        private int child_minthick;
+        private int child_maxthick;
+        private bool child_trail;
+        private int child_displayMode;
+        private int child_trailStep;
+        private int child_maxTrailSize;
+        private string child_particleTexture = "";
+        private double[] child_redValues = new double[2];
+        private double[] child_greenValues = new double[2];
+        private double[] child_blueValues = new double[2];
+        private Color child_polylineColor;
+        private bool child_dotted;
+        private string child_graphicType;
+        private bool child_useTexture;
         //----------------SelfTail Chasing Fields-------------------------
-        private List<Vector3d> totTail = new List<Vector3d>();
+        private List<Vector3d> flattenedTrails = new List<Vector3d>();
+        //----------------Child Creeper Fields----------------------------
+        private List<Vector3d> childSpawners = new List<Vector3d>();
+        private List<int> childSpawnType = new List<int>();
+        //------------------Graphics Globals------------------------------
+        private List<Point3d> particleList = new List<Point3d>();
+        private DataTree<Point3d> particleSet = new DataTree<Point3d>();
+        private DataTree<Point3d> particleBabyASet = new DataTree<Point3d>();
+        private DataTree<Point3d> particleBabyBSet = new DataTree<Point3d>();
+        private Random randomGen;
+        private BoundingBox _clippingBox;
+        private Vizualization viz = new Vizualization();
+        //-------------GH DOC Data---------------------------------------
+        private bool myBool = true;
 
+        private Engine_Global globalEngine;
+        //-------------Timer Data-----------------------------------------
+        private int cycles;
+        private Timer timer = new Timer();
+        //-------------Trail & Network Data-------------------------------
+        private DataTree<Point3d> trailTree;
+        private DataTree<Line> networkTree;
+        //-------------Child Tracker Data---------------------------------
+        private DataTree<Point3d> trailTree_ChildA;
+        private DataTree<Point3d> trailTree_ChildB;
+        #endregion     
         /// <summary>
         /// Initializes a new instance of the Creeper_Engine class.
         /// </summary>
-        public Creeper_Engine_Test()
-          : base("Creeper_Engine_Test", "CE",
-              "Engine Module Test Viz",
+        public Creeper_Engine_Dual()
+          : base("Creeper_Engine_Dual", "CED",
+              "Culebra Multi Object Engine",
               "Culebra_GH", "05 | Engine")
         {
         }
@@ -83,9 +119,11 @@ namespace Culebra_GH.Engine
             pManager.AddGenericParameter("Move Settings", "S", "Input the move settings output from the Move component", GH_ParamAccess.list);
             pManager.AddGenericParameter("Behavioral Settings", "BS", "Input the behavior settings output from the Controller component", GH_ParamAccess.item);
             pManager.AddGenericParameter("Visual Settings", "VS", "Input the visual settings output of Viz component", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Child Move Settings", "S", "Input the child move settings output from the Move component", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Child Behavioral Settings", "BS", "Input the child behavior settings output from the Controller component", GH_ParamAccess.item);
+            pManager.AddGenericParameter("Child Visual Settings", "VS", "Input the child visual settings output of Viz component", GH_ParamAccess.item);
             pManager.AddGenericParameter("Reset", "R", "Input a button to reset the sim and reset all fields", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -94,25 +132,36 @@ namespace Culebra_GH.Engine
             pManager.AddPointParameter("Creepers", "C", "Outputs the heads of the creepers", GH_ParamAccess.list);
             pManager.AddGenericParameter("Trails", "T", "Outputs data trees for each Creeper with its trail polyline", GH_ParamAccess.tree);
             pManager.AddGenericParameter("Connectivity", "CN", "Outputs curves connecting from creeper heads which indicate their search rad", GH_ParamAccess.list);
-            pManager.AddGenericParameter("BoundingBox", "BB", "Outputs the working bounds of the sim", GH_ParamAccess.item);
+            pManager.AddPointParameter("Child Creepers", "CC", "Outputs the heads of the child creepers", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Child A Trails", "CT", "Outputs data trees for Child Creeper Type A with its trail polyline", GH_ParamAccess.tree);
+            pManager.AddGenericParameter("Child B Trails", "CBT", "Outputs data trees for Child Creeper Type B with its trail polyline", GH_ParamAccess.tree);
         }
-
+        #region Solution Code
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            if (GH_Document.IsEscapeKeyDown())
+            {
+                GH_Document GHDocument = OnPingDocument();
+                GHDocument.RequestAbortSolution();
+                return;
+            }
+
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("culebra"));
             ikvm.runtime.Startup.addBootClassPathAssemby(Assembly.Load("IKVM.OpenJDK.Core"));
 
             bool reset = new bool();
-
             List<object> init_Settings = new List<object>();
             List<object> move_Settings = new List<object>();
+            List<object> child_move_Settings = new List<object>();
             IGH_VisualData visual_Settings = null;
+            IGH_VisualData child_visual_Settings = null;
 
             object behavioral_Settings = null;
+            object child_behavioral_Settings = null;
 
             if (!DA.GetDataList(0, init_Settings) || init_Settings.Count == 0 || init_Settings == null)
             {
@@ -123,27 +172,44 @@ namespace Culebra_GH.Engine
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Move Settings Detected, please connect Move Settings to enable the component");
                 return;
-            }        
+            }
             if (!DA.GetData(3, ref visual_Settings) || visual_Settings == null)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Visual Settings Detected, please connect Visual Settings to enable the component");
                 return;
-            }          
-            if (!DA.GetData(4, ref reset)) return;
+            }
+            if (!DA.GetDataList(4, child_move_Settings) || child_move_Settings.Count == 0 || child_move_Settings == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Child Move Settings Detected, please connect Move Settings to enable the component");
+                return;
+            }
+            if (!DA.GetData(7, ref reset)) return;
             Random rnd = new Random();
             if (!DA.GetData(2, ref behavioral_Settings) || behavioral_Settings == null)
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Input Object is Null");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Behavioral Settings Input Object is Null");
                 return;
             }
+            if (!DA.GetData(5, ref child_behavioral_Settings) || child_behavioral_Settings == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Child Behavioral Settings Input Object is Null");
+                return;
+            }
+            if (!DA.GetData(6, ref child_visual_Settings) || child_visual_Settings == null)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "No Child Visual Settings Detected, please connect Visual Settings to enable the component");
+                return;
+            }
+            //-----------Test if behavioral settings is of IGH_BehaviorData------
             string objtype = behavioral_Settings.GetType().Name.ToString();
-            if (!(behavioral_Settings.GetType() == typeof(IGH_BehaviorData)))
+            if (!(behavioral_Settings.GetType() == typeof(IGH_BehaviorData)) || !(child_behavioral_Settings.GetType() == typeof(IGH_BehaviorData)))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "You did not input a Behavior Data Object, please ensure input is Behavior Data Object and not " + objtype);
                 return;
             }
             else
             {
+                #region Initialize / Data Parse
                 //------------------------Init Settings--------------------------
                 if (init_Settings.Count != 0)
                 {
@@ -154,7 +220,6 @@ namespace Culebra_GH.Engine
                         GH_String value = (GH_String)init_Settings[0];
                         init_Convert = value.Value;
                     }
-
                     if (init_Convert == "Box")
                     {
                         this.spawnData = "box";
@@ -162,7 +227,6 @@ namespace Culebra_GH.Engine
                         GH_Convert.ToInt32(init_Settings[4], out this.spawnType, GH_Conversion.Primary);
                         GH_Convert.ToInt32(init_Settings[5], out this.pointCount, GH_Conversion.Primary);
                         GH_Convert.ToInt32(init_Settings[1], out this.dimensions, GH_Conversion.Primary);
-
                     }
                     else if (init_Convert == "Points")
                     {
@@ -170,8 +234,9 @@ namespace Culebra_GH.Engine
                         var wrapperToGoo = GH_Convert.ToGoo(init_Settings[3]);
                         wrapperToGoo.CastTo<List<Point3d>>(out this.ptList);
                         GH_Convert.ToInt32(init_Settings[1], out this.dimensions, GH_Conversion.Primary);
+                        GH_Convert.ToBox_Primary(init_Settings[4], ref this.box);
                     }
-                    GH_Convert.ToBoolean(init_Settings[2], out this.bounds, GH_Conversion.Primary);
+                    GH_Convert.ToInt32(init_Settings[2], out this.bounds, GH_Conversion.Primary);
                 }
                 //------------------------Move Settings--------------------------
                 Vector3d initialVector = new Vector3d();
@@ -181,15 +246,33 @@ namespace Culebra_GH.Engine
                     {
                         GH_Vector value = (GH_Vector)move_Settings[0];
                         initialVector = value.Value;
-                    }else if(move_Settings[0].GetType() == typeof(GH_Number))
+                    }
+                    else if (move_Settings[0].GetType() == typeof(GH_Number))
                     {
                         GH_Number value = (GH_Number)move_Settings[0];
                         this.initialSpeed = value.Value;
                     }
-                    //GH_Convert.ToDouble(move_Settings[0], out this.initialSpeed, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[1], out this.maxSpeed, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[2], out this.maxForce, GH_Conversion.Primary);
                     GH_Convert.ToDouble(move_Settings[3], out this.velMultiplier, GH_Conversion.Primary);
+                }
+                //------------------------Child Move Settings--------------------------
+                Vector3d child_initialVector = new Vector3d();
+                if (child_move_Settings.Count != 0)
+                {
+                    if (child_move_Settings[0].GetType() == typeof(GH_Vector))
+                    {
+                        GH_Vector value = (GH_Vector)child_move_Settings[0];
+                        child_initialVector = value.Value;
+                    }
+                    else if (child_move_Settings[0].GetType() == typeof(GH_Number))
+                    {
+                        GH_Number value = (GH_Number)child_move_Settings[0];
+                        this.child_initialSpeed = value.Value;
+                    }
+                    GH_Convert.ToDouble(child_move_Settings[1], out this.child_maxSpeed, GH_Conversion.Primary);
+                    GH_Convert.ToDouble(child_move_Settings[2], out this.child_maxForce, GH_Conversion.Primary);
+                    GH_Convert.ToDouble(child_move_Settings[3], out this.child_velMultiplier, GH_Conversion.Primary);
                 }
                 //------------------------Visual Settings--------------------------
                 TrailData td = visual_Settings.Value.trailData;
@@ -200,6 +283,7 @@ namespace Culebra_GH.Engine
                 this.maxTrailSize = td.maxTrailSize;
                 this.particleTexture = cd.particleTexture;
                 this.graphicType = cd.colorDataType;
+                this.useTexture = visual_Settings.Value.useTexture;
                 if (cd.colorDataType == "Gradient")
                 {
                     this.maxthick = cd.maxThickness;
@@ -210,51 +294,108 @@ namespace Culebra_GH.Engine
                     this.greenValues[1] = cd.greenChannel[1];
                     this.blueValues[0] = cd.blueChannel[0];
                     this.blueValues[1] = cd.blueChannel[1];
-                } else if (cd.colorDataType == "GraphicPolyline")
+                }
+                else if (cd.colorDataType == "GraphicPolyline")
                 {
                     this.polylineColor = cd.color;
                     this.dotted = cd.dotted;
                     this.maxthick = cd.maxThickness;
-                } else if (cd.colorDataType == "Disco")
+                }
+                else if (cd.colorDataType == "Disco")
                 {
                     this.maxthick = cd.maxThickness;
                     this.minthick = cd.minThickness;
+                }else if(cd.colorDataType == "Base")
+                {
+                    this.maxthick = 3;
+                    this.minthick = 1;
+                }
+                //------------------------Child Visual Settings--------------------------
+                TrailData ctd = child_visual_Settings.Value.trailData;
+                ColorData ccd = child_visual_Settings.Value.colorData;
+                this.child_trail = ctd.createTrail;
+                this.child_displayMode = child_visual_Settings.Value.displayMode;
+                this.child_trailStep = ctd.trailStep;
+                this.child_maxTrailSize = ctd.maxTrailSize;
+                this.child_particleTexture = ccd.particleTexture;
+                this.child_graphicType = ccd.colorDataType;
+                this.child_useTexture = child_visual_Settings.Value.useTexture;
+                if (ccd.colorDataType == "Gradient")
+                {
+                    this.child_maxthick = ccd.maxThickness;
+                    this.child_minthick = ccd.minThickness;
+                    this.child_redValues[0] = ccd.redChannel[0];
+                    this.child_redValues[1] = ccd.redChannel[1];
+                    this.child_greenValues[0] = ccd.greenChannel[0];
+                    this.child_greenValues[1] = ccd.greenChannel[1];
+                    this.child_blueValues[0] = ccd.blueChannel[0];
+                    this.child_blueValues[1] = ccd.blueChannel[1];
+                }
+                else if (ccd.colorDataType == "GraphicPolyline")
+                {
+                    this.child_polylineColor = ccd.color;
+                    this.child_dotted = ccd.dotted;
+                    this.child_maxthick = ccd.maxThickness;
+                }
+                else if (ccd.colorDataType == "Disco")
+                {
+                    this.child_maxthick = ccd.maxThickness;
+                    this.child_minthick = ccd.minThickness;
+                }
+                else if (ccd.colorDataType == "Base")
+                {
+                    this.child_maxthick = 3;
+                    this.child_minthick = 1;
                 }
                 //-----------------------------------------------------------------
-                this.bb = new BoundingBox();
-                int loopCount = new int();
-                bool create = new bool();
-                if (this.spawnData == "box")
+                IGH_PreviewObject comp = (IGH_PreviewObject)this;
+                if (comp.Hidden && (this.displayMode == 0 || this.child_displayMode == 0))
                 {
-                    this.bb = this.box.BoundingBox;
-                    loopCount = this.pointCount;
-                    create = true;
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Component preview must be enabled to see Graphic Mode on Canvas, right click on component and set preview on");
                 }
-                else if (this.spawnData == "Points")
-                {
-                    loopCount = this.ptList.Count;
-                    create = false;
-                    this.bounds = false;
-                }
+                #endregion
+                #region Pre Simulation Code
                 //------------------------RESET STARTS HERE--------------------------
                 if (reset)
                 { //we are using the reset to reinitialize all the variables and positions to pass to the class once we are running
+                    //-----------------------------------------------------------------
+                    this.bb = new BoundingBox();
+                    int loopCount = new int();
+                    bool create = new bool();
+                    if (this.spawnData == "box")
+                    {
+                        this.bb = this.box.BoundingBox;
+                        loopCount = this.pointCount;
+                        create = true;
+                    }
+                    else if (this.spawnData == "Points")
+                    {
+                        loopCount = this.ptList.Count;
+                        create = false;
+                        this.bb = this.box.BoundingBox;
+                    }
+                    //-----------------------------------------------------------------
+                    this.globalEngine = new Engine_Global();
+                    this.cycles = 0;
 
                     this.moveList = new List<Vector3d>();
                     this.startList = new List<Vector3d>();
                     this.creepList = new List<CulebraObject>();
                     this.currentPosList = new List<Point3d>();
                     this.networkList = new List<Line>();
-
-                    totTail = new List<Vector3d>();
+                    //----------Children Data------------
+                    this.childSpawners = new List<Vector3d>();
+                    this.childSpawnType = new List<int>();
+                    //-------Self Tail Chase Data--------
+                    flattenedTrails = new List<Vector3d>();
 
                     for (int i = 0; i < loopCount; i++)
                     {
                         if (this.dimensions == 0)
-                        { //IF WE WANT 2D
+                        { //If we want 2D
                             General.setViewport("Top", "Shaded");
                             if (create)
-                            {
+                            { //If are creating random points inside bbox
                                 if (this.spawnType == 0 || this.spawnType == 2)
                                 {
                                     this.startPos = new Vector3d((int)bb.Min[0], rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn along the y axis of the bounding area
@@ -263,8 +404,7 @@ namespace Culebra_GH.Engine
                                 {
                                     this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), 0); //spawn randomly inside the bounding area
                                 }
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
-                                if(initialVector.Length > 0)
+                                if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
                                 }
@@ -274,10 +414,8 @@ namespace Culebra_GH.Engine
                                 }
                             }
                             else
-                            {
+                            { //If we are using user defined points  
                                 this.startPos = (Vector3d)this.ptList[i];
-                                this.bb.Union(this.ptList[i]);
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
@@ -289,11 +427,12 @@ namespace Culebra_GH.Engine
                             }
                             this.creep = new Creeper(this.startPos, this.moveVec, true, false);
                             this.creepList.Add(this.creep);
-                        }else
-                        {
+                        }
+                        else
+                        { //If we want 3D
                             General.setViewport("Perspective", "Shaded");
                             if (create)
-                            {
+                            { //If are creating random points inside bbox
                                 if (this.spawnType == 0 || this.spawnType == 2)
                                 {
                                     this.startPos = new Vector3d(rnd.Next((int)bb.Min[0], (int)bb.Max[0]), rnd.Next((int)bb.Min[1], (int)bb.Max[1]), (int)bb.Min[2]); //start randomly on the lowest plane of the 3d bounds
@@ -320,10 +459,8 @@ namespace Culebra_GH.Engine
                                 }
                             }
                             else
-                            {
+                            { //If we are using user defined points  
                                 this.startPos = (Vector3d)this.ptList[i];
-                                this.bb.Union(this.ptList[i]);
-                                //this.moveVec = new Vector3d(moveValue, 0, 0); //move to the right only   
                                 if (initialVector.Length > 0)
                                 {
                                     this.moveVec = initialVector; //move in the user specified direction 
@@ -341,165 +478,75 @@ namespace Culebra_GH.Engine
                     }
                     DA.SetDataList(0, this.startList);
                 }
+                #endregion
+                #region Simulation Code
                 else
-                {
+                {                                  
                     this.particleSet = new DataTree<Point3d>();
-
+                    this.particleBabyASet = new DataTree<Point3d>();
+                    this.particleBabyBSet = new DataTree<Point3d>();
                     this.currentPosList = new List<Point3d>();
-                    DataTree<Point3d> trailTree = new DataTree<Point3d>();
-                    DataTree<Line> networkTree = new DataTree<Line>();
+                    this.trailTree = new DataTree<Point3d>();
+                    this.networkTree = new DataTree<Line>();
+                    //-------------Child Tracker Data----------
+                    this.trailTree_ChildA = new DataTree<Point3d>();
+                    this.trailTree_ChildB = new DataTree<Point3d>();                  
+                    //-----------------------------------------
                     if (this.moveList == null) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Please Reset the CreepyCrawlers Component"); return; }
-                    int counter = 0;
-                    
-                    foreach (Creeper c in this.creepList)
+                    try
                     {
-                        this.networkList = new List<Line>();
-                        c.attributes.SetMoveAttributes((float)maxSpeed, (float)maxForce, (float)velMultiplier);
-                        IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)behavioral_Settings;
-                        foreach (string s in igh_Behavior.Value.dataOrder)
-                        {
-                            if (s == "Flocking")
-                            {
-                                if (this.dimensions == 0)
-                                {
-                                    c.behaviors.Flock2D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, this.creepList, igh_Behavior.Value.flockData.network);
-                                }
-                                else if(this.dimensions == 1)
-                                {
-                                    c.behaviors.Flock3D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, this.creepList, igh_Behavior.Value.flockData.network);
-                                }
-                            }
-                            else if (s == "Wandering")
-                            {
-                                if (this.dimensions == 0)
-                                {
-                                    if(igh_Behavior.Value.wanderData.wanderingType == "Wander")
-                                    {
-                                        c.behaviors.Wander2D(igh_Behavior.Value.wanderData.randomize, igh_Behavior.Value.wanderData.addHeading, igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance);
-                                    }else
-                                    {
-                                        c.behaviors.SuperWander2D(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
-                                    }
-                                }
-                                else if (this.dimensions == 1)
-                                {
-                                    if (igh_Behavior.Value.wanderData.wanderingType == "SuperWander_B")
-                                    {
-                                        c.behaviors.Wander3D_subA(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
-                                    }
-                                    else if (igh_Behavior.Value.wanderData.wanderingType == "SuperWander_C")
-                                    {
-                                        c.behaviors.Wander3D_subB(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
-                                    }else
-                                    {
-                                        c.behaviors.Wander3D(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
-                                    }
-                                }
-                            }else if( s == "Tracking")
-                            {
-                                c.behaviors.MultiPolylineTracker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius);
-                            }else if( s == "Stigmergy")
-                            {
-                                this.totTail.AddRange(c.attributes.GetTrailVectors());
-                                c.behaviors.SelfTailChase(igh_Behavior.Value.stigmergyData.viewAngle, igh_Behavior.Value.stigmergyData.cohesionMagnitude, igh_Behavior.Value.stigmergyData.cohesionRange, igh_Behavior.Value.stigmergyData.separationMagnitude, igh_Behavior.Value.stigmergyData.separationRange, totTail);
-                            }else if( s == "Noise")
-                            {
-                                c.behaviors.Perlin(igh_Behavior.Value.noiseData.scale, igh_Behavior.Value.noiseData.strength, igh_Behavior.Value.noiseData.multiplier, igh_Behavior.Value.noiseData.velocity);
-                            }else if (s == "Separation")
-                            {
-                                c.behaviors.Separate(igh_Behavior.Value.separationData.maxSeparation, this.creepList);
-                            }else if (s == "Force")
-                            {
-                                int forceAmount = igh_Behavior.Value.forceData.Count;
-                                for (int i = 0; i < forceAmount; i++)
-                                {
-                                    if (igh_Behavior.Value.forceData[i].forceType == "Attract")
-                                    {
-                                        int attCount = 0;
-                                        foreach (Point3d p in igh_Behavior.Value.forceData[i].targets)
-                                        {
-                                            c.behaviors.Attract((Vector3d)p, igh_Behavior.Value.forceData[i].thresholds[attCount], igh_Behavior.Value.forceData[i].attractionValue, igh_Behavior.Value.forceData[i].maxAttraction);
-                                            attCount++;
-                                        }
-                                    }
-                                    else if (igh_Behavior.Value.forceData[i].forceType == "Repel")
-                                    {
-                                        int attCount = 0;
-                                        foreach (Point3d p in igh_Behavior.Value.forceData[i].targets)
-                                        {
-                                            c.behaviors.Repel((Vector3d)p, igh_Behavior.Value.forceData[i].thresholds[attCount], igh_Behavior.Value.forceData[i].repelValue, igh_Behavior.Value.forceData[i].maxRepel);
-                                            attCount++;
-                                        }
-                                    }
-                                }
-                            }
-                            else { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Houston we have a problem, no behavior data read"); return; }
-                        }
-                        GH_Path path = new GH_Path(counter);
-                        if (this.displayMode == 0)
-                        {              
-                            particleList.Add(c.attributes.GetLocation());
-                            this.particleSet.AddRange(c.attributes.GetTrailPoints(), path);
-                        }
-                        if (this.displayMode == 1)
-                        {
-                            List<Vector3d> testList = c.attributes.GetNetwork();
-                            if (testList.Count > 0)
-                            {
-                                foreach (Vector3d v in testList)
-                                {
-                                    Line l = new Line(c.attributes.GetLocation(), (Point3d)v);
-                                    networkList.Add(l);
-                                }
-                                networkTree.AddRange(networkList, path);
-                            }
-                        }
-                        c.actions.Move(this.trailStep, this.maxTrailSize);
-                        if (this.bounds)
-                        {
-                            if(this.dimensions == 0) { c.actions.Bounce(bb); }
-                            else if(this.dimensions == 1) { c.actions.Bounce3D(bb); }
-                        }
-                        this.currentPosList.Add(c.attributes.GetLocation());
-                        if (this.displayMode == 1)
-                        {
-                            if (this.trail) { trailTree.AddRange(c.attributes.GetTrailPoints(), path); }
-                        }
-                        counter++;
+                        globalEngine.Action(this.creepList, this.dimensions, behavioral_Settings, this.displayMode, this.networkList,
+                            this.maxSpeed, this.maxForce, this.velMultiplier, this.flattenedTrails, this.particleList, this.particleSet, networkTree, trailStep, maxTrailSize, bounds, bb, currentPosList, trail, trailTree,
+                            child_maxSpeed, child_maxForce, child_velMultiplier, child_behavioral_Settings, child_displayMode, child_trail, child_trailStep,
+                            child_maxTrailSize, particleBabyASet, particleBabyBSet, trailTree_ChildA, trailTree_ChildB);
+                    }catch(Exception e)
+                    {
+                        AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.Message.ToString());
+                        return;
                     }
-                                      
+                    #region Set all outputs
                     DA.SetDataList(0, this.currentPosList);
-                    if (this.displayMode == 1)
+                    DA.SetDataTree(2, networkTree);
+                    if (this.displayMode == 1 && this.trail)
                     {                     
-                        if (this.trail) { DA.SetDataTree(1, trailTree); }
-                        DA.SetDataTree(2, networkTree);
-                    }                 
-                    this.totTail.Clear();
+                        DA.SetDataTree(1, trailTree); 
+                    }
+                    if (this.child_displayMode == 1 && this.child_trail)
+                    {
+                        DA.SetDataTree(4, trailTree_ChildA);
+                        DA.SetDataTree(5, trailTree_ChildB);                      
+                    }
+                    this.flattenedTrails.Clear();
+                    this.flattenedTrails.TrimExcess();
+                    #endregion
+                    this.cycles++;                 
                 }
+                #endregion
             }
+            timer.DisplayMessage(this, "Double", this.cycles, this.myBool);
         }
-
-        public List<Point3d> particleList = new List<Point3d>();
-        public DataTree<Point3d> particleSet = new DataTree<Point3d>();
-
-        public Random randomGen = new Random();
-        public Color randomColorAction = new Color();
-        private BoundingBox _clippingBox;
-
-        public Vizualization viz = new Vizualization();
-
+        #endregion
+        #region Visualization
         protected override void BeforeSolveInstance()
         {
             if (this.displayMode == 0)
             {
                 this.particleList.Clear();
-                this.particleSet.Clear();
+                _clippingBox = BoundingBox.Empty;
+            }
+            if (this.child_displayMode == 0)
+            {
+                this.particleList.Clear();
                 _clippingBox = BoundingBox.Empty;
             }
         }
         protected override void AfterSolveInstance()
         {
             if (this.displayMode == 0)
+            {
+                _clippingBox = new BoundingBox(particleList);
+            }
+            if (this.child_displayMode == 0)
             {
                 _clippingBox = new BoundingBox(particleList);
             }
@@ -513,28 +560,78 @@ namespace Culebra_GH.Engine
         }
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
-            if (this.displayMode == 0 )
+            if (this.displayMode == 0)
             {
-                if(this.particleTexture == string.Empty)
+                if (this.useTexture)
                 {
-                   this.particleTexture = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + @"\Grasshopper\Libraries\Culebra_GH\textures\texture.png";
+                    if (this.particleTexture == string.Empty)
+                    {
+                        this.particleTexture = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + @"\Grasshopper\Libraries\Culebra_GH\textures\texture.png";
+                    }
+                    viz.DrawSprites(args, particleTexture, particleList);
                 }
-                //viz.DrawSprites(args, particleTexture, particleList);
                 if (this.trail)
                 {
-                    if(this.graphicType == "Gradient")
+                    if (this.graphicType == "Gradient")
                     {
                         viz.DrawGradientTrails(args, particleSet, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
-                    }else if(this.graphicType == "GraphicPolyline")
+                    }
+                    else if (this.graphicType == "GraphicPolyline")
                     {
                         viz.DrawPolylineTrails(args, particleSet, this.dotted, this.maxthick, this.polylineColor);
-                    }else if(this.graphicType == "Disco")
+                    }
+                    else if (this.graphicType == "Disco")
                     {
+                        this.randomGen = new Random();
                         viz.DrawDiscoTrails(args, particleSet, randomGen, this.minthick, this.maxthick);
+                    }else if (this.graphicType == "Base")
+                    {
+                        viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                    }
+                }
+            }
+            if (this.child_displayMode == 0)
+            {
+                if (this.child_trail)
+                {
+                    if (this.child_graphicType == "Gradient")
+                    {
+                        viz.DrawGradientTrails(args, particleBabyASet, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, particleBabyBSet, (float)this.child_redValues[0], (float)this.child_redValues[1], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                    }
+                    else if (this.child_graphicType == "GraphicPolyline")
+                    {
+                        viz.DrawPolylineTrails(args, particleBabyASet, this.child_dotted, this.child_maxthick, this.child_polylineColor);
+                        viz.DrawPolylineTrails(args, particleBabyBSet, this.child_dotted, this.child_maxthick, this.child_polylineColor);
+                    }
+                    else if (this.child_graphicType == "Disco")
+                    {
+                        this.randomGen = new Random();
+                        viz.DrawDiscoTrails(args, particleBabyASet, randomGen, this.child_minthick, this.child_maxthick);
+                        this.randomGen = new Random();
+                        viz.DrawDiscoTrails(args, particleBabyBSet, randomGen, this.child_minthick, this.child_maxthick);
+                    }else if(this.child_graphicType == "Base")
+                    {
+                        viz.DrawGradientTrails(args, this.particleBabyASet, 1, this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, this.particleBabyBSet, 2, this.child_minthick, this.child_maxthick);
                     }
                 }
             }
         }
+        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
+        {
+            base.AppendAdditionalComponentMenuItems(menu);
+            Menu_AppendItem(menu, "Display Component Data", Menu_DoClick);
+        }
+        private void Menu_DoClick(object sender, EventArgs e)
+        {
+            myBool = !myBool;
+        }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
+        }
+        #endregion
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -542,9 +639,7 @@ namespace Culebra_GH.Engine
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Engine_CreepyCrawlers_A;
             }
         }
         /// <summary>
@@ -552,7 +647,7 @@ namespace Culebra_GH.Engine
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("08d1cf36-17ab-4576-a4e5-7c0724ab8eb8"); }
+            get { return new Guid("dfb426a8-13c4-40c7-be21-5179dd3ff1e5"); }
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Rhino.Geometry;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Culebra_GH.Data_Structures
 {
+    /// <summary>
+    /// Forces Data Structure
+    /// </summary>
     public struct ForceData
     {
         public List<Point3d> targets { get; set; }

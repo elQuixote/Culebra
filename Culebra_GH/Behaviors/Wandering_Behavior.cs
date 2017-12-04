@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using Culebra_GH.Data_Structures;
 
 namespace Culebra_GH.Behaviors
@@ -13,8 +10,8 @@ namespace Culebra_GH.Behaviors
         /// Initializes a new instance of the Wandering_Behavior class.
         /// </summary>
         public Wandering_Behavior()
-          : base("Wandering", "Nickname",
-              "Description",
+          : base("Wandering", "WA",
+              "2D Wandering Algorithm, Wandering is a type of random steering which has some long term order. Force Values from Move Settings have a strong effect on behavior",
               "Culebra_GH", "03 | Behaviors")
         {
         }
@@ -25,18 +22,21 @@ namespace Culebra_GH.Behaviors
                 return GH_Exposure.secondary;
             }
         }
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new Utilities.CustomAttributes(this, 0);
+        }
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Randomize", "R", "R", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Add Heading", "AH", "AH", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Change", "C", "C", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Radius", "WR", "WR", GH_ParamAccess.item);
-            pManager.AddNumberParameter("Wander Distance", "WD", "WD", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Randomize", "R", "Input value specifying if change value will be randomly selected from-change value to change value each frame", GH_ParamAccess.item, true);
+            pManager.AddBooleanParameter("Add Heading", "AH", "Input value specifying if we want to add the heading", GH_ParamAccess.item, true);
+            pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item, 100.0);
+            pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item, 20.0);
+            pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item, 80.0);
         }
-
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
@@ -44,7 +44,6 @@ namespace Culebra_GH.Behaviors
         {
             pManager.AddGenericParameter("Wandering Behavior", "WB", "The Wandering Behavior Data Structure", GH_ParamAccess.item);
         }
-
         /// <summary>
         /// This is the method that actually does the work.
         /// </summary>
@@ -69,7 +68,6 @@ namespace Culebra_GH.Behaviors
 
             DA.SetData(0, wanderData);
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -77,12 +75,9 @@ namespace Culebra_GH.Behaviors
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
-                return null;
+                return Culebra_GH.Properties.Resources.Wandering;
             }
         }
-
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
         /// </summary>
