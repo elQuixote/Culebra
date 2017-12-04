@@ -34,7 +34,7 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Change", "C", "Input value specifying the incremented change value used to get the polar coordinates.", GH_ParamAccess.item, 100.0);
             pManager.AddNumberParameter("Radius", "WR", "Input value specifying the radius for the wandering circle", GH_ParamAccess.item, 60.0);
             pManager.AddNumberParameter("Distance", "WD", "Input the distance for the wander circle, this is a projection value in the direction of the objects speed vector.", GH_ParamAccess.item, 60.0);
-            pManager.AddNumberParameter("Rotation Trigger", "RT", "this value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value.", GH_ParamAccess.item, 6.0);
+            pManager.AddNumberParameter("Rotation Trigger", "RT", "This value is compared against each movement step. If rotationTrigger value > iteration count then we will reverse the change value", GH_ParamAccess.item, 6.0);
             pManager.AddIntegerParameter("Type", "T", "Input value specifying the type of Wandering (0 = Type A | 1 = Type B | 2 = Type C", GH_ParamAccess.item, 0);
         }
         /// <summary>
