@@ -38,8 +38,6 @@ namespace Culebra_GH.Behaviors
             pManager.AddNumberParameter("Cohesion Range", "CR", "Input float value for cohesion threshold, value within range will enable tailCohMag", GH_ParamAccess.item, 80.0);
             pManager.AddNumberParameter("Separation Mag", "SM", "Input float value for separation value to avoids crowding on trail", GH_ParamAccess.item, 0.0);
             pManager.AddNumberParameter("Separation Range", "SR", "Input float value for separation threshold, value within range will enable tailSepMag", GH_ParamAccess.item, 5.0);
-
-            pManager[5].Optional = true;
         }
         /// <summary>
         /// Registers all the output parameters for this component.

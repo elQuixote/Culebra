@@ -8,6 +8,7 @@ using System.Drawing;
 using CulebraData.Drawing;
 using Culebra_GH.Data_Structures;
 using CulebraData.Behavior.Types;
+using Culebra_GH.Utilities;
 
 namespace Culebra_GH.Engine
 {
@@ -46,6 +47,11 @@ namespace Culebra_GH.Engine
         public Color randomColorAction = new Color();
         private BoundingBox _clippingBox;
         public Vizualization viz = new Vizualization();
+        //------------------Component Message Globals--------------------
+        private Timer timer = new Timer();
+        private int cycles;
+        public bool myBool = true;
+
         #endregion
         /// <summary>
         /// Initializes a new instance of the Bundling_Engine class.
@@ -157,6 +163,7 @@ namespace Culebra_GH.Engine
             //-----------------------------------------------------------------
             if (reset)
             {
+                this.cycles = 0;
                 this.crvList = new List<Curve>();
                 this.crvList = curves;
                 DA.SetDataList(0, crvList);
@@ -206,13 +213,17 @@ namespace Culebra_GH.Engine
                 {
                     DA.SetDataList(0, this.crvList);
                 }
+                this.cycles++;
             }
+            timer.DisplayMessage(this, "Bundling", this.cycles, this.myBool);
         }
         #endregion
         #region Visuals
         protected override void BeforeSolveInstance()
         {
             this.particleList.Clear();
+            this.particleSet.Clear();
+
             if (this.displayMode == 0)
             {
                 _clippingBox = BoundingBox.Empty;
@@ -265,6 +276,15 @@ namespace Culebra_GH.Engine
                     }
                 }
             }
+        }
+        protected override void AppendAdditionalComponentMenuItems(System.Windows.Forms.ToolStripDropDown menu)
+        {
+            base.AppendAdditionalComponentMenuItems(menu);
+            Menu_AppendItem(menu, "Display Component Data", Menu_DoClick);
+        }
+        private void Menu_DoClick(object sender, EventArgs e)
+        {
+            myBool = !myBool;
         }
         public override void CreateAttributes()
         {

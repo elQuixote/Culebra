@@ -114,7 +114,7 @@
     <Compile Include="Data Structures\WanderingData.cs" />
     <Compile Include="Engine\Bundling_Engine.cs" />
     <Compile Include="Engine\Creeper_Engine_Dual.cs" />
-    <Compile Include="Engine\Creeper_Engine_Zombie_Test.cs" />
+    <Compile Include="Engine\Creeper_Engine_Zombie.cs" />
     <Compile Include="Engine\Engine_Global.cs" />
     <Compile Include="Engine\Creeper_Engine.cs" />
     <Compile Include="Objects\IGH_VisualData.cs" />

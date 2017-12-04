@@ -99,7 +99,7 @@ namespace Culebra_GH.Engine
         /// </summary>
         public Creeper_Engine_Dual()
           : base("Creeper_Engine_Dual", "CED",
-              "Engine Module Test Viz",
+              "Culebra Multi Object Engine",
               "Culebra_GH", "05 | Engine")
         {
         }

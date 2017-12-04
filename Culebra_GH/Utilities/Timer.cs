@@ -72,8 +72,12 @@ namespace Culebra_GH.Utilities
                 else if (engineType == "Double")
                 {
                     thisobj.Message = "Multi Creeper Engine | Cycles : " + cycles;
+                }else if(engineType == "Bundling")
+                {
+                    thisobj.Message = "Bundling Engine | Cycles : " + cycles;
                 }
-            }else
+            }
+            else
             {
                 thisobj.Message = "";
             }
