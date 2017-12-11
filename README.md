@@ -12,7 +12,7 @@ The Culebra 2.0 installer will install both the core library <code>CulebraData.d
 * Visual Studio – Use the Culebra Objects and Controller through the use of the <code>CulebraData.dll</code> (Recommended)
 * Visual Studio – Create your own objects and simply implement behavior classes individually. 
 * Visual Studio – Create your own objects and inherit from Culebra Objects. This will provide access to the controller and all classes, through the use of the <code>CulebraData.dll</code>
-* Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with IKVM.JDK.Core.dll in GH scripting environment
+* Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with <code>IKVM.JDK.Core.dll</code> in GH scripting environment
 
 ### IVKM Dependencies ###
 IKVM.NET is an implementation of Java for [Mono](http://www.mono-project.com/) and the [Microsoft.NET Framework](https://www.microsoft.com/net). It includes the following components:
@@ -20,10 +20,10 @@ IKVM.NET is an implementation of Java for [Mono](http://www.mono-project.com/) a
 * A .NET implementation of the Java class libraries
 * Tools that enable Java and .NET interoperability
 
-The IKVMC tool generates .NET assemblies from Java jar files. It converts Java bytecode to .NET dll's. The culebra.dll was created this was from the culebra.jar library and will be automatically installed in your %appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder along with all of the required IKVM dependecies by the Culebra 2.0 installer.
+The IKVMC tool generates .NET assemblies from Java jar files. It converts Java bytecode to .NET dll's. The <code>culebra.dll</code> was created this was from the <code>culebra.jar</code> library and will be automatically installed in your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH</code> folder along with all of the required IKVM dependecies by the Culebra 2.0 installer.
 
 ### Building from Source ###
-If you wish to contribute to the project you will need to compile Culebra on your own system. Culebra.NET is built against .NET 4.0 so you will need to use Visual Studio 2010 or later. To resolve dependencies simply drop your Rhinocommon.dll, Grasshopper.dll, GH_IO.dll into the libs/ folder or you could  use the dll's included in the libs/ folder. The required dependencies below will be included in the libs folder so you should not have to search for them.  
+If you wish to contribute to the project you will need to compile Culebra on your own system. Culebra.NET is built against .NET 4.0 so you will need to use Visual Studio 2010 or later. To resolve dependencies simply drop your <code>Rhinocommon.dll</code>, <code>Grasshopper.dll</code>, <code>GH_IO.dll</code> into the libs/ folder or you could  use the dll's included in the libs/ folder. The required dependencies below will be included in the libs folder so you should not have to search for them.  
 * core.dll
 * culebra.dll
 * toxiclibscore.dll 
@@ -35,7 +35,7 @@ If you wish to contribute to the project you will need to compile Culebra on you
 The visual studio solution includes 2 projects:
 * Culebra_GH (update the build path to your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder</code>)
 * CulebraData
-If you specify a different build path for your Culebra_GH project then you must replace the CulebraData.dll and the Culebra_2.0_GH.gha in your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder</code>
+If you specify a different build path for your Culebra_GH project then you must replace the <code>CulebraData.dll</code> and the <code>Culebra_2.0_GH.gha</code> in your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder</code>
 
 --------------------------------------------------------------
 
@@ -75,8 +75,8 @@ Version 2.0 Beta updates include
 
 #### Culebra 2.0 Beta – Requires Rhino 5.0 & Grasshopper Version 0.9.0076 ####
 * View the [Installation Notes](http://culebra.technology/Culebra_2.0_InstallationNotes.pdf) and [Culebra 2.0 Beta GH User Guide](http://culebra.technology/Culebra_2.0_UserGuide.pdf)
-* [Download Culebra.NET Library Documentation](http://www.food4rhino.com/app/culebra) 
-* [Download Culebra 2.0 GH Demo Files](http://www.food4rhino.com/app/culebra) 
+* [Download Culebra.NET Library Documentation](http://culebra.technology/Culebra_LibraryDocs.zip) 
+* [Download Culebra 2.0 GH Demo Files](http://culebra.technology/Culebra_DemoFiles.zip) 
 * [Download Culebra 2.0 BETA](http://www.food4rhino.com/app/culebra) 
 
 #### For more specific details see the Class Diagram Below ####
@@ -90,4 +90,4 @@ Version 2.0 Beta updates include
 
 * Thanks to Craig Reynolds for all of his work on boid behavior
 * Big thanks to Daniel Shiffman, his work has been very inspirational and referenced in this library.
-* David Rutten for all of the custom component attributes used to generate the component colors
+* Thanks to David Rutten for all of the custom component attributes used to generate the component colors
