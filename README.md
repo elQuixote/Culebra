@@ -3,13 +3,13 @@
 #### CULEBRA.NET LIBRARY FOR RHINO/GH INTRODUCTION ####
 Culebra.NET is a 2D|3D Multi Object Behavior library written in C# ([Wrapper around Culebra Java library](https://github.com/elQuixote/Culebra_Java)) focused on hybrid system interactions with custom Visualization, Data, and performance features. It contains a collection of objects and behaviors for creating dynamic multi agent interactions. For more information see the [Culebra Java Library](https://github.com/elQuixote/Culebra_Java).
 
-#####WAYS TO USE CULEBRA#####
+##### WAYS TO USE CULEBRA #####
 * Visual Studio – Use the Culebra Objects and Controller through the use of the CulebraData.dll (Recommended)
 * Visual Studio – Create your own objects and simply implement behavior classes individually. 
 * Visual Studio – Create your own objects and inherit from Culebra Objects. This will provide access to the controller and all classes, through the use of the CulebraData.dll
 * Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with IKVM.JDK.Core.dll in GH scripting environment
 
-#####CULEBRA 2.0 BETA GHA (GRASSHOPPER PLUGIN)#####
+##### CULEBRA 2.0 BETA GHA (GRASSHOPPER PLUGIN) #####
 The Culebra grasshopper plugin was rewritten to implement a slew of new behaviors through the use CulebraData.dll which is a wrapper around the Culebra Java Library.
 *Version 2.0 Beta updates include
 *Wandering Behaviors
@@ -24,10 +24,10 @@ The Culebra grasshopper plugin was rewritten to implement a slew of new behavior
 *Zombie Engine
 *Behavior Chaining with Controller
 
-#####The Controller#####
+##### The Controller #####
 * Controller Class - this is the class which acts as controller for all behaviors classes. This class also builds on behaviors, using image drivers and other features which are not in the stock behavior classes. See Java Class Diagram for more details.
 
-#####There are 7 Major Types of Behaviors which can be hybridized anyway your heart desires.#####
+##### There are 7 Major Types of Behaviors which can be hybridized anyway your heart desires. #####
 * Flocking Behavior - Flockers Behavior Type Class Implements Flock Behavior Interface
 * Wandering Behavior - Wanderer Behavior Type Class Implements Wander Behavior Interface, the base Wander behavior is from Craig Reynolds and Daniel Shiffman.
 * Noise Behavior - Improved Perlin Noise Behavior Type Class Implements Noise Behavior Interface. 
@@ -38,13 +38,13 @@ The Culebra grasshopper plugin was rewritten to implement a slew of new behavior
 
 #### RELEASES ####
 
-#####Culebra 2.0 Beta – Requires Rhino 5.0 & Grasshopper Version 0.9.0076#####
+##### Culebra 2.0 Beta – Requires Rhino 5.0 & Grasshopper Version 0.9.0076 #####
 * View the [Installation Notes](http://culebra.technology/Culebra_2.0_InstallationNotes.pdf) and [Culebra 2.0 Beta GH User Guide](http://culebra.technology/Culebra_2.0_UserGuide.pdf)
 * [Download Culebra.NET Library Documentation](http://www.food4rhino.com/app/culebra) 
 * [Download Culebra 2.0 GH Demo Files](http://www.food4rhino.com/app/culebra) 
 * [Download Culebra 2.0 BETA](http://www.food4rhino.com/app/culebra) 
 
-#####For more specific details see the Class Diagram Below####
+##### For more specific details see the Class Diagram Below ####
 
 #### CLASS DIAGRAMS ####
 [![IMAGE](images/Culebra_ClassDiagram_Small.jpg)](http://www.culebra.technology/culebra-1/Culebra_ClassDiagram.jpg)
