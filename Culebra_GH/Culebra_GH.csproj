@@ -133,15 +133,6 @@
     <Compile Include="Settings_Visual\Visual_Settings.cs" />
     <Compile Include="SpawnTypes\Spawn_Box.cs" />
     <Compile Include="SpawnTypes\Spawn_Point.cs" />
-    <Compile Include="Tests\Component_Test_Conduit.cs" />
-    <Compile Include="Tests\ComponentTest_IMP.cs" />
-    <Compile Include="Tests\Component_Test_Behaviors.cs" />
-    <Compile Include="Tests\Component_Test_Conduit_Mod.cs" />
-    <Compile Include="Tests\Component_Test_MapBehavior.cs" />
-    <Compile Include="Tests\Component_Test_MultiPolylineTracker.cs" />
-    <Compile Include="Tests\Component_Test_MultiPolylineTrackerBabies.cs" />
-    <Compile Include="Tests\Component_Test_PolylineTracker.cs" />
-    <Compile Include="Tests\Component_Test_SelfTailChasers.cs" />
     <Compile Include="Culebra_GHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CustomAttributes.cs" />
