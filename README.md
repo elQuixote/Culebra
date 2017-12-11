@@ -5,28 +5,33 @@ Culebra.NET is a 2D|3D Multi Object Behavior library written in C# ([Wrapper aro
 
 --------------------------------------------------------------
 
-#### WAYS TO USE CULEBRA ####
+### WAYS TO USE CULEBRA ###
 * Visual Studio – Use the Culebra Objects and Controller through the use of the CulebraData.dll (Recommended)
 * Visual Studio – Create your own objects and simply implement behavior classes individually. 
 * Visual Studio – Create your own objects and inherit from Culebra Objects. This will provide access to the controller and all classes, through the use of the CulebraData.dll
 * Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with IKVM.JDK.Core.dll in GH scripting environment
 
+#### Pre-compiled binaries ####
+
+#### Building from Source ####
+
 --------------------------------------------------------------
 
 #### CULEBRA 2.0 BETA GHA (GRASSHOPPER PLUGIN) ####
 The Culebra grasshopper plugin was rewritten to implement a slew of new behaviors through the use CulebraData.dll which is a wrapper around the Culebra Java Library.
-*Version 2.0 Beta updates include
-*Wandering Behaviors
-*Path Following Behaviors
-*Multi.Objects Interactions
-*Mesh Crawling Behaviors
-*Stigmergy Behaviors
-*Mesh Color Behavior Influence
-*Graphics/Geometry Modes
-*Visualization Features
-*Single & Multi.Object Engines
-*Zombie Engine
-*Behavior Chaining with Controller
+
+Version 2.0 Beta updates include
+* Wandering Behaviors
+* Path Following Behaviors
+* Multi.Objects Interactions
+* Mesh Crawling Behaviors
+* Stigmergy Behaviors
+* Mesh Color Behavior Influence
+* Graphics/Geometry Modes
+* Visualization Features
+* Single & Multi.Object Engines
+* Zombie Engine
+* Behavior Chaining with Controller
 
 --------------------------------------------------------------
 
@@ -56,10 +61,10 @@ The Culebra grasshopper plugin was rewritten to implement a slew of new behavior
 
 --------------------------------------------------------------
 
-#### CLASS DIAGRAMS ####
+#### JAVA CLASS DIAGRAMS ####
 [![IMAGE](images/Culebra_ClassDiagram_Small.jpg)](http://www.culebra.technology/culebra-1/Culebra_ClassDiagram.jpg)
 
-##### CREDITS #####
+#### CREDITS ####
 
 * Thanks to Craig Reynolds for all of his work on boid behavior
 * Big thanks to Daniel Shiffman, his work has been very inspirational and referenced in this library.
