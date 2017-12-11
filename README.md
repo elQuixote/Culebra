@@ -23,14 +23,14 @@ IKVM.NET is an implementation of Java for [Mono](http://www.mono-project.com/) a
 The IKVMC tool generates .NET assemblies from Java jar files. It converts Java bytecode to .NET dll's. The <code>culebra.dll</code> was created this was from the <code>culebra.jar</code> library and will be automatically installed in your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH</code> folder along with all of the required IKVM dependecies by the Culebra 2.0 installer.
 
 ### Building from Source ###
-If you wish to contribute to the project you will need to compile Culebra on your own system. Culebra.NET is built against .NET 4.0 so you will need to use Visual Studio 2010 or later. To resolve dependencies simply drop your <code>Rhinocommon.dll</code>, <code>Grasshopper.dll</code>, <code>GH_IO.dll</code> into the libs/ folder or you could  use the dll's included in the libs/ folder. The required dependencies below will be included in the libs folder so you should not have to search for them.  
+If you wish to contribute to the project you will need to compile Culebra on your own system. Culebra.NET is built against .NET 4.0 so you will need to use Visual Studio 2010 or later. To resolve dependencies simply drop your <code>Rhinocommon.dll</code>, <code>Grasshopper.dll</code>, <code>GH_IO.dll</code> into the libs/ folder. The required dependencies below will be included in the libs folder so you should not have to search for them.  
 * core.dll
 * culebra.dll
 * toxiclibscore.dll 
 * IKVM.OpenJDK.Core.dll 
-* Grasshopper.dll 
-* Rhinocommon.dll 
-* GH_IO.dll 
+* Grasshopper.dll (need to add your own inside libs folder)
+* Rhinocommon.dll (need to add your own inside libs folder)
+* GH_IO.dll (need to add your own inside libs folder)
 
 The visual studio solution includes 2 projects:
 * Culebra_GH (update the build path to your <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder</code>)
