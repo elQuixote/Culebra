@@ -6,17 +6,12 @@ Culebra.NET is a 2D|3D Multi Object Behavior library written in C# ([Wrapper aro
 --------------------------------------------------------------
 
 ### WAYS TO USE CULEBRA ###
-* Visual Studio – Use the Culebra Objects and Controller through the use of the CulebraData.dll (Recommended)
-* Visual Studio – Create your own objects and simply implement behavior classes individually. 
-* Visual Studio – Create your own objects and inherit from Culebra Objects. This will provide access to the controller and all classes, through the use of the CulebraData.dll
-* Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with IKVM.JDK.Core.dll in GH scripting environment
-
 #### Pre-compiled binaries ####
-The Culebra 2.0 installer will install both the core library, CulebraData.dll, and the Grasshopper assembly, Culebra_2.0_GH.GHA, into the %appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder. Do not forget to unblock the assemblies and Rhino will need to be restarted if you are already running it. 
+The Culebra 2.0 installer will install both the core library <code>CulebraData.dll</code>, and the Grasshopper assembly <code>Culebra_2.0_GH.GHA</code>, into the <code>%appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder</code>. Do not forget to unblock the assemblies and Rhino will need to be restarted if you are already running it. 
 
 * Grasshopper Scripting Components in C#,Python – Unavailable in Beta Release, currently some issues with IKVM.JDK.Core.dll in GH scripting environment
-
-#### IVKM dependencies ####
+------------
+#### IVKM Dependencies ####
 IKVM.NET is an implementation of Java for [Mono](http://www.mono-project.com/) and the [Microsoft.NET Framework](https://www.microsoft.com/net). It includes the following components:
 * A Java Virtual Machine implemented in .NET
 * A .NET implementation of the Java class libraries
@@ -39,6 +34,10 @@ The visual studio solution includes 2 projects:
 * CulebraData
 
 If you specify a different build path for your Culebra_GH project then you must replace the CulebraData.dll and the Culebra_2.0_GH.gha in your %appdata%\Roaming\Grasshopper\Libraries\Culebra_GH folder
+
+* Visual Studio – Use the Culebra Objects and Controller through the use of the CulebraData.dll (Recommended)
+* Visual Studio – Create your own objects and simply implement behavior classes individually. 
+* Visual Studio – Create your own objects and inherit from Culebra Objects. This will provide access to the controller and all classes, through the use of the CulebraData.dll
 
 --------------------------------------------------------------
 
