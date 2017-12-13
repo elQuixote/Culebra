@@ -59,7 +59,7 @@ Version 2.0 Beta updates include
 
 ### BEHAVIORS ###
 
-<IMG SRC="http://www.complicitmatter.com/wp-content/uploads/2017/12/animation5-small.gif">
+<img src="http://www.complicitmatter.com/wp-content/uploads/2017/12/animation5-small.gif">
 
 #### There are 7 Major Types of Behaviors which can be hybridized anyway your heart desires. ####
 * Flocking Behavior - Flockers Behavior Type Class Implements Flock Behavior Interface
