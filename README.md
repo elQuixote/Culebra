@@ -58,7 +58,9 @@ Version 2.0 Beta updates include
 --------------------------------------------------------------
 
 ### BEHAVIORS ###
+
 <a href="http://www.complicitmatter.com/wp-content/uploads/2017/12/animation5-small.gif"></a>
+
 #### There are 7 Major Types of Behaviors which can be hybridized anyway your heart desires. ####
 * Flocking Behavior - Flockers Behavior Type Class Implements Flock Behavior Interface
 * Wandering Behavior - Wanderer Behavior Type Class Implements Wander Behavior Interface, the base Wander behavior is from Craig Reynolds and Daniel Shiffman.
