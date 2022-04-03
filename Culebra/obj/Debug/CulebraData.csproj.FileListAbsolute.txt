@@ -21,3 +21,10 @@ E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\bin\CulebraData.pd
 E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.dll
 E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.pdb
 E:\Documents\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.csprojResolveAssemblyReference.cache
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\bin\CulebraData.XML
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\bin\CulebraData.dll
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra_GH\bin\CulebraData.pdb
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.csproj.CoreCompileInputs.cache
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.dll
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.pdb
+G:\MyDocuments\ComplicitMatter_SourceTree\C#\Culebra\Culebra\obj\Debug\CulebraData.csprojAssemblyReference.cache

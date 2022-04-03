@@ -74,11 +74,11 @@ namespace Culebra_GH.Behaviors
                         FlockingData fd;
                         bool worked = a.CastTo(out fd);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Flocking data structure, please check your inputs"); return; }
-                        behaviorData.flockData = fd;
+                        behaviorData.FlockData = fd;
                         behaviorNames.Add("Flocking");
 
-                        stringlist.Add("Alignment Value = " + fd.alignment_Value.ToString());
-                        stringlist.Add("Separation Value = " + fd.separation_Value.ToString());
+                        stringlist.Add("Alignment Value = " + fd.Alignment_Value.ToString());
+                        stringlist.Add("Separation Value = " + fd.Separation_Value.ToString());
                     }
                     else if (a.ToString() == "Culebra_GH.Data_Structures.WanderingData")
                     {
@@ -86,7 +86,7 @@ namespace Culebra_GH.Behaviors
                         WanderingData wd;
                         bool worked = a.CastTo(out wd);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Wandering data structure, please check your inputs"); return; }
-                        behaviorData.wanderData = wd;
+                        behaviorData.WanderData = wd;
                         behaviorNames.Add("Wandering");
 
                         stringlist.Add("Wandering Radius Value = " + wd.wanderingRadius.ToString());
@@ -97,7 +97,7 @@ namespace Culebra_GH.Behaviors
                         TrackingData td;
                         bool worked = a.CastTo(out td);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Tracking data structure, please check your inputs"); return; }
-                        behaviorData.trackingData = td;
+                        behaviorData.TrackingData = td;
                         behaviorNames.Add("Tracking");
                     }else if(a.ToString() == "Culebra_GH.Data_Structures.StigmergyData")
                     {
@@ -105,7 +105,7 @@ namespace Culebra_GH.Behaviors
                         StigmergyData sd;
                         bool worked = a.CastTo(out sd);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Stigmergy data structure, please check your inputs"); return; }
-                        behaviorData.stigmergyData = sd;
+                        behaviorData.StigmergyData = sd;
                         behaviorNames.Add("Stigmergy");
                     }else if (a.ToString() == "Culebra_GH.Data_Structures.NoiseData")
                     {
@@ -113,7 +113,7 @@ namespace Culebra_GH.Behaviors
                         NoiseData nd;
                         bool worked = a.CastTo(out nd);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Noise data structure, please check your inputs"); return; }
-                        behaviorData.noiseData = nd;
+                        behaviorData.NoiseData = nd;
                         behaviorNames.Add("Noise");
                     }else if (a.ToString() == "Culebra_GH.Data_Structures.ForceData")
                     {
@@ -122,7 +122,7 @@ namespace Culebra_GH.Behaviors
                         bool worked = a.CastTo(out data);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Forces data structure, please check your inputs"); return; }
                         forceDataList.Add(data);
-                        behaviorData.forceData = forceDataList;
+                        behaviorData.ForceData = forceDataList;
                         behaviorNames.Add("Force");
                     }else if (a.ToString() == "Culebra_GH.Data_Structures.SeparationData")
                     {
@@ -130,7 +130,7 @@ namespace Culebra_GH.Behaviors
                         SeparationData data;
                         bool worked = a.CastTo(out data);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Separation data structure, please check your inputs"); return; }
-                        behaviorData.separationData = data;
+                        behaviorData.SeparationData = data;
                         behaviorNames.Add("Separation");
                     }else if (a.ToString() == "Culebra_GH.Data_Structures.MeshCrawlData")
                     {
@@ -138,7 +138,7 @@ namespace Culebra_GH.Behaviors
                         MeshCrawlData data;
                         bool worked = a.CastTo(out data);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Mesh Crawl data structure, please check your inputs"); return; }
-                        behaviorData.meshCrawlData = data;
+                        behaviorData.MeshCrawlData = data;
                         behaviorNames.Add("Crawl");
                     }else if (a.ToString() == "Culebra_GH.Data_Structures.BundlingData")
                     {
@@ -146,7 +146,7 @@ namespace Culebra_GH.Behaviors
                         BundlingData data;
                         bool worked = a.CastTo(out data);
                         if (!worked) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "We could not cast to Bundling data structure, please check your inputs"); return; }
-                        behaviorData.bundlingData = data;
+                        behaviorData.BundlingData = data;
                         behaviorNames.Add("Bundling");
                     }
                     else { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "Could not convert incoming data"); return; }   
@@ -154,7 +154,7 @@ namespace Culebra_GH.Behaviors
             }
             if(hitCounter > 0)
             {
-                behaviorData.dataOrder = behaviorNames;
+                behaviorData.DataOrder = behaviorNames;
                 IGH_BehaviorData igh_Behavior = new IGH_BehaviorData(behaviorData);
                 DA.SetData(0, igh_Behavior);
             }

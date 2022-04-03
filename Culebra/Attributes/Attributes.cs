@@ -74,6 +74,10 @@ namespace CulebraData.Attributes
             Vector3d loc = Utilities.Convert.ToVector3d(this.culebraObject.GetObject().getLocation());
             return loc;
         }
+        /// <summary>
+        /// Setter method for setting the new object location
+        /// </summary>
+        /// <param name="newLocation">Set the new location</param>
         public void SetLocation(Vector3d newLocation)
         {
             this.culebraObject.GetObject().behavior.setLoc(Utilities.Convert.ToPVec(newLocation));

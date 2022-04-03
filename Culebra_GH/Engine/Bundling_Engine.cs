@@ -31,6 +31,7 @@ namespace Culebra_GH.Engine
         private int trailStep;
         private int maxTrailSize;
         private string particleTexture = "";
+        private int alphaValue = new int();
         private double[] redValues = new double[2];
         private double[] greenValues = new double[2];
         private double[] blueValues = new double[2];
@@ -130,32 +131,33 @@ namespace Culebra_GH.Engine
             this.displayMode = igh_Visual.Value.displayMode;
             this.trailStep = td.trailStep;
             this.maxTrailSize = td.maxTrailSize;
-            this.particleTexture = cd.particleTexture;
-            this.graphicType = cd.colorDataType;
+            this.particleTexture = cd.ParticleTexture;
+            this.graphicType = cd.ColorDataType;
             this.useTexture = igh_Visual.Value.useTexture;
-            if (cd.colorDataType == "Gradient")
+            if (cd.ColorDataType == "Gradient")
             {
-                this.maxthick = cd.maxThickness;
-                this.minthick = cd.minThickness;
-                this.redValues[0] = cd.redChannel[0];
-                this.redValues[1] = cd.redChannel[1];
-                this.greenValues[0] = cd.greenChannel[0];
-                this.greenValues[1] = cd.greenChannel[1];
-                this.blueValues[0] = cd.blueChannel[0];
-                this.blueValues[1] = cd.blueChannel[1];
+                this.maxthick = cd.MaxThickness;
+                this.minthick = cd.MinThickness;
+                this.alphaValue = cd.Alpha;
+                this.redValues[0] = cd.RedChannel[0];
+                this.redValues[1] = cd.RedChannel[1];
+                this.greenValues[0] = cd.GreenChannel[0];
+                this.greenValues[1] = cd.GreenChannel[1];
+                this.blueValues[0] = cd.BlueChannel[0];
+                this.blueValues[1] = cd.BlueChannel[1];
             }
-            else if (cd.colorDataType == "GraphicPolyline")
+            else if (cd.ColorDataType == "GraphicPolyline")
             {
-                this.polylineColor = cd.color;
-                this.dotted = cd.dotted;
-                this.maxthick = cd.maxThickness;
+                this.polylineColor = cd.Color;
+                this.dotted = cd.Dotted;
+                this.maxthick = cd.MaxThickness;
             }
-            else if (cd.colorDataType == "Disco")
+            else if (cd.ColorDataType == "Disco")
             {
-                this.maxthick = cd.maxThickness;
-                this.minthick = cd.minThickness;
+                this.maxthick = cd.MaxThickness;
+                this.minthick = cd.MinThickness;
             }
-            else if (cd.colorDataType == "Base")
+            else if (cd.ColorDataType == "Base")
             {
                 this.maxthick = 3;
                 this.minthick = 1;
@@ -175,22 +177,22 @@ namespace Culebra_GH.Engine
 
                 IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)behavioral_Settings;
 
-                this.thresh = igh_Behavior.Value.bundlingData.threshold;
-                this.ratio = igh_Behavior.Value.bundlingData.ratio;
-                this.ptCount = igh_Behavior.Value.bundlingData.pointCount;
-                this.rebuild = igh_Behavior.Value.bundlingData.rebuild;
-                this.weldCount = igh_Behavior.Value.bundlingData.weldCount;
+                this.thresh = igh_Behavior.Value.BundlingData.Threshold;
+                this.ratio = igh_Behavior.Value.BundlingData.Ratio;
+                this.ptCount = igh_Behavior.Value.BundlingData.PointCount;
+                this.rebuild = igh_Behavior.Value.BundlingData.Rebuild;
+                this.weldCount = igh_Behavior.Value.BundlingData.WeldCount;
                 //-----------------------------------------------------------------
-                foreach (string s in igh_Behavior.Value.dataOrder)
+                foreach (string s in igh_Behavior.Value.DataOrder)
                 {
                     if (s == "Bundling")
                     {
                         try
                         {
-                            if(igh_Behavior.Value.bundlingData.colorMesh != null)
+                            if(igh_Behavior.Value.BundlingData.ColorMesh != null)
                             {
                                 this.crvList = this.selfOrg.Bundling(particleList, particleSet, this.crvList, this.thresh, this.ratio, this.weldCount, this.rebuild, this.ptCount,
-                                    igh_Behavior.Value.bundlingData.colorMesh, igh_Behavior.Value.bundlingData.useColor);
+                                    igh_Behavior.Value.BundlingData.ColorMesh, igh_Behavior.Value.BundlingData.UseColor);
                             }
                             else
                             {
@@ -259,7 +261,7 @@ namespace Culebra_GH.Engine
                 {
                     if (this.graphicType == "Gradient")
                     {
-                        viz.DrawGradientTrails(args, particleSet, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
+                        viz.DrawGradientTrails(args, particleSet, this.alphaValue, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
                     }
                     else if (this.graphicType == "GraphicPolyline")
                     {
@@ -272,7 +274,7 @@ namespace Culebra_GH.Engine
                     }
                     else if (this.graphicType == "Base")
                     {
-                        viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                        viz.DrawGradientTrails(args, particleSet, 0, this.alphaValue, this.minthick, this.maxthick);
                     }
                 }
             }

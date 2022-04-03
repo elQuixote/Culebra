@@ -74,9 +74,9 @@ namespace Culebra_GH.Behaviors
 
             List<float> floatThresholds = thresholds.Select<double, float>(i => (float)i).ToList();
             ForceData forceData = new ForceData(targets, floatThresholds);
-            forceData.repelValue = (float)av;
-            forceData.maxRepel = (float)ma;
-            forceData.forceType = "Repel";
+            forceData.RepelValue = (float)av;
+            forceData.MaxRepel = (float)ma;
+            forceData.ForceType = "Repel";
 
             DA.SetData(0, forceData);
             DA.SetDataList(1, circles);
