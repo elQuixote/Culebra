@@ -45,6 +45,7 @@ namespace Culebra_GH.Engine
         private int trailStep;
         private int maxTrailSize;
         private string particleTexture = "";
+        private int alphaValue = new int();
         private double[] redValues = new double[2];
         private double[] greenValues = new double[2];
         private double[] blueValues = new double[2];
@@ -60,6 +61,7 @@ namespace Culebra_GH.Engine
         private int child_trailStep;
         private int child_maxTrailSize;
         private string child_particleTexture = "";
+        private int child_alphaValue = new int();
         private double[] child_redValues = new double[2];
         private double[] child_greenValues = new double[2];
         private double[] child_blueValues = new double[2];
@@ -281,31 +283,32 @@ namespace Culebra_GH.Engine
                 this.displayMode = visual_Settings.Value.displayMode;
                 this.trailStep = td.trailStep;
                 this.maxTrailSize = td.maxTrailSize;
-                this.particleTexture = cd.particleTexture;
-                this.graphicType = cd.colorDataType;
+                this.particleTexture = cd.ParticleTexture;
+                this.graphicType = cd.ColorDataType;
                 this.useTexture = visual_Settings.Value.useTexture;
-                if (cd.colorDataType == "Gradient")
+                if (cd.ColorDataType == "Gradient")
                 {
-                    this.maxthick = cd.maxThickness;
-                    this.minthick = cd.minThickness;
-                    this.redValues[0] = cd.redChannel[0];
-                    this.redValues[1] = cd.redChannel[1];
-                    this.greenValues[0] = cd.greenChannel[0];
-                    this.greenValues[1] = cd.greenChannel[1];
-                    this.blueValues[0] = cd.blueChannel[0];
-                    this.blueValues[1] = cd.blueChannel[1];
+                    this.maxthick = cd.MaxThickness;
+                    this.minthick = cd.MinThickness;
+                    this.alphaValue = cd.Alpha;
+                    this.redValues[0] = cd.RedChannel[0];
+                    this.redValues[1] = cd.RedChannel[1];
+                    this.greenValues[0] = cd.GreenChannel[0];
+                    this.greenValues[1] = cd.GreenChannel[1];
+                    this.blueValues[0] = cd.BlueChannel[0];
+                    this.blueValues[1] = cd.BlueChannel[1];
                 }
-                else if (cd.colorDataType == "GraphicPolyline")
+                else if (cd.ColorDataType == "GraphicPolyline")
                 {
-                    this.polylineColor = cd.color;
-                    this.dotted = cd.dotted;
-                    this.maxthick = cd.maxThickness;
+                    this.polylineColor = cd.Color;
+                    this.dotted = cd.Dotted;
+                    this.maxthick = cd.MaxThickness;
                 }
-                else if (cd.colorDataType == "Disco")
+                else if (cd.ColorDataType == "Disco")
                 {
-                    this.maxthick = cd.maxThickness;
-                    this.minthick = cd.minThickness;
-                }else if(cd.colorDataType == "Base")
+                    this.maxthick = cd.MaxThickness;
+                    this.minthick = cd.MinThickness;
+                }else if(cd.ColorDataType == "Base")
                 {
                     this.maxthick = 3;
                     this.minthick = 1;
@@ -317,32 +320,33 @@ namespace Culebra_GH.Engine
                 this.child_displayMode = child_visual_Settings.Value.displayMode;
                 this.child_trailStep = ctd.trailStep;
                 this.child_maxTrailSize = ctd.maxTrailSize;
-                this.child_particleTexture = ccd.particleTexture;
-                this.child_graphicType = ccd.colorDataType;
+                this.child_particleTexture = ccd.ParticleTexture;
+                this.child_graphicType = ccd.ColorDataType;
                 this.child_useTexture = child_visual_Settings.Value.useTexture;
-                if (ccd.colorDataType == "Gradient")
+                if (ccd.ColorDataType == "Gradient")
                 {
-                    this.child_maxthick = ccd.maxThickness;
-                    this.child_minthick = ccd.minThickness;
-                    this.child_redValues[0] = ccd.redChannel[0];
-                    this.child_redValues[1] = ccd.redChannel[1];
-                    this.child_greenValues[0] = ccd.greenChannel[0];
-                    this.child_greenValues[1] = ccd.greenChannel[1];
-                    this.child_blueValues[0] = ccd.blueChannel[0];
-                    this.child_blueValues[1] = ccd.blueChannel[1];
+                    this.child_maxthick = ccd.MaxThickness;
+                    this.child_minthick = ccd.MinThickness;
+                    this.child_alphaValue = ccd.Alpha;
+                    this.child_redValues[0] = ccd.RedChannel[0];
+                    this.child_redValues[1] = ccd.RedChannel[1];
+                    this.child_greenValues[0] = ccd.GreenChannel[0];
+                    this.child_greenValues[1] = ccd.GreenChannel[1];
+                    this.child_blueValues[0] = ccd.BlueChannel[0];
+                    this.child_blueValues[1] = ccd.BlueChannel[1];
                 }
-                else if (ccd.colorDataType == "GraphicPolyline")
+                else if (ccd.ColorDataType == "GraphicPolyline")
                 {
-                    this.child_polylineColor = ccd.color;
-                    this.child_dotted = ccd.dotted;
-                    this.child_maxthick = ccd.maxThickness;
+                    this.child_polylineColor = ccd.Color;
+                    this.child_dotted = ccd.Dotted;
+                    this.child_maxthick = ccd.MaxThickness;
                 }
-                else if (ccd.colorDataType == "Disco")
+                else if (ccd.ColorDataType == "Disco")
                 {
-                    this.child_maxthick = ccd.maxThickness;
-                    this.child_minthick = ccd.minThickness;
+                    this.child_maxthick = ccd.MaxThickness;
+                    this.child_minthick = ccd.MinThickness;
                 }
-                else if (ccd.colorDataType == "Base")
+                else if (ccd.ColorDataType == "Base")
                 {
                     this.child_maxthick = 3;
                     this.child_minthick = 1;
@@ -574,7 +578,7 @@ namespace Culebra_GH.Engine
                 {
                     if (this.graphicType == "Gradient")
                     {
-                        viz.DrawGradientTrails(args, particleSet, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
+                        viz.DrawGradientTrails(args, particleSet, this.alphaValue, (float)this.redValues[0], (float)this.redValues[1], (float)this.greenValues[0], (float)this.greenValues[1], (float)this.blueValues[0], (float)this.blueValues[1], this.minthick, this.maxthick);
                     }
                     else if (this.graphicType == "GraphicPolyline")
                     {
@@ -586,7 +590,7 @@ namespace Culebra_GH.Engine
                         viz.DrawDiscoTrails(args, particleSet, randomGen, this.minthick, this.maxthick);
                     }else if (this.graphicType == "Base")
                     {
-                        viz.DrawGradientTrails(args, particleSet, 0, this.minthick, this.maxthick);
+                        viz.DrawGradientTrails(args, particleSet, 0, this.alphaValue, this.minthick, this.maxthick);
                     }
                 }
             }
@@ -596,8 +600,8 @@ namespace Culebra_GH.Engine
                 {
                     if (this.child_graphicType == "Gradient")
                     {
-                        viz.DrawGradientTrails(args, particleBabyASet, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
-                        viz.DrawGradientTrails(args, particleBabyBSet, (float)this.child_redValues[0], (float)this.child_redValues[1], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, particleBabyASet, this.child_alphaValue, (float)this.child_redValues[1], (float)this.child_redValues[0], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, particleBabyBSet, this.child_alphaValue, (float)this.child_redValues[0], (float)this.child_redValues[1], (float)this.child_greenValues[0], (float)this.child_greenValues[1], (float)this.child_blueValues[0], (float)this.child_blueValues[1], this.child_minthick, this.child_maxthick);
                     }
                     else if (this.child_graphicType == "GraphicPolyline")
                     {
@@ -612,8 +616,8 @@ namespace Culebra_GH.Engine
                         viz.DrawDiscoTrails(args, particleBabyBSet, randomGen, this.child_minthick, this.child_maxthick);
                     }else if(this.child_graphicType == "Base")
                     {
-                        viz.DrawGradientTrails(args, this.particleBabyASet, 1, this.child_minthick, this.child_maxthick);
-                        viz.DrawGradientTrails(args, this.particleBabyBSet, 2, this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, this.particleBabyASet, 1, this.child_alphaValue, this.child_minthick, this.child_maxthick);
+                        viz.DrawGradientTrails(args, this.particleBabyBSet, 2, this.child_alphaValue, this.child_minthick, this.child_maxthick);
                     }
                 }
             }

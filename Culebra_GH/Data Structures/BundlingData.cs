@@ -8,23 +8,23 @@ namespace Culebra_GH.Data_Structures
     /// </summary>
     public struct BundlingData
     {
-        public Mesh colorMesh { get; set; }
-        public bool useColor { get; set; }
-        public double threshold { get; set; }
-        public double ratio { get; set; }
-        public bool rebuild { get; set; }
-        public int pointCount { get; set; }
-        public int weldCount { get; set; }
+        public Mesh ColorMesh { get; set; }
+        public bool UseColor { get; set; }
+        public double Threshold { get; set; }
+        public double Ratio { get; set; }
+        public bool Rebuild { get; set; }
+        public int PointCount { get; set; }
+        public int WeldCount { get; set; }
 
         public BundlingData(double threshold, double ratio, bool rebuild, int point_Count, int weld_Count, Mesh color_Mesh = null, bool use_Color = false)
         {
-            this.colorMesh = color_Mesh;
-            this.useColor = use_Color;
-            this.threshold = threshold;
-            this.ratio = ratio;
-            this.rebuild = rebuild;
-            this.pointCount = point_Count;
-            this.weldCount = weld_Count;
+            this.ColorMesh = color_Mesh;
+            this.UseColor = use_Color;
+            this.Threshold = threshold;
+            this.Ratio = ratio;
+            this.Rebuild = rebuild;
+            this.PointCount = point_Count;
+            this.WeldCount = weld_Count;
         }
     }
 }

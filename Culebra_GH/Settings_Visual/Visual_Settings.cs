@@ -114,7 +114,7 @@ namespace Culebra_GH.Settings_Visual
             else
             {
                 ColorData color = new ColorData();
-                color.colorDataType = "Base";
+                color.ColorDataType = "Base";
                 visualData.colorData = color;
             }
             if (!DA.GetData(2, ref texture)) return;

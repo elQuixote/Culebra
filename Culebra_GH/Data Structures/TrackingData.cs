@@ -7,32 +7,32 @@ namespace Culebra_GH.Data_Structures
     /// </summary>
     public struct TrackingData
     {
-        public java.util.List polylines { get; set; }
-        public float pathThreshold { get; set; }
-        public float projectionDistance { get; set; }
-        public float pathRadius { get; set; }
-        public bool triggerBabies { get; set; }
-        public int maxChildren { get; set; }
+        public java.util.List Polylines { get; set; }
+        public float PathThreshold { get; set; }
+        public float ProjectionDistance { get; set; }
+        public float PathRadius { get; set; }
+        public bool TriggerBabies { get; set; }
+        public int MaxChildren { get; set; }
 
-        public Mesh colorMesh { get; set; }
-        public bool mapThreshold { get; set; }
-        public bool mapProjection { get; set; }
-        public bool mapRadius { get; set; }
+        public Mesh ColorMesh { get; set; }
+        public bool MapThreshold { get; set; }
+        public bool MapProjection { get; set; }
+        public bool MapRadius { get; set; }
          
         public TrackingData(java.util.List polylines, float path_Threshold, float projection_Distance, float path_Radius, bool trigger_Babies = false, int max_Children = 2,
             Mesh color_Mesh = null, bool map_Threshold = false, bool map_Projection = false, bool map_Radius = false)
         {
-            this.polylines = polylines;
-            this.pathThreshold = path_Threshold;
-            this.projectionDistance = projection_Distance;
-            this.pathRadius = path_Radius;
-            this.triggerBabies = trigger_Babies;
-            this.maxChildren = max_Children;
+            this.Polylines = polylines;
+            this.PathThreshold = path_Threshold;
+            this.ProjectionDistance = projection_Distance;
+            this.PathRadius = path_Radius;
+            this.TriggerBabies = trigger_Babies;
+            this.MaxChildren = max_Children;
 
-            this.colorMesh = color_Mesh;
-            this.mapThreshold = map_Threshold;
-            this.mapProjection = map_Projection;
-            this.mapRadius = map_Radius;
+            this.ColorMesh = color_Mesh;
+            this.MapThreshold = map_Threshold;
+            this.MapProjection = map_Projection;
+            this.MapRadius = map_Radius;
         }
     }
 }

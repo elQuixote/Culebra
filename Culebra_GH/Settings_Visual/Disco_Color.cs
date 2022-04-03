@@ -62,11 +62,11 @@ namespace Culebra_GH.Settings_Visual
             if(maxThickness > 4) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "There is a performance decrease if the max thickness is greater than 3, keep an eye on your value"); return; }
 
             ColorData colorData = new ColorData();
-            colorData.particleTexture = path;
-            colorData.maxThickness = maxThickness;
-            colorData.minThickness = minThickness;
+            colorData.ParticleTexture = path;
+            colorData.MaxThickness = maxThickness;
+            colorData.MinThickness = minThickness;
 
-            colorData.colorDataType = "Disco";
+            colorData.ColorDataType = "Disco";
 
             DA.SetData(0, colorData);
         }

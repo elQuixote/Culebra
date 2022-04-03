@@ -66,12 +66,12 @@ namespace Culebra_GH.Settings_Visual
             if (thickness > 4) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "There is a performance decrease if the thickness is greater than 3, keep an eye on your value"); return; }
 
             ColorData colorData = new ColorData();
-            colorData.color = color;
-            colorData.particleTexture = path;
-            colorData.dotted = dotted;
-            colorData.maxThickness = thickness;
+            colorData.Color = color;
+            colorData.ParticleTexture = path;
+            colorData.Dotted = dotted;
+            colorData.MaxThickness = thickness;
 
-            colorData.colorDataType = "GraphicPolyline";
+            colorData.ColorDataType = "GraphicPolyline";
 
             DA.SetData(0, colorData);
         }

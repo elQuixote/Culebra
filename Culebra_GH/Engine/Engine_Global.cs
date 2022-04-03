@@ -164,32 +164,32 @@ namespace Culebra_GH.Engine
         private void FilterBehaviors(Creeper c, List<CulebraObject> creepList, object behavioral_Settings, int dimensions, List<Vector3d> childSpawners, List<int> childSpawnType, List<Vector3d> totTail)
         {
             IGH_BehaviorData igh_Behavior = (IGH_BehaviorData)behavioral_Settings;
-            foreach (string s in igh_Behavior.Value.dataOrder)
+            foreach (string s in igh_Behavior.Value.DataOrder)
             {
                 if (s == "Flocking")
                 {
                     if (dimensions == 0)
                     {
-                        if(igh_Behavior.Value.flockData.colorMesh != null)
+                        if(igh_Behavior.Value.FlockData.ColorMesh != null)
                         {
-                            c.behaviors.Flock2D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, creepList, 
-                                igh_Behavior.Value.flockData.network, igh_Behavior.Value.flockData.mapAlignment, igh_Behavior.Value.flockData.mapSeparation, igh_Behavior.Value.flockData.mapCohesion, igh_Behavior.Value.flockData.colorMesh);
+                            c.behaviors.Flock2D(igh_Behavior.Value.FlockData.SearchRadius, igh_Behavior.Value.FlockData.Cohesion_Value, igh_Behavior.Value.FlockData.Separation_Value, igh_Behavior.Value.FlockData.Alignment_Value, igh_Behavior.Value.FlockData.ViewAngle, creepList, 
+                                igh_Behavior.Value.FlockData.Network, igh_Behavior.Value.FlockData.MapAlignment, igh_Behavior.Value.FlockData.MapSeparation, igh_Behavior.Value.FlockData.MapCohesion, igh_Behavior.Value.FlockData.ColorMesh);
                         }
                         else
                         {
-                            c.behaviors.Flock2D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, creepList, igh_Behavior.Value.flockData.network);
+                            c.behaviors.Flock2D(igh_Behavior.Value.FlockData.SearchRadius, igh_Behavior.Value.FlockData.Cohesion_Value, igh_Behavior.Value.FlockData.Separation_Value, igh_Behavior.Value.FlockData.Alignment_Value, igh_Behavior.Value.FlockData.ViewAngle, creepList, igh_Behavior.Value.FlockData.Network);
                         }
                     }
                     else if (dimensions == 1)
                     {
-                        if (igh_Behavior.Value.flockData.colorMesh != null)
+                        if (igh_Behavior.Value.FlockData.ColorMesh != null)
                         {
-                            c.behaviors.Flock3D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, creepList,
-                                igh_Behavior.Value.flockData.network, igh_Behavior.Value.flockData.mapAlignment, igh_Behavior.Value.flockData.mapSeparation, igh_Behavior.Value.flockData.mapCohesion, igh_Behavior.Value.flockData.colorMesh);
+                            c.behaviors.Flock3D(igh_Behavior.Value.FlockData.SearchRadius, igh_Behavior.Value.FlockData.Cohesion_Value, igh_Behavior.Value.FlockData.Separation_Value, igh_Behavior.Value.FlockData.Alignment_Value, igh_Behavior.Value.FlockData.ViewAngle, creepList,
+                                igh_Behavior.Value.FlockData.Network, igh_Behavior.Value.FlockData.MapAlignment, igh_Behavior.Value.FlockData.MapSeparation, igh_Behavior.Value.FlockData.MapCohesion, igh_Behavior.Value.FlockData.ColorMesh);
                         }
                         else
                         {
-                            c.behaviors.Flock3D(igh_Behavior.Value.flockData.searchRadius, igh_Behavior.Value.flockData.cohesion_Value, igh_Behavior.Value.flockData.separation_Value, igh_Behavior.Value.flockData.alignment_Value, igh_Behavior.Value.flockData.viewAngle, creepList, igh_Behavior.Value.flockData.network);
+                            c.behaviors.Flock3D(igh_Behavior.Value.FlockData.SearchRadius, igh_Behavior.Value.FlockData.Cohesion_Value, igh_Behavior.Value.FlockData.Separation_Value, igh_Behavior.Value.FlockData.Alignment_Value, igh_Behavior.Value.FlockData.ViewAngle, creepList, igh_Behavior.Value.FlockData.Network);
                         }
                     }
                 }
@@ -201,134 +201,134 @@ namespace Culebra_GH.Engine
                 {
                     if (dimensions == 0)
                     {
-                        if (igh_Behavior.Value.wanderData.wanderingType == "Wander")
+                        if (igh_Behavior.Value.WanderData.wanderingType == "Wander")
                         {
-                            if(igh_Behavior.Value.wanderData.colorMesh != null)
+                            if(igh_Behavior.Value.WanderData.colorMesh != null)
                             {
-                                c.behaviors.Wander2D(igh_Behavior.Value.wanderData.randomize, igh_Behavior.Value.wanderData.addHeading, igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance,
-                                    igh_Behavior.Value.wanderData.mapChange, igh_Behavior.Value.wanderData.mapRadius, igh_Behavior.Value.wanderData.mapDistance, igh_Behavior.Value.wanderData.colorMesh);
+                                c.behaviors.Wander2D(igh_Behavior.Value.WanderData.randomize, igh_Behavior.Value.WanderData.addHeading, igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance,
+                                    igh_Behavior.Value.WanderData.mapChange, igh_Behavior.Value.WanderData.mapRadius, igh_Behavior.Value.WanderData.mapDistance, igh_Behavior.Value.WanderData.colorMesh);
                             }
                             else
                             {
-                                c.behaviors.Wander2D(igh_Behavior.Value.wanderData.randomize, igh_Behavior.Value.wanderData.addHeading, igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance);
+                                c.behaviors.Wander2D(igh_Behavior.Value.WanderData.randomize, igh_Behavior.Value.WanderData.addHeading, igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance);
                             }
                         }
                         else
                         {
-                            c.behaviors.SuperWander2D(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
+                            c.behaviors.SuperWander2D(igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance, igh_Behavior.Value.WanderData.rotationTrigger);
                         }
                     }
                     else if (dimensions == 1)
                     {
-                        if (igh_Behavior.Value.wanderData.wanderingType == "SuperWander_B")
+                        if (igh_Behavior.Value.WanderData.wanderingType == "SuperWander_B")
                         {
-                            c.behaviors.Wander3D_subA(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
+                            c.behaviors.Wander3D_subA(igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance, igh_Behavior.Value.WanderData.rotationTrigger);
                         }
-                        else if (igh_Behavior.Value.wanderData.wanderingType == "SuperWander_C")
+                        else if (igh_Behavior.Value.WanderData.wanderingType == "SuperWander_C")
                         {
-                            c.behaviors.Wander3D_subB(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
+                            c.behaviors.Wander3D_subB(igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance, igh_Behavior.Value.WanderData.rotationTrigger);
                         }
                         else
                         {
-                            if(igh_Behavior.Value.wanderData.colorMesh != null)
+                            if(igh_Behavior.Value.WanderData.colorMesh != null)
                             {
-                                c.behaviors.Wander3D(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger,
-                                    igh_Behavior.Value.wanderData.mapChange, igh_Behavior.Value.wanderData.mapRadius, igh_Behavior.Value.wanderData.mapDistance, false, igh_Behavior.Value.wanderData.colorMesh);
+                                c.behaviors.Wander3D(igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance, igh_Behavior.Value.WanderData.rotationTrigger,
+                                    igh_Behavior.Value.WanderData.mapChange, igh_Behavior.Value.WanderData.mapRadius, igh_Behavior.Value.WanderData.mapDistance, false, igh_Behavior.Value.WanderData.colorMesh);
                             }
                             else
                             {
-                                c.behaviors.Wander3D(igh_Behavior.Value.wanderData.change, igh_Behavior.Value.wanderData.wanderingRadius, igh_Behavior.Value.wanderData.wanderingDistance, igh_Behavior.Value.wanderData.rotationTrigger);
+                                c.behaviors.Wander3D(igh_Behavior.Value.WanderData.change, igh_Behavior.Value.WanderData.wanderingRadius, igh_Behavior.Value.WanderData.wanderingDistance, igh_Behavior.Value.WanderData.rotationTrigger);
                             }
                         }
                     }
                 }
                 else if (s == "Tracking")
                 {
-                    if (igh_Behavior.Value.trackingData.triggerBabies)
+                    if (igh_Behavior.Value.TrackingData.TriggerBabies)
                     {
-                        if(igh_Behavior.Value.trackingData.colorMesh != null)
+                        if(igh_Behavior.Value.TrackingData.ColorMesh != null)
                         {
-                            c.behaviors.MultiPolylineTrackerBabyMaker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius,
-                                igh_Behavior.Value.trackingData.triggerBabies, igh_Behavior.Value.trackingData.maxChildren, true, childSpawners, childSpawnType,
-                                igh_Behavior.Value.trackingData.mapThreshold, igh_Behavior.Value.trackingData.mapProjection, igh_Behavior.Value.trackingData.mapRadius, igh_Behavior.Value.trackingData.colorMesh);
+                            c.behaviors.MultiPolylineTrackerBabyMaker(igh_Behavior.Value.TrackingData.Polylines, igh_Behavior.Value.TrackingData.PathThreshold, igh_Behavior.Value.TrackingData.ProjectionDistance, igh_Behavior.Value.TrackingData.PathRadius,
+                                igh_Behavior.Value.TrackingData.TriggerBabies, igh_Behavior.Value.TrackingData.MaxChildren, true, childSpawners, childSpawnType,
+                                igh_Behavior.Value.TrackingData.MapThreshold, igh_Behavior.Value.TrackingData.MapProjection, igh_Behavior.Value.TrackingData.MapRadius, igh_Behavior.Value.TrackingData.ColorMesh);
                             this.childSpawners = c.behaviors.GetChildStartPositions();
                             this.childSpawnType = c.behaviors.GetChildSpawnTypes();
                         }
                         else
                         {
-                            c.behaviors.MultiPolylineTrackerBabyMaker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius,
-                                igh_Behavior.Value.trackingData.triggerBabies, igh_Behavior.Value.trackingData.maxChildren, true, childSpawners, childSpawnType);
+                            c.behaviors.MultiPolylineTrackerBabyMaker(igh_Behavior.Value.TrackingData.Polylines, igh_Behavior.Value.TrackingData.PathThreshold, igh_Behavior.Value.TrackingData.ProjectionDistance, igh_Behavior.Value.TrackingData.PathRadius,
+                                igh_Behavior.Value.TrackingData.TriggerBabies, igh_Behavior.Value.TrackingData.MaxChildren, true, childSpawners, childSpawnType);
                             this.childSpawners = c.behaviors.GetChildStartPositions();
                             this.childSpawnType = c.behaviors.GetChildSpawnTypes();
                         }
                     }
                     else
                     {
-                        if(igh_Behavior.Value.trackingData.colorMesh != null)
+                        if(igh_Behavior.Value.TrackingData.ColorMesh != null)
                         {
-                            c.behaviors.MultiPolylineTracker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius,
-                                igh_Behavior.Value.trackingData.mapThreshold, igh_Behavior.Value.trackingData.mapProjection, igh_Behavior.Value.trackingData.mapRadius, igh_Behavior.Value.trackingData.colorMesh);
+                            c.behaviors.MultiPolylineTracker(igh_Behavior.Value.TrackingData.Polylines, igh_Behavior.Value.TrackingData.PathThreshold, igh_Behavior.Value.TrackingData.ProjectionDistance, igh_Behavior.Value.TrackingData.PathRadius,
+                                igh_Behavior.Value.TrackingData.MapThreshold, igh_Behavior.Value.TrackingData.MapProjection, igh_Behavior.Value.TrackingData.MapRadius, igh_Behavior.Value.TrackingData.ColorMesh);
                         }
                         else
                         {
-                            c.behaviors.MultiPolylineTracker(igh_Behavior.Value.trackingData.polylines, igh_Behavior.Value.trackingData.pathThreshold, igh_Behavior.Value.trackingData.projectionDistance, igh_Behavior.Value.trackingData.pathRadius);
+                            c.behaviors.MultiPolylineTracker(igh_Behavior.Value.TrackingData.Polylines, igh_Behavior.Value.TrackingData.PathThreshold, igh_Behavior.Value.TrackingData.ProjectionDistance, igh_Behavior.Value.TrackingData.PathRadius);
                         }
                     }
                 }
                 else if(s == "Crawl")
                 {
-                    if (igh_Behavior.Value.meshCrawlData.triggerBabies)
+                    if (igh_Behavior.Value.MeshCrawlData.TriggerBabies)
                     {
-                        c.behaviors.MeshWalk(igh_Behavior.Value.meshCrawlData.mesh, igh_Behavior.Value.meshCrawlData.meshThreshold, igh_Behavior.Value.meshCrawlData.meshProjectionDistance, igh_Behavior.Value.meshCrawlData.multiplier, igh_Behavior.Value.meshCrawlData.triggerBabies, true, igh_Behavior.Value.meshCrawlData.maxChildren, childSpawners, childSpawnType);
+                        c.behaviors.MeshWalk(igh_Behavior.Value.MeshCrawlData.Mesh, igh_Behavior.Value.MeshCrawlData.MeshThreshold, igh_Behavior.Value.MeshCrawlData.MeshProjectionDistance, igh_Behavior.Value.MeshCrawlData.Multiplier, igh_Behavior.Value.MeshCrawlData.TriggerBabies, true, igh_Behavior.Value.MeshCrawlData.MaxChildren, childSpawners, childSpawnType);
                         this.childSpawners = c.behaviors.GetMeshCrawler().GetChildStartPositions();
                         this.childSpawnType = c.behaviors.GetMeshCrawler().GetChildSpawnType();
                     }
                     else
                     {
-                        c.behaviors.MeshWalk(igh_Behavior.Value.meshCrawlData.mesh, igh_Behavior.Value.meshCrawlData.meshThreshold, igh_Behavior.Value.meshCrawlData.meshProjectionDistance, igh_Behavior.Value.meshCrawlData.multiplier);
+                        c.behaviors.MeshWalk(igh_Behavior.Value.MeshCrawlData.Mesh, igh_Behavior.Value.MeshCrawlData.MeshThreshold, igh_Behavior.Value.MeshCrawlData.MeshProjectionDistance, igh_Behavior.Value.MeshCrawlData.Multiplier);
                     }
                 }
                 else if (s == "Stigmergy")
                 {
                     totTail.AddRange(c.attributes.GetTrailVectors());
-                    c.behaviors.SelfTailChase(igh_Behavior.Value.stigmergyData.viewAngle, igh_Behavior.Value.stigmergyData.cohesionMagnitude, igh_Behavior.Value.stigmergyData.cohesionRange, igh_Behavior.Value.stigmergyData.separationMagnitude, igh_Behavior.Value.stigmergyData.separationRange, totTail);
+                    c.behaviors.SelfTailChase(igh_Behavior.Value.StigmergyData.ViewAngle, igh_Behavior.Value.StigmergyData.CohesionMagnitude, igh_Behavior.Value.StigmergyData.CohesionRange, igh_Behavior.Value.StigmergyData.SeparationMagnitude, igh_Behavior.Value.StigmergyData.SeparationRange, totTail);
                 }
                 else if (s == "Noise")
                 {
-                    if(igh_Behavior.Value.noiseData.colorMesh != null)
+                    if(igh_Behavior.Value.NoiseData.ColorMesh != null)
                     {
-                        c.behaviors.Perlin2DMap(igh_Behavior.Value.noiseData.scale, igh_Behavior.Value.noiseData.strength, igh_Behavior.Value.noiseData.multiplier, igh_Behavior.Value.noiseData.velocity,
-                            igh_Behavior.Value.noiseData.mapStrength, igh_Behavior.Value.noiseData.mapStrength, igh_Behavior.Value.noiseData.mapMultiplier, igh_Behavior.Value.noiseData.colorMesh);
+                        c.behaviors.Perlin2DMap(igh_Behavior.Value.NoiseData.Scale, igh_Behavior.Value.NoiseData.Strength, igh_Behavior.Value.NoiseData.Multiplier, igh_Behavior.Value.NoiseData.Velocity,
+                            igh_Behavior.Value.NoiseData.MapStrength, igh_Behavior.Value.NoiseData.MapStrength, igh_Behavior.Value.NoiseData.MapMultiplier, igh_Behavior.Value.NoiseData.ColorMesh);
                     }
                     else
                     {
-                        c.behaviors.Perlin(igh_Behavior.Value.noiseData.scale, igh_Behavior.Value.noiseData.strength, igh_Behavior.Value.noiseData.multiplier, igh_Behavior.Value.noiseData.velocity);
+                        c.behaviors.Perlin(igh_Behavior.Value.NoiseData.Scale, igh_Behavior.Value.NoiseData.Strength, igh_Behavior.Value.NoiseData.Multiplier, igh_Behavior.Value.NoiseData.Velocity);
                     }
                 }
                 else if (s == "Separation")
                 {
-                    c.behaviors.Separate(igh_Behavior.Value.separationData.maxSeparation, creepList);
+                    c.behaviors.Separate(igh_Behavior.Value.SeparationData.MaxSeparation, creepList);
                 }
                 else if (s == "Force")
                 {
-                    int forceAmount = igh_Behavior.Value.forceData.Count;
+                    int forceAmount = igh_Behavior.Value.ForceData.Count;
                     for (int i = 0; i < forceAmount; i++)
                     {
-                        if (igh_Behavior.Value.forceData[i].forceType == "Attract")
+                        if (igh_Behavior.Value.ForceData[i].ForceType == "Attract")
                         {
                             int attCount = 0;
-                            foreach (Point3d p in igh_Behavior.Value.forceData[i].targets)
+                            foreach (Point3d p in igh_Behavior.Value.ForceData[i].Targets)
                             {
-                                c.behaviors.Attract((Vector3d)p, igh_Behavior.Value.forceData[i].thresholds[attCount], igh_Behavior.Value.forceData[i].attractionValue, igh_Behavior.Value.forceData[i].maxAttraction);
+                                c.behaviors.Attract((Vector3d)p, igh_Behavior.Value.ForceData[i].Thresholds[attCount], igh_Behavior.Value.ForceData[i].AttractionValue, igh_Behavior.Value.ForceData[i].MaxAttraction);
                                 attCount++;
                             }
                         }
-                        else if (igh_Behavior.Value.forceData[i].forceType == "Repel")
+                        else if (igh_Behavior.Value.ForceData[i].ForceType == "Repel")
                         {
                             int attCount = 0;
-                            foreach (Point3d p in igh_Behavior.Value.forceData[i].targets)
+                            foreach (Point3d p in igh_Behavior.Value.ForceData[i].Targets)
                             {
-                                c.behaviors.Repel((Vector3d)p, igh_Behavior.Value.forceData[i].thresholds[attCount], igh_Behavior.Value.forceData[i].repelValue, igh_Behavior.Value.forceData[i].maxRepel);
+                                c.behaviors.Repel((Vector3d)p, igh_Behavior.Value.ForceData[i].Thresholds[attCount], igh_Behavior.Value.ForceData[i].RepelValue, igh_Behavior.Value.ForceData[i].MaxRepel);
                                 attCount++;
                             }
                         }

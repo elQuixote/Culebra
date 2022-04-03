@@ -7,27 +7,27 @@ namespace Culebra_GH.Data_Structures
     /// </summary>
     public struct NoiseData
     {
-        public float scale { get; set; }
-        public float strength { get; set; }
-        public float multiplier { get; set; }
-        public float velocity { get; set; }
+        public float Scale { get; set; }
+        public float Strength { get; set; }
+        public float Multiplier { get; set; }
+        public float Velocity { get; set; }
 
-        public Mesh colorMesh { get; set; }
-        public bool mapScale { get; set; }
-        public bool mapStrength { get; set; }
-        public bool mapMultiplier { get; set; }
+        public Mesh ColorMesh { get; set; }
+        public bool MapScale { get; set; }
+        public bool MapStrength { get; set; }
+        public bool MapMultiplier { get; set; }
 
         public NoiseData(float scale, float strength, float multiplier, float velocity, Mesh color_Mesh = null, bool map_Scale = false, bool map_Strength = false, bool map_Multiplier = false)
         {
-            this.scale = scale;
-            this.strength = strength;
-            this.multiplier = multiplier;
-            this.velocity = velocity;
+            this.Scale = scale;
+            this.Strength = strength;
+            this.Multiplier = multiplier;
+            this.Velocity = velocity;
 
-            this.colorMesh = color_Mesh;
-            this.mapScale = map_Scale;
-            this.mapStrength = map_Strength;
-            this.mapMultiplier = map_Multiplier;
+            this.ColorMesh = color_Mesh;
+            this.MapScale = map_Scale;
+            this.MapStrength = map_Strength;
+            this.MapMultiplier = map_Multiplier;
         }
     }
 }

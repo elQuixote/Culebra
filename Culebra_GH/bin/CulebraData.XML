@@ -52,6 +52,12 @@
             </summary>
             <returns>the objects location puller from the controller</returns>
         </member>
+        <member name="M:CulebraData.Attributes.Attributes.SetLocation(Rhino.Geometry.Vector3d)">
+            <summary>
+            Setter method for setting the new object location
+            </summary>
+            <param name="newLocation">Set the new location</param>
+        </member>
         <member name="M:CulebraData.Attributes.Attributes.GetSpeed">
             <summary>
             Getter for retrieving the object speed
@@ -693,22 +699,24 @@
             <param name="file">the texture file</param>
             <param name="particleList">the list of points representing the particle positions</param>
         </member>
-        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single)">
+        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Int32,System.Single,System.Single)">
             <summary>
             Draws a gradient trail through the display pipeline
             </summary>
             <param name="args">preview Display Args for IGH_PreviewObjects</param>
             <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
             <param name="colorType">the color type</param>
+            <param name="alpha">the trail alpha value</param>
             <param name="minTrailThickness">the minimum trail thickness</param>
             <param name="maxTrailThickness">the maximum trail thickness</param>
         </member>
-        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <member name="M:CulebraData.Drawing.Vizualization.DrawGradientTrails(Grasshopper.Kernel.IGH_PreviewArgs,Grasshopper.DataTree{Rhino.Geometry.Point3d},System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
             <summary>
             Draws a gradient trail through the display pipeline
             </summary>
             <param name="args">preview Display Args for IGH_PreviewObjects</param>
             <param name="particleSet">The data tree containing the points list for each object you want to draw a gradient for</param>
+            <param name="alpha">the trail alpha value</param>
             <param name="r_colorA">the target min color value for the r channel</param>
             <param name="r_colorB">the target max color value for the r channel</param>
             <param name="g_colorA">the targer min color value for the g channel</param>

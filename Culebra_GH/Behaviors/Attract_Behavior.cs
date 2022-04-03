@@ -73,7 +73,7 @@ namespace Culebra_GH.Behaviors
             }
             List<float> floatThresholds = thresholds.Select<double, float>(i => (float)i).ToList();
             ForceData forceData = new ForceData(targets, floatThresholds, (float)av, (float)ma);
-            forceData.forceType = "Attract";
+            forceData.ForceType = "Attract";
 
             DA.SetData(0, forceData);
             DA.SetDataList(1, circles);

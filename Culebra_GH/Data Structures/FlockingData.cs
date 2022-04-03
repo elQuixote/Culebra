@@ -7,32 +7,32 @@ namespace Culebra_GH.Data_Structures
     /// </summary>
     public struct FlockingData
     {
-        public bool network { get; set; }
-        public float alignment_Value { get; set; }
-        public float separation_Value { get; set; }
-        public float cohesion_Value { get; set; }
-        public float searchRadius { get; set; }
-        public float viewAngle { get; set; }
+        public bool Network { get; set; }
+        public float Alignment_Value { get; set; }
+        public float Separation_Value { get; set; }
+        public float Cohesion_Value { get; set; }
+        public float SearchRadius { get; set; }
+        public float ViewAngle { get; set; }
         
-        public Mesh colorMesh { get; set; }
-        public bool mapAlignment { get; set; }
-        public bool mapSeparation { get; set; }
-        public bool mapCohesion { get; set; }
+        public Mesh ColorMesh { get; set; }
+        public bool MapAlignment { get; set; }
+        public bool MapSeparation { get; set; }
+        public bool MapCohesion { get; set; }
 
         public FlockingData(float alignmentValue, float separationValue, float cohesionValue, float searchRadius, float viewAngle = 60.0f, bool drawSearchConnectivity = false,
             Mesh color_Mesh = null, bool map_Alignment = false, bool map_Separation = false, bool map_Cohesion = false)
         {
-            this.alignment_Value = alignmentValue;
-            this.separation_Value = separationValue;
-            this.cohesion_Value = cohesionValue;
-            this.network = drawSearchConnectivity;
-            this.searchRadius = searchRadius;
-            this.viewAngle = viewAngle;
+            this.Alignment_Value = alignmentValue;
+            this.Separation_Value = separationValue;
+            this.Cohesion_Value = cohesionValue;
+            this.Network = drawSearchConnectivity;
+            this.SearchRadius = searchRadius;
+            this.ViewAngle = viewAngle;
 
-            this.colorMesh = color_Mesh;
-            this.mapAlignment = map_Alignment;
-            this.mapSeparation = map_Separation;
-            this.mapCohesion = map_Cohesion;
+            this.ColorMesh = color_Mesh;
+            this.MapAlignment = map_Alignment;
+            this.MapSeparation = map_Separation;
+            this.MapCohesion = map_Cohesion;
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Culebra_GH.Settings_Visual
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Particle Texture Path", "PT", "Input path to particle texture, a png file", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Alpha Channel", "AC", "Input the polyline alpha channel (0-255)", GH_ParamAccess.item, 255);
             pManager.AddIntervalParameter("Red Channel", "RC", "Input a domain component specifying the minimum and maximum floating point values for the red channel", GH_ParamAccess.item);
             pManager.AddIntervalParameter("Green Channel", "GC", "Input a domain component specifying the minimum and maximum floating point values for the red channel", GH_ParamAccess.item);
             pManager.AddIntervalParameter("Blue Channel", "BC", "Input a domain component specifying the minimum and maximum floating point values for the red channel", GH_ParamAccess.item);
@@ -55,6 +56,7 @@ namespace Culebra_GH.Settings_Visual
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             string path = "";
+            int alphaChannel = new int();
             Interval redInterval = new Interval();
             Interval greenInterval = new Interval();
             Interval blueInterval = new Interval();
@@ -63,17 +65,18 @@ namespace Culebra_GH.Settings_Visual
             int maxThickness = new int();
 
             DA.GetData(0, ref path);
-            if (!DA.GetData(1, ref redInterval)) return;
-            if (!DA.GetData(2, ref greenInterval)) return;
-            if (!DA.GetData(3, ref blueInterval)) return;
-            if (!DA.GetData(4, ref minThickness)) return;
-            if (!DA.GetData(5, ref maxThickness)) return;
+            if (!DA.GetData(1, ref alphaChannel)) return;
+            if (!DA.GetData(2, ref redInterval)) return;
+            if (!DA.GetData(3, ref greenInterval)) return;
+            if (!DA.GetData(4, ref blueInterval)) return;
+            if (!DA.GetData(5, ref minThickness)) return;
+            if (!DA.GetData(6, ref maxThickness)) return;
 
             if (minThickness < 0) { AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Min thickness has to be greater than 0, please increase"); return; }
             if (maxThickness > 4) { AddRuntimeMessage(GH_RuntimeMessageLevel.Warning, "There is a performance decrease if the max thickness is greater than 3, keep an eye on your value"); return; }
 
-            ColorData colorData = new ColorData(path, redInterval, greenInterval, blueInterval, minThickness, maxThickness);
-            colorData.colorDataType = "Gradient";
+            ColorData colorData = new ColorData(path, alphaChannel, redInterval, greenInterval, blueInterval, minThickness, maxThickness);
+            colorData.ColorDataType = "Gradient";
             DA.SetData(0, colorData);
         }
         /// <summary>
